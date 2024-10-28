@@ -1,0 +1,46 @@
+﻿<Window
+    x:Class="IgniteApp.Views.MainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:home="clr-namespace:IgniteApp.Shell.Home.Views"
+    xmlns:local="clr-namespace:IgniteApp.Views"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:s="https://github.com/canton7/Stylet"
+    xmlns:settings="clr-namespace:IgniteApp.Properties"
+    Title="主页"
+    Width="1150"
+    Height="800"
+    AllowsTransparency="True"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Grid Panel.ZIndex="1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid>
+            <ContentControl s:View.Model="{Binding HeaderViewModel}" />
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="300"/>
+                </Grid.RowDefinitions>
+                <ContentControl Grid.Row="0" s:View.Model="{Binding HomeViewModel}" />
+                <ContentControl Grid.Row="1" s:View.Model="{Binding FooterViewModel}" />
+            </Grid>
+            <Grid Grid.Column="1">
+                <ContentControl Grid.Column="1" s:View.Model="{Binding AsideViewModel}" />
+            </Grid>
+        </Grid>
+      
+    </Grid>
+</Window>

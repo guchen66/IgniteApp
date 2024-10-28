@@ -1,0 +1,8 @@
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\Debug\IgniteShared.dll
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\Debug\IgniteShared.pdb
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\obj\Debug\IgniteShared.csproj.AssemblyReference.cache
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\obj\Debug\IgniteShared.Properties.Resources.resources
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\obj\Debug\IgniteShared.csproj.GenerateResource.cache
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\obj\Debug\IgniteShared.csproj.CoreCompileInputs.cache
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\obj\Debug\IgniteShared.dll
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\obj\Debug\IgniteShared.pdb
