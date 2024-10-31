@@ -1,23 +1,35 @@
 ﻿using IgniteApp.Bases;
+using IgniteApp.Modules;
 using IgniteApp.Shell.Home.Models;
 using IgniteApp.ViewModels;
+using IgniteDb;
+using IgniteDb.IRepositorys;
+using IgniteShared.Dtos;
 using IgniteShared.Entitys;
+using IT.Tangdao.Framework.DaoAdmin.IServices;
+using IT.Tangdao.Framework.DaoCommands;
 using Stylet;
+using StyletIoC;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Unity;
 
 namespace IgniteApp.Shell.Footer.ViewModels
 {
     public class FooterViewModel : ControlViewModelBase
     {
+        
+        public IMaterialRepository db;
         #region--产品信息--
-        private BindableCollection<ProductInfo> _productList;
+        private BindableCollection<ProductDto> _productList;
 
-        public BindableCollection<ProductInfo> ProductList
+        public BindableCollection<ProductDto> ProductList
         {
             get => _productList;
             set => SetAndNotify(ref _productList, value);
@@ -26,19 +38,19 @@ namespace IgniteApp.Shell.Footer.ViewModels
 
         public BindableCollection<MaterialInfo> MaterialInfoList
         {
-            get => _materialInfoList;
+            get => _materialInfoList??(_materialInfoList=new BindableCollection<MaterialInfo>());
             set => SetAndNotify(ref _materialInfoList, value);
         }
-        private BindableCollection<StaticticInfo> _staticticList;
+        private BindableCollection<StaticticDto> _staticticList;
 
-        public BindableCollection<StaticticInfo> StaticticList
+        public BindableCollection<StaticticDto> StaticticList
         {
             get => _staticticList;
             set => SetAndNotify(ref _staticticList, value);
         }
-        private StaticticInfo _staticticInfo;
+        private StaticticDto _staticticInfo;
 
-        public StaticticInfo StaticticInfo
+        public StaticticDto StaticticInfo
         {
             get => _staticticInfo;
             set => SetAndNotify(ref _staticticInfo, value);
@@ -59,39 +71,31 @@ namespace IgniteApp.Shell.Footer.ViewModels
         }
 
         #endregion
-
+        AccessDbContext _context;
         #region--ctor--
-        public FooterViewModel()
+        public FooterViewModel(IMaterialRepository db)
         {
+            this.db = db;
             InitData();
             QueryPlcStatus();
+            UpdateCommand = MinidaoCommand.Create<int?>(ExecuteUpdate);
            
         }
         #endregion
 
         public void InitData()
         {
-            ProductList = new BindableCollection<ProductInfo>() 
+            ProductList = new BindableCollection<ProductDto>() 
             {
-                 new ProductInfo(){ProductName="123",Remark="2222"},
-                  new ProductInfo(){ProductName="234",Remark = "2222"},
+                 new ProductDto(){ProductName="123",Remark="2222"},
+                  new ProductDto(){ProductName="234",Remark = "2222"},
             };
-            MaterialInfoList = new BindableCollection<MaterialInfo>() 
-            {
-                new MaterialInfo(){Station="第一工位",Status="已处理"},
-                new MaterialInfo(){Station="第二工位",Status="已处理"},
-                new MaterialInfo(){Station="第三工位",Status="未处理"},
-                new MaterialInfo(){Station="第一工位",Status="已处理"},
-                new MaterialInfo(){Station="第二工位",Status="已处理"},
-                new MaterialInfo(){Station="第三工位",Status="未处理"},
-                new MaterialInfo(){Station="第一工位",Status="已处理"},
-                new MaterialInfo(){Station="第二工位",Status="已处理"},
-                new MaterialInfo(){Station="第三工位",Status="未处理"},
-                new MaterialInfo(){Station="第一工位",Status="已处理"},
-                new MaterialInfo(){Station="第二工位",Status="已处理"},
-                new MaterialInfo(){Station="第三工位",Status="未处理"},
-            };
-            StaticticInfo = new StaticticInfo
+            AccessDbContext db=new AccessDbContext();
+            
+            var model=db.MaterialInfos.ToList();
+            MaterialInfoList = new BindableCollection<MaterialInfo>(model);
+
+            StaticticInfo = new StaticticDto
             {
                 OkCount = 1,
                 NgCount = 100,
@@ -100,6 +104,10 @@ namespace IgniteApp.Shell.Footer.ViewModels
 
         }
 
+        public void ExecuteUpdate(int? i)
+        {
+
+        }
         public void QueryPlcStatus()
         {
             Task.Run(() => 
@@ -114,5 +122,8 @@ namespace IgniteApp.Shell.Footer.ViewModels
             PlcColor = "Green";
             StaticticInfo.SetReset();
         }
+
+        public ICommand UpdateCommand { get; set; }
+        public ICommand DeleteCommand { get; set;}
     }
 }

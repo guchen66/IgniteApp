@@ -91,7 +91,11 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dtos\DataBase.cs" />
     <Compile Include="Dtos\LoginDto.cs" />
+    <Compile Include="Dtos\MaterialDto.cs" />
+    <Compile Include="Dtos\ProductDto.cs" />
+    <Compile Include="Dtos\StaticticDto.cs" />
     <Compile Include="Entitys\EntityBase.cs" />
     <Compile Include="Entitys\MaterialInfo.cs" />
     <Compile Include="Entitys\ProductInfo.cs" />

@@ -8,62 +8,31 @@ using System.Threading.Tasks;
 namespace IgniteShared.Entitys
 {
     /// <summary>
-    /// 由于没有使用数据库
-    /// 这里直接使用实体类在界面展示
+    /// 数据库实体类基类
     /// </summary>
-    public class EntityBase:DaoViewModelBase
+    public class EntityBase
     {
-        private long _id;
-
-        public long Id
-        {
-            get => _id;
-            set => SetProperty(ref _id, value);
-        }
+        public long Id { get; set; }
 
         /// <summary>
         /// 创建时间
         /// </summary>
-        private DateTime _createTime;
-
-        public DateTime CreateTime
-        {
-            get => _createTime;
-            set => SetProperty(ref _createTime, value);
-        }
+        public DateTime CreateTime { get; set; }
 
         /// <summary>
         /// 修改时间
         /// </summary>
-        private DateTime _updateTime;
-
-        public DateTime UpdateTime
-        {
-            get => _updateTime;
-            set => SetProperty(ref _updateTime, value);
-        }
+        public DateTime UpdateTime { get; set; }
 
         /// <summary>
         /// 备注
         /// </summary>
-        private string _remark;
-
-        public string Remark
-        {
-            get => _remark;
-            set => SetProperty(ref _remark, value);
-        }
+        public string Remark { get; set; }
 
         /// <summary>
         /// 软删除
         /// </summary>
-        private int _delete;
-
-        public int Delete
-        {
-            get => _delete;
-            set => SetProperty(ref _delete, value);
-        }
+        public bool IsDeleted { get; set; }
 
     }
 }

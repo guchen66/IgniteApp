@@ -19,6 +19,8 @@ namespace IgniteApp
         {
             builder.AddModule(new TangdaoModules());
             builder.AddModule(new HomeModules());
+            builder.AddModule(new SqliteModules());
+           
         }
 
         protected override void Configure()

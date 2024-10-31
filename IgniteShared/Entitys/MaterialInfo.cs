@@ -11,21 +11,8 @@ namespace IgniteShared.Entitys
     /// </summary>
     public class MaterialInfo:EntityBase
     {
-        private string _station;
-
-        public string Station
-        {
-            get => _station;
-            set => SetProperty(ref _station, value);
-        }
-
-        private string _status;
-
-        public string Status
-        {
-            get => _status;
-            set => SetProperty(ref _status, value);
-        }
+        public string Station { get; set; }
+        public string Status { get; set; }
 
     }
 }

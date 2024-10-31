@@ -13,55 +13,21 @@ namespace IgniteShared.Entitys
     /// </summary>
     public class StaticticInfo:EntityBase
     {
-        private string _name;
-
-        public string Name
-        {
-            get => _name;
-            set => SetProperty(ref _name, value);
-        }
+        public string Name { get; set; }
 
         /// <summary>
         /// Ok数量
         /// </summary>
-        private int _OkCount;
-
-        public int OkCount
-        {
-            get => _OkCount;
-            set => SetProperty(ref _OkCount, value);
-        }
+        public int OkCount { get; set; }
 
         /// <summary>
         /// Ng数量
         /// </summary>
-        private int _NgCount;
-
-        public int NgCount
-        {
-            get => _NgCount;
-            set => SetProperty(ref _NgCount, value);
-        }
+        public int NgCount { get; set; }
 
         /// <summary>
         /// 当日产量
         /// </summary>
-        private int _outputCount;
-
-        public int OutputCount
-        {
-            get => _outputCount;
-            set => SetProperty(ref _outputCount, value);
-        }
-
-        /// <summary>
-        /// 重置统计信息
-        /// </summary>
-        public void SetReset()
-        {
-            this.OkCount = 0;
-            this.NgCount = 0;
-            this.OutputCount = 0;
-        }
+        public int OutputCount { get; set; }
     }
 }

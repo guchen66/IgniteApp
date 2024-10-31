@@ -17,3 +17,11 @@ E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\obj\Debug\IgniteAdmin.pdb
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\Debug\System.Threading.Tasks.Extensions.dll
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\Debug\Db\demo.db
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\Debug\Microsoft.Extensions.DependencyInjection.dll
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\Debug\Microsoft.Extensions.DependencyInjection.xml
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\Debug\System.Threading.Tasks.Extensions.xml

@@ -11,13 +11,6 @@ namespace IgniteShared.Entitys
     /// </summary>
     public class ProductInfo: EntityBase
     {
-        private string _productName;
-
-        public string ProductName
-        {
-            get => _productName;
-            set => SetProperty(ref _productName, value);
-        }
-
+        public string ProductName { get; set; }
     }
 }
