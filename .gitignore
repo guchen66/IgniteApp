@@ -1,0 +1,10 @@
+# 忽略所有的dll文件
+*.dll
+
+# 忽略 Cargo.SqlSugar 类库中的 Db 文件夹及其内容
+Cargo.SqlSugar/Db/
+
+# 自定义规则
+# 例如忽略特定文件或文件夹：
+# filename.ext
+# path/to/directory/

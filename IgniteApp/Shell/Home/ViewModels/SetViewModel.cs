@@ -36,9 +36,8 @@ namespace IgniteApp.Shell.Home.ViewModels
         public SetViewModel(IViewFactory viewFactory)
         {
             this._viewFactory = viewFactory;
-            SetMenuItem setMenuItem = new SetMenuItem();
             //字典转列表
-            var lists=setMenuItem.ReadAppConfigToDic("SetMenu").Select(kvp=>new SetMenuItem 
+            var lists=this.ReadAppConfigToDic("SetMenu").Select(kvp=>new SetMenuItem 
             {
                 MenuName=kvp.Value,
                 SetMenuToView=kvp.Value,
@@ -61,6 +60,29 @@ namespace IgniteApp.Shell.Home.ViewModels
         public ProcessViewModel ProcessViewModel;
         public AxisArgsViewModel AxisArgsViewModel;
         public SystemSetViewModel SystemSetViewModel;
-       
+        private Screen _defaultScreen;
+
+        public Screen DefaultScreen
+        {
+            get => _defaultScreen;
+            set => SetAndNotify(ref _defaultScreen, value);
+        }
+
+        /// <summary>
+        /// 默认打开首页
+        /// </summary>
+        /// <param name="screen"></param>
+        public void ExecuteLoad(Screen screen)
+        {
+            ActivateItem(screen ?? (screen = _viewFactory.ProcessViewModel()));
+        }
+        protected override void OnActivate()
+        {
+            base.OnActivate();
+        }
+        protected override void OnInitialActivate()
+        {
+            base.OnInitialActivate();
+        }
     }
 }

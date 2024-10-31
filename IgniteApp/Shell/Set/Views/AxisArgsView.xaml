@@ -1,12 +1,119 @@
-﻿<UserControl x:Class="IgniteApp.Shell.Set.Views.AxisArgsView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:IgniteApp.Shell.Set.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+﻿<UserControl
+    x:Class="IgniteApp.Shell.Set.Views.AxisArgsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:IgniteApp.Shell.Set.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="clr-namespace:IgniteApp.Shell.Set.Models"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <!--  定义按钮被按下时的样式  -->
+                                <Setter Property="Background" Value="Aqua" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type ListBox}">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+        <ObjectDataProvider x:Key="MyAxis" ObjectType="{x:Type model:AxisProvider}" />
+        <DataTemplate x:Key="DetailTemplate">
+            <GroupBox Header="参数区间">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="速度1" Margin="80 0 0 0"/>
+                        <TextBlock Text="速度2" Margin="80 0 0 0"/>
+                        <TextBlock Text="速度3" Margin="80 0 0 0"/>
+                        <TextBlock Text="速度4" Margin="80 0 0 0"/>
+                       
+                    </StackPanel>
+                    <WrapPanel Margin="5" Grid.Row="1">
+                        <TextBlock Text="Min" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBox Text="{Binding AxisMinValue}" Width="100" Margin="10 0 0 0"/>
+                        <TextBox Text="{Binding AxisMinValue}" Width="100" Margin="10 0 0 0"/>
+                        <TextBox Text="{Binding AxisMinValue}" Width="100" Margin="10 0 0 0"/>
+                        <TextBox Text="{Binding AxisMinValue}" Width="100" Margin="10 0 0 0"/>
+                    </WrapPanel>
+                    <WrapPanel Grid.Row="2" Margin="5">
+                        <TextBlock Text="Max" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBox Text="{Binding AxisMaxValue}" Width="100" Margin="10 0 0 0"/>
+                        <TextBox Text="{Binding AxisMaxValue}" Width="100" Margin="10 0 0 0"/>
+                        <TextBox Text="{Binding AxisMaxValue}" Width="100" Margin="10 0 0 0"/>
+                        <TextBox Text="{Binding AxisMaxValue}" Width="100" Margin="10 0 0 0"/>
+                    </WrapPanel>
+                </Grid>
+            </GroupBox>
+
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
-        <TextBlock Text="轴参数设置"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <ListBox
+            Margin="10,0,10,0"
+            IsSynchronizedWithCurrentItem="True"
+            ItemsSource="{Binding Source={StaticResource MyAxis}}"
+            ScrollViewer.VerticalScrollBarVisibility="Disabled"
+            SelectedIndex="0"
+            SelectionMode="Single"
+            Style="{DynamicResource StackPanelVerticalListBox}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Margin="10" Text="{Binding AxisName}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                <Grid>
+                                    <Border Name="border" />
+                                    <ContentPresenter />
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="border" Property="Background" Value="Transparent" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+
+        <ContentControl
+            Grid.Column="1"
+            Content="{Binding Source={StaticResource MyAxis}}"
+            ContentTemplate="{StaticResource DetailTemplate}" />
     </Grid>
 </UserControl>

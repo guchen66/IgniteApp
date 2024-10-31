@@ -1,3 +1,4 @@
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\Db\demo.db
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\IgniteShared.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\IgniteShared.pdb
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\IT.Tangdao.Framework.dll

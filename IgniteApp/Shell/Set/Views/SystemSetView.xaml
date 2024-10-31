@@ -4,9 +4,28 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:IgniteApp.Shell.Set.Views"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <DataTemplate x:Key="SysDetail" DataType="hc:TabItem">
+            <StackPanel>
+                <TextBlock Text="{Binding Name}"/>
+                <TextBlock Text="{Binding Type}"/>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
-            
+        <hc:TabControl ItemsSource="{Binding Systems}" SelectedItem="{Binding SystemItem,Mode=OneWay}" Name="tab">
+            <hc:TabControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </hc:TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <!-- 直接使用资源中的DataTemplate -->
+                <StaticResource ResourceKey="SysDetail"/>
+            </TabControl.ContentTemplate>
+        </hc:TabControl>  
     </Grid>
 </UserControl>

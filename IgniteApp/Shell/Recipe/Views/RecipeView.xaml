@@ -24,6 +24,5 @@
          Grid.Column="1"
          Margin="5"
          s:View.Model="{Binding ActiveItem}" />
-
     </Grid>
 </UserControl>

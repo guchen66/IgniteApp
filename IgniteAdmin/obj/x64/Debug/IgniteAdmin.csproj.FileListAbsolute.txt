@@ -1,3 +1,4 @@
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\x64\Debug\Db\demo.db
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\x64\Debug\IgniteAdmin.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\x64\Debug\IgniteAdmin.pdb
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\x64\Debug\IgniteShared.dll

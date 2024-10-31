@@ -219,6 +219,9 @@
     <Compile Include="Shell\Recipe\Views\RecipeView.xaml.cs">
       <DependentUpon>RecipeView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Shell\Set\Models\AxisItem.cs" />
+    <Compile Include="Shell\Set\Models\ProcessItem.cs" />
+    <Compile Include="Shell\Set\Models\SystemMenuItem.cs" />
     <Compile Include="Shell\Set\ViewModels\AxisArgsViewModel.cs" />
     <Compile Include="Shell\Set\ViewModels\ProcessViewModel.cs" />
     <Compile Include="Shell\Set\ViewModels\SystemSetViewModel.cs" />
@@ -273,6 +276,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Assets\Styles\BackgroundBrushStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Shell\Aside\Views\AsideView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -347,6 +354,10 @@
     <ProjectReference Include="..\IgniteAdmin\IgniteAdmin.csproj">
       <Project>{e36aeea2-58d6-416a-a8cf-9641e62cc511}</Project>
       <Name>IgniteAdmin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IgniteDb\IgniteDb.csproj">
+      <Project>{46ba1e29-687a-4979-889b-54fecbf79c11}</Project>
+      <Name>IgniteDb</Name>
     </ProjectReference>
     <ProjectReference Include="..\IgniteShared\IgniteShared.csproj">
       <Project>{99109e4d-f7d9-4a89-b0a0-113af42f7919}</Project>

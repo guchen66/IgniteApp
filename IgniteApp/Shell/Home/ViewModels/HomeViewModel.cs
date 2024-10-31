@@ -27,6 +27,13 @@ namespace IgniteApp.Shell.Home.ViewModels
             get => _homeMenuItem ?? (_homeMenuItem = new BindableCollection<HomeMenuItem>());
             set => SetAndNotify(ref _homeMenuItem, value);
         }
+        private Screen _defaultScreen;
+
+        public Screen DefaultScreen
+        {
+            get => _defaultScreen;
+            set => SetAndNotify(ref _defaultScreen, value);
+        }
 
         private readonly IViewFactory _viewFactory;
         public HomeViewModel(IViewFactory viewFactory)
@@ -59,6 +66,15 @@ namespace IgniteApp.Shell.Home.ViewModels
                 dicts.TryGetValue(title,out IScreen screen);
                 ActivateItem(screen ?? (screen = _viewFactory.CreateViewModel(title)));
             }
+        }
+
+        /// <summary>
+        /// 默认打开首页
+        /// </summary>
+        /// <param name="screen"></param>
+        public void ExecuteLoad(Screen screen)
+        {
+            ActivateItem(screen ?? (screen = _viewFactory.DefaultViewModel()));
         }
     }
 }

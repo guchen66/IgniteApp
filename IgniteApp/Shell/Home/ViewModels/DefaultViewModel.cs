@@ -9,5 +9,6 @@ namespace IgniteApp.Shell.Home.ViewModels
 {
     public class DefaultViewModel:ControlViewModelBase
     {
+       
     }
 }

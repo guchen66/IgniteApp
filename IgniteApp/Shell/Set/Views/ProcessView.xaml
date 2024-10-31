@@ -1,12 +1,343 @@
-﻿<UserControl x:Class="IgniteApp.Shell.Set.Views.ProcessView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:IgniteApp.Shell.Set.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+﻿<UserControl
+    x:Class="IgniteApp.Shell.Set.Views.ProcessView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
+    xmlns:local="clr-namespace:IgniteApp.Shell.Set.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:s="https://github.com/canton7/Stylet"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <DataTemplate x:Key="ProcessDetail" DataType="hc:TabItem">
+            <GroupBox Header="生产流程" HorizontalAlignment="Left">
+                <StackPanel Margin="10">
+                    <ToggleButton
+                        Margin="5"
+                        hc:StatusSwitchElement.HideUncheckedElement="True"
+                        IsChecked="{Binding IsFeeding}"
+                        Style="{StaticResource ToggleButtonCustom}">
+                        <hc:StatusSwitchElement.CheckedElement>
+                            <Border
+                                Width="150"
+                                Height="40"
+                                BorderBrush="{DynamicResource BorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="4">
+                                <Grid>
+                                    <TextBlock Padding="20,10" Text="上料" />
+                                    <Ellipse
+                                        Width="20"
+                                        Height="20"
+                                        Margin="0,0,30,0"
+                                        HorizontalAlignment="Right"
+                                        Fill="{DynamicResource PrimaryBrush}"
+                                        Stroke="{DynamicResource BorderBrush}"
+                                        StrokeThickness="1" />
+                                </Grid>
+                            </Border>
+                        </hc:StatusSwitchElement.CheckedElement>
+                        <Border
+                            Width="150"
+                            Height="40"
+                            BorderBrush="{DynamicResource BorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="4">
+                            <Grid>
+                                <TextBlock Padding="20,10" Text="上料" />
+                                <Ellipse
+                                    Width="20"
+                                    Height="20"
+                                    Margin="0,0,30,0"
+                                    HorizontalAlignment="Right"
+                                    Fill="{DynamicResource BorderBrush}"
+                                    Stroke="{DynamicResource BorderBrush}"
+                                    StrokeThickness="1" />
+                            </Grid>
+                        </Border>
+                    </ToggleButton>
+                    <ToggleButton
+                        Margin="5"
+                        hc:StatusSwitchElement.HideUncheckedElement="True"
+                        IsChecked="{Binding IsBoardMade}"
+                        Style="{StaticResource ToggleButtonCustom}">
+                        <hc:StatusSwitchElement.CheckedElement>
+                            <Border
+                                Width="150"
+                                Height="40"
+                                BorderBrush="{DynamicResource BorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="4">
+                                <Grid>
+                                    <TextBlock Padding="20,10" Text="电路板制造" />
+                                    <Ellipse
+                                        Width="20"
+                                        Height="20"
+                                        Margin="0,0,30,0"
+                                        HorizontalAlignment="Right"
+                                        Fill="{DynamicResource PrimaryBrush}"
+                                        Stroke="{DynamicResource BorderBrush}"
+                                        StrokeThickness="1" />
+                                </Grid>
+                            </Border>
+                        </hc:StatusSwitchElement.CheckedElement>
+                        <Border
+                            Width="150"
+                            Height="40"
+                            BorderBrush="{DynamicResource BorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="4">
+                            <Grid>
+                                <TextBlock Padding="20,10" Text="电路板制造" />
+                                <Ellipse
+                                    Width="20"
+                                    Height="20"
+                                    Margin="0,0,30,0"
+                                    HorizontalAlignment="Right"
+                                    Fill="{DynamicResource BorderBrush}"
+                                    Stroke="{DynamicResource BorderBrush}"
+                                    StrokeThickness="1" />
+                            </Grid>
+                        </Border>
+                    </ToggleButton>
+                    <ToggleButton
+                        Margin="5"
+                        hc:StatusSwitchElement.HideUncheckedElement="True"
+                        IsChecked="{Binding IsBoardCheck}"
+                        Style="{StaticResource ToggleButtonCustom}">
+                        <hc:StatusSwitchElement.CheckedElement>
+                            <Border
+                                Width="150"
+                                Height="40"
+                                BorderBrush="{DynamicResource BorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="4">
+                                <Grid>
+                                    <TextBlock Padding="20,10" Text="电路板检测" />
+                                    <Ellipse
+                                        Width="20"
+                                        Height="20"
+                                        Margin="0,0,30,0"
+                                        HorizontalAlignment="Right"
+                                        Fill="{DynamicResource PrimaryBrush}"
+                                        Stroke="{DynamicResource BorderBrush}"
+                                        StrokeThickness="1" />
+                                </Grid>
+                            </Border>
+                        </hc:StatusSwitchElement.CheckedElement>
+                        <Border
+                            Width="150"
+                            Height="40"
+                            BorderBrush="{DynamicResource BorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="4">
+                            <Grid>
+                                <TextBlock Padding="20,10" Text="电路板检测" />
+                                <Ellipse
+                                    Width="20"
+                                    Height="20"
+                                    Margin="0,0,30,0"
+                                    HorizontalAlignment="Right"
+                                    Fill="{DynamicResource BorderBrush}"
+                                    Stroke="{DynamicResource BorderBrush}"
+                                    StrokeThickness="1" />
+                            </Grid>
+                        </Border>
+                    </ToggleButton>
+                    <ToggleButton
+                        Margin="5"
+                        hc:StatusSwitchElement.HideUncheckedElement="True"
+                        IsChecked="{Binding IsSeal}"
+                        Style="{StaticResource ToggleButtonCustom}">
+                        <hc:StatusSwitchElement.CheckedElement>
+                            <Border
+                                Width="150"
+                                Height="40"
+                                BorderBrush="{DynamicResource BorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="4">
+                                <Grid>
+                                    <TextBlock Padding="20,10" Text="密封测试" />
+                                    <Ellipse
+                                        Width="20"
+                                        Height="20"
+                                        Margin="0,0,30,0"
+                                        HorizontalAlignment="Right"
+                                        Fill="{DynamicResource PrimaryBrush}"
+                                        Stroke="{DynamicResource BorderBrush}"
+                                        StrokeThickness="1" />
+                                </Grid>
+                            </Border>
+                        </hc:StatusSwitchElement.CheckedElement>
+                        <Border
+                            Width="150"
+                            Height="40"
+                            BorderBrush="{DynamicResource BorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="4">
+                            <Grid>
+                                <TextBlock Padding="20,10" Text="密封测试" />
+                                <Ellipse
+                                    Width="20"
+                                    Height="20"
+                                    Margin="0,0,30,0"
+                                    HorizontalAlignment="Right"
+                                    Fill="{DynamicResource BorderBrush}"
+                                    Stroke="{DynamicResource BorderBrush}"
+                                    StrokeThickness="1" />
+                            </Grid>
+                        </Border>
+                    </ToggleButton>
+                    <ToggleButton
+                        Margin="5"
+                        hc:StatusSwitchElement.HideUncheckedElement="True"
+                        IsChecked="{Binding IsSafe}"
+                        Style="{StaticResource ToggleButtonCustom}">
+                        <hc:StatusSwitchElement.CheckedElement>
+                            <Border
+                                Width="150"
+                                Height="40"
+                                BorderBrush="{DynamicResource BorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="4">
+                                <Grid>
+                                    <TextBlock Padding="20,10" Text="安全测试" />
+                                    <Ellipse
+                                        Width="20"
+                                        Height="20"
+                                        Margin="0,0,30,0"
+                                        HorizontalAlignment="Right"
+                                        Fill="{DynamicResource PrimaryBrush}"
+                                        Stroke="{DynamicResource BorderBrush}"
+                                        StrokeThickness="1" />
+                                </Grid>
+                            </Border>
+                        </hc:StatusSwitchElement.CheckedElement>
+                        <Border
+                            Width="150"
+                            Height="40"
+                            BorderBrush="{DynamicResource BorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="4">
+                            <Grid>
+                                <TextBlock Padding="20,10" Text="安全测试" />
+                                <Ellipse
+                                    Width="20"
+                                    Height="20"
+                                    Margin="0,0,30,0"
+                                    HorizontalAlignment="Right"
+                                    Fill="{DynamicResource BorderBrush}"
+                                    Stroke="{DynamicResource BorderBrush}"
+                                    StrokeThickness="1" />
+                            </Grid>
+                        </Border>
+                    </ToggleButton>
+                    <ToggleButton
+                        Margin="5"
+                        hc:StatusSwitchElement.HideUncheckedElement="True"
+                        IsChecked="{Binding IsCharge}"
+                        Style="{StaticResource ToggleButtonCustom}">
+                        <hc:StatusSwitchElement.CheckedElement>
+                            <Border
+                                Width="150"
+                                Height="40"
+                                BorderBrush="{DynamicResource BorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="4">
+                                <Grid>
+                                    <TextBlock Padding="20,10" Text="装药" />
+                                    <Ellipse
+                                        Width="20"
+                                        Height="20"
+                                        Margin="0,0,30,0"
+                                        HorizontalAlignment="Right"
+                                        Fill="{DynamicResource PrimaryBrush}"
+                                        Stroke="{DynamicResource BorderBrush}"
+                                        StrokeThickness="1" />
+                                </Grid>
+                            </Border>
+                        </hc:StatusSwitchElement.CheckedElement>
+                        <Border
+                            Width="150"
+                            Height="40"
+                            BorderBrush="{DynamicResource BorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="4">
+                            <Grid>
+                                <TextBlock Padding="20,10" Text="装药" />
+                                <Ellipse
+                                    Width="20"
+                                    Height="20"
+                                    Margin="0,0,30,0"
+                                    HorizontalAlignment="Right"
+                                    Fill="{DynamicResource BorderBrush}"
+                                    Stroke="{DynamicResource BorderBrush}"
+                                    StrokeThickness="1" />
+                            </Grid>
+                        </Border>
+                    </ToggleButton>
+                    <ToggleButton
+                        Margin="5"
+                        hc:StatusSwitchElement.HideUncheckedElement="True"
+                        IsChecked="{Binding IsBlanking}"
+                        Style="{StaticResource ToggleButtonCustom}">
+                        <hc:StatusSwitchElement.CheckedElement>
+                            <Border
+                                Width="150"
+                                Height="40"
+                                BorderBrush="{DynamicResource BorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="4">
+                                <Grid>
+                                    <TextBlock Padding="20,10" Text="下料" />
+                                    <Ellipse
+                                        Width="20"
+                                        Height="20"
+                                        Margin="0,0,30,0"
+                                        HorizontalAlignment="Right"
+                                        Fill="{DynamicResource PrimaryBrush}"
+                                        Stroke="{DynamicResource BorderBrush}"
+                                        StrokeThickness="1" />
+                                </Grid>
+                            </Border>
+                        </hc:StatusSwitchElement.CheckedElement>
+                        <Border
+                            Width="150"
+                            Height="40"
+                            BorderBrush="{DynamicResource BorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="4">
+                            <Grid>
+                                <TextBlock Padding="20,10" Text="下料" />
+                                <Ellipse
+                                    Width="20"
+                                    Height="20"
+                                    Margin="0,0,30,0"
+                                    HorizontalAlignment="Right"
+                                    Fill="{DynamicResource BorderBrush}"
+                                    Stroke="{DynamicResource BorderBrush}"
+                                    StrokeThickness="1" />
+                            </Grid>
+                        </Border>
+                    </ToggleButton>
+                </StackPanel>
+            </GroupBox>
+           
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
-        <TextBlock Text="流程设置"/>
+        <hc:TabControl ItemsSource="{Binding ProcessItems}">
+            <hc:TabControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </hc:TabControl.ItemTemplate>
+            <hc:TabControl.ContentTemplate>
+                <!--  直接使用资源中的DataTemplate  -->
+                <StaticResource ResourceKey="ProcessDetail"/>
+            </hc:TabControl.ContentTemplate>
+        </hc:TabControl>
     </Grid>
 </UserControl>
