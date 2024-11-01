@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Xml.Linq;
 using IgniteAdmin.Managers.Login;
+using IgniteAdmin.Managers.Transmit;
 using IgniteApp.Bases;
 using IgniteDb;
 using IgniteShared.Dtos;
@@ -65,6 +66,7 @@ namespace IgniteApp.ViewModels
         /// </summary>
         public void ExecuteLogin() 
         {
+           
             if (LoginDto.UserName=="Admin")
             {
                 ExecuteAdminLogin();
@@ -80,7 +82,6 @@ namespace IgniteApp.ViewModels
         /// </summary>
         public void ExecuteAdminLogin()
         {
-            
             LoginDto.IsAdmin = true;
             LoginDto.IP = IPHelper.GetLocalIPByLinq();
             SysLoginInfo.Role = LoginDto.Role = RoleType.管理员;

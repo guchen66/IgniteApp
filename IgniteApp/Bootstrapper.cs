@@ -10,6 +10,8 @@ using System.Windows.Threading;
 using IT.Tangdao.Framework.DaoAdmin;
 using IgniteApp.Modules;
 using Yitter.IdGenerator;
+using IgniteAdmin.Managers.Transmit;
+using System.Threading;
 namespace IgniteApp
 {
     public class Bootstrapper : Bootstrapper<LoginViewModel>
@@ -20,7 +22,7 @@ namespace IgniteApp
             builder.AddModule(new TangdaoModules());
             builder.AddModule(new HomeModules());
             builder.AddModule(new SqliteModules());
-           
+            builder.AddModule(new AutoModules());
         }
 
         protected override void Configure()
@@ -37,10 +39,12 @@ namespace IgniteApp
         protected override void OnStart()
         {
             base.OnStart();
-            RegisterEvents();            //注册全局异常捕获
+            RegisterExceptionEvents();            //注册全局异常捕获
+            RegisterWCFEvent();                   //注册WCF事件
+            RegisterAutoMapper();
         }
 
-        private void RegisterEvents()
+        private void RegisterExceptionEvents()
         {
             ExceptionHandler handler= new ExceptionHandler();
             //Task线程内未捕获异常处理事件
@@ -51,7 +55,24 @@ namespace IgniteApp
             AppDomain.CurrentDomain.UnhandledException += handler.CurrentDomain_UnhandledException;
         }
 
-       
+        private void RegisterWCFEvent()
+        {
+            var isStart = WcfTransmitManager.StartWcf();
+            Thread thread = new Thread(() => 
+            {
+                
+            });
+            if (isStart)
+            {
+                thread.Start();
+            }
+           
+        }
+        private void RegisterAutoMapper()
+        {
+
+        }
+
     }
 
     /// <summary>
@@ -64,7 +85,7 @@ namespace IgniteApp
         public static IContainer Init(IContainer container)
         {
             Container= container;
-
+            
             return Container;
         }
         public static T GetService<T>()

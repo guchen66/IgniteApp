@@ -58,6 +58,9 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.10.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -184,9 +187,14 @@
     <Compile Include="Common\MenuList.cs" />
     <Compile Include="Converters\IdConverter.cs" />
     <Compile Include="Converters\RoleTypeConverter.cs" />
+    <Compile Include="Dialogs\ViewModels\AddRecipeViewModel.cs" />
+    <Compile Include="Dialogs\Views\AddRecipeView.xaml.cs">
+      <DependentUpon>AddRecipeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ExceptionHandler.cs" />
     <Compile Include="Interfaces\IMenuItem.cs" />
     <Compile Include="Interfaces\IViewFactory.cs" />
+    <Compile Include="Modules\AutoModules.cs" />
     <Compile Include="Modules\HomeModules.cs" />
     <Compile Include="Modules\SqliteModules.cs" />
     <Compile Include="Modules\TangdaoModules.cs" />
@@ -284,6 +292,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="appsetting.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
@@ -300,6 +311,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Assets\Styles\BackgroundBrushStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\Views\AddRecipeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -397,6 +412,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

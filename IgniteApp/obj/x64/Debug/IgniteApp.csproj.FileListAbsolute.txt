@@ -36,7 +36,6 @@ E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\bin\x64\Debug\Unity.Container.
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\bin\x64\Debug\Unity.Interception.Configuration.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\bin\x64\Debug\Unity.Interception.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\bin\x64\Debug\Yitter.IdGenerator.dll
-E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\bin\x64\Debug\EntityFramework.DynamicFilters.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\bin\x64\Debug\IgniteAdmin.pdb
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\bin\x64\Debug\IgniteShared.pdb
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\bin\x64\Debug\IgniteDb.pdb
@@ -66,7 +65,6 @@ E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\bin\x64\Debug\Unity.Configurat
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\bin\x64\Debug\Unity.Container.pdb
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\bin\x64\Debug\Unity.Interception.pdb
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\bin\x64\Debug\Unity.Interception.Configuration.pdb
-E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\bin\x64\Debug\EntityFramework.DynamicFilters.xml
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\obj\x64\Debug\IgniteApp.csproj.AssemblyReference.cache
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\obj\x64\Debug\Assets\Styles\BackgroundBrushStyle.baml
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\obj\x64\Debug\Shell\Aside\Views\AsideView.g.cs
@@ -113,3 +111,9 @@ E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\obj\x64\Debug\IgniteApp.csproj
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\obj\x64\Debug\IgniteApp.csproj.Up2Date
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\obj\x64\Debug\IgniteApp.exe
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\obj\x64\Debug\IgniteApp.pdb
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\bin\x64\Debug\appsetting.json
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\bin\x64\Debug\IgniteShared.dll.config
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\bin\x64\Debug\AutoMapper.dll
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\bin\x64\Debug\AutoMapper.xml
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\obj\x64\Debug\Dialogs\Views\AddRecipeView.g.cs
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\obj\x64\Debug\Dialogs\Views\AddRecipeView.baml

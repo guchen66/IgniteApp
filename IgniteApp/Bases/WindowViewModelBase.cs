@@ -8,5 +8,6 @@ namespace IgniteApp.Bases
 {
     public class WindowViewModelBase:ViewModelBase
     {
+        public string TitleName {  get; set; }
     }
 }

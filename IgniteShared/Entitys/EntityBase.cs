@@ -1,6 +1,8 @@
 ﻿using IT.Tangdao.Framework.DaoMvvm;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,7 +34,8 @@ namespace IgniteShared.Entitys
         /// <summary>
         /// 软删除
         /// </summary>
-        public bool IsDeleted { get; set; }
+        
+        public bool? IsDeleted { get; set; }
 
     }
 }

@@ -8,8 +8,15 @@ using System.Threading.Tasks;
 
 namespace IgniteApp.Shell.Recipe.Models
 {
-    public class RecipeMenuItem : DaoViewModelBase, IMenuItem
+    public class RecipeMenuItem : DaoViewModelBase//, IMenuItem
     {
-        public string MenuName { get; set; }
-    }
+		private string _recipeName;
+
+		public string RecipeName
+		{
+			get => _recipeName;
+			set => SetProperty(ref _recipeName, value);
+		}
+
+	}
 }

@@ -24,9 +24,9 @@ namespace IgniteApp.Shell.Footer.ViewModels
 {
     public class FooterViewModel : ControlViewModelBase
     {
-        
-        public IMaterialRepository db;
-        #region--产品信息--
+        #region--属性--
+
+        private readonly IMaterialRepository db;
         private BindableCollection<ProductDto> _productList;
 
         public BindableCollection<ProductDto> ProductList
@@ -71,7 +71,7 @@ namespace IgniteApp.Shell.Footer.ViewModels
         }
 
         #endregion
-        AccessDbContext _context;
+
         #region--ctor--
         public FooterViewModel(IMaterialRepository db)
         {

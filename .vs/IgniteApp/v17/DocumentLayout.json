@@ -3,24 +3,16 @@
   "WorkspaceRootPath": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|e:\\csharp project\\applyclient\\igniteapp\\igniteapp\\shell\\footer\\viewmodels\\footerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|solutionrelative:igniteapp\\shell\\footer\\viewmodels\\footerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|e:\\csharp project\\applyclient\\igniteapp\\igniteapp\\shell\\recipe\\viewmodels\\recipeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|solutionrelative:igniteapp\\shell\\recipe\\viewmodels\\recipeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|e:\\csharp project\\applyclient\\igniteapp\\igniteapp\\modules\\sqlitemodules.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|solutionrelative:igniteapp\\modules\\sqlitemodules.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{46BA1E29-687A-4979-889B-54FECBF79C11}|IgniteDb\\IgniteDb.csproj|e:\\csharp project\\applyclient\\igniteapp\\ignitedb\\repositorys\\reciperepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46BA1E29-687A-4979-889B-54FECBF79C11}|IgniteDb\\IgniteDb.csproj|solutionrelative:ignitedb\\repositorys\\reciperepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{46BA1E29-687A-4979-889B-54FECBF79C11}|IgniteDb\\IgniteDb.csproj|e:\\csharp project\\applyclient\\igniteapp\\ignitedb\\codefirst.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{46BA1E29-687A-4979-889B-54FECBF79C11}|IgniteDb\\IgniteDb.csproj|solutionrelative:ignitedb\\codefirst.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{46BA1E29-687A-4979-889B-54FECBF79C11}|IgniteDb\\IgniteDb.csproj|e:\\csharp project\\applyclient\\igniteapp\\ignitedb\\accessdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{46BA1E29-687A-4979-889B-54FECBF79C11}|IgniteDb\\IgniteDb.csproj|solutionrelative:ignitedb\\accessdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{46BA1E29-687A-4979-889B-54FECBF79C11}|IgniteDb\\IgniteDb.csproj|e:\\csharp project\\applyclient\\igniteapp\\ignitedb\\repositorys\\materialrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{46BA1E29-687A-4979-889B-54FECBF79C11}|IgniteDb\\IgniteDb.csproj|solutionrelative:ignitedb\\repositorys\\materialrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|e:\\csharp project\\applyclient\\igniteapp\\igniteapp\\shell\\recipe\\views\\recipeview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|solutionrelative:igniteapp\\shell\\recipe\\views\\recipeview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -62,67 +54,40 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MaterialRepository.cs",
-              "DocumentMoniker": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteDb\\Repositorys\\MaterialRepository.cs",
-              "RelativeDocumentMoniker": "IgniteDb\\Repositorys\\MaterialRepository.cs",
-              "ToolTip": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteDb\\Repositorys\\MaterialRepository.cs",
-              "RelativeToolTip": "IgniteDb\\Repositorys\\MaterialRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAADwvxYAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-31T14:45:26.613Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AccessDbContext.cs",
-              "DocumentMoniker": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteDb\\AccessDbContext.cs",
-              "RelativeDocumentMoniker": "IgniteDb\\AccessDbContext.cs",
-              "ToolTip": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteDb\\AccessDbContext.cs",
-              "RelativeToolTip": "IgniteDb\\AccessDbContext.cs",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAAAA0AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-31T14:23:34.568Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "FooterViewModel.cs",
-              "DocumentMoniker": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Shell\\Footer\\ViewModels\\FooterViewModel.cs",
-              "RelativeDocumentMoniker": "IgniteApp\\Shell\\Footer\\ViewModels\\FooterViewModel.cs",
-              "ToolTip": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Shell\\Footer\\ViewModels\\FooterViewModel.cs",
-              "RelativeToolTip": "IgniteApp\\Shell\\Footer\\ViewModels\\FooterViewModel.cs",
-              "ViewState": "AQIAABwAAAAAAAAAAAAuwFAAAABHAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-31T14:22:57.439Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "SqliteModules.cs",
-              "DocumentMoniker": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Modules\\SqliteModules.cs",
-              "RelativeDocumentMoniker": "IgniteApp\\Modules\\SqliteModules.cs",
-              "ToolTip": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Modules\\SqliteModules.cs",
-              "RelativeToolTip": "IgniteApp\\Modules\\SqliteModules.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAiwBIAAAAFAAAA",
+              "Title": "RecipeRepository.cs",
+              "DocumentMoniker": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteDb\\Repositorys\\RecipeRepository.cs",
+              "RelativeDocumentMoniker": "IgniteDb\\Repositorys\\RecipeRepository.cs",
+              "ToolTip": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteDb\\Repositorys\\RecipeRepository.cs",
+              "RelativeToolTip": "IgniteDb\\Repositorys\\RecipeRepository.cs",
+              "ViewState": "AQIAABoAAAAAAAAAAAAowC4AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-31T14:22:41.599Z",
+              "WhenOpened": "2024-11-01T16:19:48.685Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "CodeFirst.cs",
-              "DocumentMoniker": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteDb\\CodeFirst.cs",
-              "RelativeDocumentMoniker": "IgniteDb\\CodeFirst.cs",
-              "ToolTip": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteDb\\CodeFirst.cs",
-              "RelativeToolTip": "IgniteDb\\CodeFirst.cs",
-              "ViewState": "AQIAABkAAAAAAAAAAADwvxIAAAANAAAA",
+              "Title": "RecipeView.xaml",
+              "DocumentMoniker": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Shell\\Recipe\\Views\\RecipeView.xaml",
+              "RelativeDocumentMoniker": "IgniteApp\\Shell\\Recipe\\Views\\RecipeView.xaml",
+              "ToolTip": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Shell\\Recipe\\Views\\RecipeView.xaml",
+              "RelativeToolTip": "IgniteApp\\Shell\\Recipe\\Views\\RecipeView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-11-01T16:12:45.162Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RecipeViewModel.cs",
+              "DocumentMoniker": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Shell\\Recipe\\ViewModels\\RecipeViewModel.cs",
+              "RelativeDocumentMoniker": "IgniteApp\\Shell\\Recipe\\ViewModels\\RecipeViewModel.cs",
+              "ToolTip": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Shell\\Recipe\\ViewModels\\RecipeViewModel.cs",
+              "RelativeToolTip": "IgniteApp\\Shell\\Recipe\\ViewModels\\RecipeViewModel.cs",
+              "ViewState": "AQIAAE8AAAAAAAAAAAAowF0AAAAjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-31T14:21:30.534Z",
+              "WhenOpened": "2024-11-01T13:19:22.399Z",
               "EditorCaption": ""
             }
           ]

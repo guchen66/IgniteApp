@@ -1,0 +1,17 @@
+{
+  "WCF": {
+    "Id": "001",
+    "Name": "IgniteWeb",
+    "Startup": false,
+  },
+  "RecipeList": {
+    "RecipeItem1": {
+      "Id": "1",
+      "Name": "配方1"
+    },
+    "RecipeItem2": {
+      "Id": "1",
+      "Name": "配方1"
+    }
+  }
+}

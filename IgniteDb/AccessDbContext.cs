@@ -18,6 +18,7 @@ namespace IgniteDb
     {
         public DbSet<ProductInfo> Products { get; set; }
         public DbSet<MaterialInfo> MaterialInfos { get; set; }
+        public DbSet<RecipeInfo> RecipeInfos { get; set; }
         public AccessDbContext() : base("Sqlite")
         {
 
@@ -26,9 +27,10 @@ namespace IgniteDb
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             // modelBuilder.Filter("IsDeleted", d=>d.IsDeleted,false);
-            modelBuilder.Filter("IsDeleted", (IDeletionWare d) => d.IsDeleted, false);      //使用全局过滤器进行软删除
+          //  modelBuilder.Filter("IsDeleted", (IDeletionWare d) => d.IsDeleted, false);      //使用全局过滤器进行软删除
             modelBuilder.Entity<ProductInfo>().ToTable("ProductInfo");
             modelBuilder.Entity<MaterialInfo>().ToTable("MaterialInfo");
+            modelBuilder.Entity<RecipeInfo>().ToTable("RecipeInfo");
             var sqliteConnectionInitializer = new SqliteCreateDatabaseIfNotExists<AccessDbContext>(modelBuilder);
             Database.SetInitializer(sqliteConnectionInitializer);
             //   modelBuilder.Entity<HeaderInfo>().ToTable("headerinfo");
@@ -37,7 +39,7 @@ namespace IgniteDb
         }
         public override int SaveChanges()
         {
-            ChangeTracker.Entries<IDeletionWare>().ToList().ForEach(entry => SetFilterDelete(entry));
+           // ChangeTracker.Entries<IDeletionWare>().ToList().ForEach(entry => SetFilterDelete(entry));
             return base.SaveChanges();
         }
 
@@ -65,5 +67,7 @@ namespace IgniteDb
                     break;
             }
         }
+
+       
     }
 }

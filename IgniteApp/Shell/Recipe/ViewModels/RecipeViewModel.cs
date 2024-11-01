@@ -1,12 +1,23 @@
-﻿using IgniteApp.Bases;
+﻿using HandyControl.Controls;
+using IgniteApp.Bases;
+using IgniteApp.Dialogs.ViewModels;
 using IgniteApp.Interfaces;
 using IgniteApp.Shell.Home.Models;
+using IgniteApp.Shell.Home.ViewModels;
 using IgniteApp.Shell.Recipe.Models;
 using IgniteApp.Shell.Set.ViewModels;
 using IgniteApp.ViewModels;
+using IgniteDb.IRepositorys;
+using IgniteShared.Dtos;
+using IgniteShared.Entitys;
+using IT.Tangdao.Framework.Extensions;
 using Stylet;
+using StyletIoC;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,11 +26,12 @@ namespace IgniteApp.Shell.Recipe.ViewModels
 {
     public class RecipeViewModel : SectionViewModel
     {
-        private BindableCollection<RecipeMenuItem> _recipeMenuList;
+        private readonly IRecipeRepository db;
+        private ObservableCollection<RecipeDto> _recipeMenuList;
 
-        public BindableCollection<RecipeMenuItem> RecipeMenuList
+        public ObservableCollection<RecipeDto> RecipeMenuList
         {
-            get => _recipeMenuList;
+            get => _recipeMenuList??(_recipeMenuList=new ObservableCollection<RecipeDto>());
             set => SetAndNotify(ref _recipeMenuList, value);
         }
         private int _selectedIndex;
@@ -29,20 +41,26 @@ namespace IgniteApp.Shell.Recipe.ViewModels
             get => _selectedIndex;
             set => SetAndNotify(ref _selectedIndex, value);
         }
+        private string _selectedValue;
+
+        public string SelectedValue
+        {
+            get => _selectedValue;
+            set => SetAndNotify(ref _selectedValue, value);
+        }
 
         public IViewFactory _viewFactory;
-        public RecipeViewModel(IViewFactory viewFactory)
+        public IWindowManager _windowManager;
+        public RecipeViewModel(IRecipeRepository db, IViewFactory viewFactory, IWindowManager windowManager)
         {
-            this._viewFactory = viewFactory;
-            RecipeMenuItem Item = new RecipeMenuItem();
+            this.db = db;
+            _viewFactory = viewFactory;
+            _windowManager = windowManager;
             //字典转列表
-            var lists = Item.ReadAppConfigToDic("RecipeMenu").Select(kvp => new RecipeMenuItem
-            {
-                MenuName = kvp.Value,
-               
-            }).ToList();
-            RecipeMenuList = new BindableCollection<RecipeMenuItem>(lists);
+            var lists = db.GetRecipes().ToObservableCollection();
+            RecipeMenuList = lists;
             this.Bind(viewModel => viewModel.SelectedIndex, (obj, args) => DoNavigateToView());
+           
         }
 
         private void DoNavigateToView()
@@ -56,9 +74,44 @@ namespace IgniteApp.Shell.Recipe.ViewModels
                     break;
             }
         }
+
+        public void ExecuteAdd()
+        {
+            var result = _windowManager.ShowDialog(AddRecipeViewModel);
+            ///关闭子窗体的返回结果
+            if (result.GetValueOrDefault(true))
+            {
+                this.RefreshData();
+            }
+            else
+            {
+               
+            }
+        }
+        public void ExecuteEdit()
+        {
+            var dto=db.GetRecipeById(SelectedValue.ToInt());
+            dto.RecipeName = "配方4";
+            db.EditRecipe(dto);
+            this.RefreshData();
+        }
+
+        public void ExecuteDelete()
+        {
+            var dto = db.GetRecipeById(SelectedValue.ToInt());
+            db.DeleteRecipe(dto);
+            this.RefreshData();
+        }
+        public void RefreshData()
+        {
+            RecipeMenuList = new ObservableCollection<RecipeDto>();
+            db.GetRecipes().ForEach(x => RecipeMenuList.Add(x));
+        }
         public ProcessViewModel ProcessViewModel;
         public AxisArgsViewModel AxisArgsViewModel;
         public SystemSetViewModel SystemSetViewModel;
 
+        [Inject]
+        public AddRecipeViewModel AddRecipeViewModel;
     }
 }
