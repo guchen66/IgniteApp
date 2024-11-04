@@ -47,3 +47,4 @@ E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\obj\Debug\IgniteDb.pdb
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\IgniteShared.dll.config
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\AutoMapper.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\AutoMapper.xml
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\IT.Tangdao.Framework.pdb

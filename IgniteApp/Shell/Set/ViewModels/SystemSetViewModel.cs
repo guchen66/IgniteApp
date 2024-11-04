@@ -12,6 +12,14 @@ namespace IgniteApp.Shell.Set.ViewModels
 {
     public class SystemSetViewModel:ControlViewModelBase
     {
+        #region--字段--
+        #endregion
+        #region--属性--
+        #endregion
+        #region--.ctor--
+        #endregion
+        #region--方法--
+        #endregion
         private ObservableCollection<SystemMenuItem> _systems;
 
         public ObservableCollection<SystemMenuItem> Systems

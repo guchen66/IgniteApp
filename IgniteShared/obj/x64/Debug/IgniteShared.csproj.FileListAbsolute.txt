@@ -30,3 +30,4 @@ E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\EntityFramewo
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\EntityFramework.SqlServer.xml
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\AutoMapper.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\AutoMapper.xml
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\IT.Tangdao.Framework.pdb

@@ -13,5 +13,12 @@
       "Id": "1",
       "Name": "配方1"
     }
+  },
+  "Sqlite": {
+    "InitTable": false //数据库表的初始化
+  },
+  "PlcConfig": {
+    "IP": "127.0.0.1",
+    "Port": "8888",
   }
 }

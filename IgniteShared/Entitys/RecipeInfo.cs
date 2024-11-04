@@ -13,5 +13,6 @@ namespace IgniteShared.Entitys
     {
         public string RecipeName {  get; set; }
         public string ViewName {  get; set; }
+        public bool IsEnabled { get; set; }
     }
 }

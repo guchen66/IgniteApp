@@ -1,4 +1,5 @@
-﻿using IgniteShared.Entitys;
+﻿using IgniteShared.Dtos;
+using IgniteShared.Entitys;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,7 @@ namespace IgniteDb.IRepositorys
     public interface IProductRepository
     {
         void AddProduct(ProductInfo productInfo);
+
+        List<ProductDto> GetAllProductInfo();
     }
 }

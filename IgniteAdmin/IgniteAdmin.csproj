@@ -119,6 +119,8 @@
     </Compile>
     <Compile Include="Providers\AutoMapperProvider.cs" />
     <Compile Include="Providers\IAutoMapperProvider.cs" />
+    <Compile Include="Providers\IPlcProvider.cs" />
+    <Compile Include="Providers\PlcProvider.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -130,6 +132,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\IgniteDevices\IgniteDevices.csproj">
+      <Project>{5b5595c1-b458-4bfd-bd62-36bdc512ab68}</Project>
+      <Name>IgniteDevices</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IgniteShared\IgniteShared.csproj">
       <Project>{99109e4d-f7d9-4a89-b0a0-113af42f7919}</Project>
       <Name>IgniteShared</Name>

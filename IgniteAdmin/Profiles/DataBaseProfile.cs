@@ -15,6 +15,10 @@ namespace IgniteAdmin.Profiles
             //配方DTO和实体类转换
             CreateMap<RecipeInfo, RecipeDto>();
             CreateMap<RecipeDto, RecipeInfo>();
+            CreateMap<ProductDto, ProductInfo>();
+            CreateMap<ProductInfo, ProductDto>();
+            CreateMap<MaterialDto, MaterialInfo>();
+            CreateMap<MaterialInfo, MaterialDto>();
         }
     }
 }

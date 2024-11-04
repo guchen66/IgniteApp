@@ -108,6 +108,7 @@
     <Compile Include="Dtos\DataBase.cs" />
     <Compile Include="Dtos\LoginDto.cs" />
     <Compile Include="Dtos\MaterialDto.cs" />
+    <Compile Include="Dtos\PlcDto.cs" />
     <Compile Include="Dtos\ProductDto.cs" />
     <Compile Include="Dtos\RecipeDto.cs" />
     <Compile Include="Dtos\StaticticDto.cs" />
@@ -116,10 +117,13 @@
     <Compile Include="Entitys\ProductInfo.cs" />
     <Compile Include="Entitys\RecipeInfo.cs" />
     <Compile Include="Entitys\StaticticInfo.cs" />
+    <Compile Include="Globals\Local\DeviceInfoLocation.cs" />
     <Compile Include="Globals\Local\IgniteLocation.cs" />
     <Compile Include="Globals\Local\LoginInfoLocation.cs" />
     <Compile Include="Globals\Local\UserInfoLocation.cs" />
     <Compile Include="Globals\System\SysLoginInfo.cs" />
+    <Compile Include="Globals\System\SysPlcInfo.cs" />
+    <Compile Include="Models\PlcConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

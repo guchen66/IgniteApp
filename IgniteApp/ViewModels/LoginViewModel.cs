@@ -86,6 +86,7 @@ namespace IgniteApp.ViewModels
             LoginDto.IP = IPHelper.GetLocalIPByLinq();
             SysLoginInfo.Role = LoginDto.Role = RoleType.管理员;
             SysLoginInfo.UserName = LoginDto.UserName;
+            SysLoginInfo.Password = LoginDto.Password;
             UserManager.SaveXml(LoginDto);
             // 显示主窗口
             _windowManager.ShowWindow(_mainViewModel);
@@ -101,6 +102,7 @@ namespace IgniteApp.ViewModels
             LoginDto.IP = IPHelper.GetLocalIPByLinq();
             SysLoginInfo.Role = LoginDto.Role = RoleType.普通用户;
             SysLoginInfo.UserName = LoginDto.UserName;
+            SysLoginInfo.Password = LoginDto.Password;
             UserManager.SaveXml(LoginDto);
             // 显示主窗口
             _windowManager.ShowWindow(_mainViewModel);

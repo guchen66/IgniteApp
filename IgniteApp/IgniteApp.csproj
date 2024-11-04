@@ -188,8 +188,12 @@
     <Compile Include="Converters\IdConverter.cs" />
     <Compile Include="Converters\RoleTypeConverter.cs" />
     <Compile Include="Dialogs\ViewModels\AddRecipeViewModel.cs" />
+    <Compile Include="Dialogs\ViewModels\SafePopupViewModel.cs" />
     <Compile Include="Dialogs\Views\AddRecipeView.xaml.cs">
       <DependentUpon>AddRecipeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Views\SafePopupView.xaml.cs">
+      <DependentUpon>SafePopupView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ExceptionHandler.cs" />
     <Compile Include="Interfaces\IMenuItem.cs" />
@@ -315,6 +319,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialogs\Views\AddRecipeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\Views\SafePopupView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

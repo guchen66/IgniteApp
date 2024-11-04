@@ -120,6 +120,7 @@
     <Compile Include="IRepositorys\IMaterialRepository.cs" />
     <Compile Include="IRepositorys\IProductRepository.cs" />
     <Compile Include="IRepositorys\IRecipeRepository.cs" />
+    <Compile Include="IRepositorys\IStaticticRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -136,6 +137,7 @@
     <Compile Include="Repositorys\MaterialRepository.cs" />
     <Compile Include="Repositorys\ProductRepository.cs" />
     <Compile Include="Repositorys\RecipeRepository.cs" />
+    <Compile Include="Repositorys\StaticticRepository.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

@@ -30,3 +30,8 @@ E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\x64\Debug\AutoMapper.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\x64\Debug\Stylet.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\x64\Debug\AutoMapper.xml
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\x64\Debug\Stylet.xml
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\x64\Debug\IT.Tangdao.Framework.pdb
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\x64\Debug\IgniteDevices.dll
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\x64\Debug\NModbus4.dll
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\x64\Debug\IgniteDevices.pdb
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\x64\Debug\NModbus4.xml

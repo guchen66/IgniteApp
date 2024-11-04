@@ -11,6 +11,14 @@ namespace IgniteApp.Shell.Set.ViewModels
 {
     public class ProcessViewModel:ControlViewModelBase
     {
+        #region--字段--
+        #endregion
+        #region--属性--
+        #endregion
+        #region--.ctor--
+        #endregion
+        #region--方法--
+        #endregion
         private ObservableCollection<ProcessItem> _processItems;
 
         public ObservableCollection<ProcessItem> ProcessItems

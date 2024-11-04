@@ -26,12 +26,19 @@ namespace IgniteApp.Shell.Recipe.ViewModels
 {
     public class RecipeViewModel : SectionViewModel
     {
+        #region--字段--
+
         private readonly IRecipeRepository db;
+        public IViewFactory _viewFactory;
+        public IWindowManager _windowManager;
+        #endregion
+
+        #region--属性--
         private ObservableCollection<RecipeDto> _recipeMenuList;
 
         public ObservableCollection<RecipeDto> RecipeMenuList
         {
-            get => _recipeMenuList??(_recipeMenuList=new ObservableCollection<RecipeDto>());
+            get => _recipeMenuList ?? (_recipeMenuList = new ObservableCollection<RecipeDto>());
             set => SetAndNotify(ref _recipeMenuList, value);
         }
         private int _selectedIndex;
@@ -49,8 +56,9 @@ namespace IgniteApp.Shell.Recipe.ViewModels
             set => SetAndNotify(ref _selectedValue, value);
         }
 
-        public IViewFactory _viewFactory;
-        public IWindowManager _windowManager;
+        #endregion
+
+        #region--.ctor--
         public RecipeViewModel(IRecipeRepository db, IViewFactory viewFactory, IWindowManager windowManager)
         {
             this.db = db;
@@ -59,10 +67,12 @@ namespace IgniteApp.Shell.Recipe.ViewModels
             //字典转列表
             var lists = db.GetRecipes().ToObservableCollection();
             RecipeMenuList = lists;
-            this.Bind(viewModel => viewModel.SelectedIndex, (obj, args) => DoNavigateToView());
-           
-        }
+           // this.Bind(viewModel => viewModel.SelectedIndex, (obj, args) => DoNavigateToView());
 
+        }
+        #endregion
+
+        #region--方法--
         private void DoNavigateToView()
         {
             switch (SelectedIndex)
@@ -85,20 +95,32 @@ namespace IgniteApp.Shell.Recipe.ViewModels
             }
             else
             {
-               
+
             }
         }
         public void ExecuteEdit()
         {
-            var dto=db.GetRecipeById(SelectedValue.ToInt());
-            dto.RecipeName = "配方4";
-            db.EditRecipe(dto);
-            this.RefreshData();
+            var result = _windowManager.ShowDialog(SafePopupViewModel);
+         //   IsEnabled = result.HasValue;
+            ///关闭子窗体的返回结果
+            if (result.GetValueOrDefault(true))
+            {
+                var dto = db.GetRecipeById(SelectedValue.ToInt());
+                this.RefreshData();
+            }
+            else
+            {
+                MessageBox.Error("密码输入错误");
+            }
+          //  var dto = db.GetRecipeById(SelectedValue.ToInt());
+           // dto.RecipeName = "配方4";
+           // db.EditRecipe(dto);
+           // this.RefreshData();
         }
 
         public void ExecuteDelete()
         {
-            var dto = db.GetRecipeById(SelectedValue.ToInt());
+            var dto = db.GetRecipeById(SelectedIndex);
             db.DeleteRecipe(dto);
             this.RefreshData();
         }
@@ -107,11 +129,21 @@ namespace IgniteApp.Shell.Recipe.ViewModels
             RecipeMenuList = new ObservableCollection<RecipeDto>();
             db.GetRecipes().ForEach(x => RecipeMenuList.Add(x));
         }
+
+        public void ExecuteApply()
+        {
+            //TODO 保存配方并发送给PLC
+        }
+
         public ProcessViewModel ProcessViewModel;
         public AxisArgsViewModel AxisArgsViewModel;
         public SystemSetViewModel SystemSetViewModel;
 
         [Inject]
         public AddRecipeViewModel AddRecipeViewModel;
+        [Inject]
+        public SafePopupViewModel SafePopupViewModel;
+        #endregion
+
     }
 }

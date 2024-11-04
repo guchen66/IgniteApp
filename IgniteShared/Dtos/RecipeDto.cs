@@ -62,6 +62,12 @@ namespace IgniteShared.Dtos
             get => _isDeleted;
             set => SetProperty(ref _isDeleted, value);
         }
+        private bool _isEnabled;
 
+        public bool IsEnabled
+        {
+            get => _isEnabled;
+            set => SetProperty(ref _isEnabled, value);
+        }
     }
 }

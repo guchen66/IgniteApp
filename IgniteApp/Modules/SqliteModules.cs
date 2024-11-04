@@ -22,6 +22,7 @@ namespace IgniteApp.Modules
             Bind<AccessDbContext>().ToFactory(container => new AccessDbContext());
             Bind<IMaterialRepository>().To<MaterialRepository>().InSingletonScope();
             Bind<IRecipeRepository>().To<RecipeRepository>().InSingletonScope();
+            Bind<IProductRepository>().To<ProductRepository>().InSingletonScope();
         }
     }
 

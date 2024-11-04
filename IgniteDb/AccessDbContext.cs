@@ -1,6 +1,8 @@
 ﻿//using EntityFramework.DynamicFilters;
 using EntityFramework.DynamicFilters;
 using IgniteShared.Entitys;
+using IT.Tangdao.Framework.Helpers;
+using Newtonsoft.Json.Linq;
 using SQLite.CodeFirst;
 using System;
 using System.Collections.Generic;
@@ -8,6 +10,7 @@ using System.Configuration;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +22,7 @@ namespace IgniteDb
         public DbSet<ProductInfo> Products { get; set; }
         public DbSet<MaterialInfo> MaterialInfos { get; set; }
         public DbSet<RecipeInfo> RecipeInfos { get; set; }
+        public DbSet<StaticticInfo> StaticticInfos { get; set; }
         public AccessDbContext() : base("Sqlite")
         {
 
@@ -31,12 +35,21 @@ namespace IgniteDb
             modelBuilder.Entity<ProductInfo>().ToTable("ProductInfo");
             modelBuilder.Entity<MaterialInfo>().ToTable("MaterialInfo");
             modelBuilder.Entity<RecipeInfo>().ToTable("RecipeInfo");
-            var sqliteConnectionInitializer = new SqliteCreateDatabaseIfNotExists<AccessDbContext>(modelBuilder);
-            Database.SetInitializer(sqliteConnectionInitializer);
-            //   modelBuilder.Entity<HeaderInfo>().ToTable("headerinfo");
-            base.OnModelCreating(modelBuilder);
+            IsInitTable(out bool isShould);
+            if (isShould)
+            {
+                //TODO改变实体类后，可以创建新的数据库，注意，这种方式会删除表内的所有数据
+                var sqliteConnectionInitializer = new SqliteDropCreateDatabaseWhenModelChanges<AccessDbContext>(modelBuilder);
+                Database.SetInitializer(sqliteConnectionInitializer);
+            }
+            else
+            {
+                var sqliteConnectionInitializer = new SqliteCreateDatabaseIfNotExists<AccessDbContext>(modelBuilder);
+                Database.SetInitializer(sqliteConnectionInitializer);
+            }
 
         }
+
         public override int SaveChanges()
         {
            // ChangeTracker.Entries<IDeletionWare>().ToList().ForEach(entry => SetFilterDelete(entry));
@@ -68,6 +81,17 @@ namespace IgniteDb
             }
         }
 
-       
+        /// <summary>
+        /// 是否初始化数据表
+        /// </summary>
+        /// <returns></returns>
+        private bool IsInitTable(out bool isShould)
+        {
+            var path = DirectoryHelper.SelectDirectoryByName("appsetting.json");
+            string jsonContent = File.ReadAllText(path);
+            isShould = JObject.Parse(jsonContent)["Sqlite"]["InitTable"].Value<bool>();//.ToString();
+            return isShould;
+
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using IT.Tangdao.Framework.DaoMvvm;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -11,6 +12,7 @@ namespace IgniteShared.Entitys
     /// <summary>
     /// 统计信息
     /// </summary>
+    [Table("StaticticInfo")]
     public class StaticticInfo:EntityBase
     {
         public string Name { get; set; }
