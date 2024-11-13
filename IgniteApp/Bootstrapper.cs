@@ -12,6 +12,10 @@ using IgniteApp.Modules;
 using Yitter.IdGenerator;
 using IgniteAdmin.Managers.Transmit;
 using System.Threading;
+using IgniteShared.Models;
+using IT.Tangdao.Framework.Helpers;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 namespace IgniteApp
 {
     public class Bootstrapper : Bootstrapper<LoginViewModel>
@@ -54,7 +58,7 @@ namespace IgniteApp
             //非UI线程未捕获异常处理事件(例如自己创建的一个子线程)
             AppDomain.CurrentDomain.UnhandledException += handler.CurrentDomain_UnhandledException;
         }
-
+      
         private void RegisterWCFEvent()
         {
             var isStart = WcfTransmitManager.StartWcf();

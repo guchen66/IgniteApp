@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\App.xaml
-19638914650
+202051179372
 
-69-1325743587
+721791646964
 52-990456262
-Assets\Styles\BackgroundBrushStyle.xaml;Dialogs\Views\AddRecipeView.xaml;Dialogs\Views\SafePopupView.xaml;Shell\Aside\Views\AsideView.xaml;Shell\Footer\Views\FooterView.xaml;Shell\Header\Views\HeaderView.xaml;Shell\Home\Views\DefaultView.xaml;Shell\Home\Views\HomeView.xaml;Shell\Home\Views\MonitorView.xaml;Shell\Home\Views\SetView.xaml;Shell\Home\Views\UserInfoView.xaml;Shell\Home\Views\_404View.xaml;Shell\Maintion\Views\MaintainView.xaml;Shell\Recipe\Views\RecipeView.xaml;Shell\Set\Views\AxisArgsView.xaml;Shell\Set\Views\ProcessView.xaml;Shell\Set\Views\SystemSetView.xaml;Views\LoginView.xaml;Views\MainView.xaml;
+Assets\Styles\BackgroundBrushStyle.xaml;Dialogs\Views\AddRecipeView.xaml;Dialogs\Views\SafePopupView.xaml;Shell\Aside\Views\AsideView.xaml;Shell\Footer\Views\FooterView.xaml;Shell\Header\Views\HeaderView.xaml;Shell\Home\Views\DefaultView.xaml;Shell\Home\Views\HomeView.xaml;Shell\Home\Views\MonitorView.xaml;Shell\Home\Views\SetView.xaml;Shell\Home\Views\UserInfoView.xaml;Shell\Home\Views\WatermarkView.xaml;Shell\Home\Views\_404View.xaml;Shell\Maintion\Views\MaintainView.xaml;Shell\Recipe\Views\RecipeView.xaml;Shell\Set\Views\AxisArgsView.xaml;Shell\Set\Views\ProcessView.xaml;Shell\Set\Views\SystemSetView.xaml;Views\LoginView.xaml;Views\MainView.xaml;
 
 False
 

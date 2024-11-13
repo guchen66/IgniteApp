@@ -14,11 +14,8 @@ namespace IgniteShared.Models
 
     public class PlcBackResult
     {
-
         public bool IsSuccess { get; set; } = true;
-
         public string Message { get; set; }
 
-       
     }
 }

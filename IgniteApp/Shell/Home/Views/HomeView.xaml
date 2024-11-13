@@ -8,12 +8,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="https://github.com/canton7/Stylet"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+   xmlns:conver="clr-namespace:IgniteApp.Converters"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <UserControl.Resources>
-       
-    </UserControl.Resources>
     <Grid>
         <i:Interaction.Triggers>
             <i:EventTrigger EventName="Loaded">
@@ -49,5 +47,4 @@
             Margin="5"
             s:View.Model="{Binding ActiveItem}" />
     </Grid>
-
 </UserControl>

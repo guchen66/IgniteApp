@@ -32,7 +32,7 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
-                    <RowDefinition Height="300"/>
+                    <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
                 <ContentControl Grid.Row="0" s:View.Model="{Binding HomeViewModel}" />
                 <ContentControl Grid.Row="1" s:View.Model="{Binding FooterViewModel}" />

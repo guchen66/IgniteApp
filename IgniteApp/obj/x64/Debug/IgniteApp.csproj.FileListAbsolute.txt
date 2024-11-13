@@ -124,3 +124,5 @@ E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\bin\x64\Debug\IgniteDevices.pd
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\bin\x64\Debug\NModbus4.xml
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\obj\x64\Debug\Dialogs\Views\SafePopupView.g.cs
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\obj\x64\Debug\Dialogs\Views\SafePopupView.baml
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\obj\x64\Debug\Shell\Home\Views\WatermarkView.g.cs
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\obj\x64\Debug\Shell\Home\Views\WatermarkView.baml
