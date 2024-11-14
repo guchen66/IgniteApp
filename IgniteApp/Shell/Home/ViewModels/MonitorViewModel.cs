@@ -40,7 +40,7 @@ namespace IgniteApp.Shell.Home.ViewModels
                
             }).ToList();
             MonitorMenuList = new BindableCollection<MonitorMenuItem>(lists);
-            this.Bind(viewModel => viewModel.SelectedIndex, (obj, args) => DoNavigateToView());
+            this.BindAndInvoke(viewModel => viewModel.SelectedIndex, (obj, args) => DoNavigateToView());
         }
 
         private void DoNavigateToView()

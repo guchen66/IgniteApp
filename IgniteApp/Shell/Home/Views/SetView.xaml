@@ -18,11 +18,11 @@
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
-        <i:Interaction.Triggers>
+        <!--<i:Interaction.Triggers>
             <i:EventTrigger EventName="Loaded">
                 <i:InvokeCommandAction Command="{s:Action ExecuteLoad}" CommandParameter="{Binding DefaultScreen}" />
             </i:EventTrigger>
-        </i:Interaction.Triggers>
+        </i:Interaction.Triggers>-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="180"/>
             <ColumnDefinition />

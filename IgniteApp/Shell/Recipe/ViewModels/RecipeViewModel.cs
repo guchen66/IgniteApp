@@ -41,6 +41,10 @@ namespace IgniteApp.Shell.Recipe.ViewModels
             get => _recipeMenuList ?? (_recipeMenuList = new ObservableCollection<RecipeDto>());
             set => SetAndNotify(ref _recipeMenuList, value);
         }
+        /// <summary>
+        /// TODO只有SelectedIndex才能正常跳转，其他类似SelectedValue不起作用应该是HC框架的bug
+        /// 但是下标从0开始，所以为了和数据库Id=1对应，然后数据+1
+        /// </summary>
         private int _selectedIndex;
 
         public int SelectedIndex
@@ -56,6 +60,14 @@ namespace IgniteApp.Shell.Recipe.ViewModels
             set => SetAndNotify(ref _selectedValue, value);
         }
 
+        private RecipeDto _selectItem;
+
+        public RecipeDto SelectItem
+        {
+            get => _selectItem;
+            set => SetAndNotify(ref _selectItem, value);
+        }
+
         #endregion
 
         #region--.ctor--
@@ -67,24 +79,12 @@ namespace IgniteApp.Shell.Recipe.ViewModels
             //字典转列表
             var lists = db.GetRecipes().ToObservableCollection();
             RecipeMenuList = lists;
-           // this.Bind(viewModel => viewModel.SelectedIndex, (obj, args) => DoNavigateToView());
 
         }
         #endregion
 
         #region--方法--
-        private void DoNavigateToView()
-        {
-            switch (SelectedIndex)
-            {
-                case 0: ActivateItem(ProcessViewModel ?? (ProcessViewModel = _viewFactory.ProcessViewModel())); break;
-                case 1: ActivateItem(AxisArgsViewModel ?? (AxisArgsViewModel = _viewFactory.AxisArgsViewModel())); break;
-                case 2: ActivateItem(SystemSetViewModel ?? (SystemSetViewModel = _viewFactory.SystemSetViewModel())); break;
-                default:
-                    break;
-            }
-        }
-
+     
         public void ExecuteAdd()
         {
             var result = _windowManager.ShowDialog(AddRecipeViewModel);

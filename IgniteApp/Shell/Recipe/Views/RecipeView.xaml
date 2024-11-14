@@ -12,7 +12,7 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
     <UserControl.Resources>
-        <DataTemplate x:Key="ListBoxItem">
+        <DataTemplate x:Key="ListBoxTemplate">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock
                     Height="40"
@@ -23,7 +23,6 @@
         <DataTemplate x:Key="DetailContentTemplate">
             <GroupBox
                 Padding="8"
-                BorderBrush="Aqua"
                 BorderThickness="1"
                 Header="{Binding RecipeName}">
                 <StackPanel>
@@ -96,10 +95,10 @@
             </Grid.RowDefinitions>
             <ListBox
                 IsSynchronizedWithCurrentItem="True"
-                ItemTemplate="{StaticResource ListBoxItem}"
-                ItemsSource="{Binding RecipeMenuList,UpdateSourceTrigger=PropertyChanged}"            
-                SelectedValue="{Binding SelectedValue}"
-                SelectedValuePath="Id"
+                ItemTemplate="{StaticResource ListBoxTemplate}"
+                ItemsSource="{Binding RecipeMenuList,UpdateSourceTrigger=PropertyChanged}"       
+               SelectedIndex="{Binding SelectedIndex}"
+             
                 UseLayoutRounding="True"
                 SelectionMode="Single" />
             <Border
@@ -150,13 +149,12 @@
                             Content="编辑" />
                     </StackPanel>
                 </StackPanel>
-
             </Border>
         </Grid>
 
-        <ContentControl
+        <ContentControl 
             Grid.Column="1"
-            Content="{Binding RecipeMenuList}"
+            Content="{Binding RecipeMenuList}" 
             ContentTemplate="{StaticResource DetailContentTemplate}" />
     </Grid>
 </UserControl>

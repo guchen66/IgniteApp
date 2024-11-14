@@ -43,7 +43,7 @@ namespace IgniteApp.Shell.Home.ViewModels
                 SetMenuToView=kvp.Value,
             }).ToList();
             SetMenuList = new BindableCollection<SetMenuItem>(lists);
-            this.Bind(viewModel=>viewModel.SelectedIndex, (obj,args)=>DoNavigateToView());
+            this.BindAndInvoke(viewModel=>viewModel.SelectedIndex, (obj,args)=>DoNavigateToView());
         }
 
         private void DoNavigateToView()
@@ -72,10 +72,10 @@ namespace IgniteApp.Shell.Home.ViewModels
         /// 默认打开首页
         /// </summary>
         /// <param name="screen"></param>
-        public void ExecuteLoad(Screen screen)
+      /*  public void ExecuteLoad(Screen screen)
         {
             ActivateItem(screen ?? (screen = _viewFactory.ProcessViewModel()));
-        }
+        }*/
         protected override void OnActivate()
         {
             base.OnActivate();

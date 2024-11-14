@@ -34,14 +34,14 @@ namespace IgniteApp.Shell.Maintion.ViewModels
         {
             this._viewFactory = viewFactory;
             MaintainMenuItem Item = new MaintainMenuItem();
-            //字典转列表
+            
             var lists = Item.ReadAppConfigToDic("MaintainMenu").Select(kvp => new MaintainMenuItem
             {
                 MenuName = kvp.Value,
                
             }).ToList();
             MaintainMenuList = new BindableCollection<MaintainMenuItem>(lists);
-            this.Bind(viewModel => viewModel.SelectedIndex, (obj, args) => DoNavigateToView());
+            this.BindAndInvoke(viewModel => viewModel.SelectedIndex, (obj, args) => DoNavigateToView());
         }
 
         private void DoNavigateToView()
