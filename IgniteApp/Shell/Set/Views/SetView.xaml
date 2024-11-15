@@ -1,6 +1,5 @@
-﻿<UserControl
-    x:Class="IgniteApp.Shell.Home.Views.SetView"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<UserControl x:Class="IgniteApp.Shell.Set.Views.SetView"
+               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:IgniteApp.Shell.Home.Views"
@@ -32,6 +31,6 @@
             Grid.Column="1"
             Margin="5"
             s:View.Model="{Binding ActiveItem}" />
-        
+
     </Grid>
 </UserControl>

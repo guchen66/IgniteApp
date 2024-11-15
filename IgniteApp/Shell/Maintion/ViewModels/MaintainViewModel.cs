@@ -12,8 +12,9 @@ using System.Threading.Tasks;
 
 namespace IgniteApp.Shell.Maintion.ViewModels
 {
-    public class MaintainViewModel : SectionViewModel
+    public class MaintainViewModel : NavigatViewModel
     {
+        public override string Name => "维护";
         private BindableCollection<MaintainMenuItem> _maintainMenuList;
 
         public BindableCollection<MaintainMenuItem> MaintainMenuList

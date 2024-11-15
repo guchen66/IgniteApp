@@ -10,13 +10,12 @@
     <UserControl.Resources>
         <DataTemplate x:Key="SysDetail" DataType="hc:TabItem">
             <StackPanel>
-                <TextBlock Text="{Binding Name}"/>
-                <TextBlock Text="{Binding Type}"/>
+                <ContentControl Content="{Binding CurrentView}"/>
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
-        <hc:TabControl ItemsSource="{Binding Systems}" SelectedItem="{Binding SystemItem,Mode=OneWay}" Name="tab">
+        <hc:TabControl ItemsSource="{Binding SystemLists}" SelectedItem="{Binding SystemItem,Mode=OneWay}" Name="tab">
             <hc:TabControl.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}"/>

@@ -1,0 +1,63 @@
+﻿<UserControl
+    x:Class="IgniteApp.Shell.Set.Views.NetSetView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:IgniteApp.Shell.Set.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:IgniteApp.Shell.Set.ViewModels"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style x:Key="Txt" TargetType="TextBlock">
+            <Setter Property="Width" Value="60"/>
+            <Setter Property="MaxWidth" Value="60"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <vm:NetSetViewModel />
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Margin="5" Text="代理设置" FontSize="16" FontWeight="Bold" FontFamily="微软雅黑"/>
+            <Grid Grid.Row="1" Width="600" HorizontalAlignment="Left">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="类型" Style="{StaticResource Txt}" Margin="5" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox  Margin="5" Grid.Row="0" Grid.Column="1" Text="{Binding NetSetItem.Type}"/>
+                <TextBlock Text="地址" Style="{StaticResource Txt}" Margin="5" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"/>
+                <TextBox  Margin="5" Grid.Row="0" Grid.Column="3" Text="{Binding NetSetItem.Address}"/>
+                <TextBlock Text="用户名" Style="{StaticResource Txt}" Margin="5" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox  Margin="5" Grid.Row="1" Grid.Column="1" Text="{Binding NetSetItem.Account}"/>
+                <TextBlock Text="端口" Style="{StaticResource Txt}" Margin="5" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"/>
+                <TextBox  Margin="5" Grid.Row="1" Grid.Column="3" Text="{Binding NetSetItem.Port}"/>
+            </Grid>
+        </Grid>
+        <Separator Grid.Row="1"/>
+       
+    </Grid>
+</UserControl>

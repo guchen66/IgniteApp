@@ -1,5 +1,6 @@
 ﻿using IgniteApp.Bases;
 using IgniteApp.Shell.Set.Models;
+using IgniteApp.Shell.Set.Views;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -20,21 +21,15 @@ namespace IgniteApp.Shell.Set.ViewModels
         #endregion
         #region--方法--
         #endregion
-        private ObservableCollection<SystemMenuItem> _systems;
+        private ObservableCollection<SystemMenuItem> _systemLists;
 
-        public ObservableCollection<SystemMenuItem> Systems
+        public ObservableCollection<SystemMenuItem> SystemLists
         {
-            get => _systems;
-            set => SetAndNotify(ref _systems, value);
+            get => _systemLists;
+            set => SetAndNotify(ref _systemLists, value);
         }
 
-        private ObservableCollection<SystemMenuItem> _item;
-
-        public ObservableCollection<SystemMenuItem> Item
-        {
-            get => _item;
-            set => SetAndNotify(ref _item, value);
-        }
+      
         private SystemMenuItem _systemItem;
 
         public SystemMenuItem SystemItem
@@ -45,19 +40,23 @@ namespace IgniteApp.Shell.Set.ViewModels
 
         public SystemSetViewModel()
         {
-            Systems = new ObservableCollection<SystemMenuItem>()
+            SystemLists = new ObservableCollection<SystemMenuItem>()
             {
-                new SystemMenuItem(){ Id=1,Name="展示",Type="11", },
-                new SystemMenuItem(){ Id=1,Name="展示",Type="11",},
-                new SystemMenuItem(){ Id=1,Name="展示",Type="11", },
-            };
+                new SystemMenuItem(){ Id=1,Name="通用设置",CurrentView=new CommonSetView() },
+                new SystemMenuItem(){ Id=2,Name="账户设置",CurrentView=new AccountSetView()},
+                new SystemMenuItem(){ Id=3,Name="网络设置",CurrentView=new NetSetView()},           
+                new SystemMenuItem(){ Id=4,Name="辅助设置", CurrentView=new AssistSetView()},
+            };       
+        }
 
-            Item = new ObservableCollection<SystemMenuItem>()
-            {
-                new SystemMenuItem(){ Id=1,Name="展示",Type="11" },
-                new SystemMenuItem(){ Id=2,Name="展示",Type="11"},
-                new SystemMenuItem(){ Id=3,Name="展示",Type="11"},
-            };
+        protected override void OnActivate()
+        {
+            base.OnActivate();
+        }
+
+        protected override void OnInitialActivate()
+        {
+            base.OnInitialActivate();
         }
     }
 }

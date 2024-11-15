@@ -18,7 +18,7 @@ using System.Windows.Input;
 
 namespace IgniteApp.Shell.Home.ViewModels
 {
-    public class HomeViewModel: SectionViewModel
+    public class HomeViewModel: NavigatViewModel
     {      
         private BindableCollection<HomeMenuItem> _homeMenuItem;
 

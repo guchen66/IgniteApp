@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace IgniteApp.Shell.Set.Models
 {
@@ -33,6 +34,14 @@ namespace IgniteApp.Shell.Set.Models
         {
             get => _type;
             set => SetProperty(ref _type, value);
+        }
+
+        private UserControl _currentView;
+
+        public UserControl CurrentView
+        {
+            get => _currentView;
+            set => SetProperty(ref _currentView, value);
         }
 
         private IList _items;

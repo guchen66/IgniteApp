@@ -3,6 +3,7 @@ E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\app.config
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\IgniteDb.dll.config
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\IgniteDb.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\IgniteDb.pdb
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\AutoMapper.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\EntityFramework.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\EntityFramework.DynamicFilters.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\EntityFramework.SqlServer.dll
@@ -23,9 +24,12 @@ E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\System.Runtime.Compil
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\System.Threading.Tasks.Extensions.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\System.ValueTuple.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\IgniteShared.pdb
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\IgniteShared.dll.config
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\AutoMapper.xml
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\EntityFramework.xml
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\EntityFramework.DynamicFilters.xml
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\EntityFramework.SqlServer.xml
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\IT.Tangdao.Framework.pdb
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\Microsoft.Extensions.DependencyInjection.xml
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
@@ -44,7 +48,3 @@ E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\obj\Debug\IgniteDb.csproj.CoreC
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\obj\Debug\IgniteDb.csproj.Up2Date
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\obj\Debug\IgniteDb.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\obj\Debug\IgniteDb.pdb
-E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\IgniteShared.dll.config
-E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\AutoMapper.dll
-E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\AutoMapper.xml
-E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\IT.Tangdao.Framework.pdb

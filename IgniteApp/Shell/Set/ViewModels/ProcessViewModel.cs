@@ -35,5 +35,10 @@ namespace IgniteApp.Shell.Set.ViewModels
                  new ProcessItem() {Name="空跑模式", IsFeeding=true,IsBoardMade=false,IsBoardCheck=false,IsSeal=false,IsSafe=false,IsCharge=false,IsBlanking=false},
             };
         }
+
+        public void SaveProcess()
+        {
+
+        }
     }
 }

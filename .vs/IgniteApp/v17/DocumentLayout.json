@@ -1,24 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|e:\\csharp project\\applyclient\\igniteapp\\igniteapp\\shell\\home\\viewmodels\\setviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|solutionrelative:igniteapp\\shell\\home\\viewmodels\\setviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|e:\\csharp project\\applyclient\\igniteapp\\igniteapp\\shell\\home\\viewmodels\\userinfoviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|solutionrelative:igniteapp\\shell\\home\\viewmodels\\userinfoviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|e:\\csharp project\\applyclient\\igniteapp\\igniteapp\\shell\\home\\viewmodels\\defaultviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|solutionrelative:igniteapp\\shell\\home\\viewmodels\\defaultviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|e:\\csharp project\\applyclient\\igniteapp\\igniteapp\\shell\\recipe\\viewmodels\\recipeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|solutionrelative:igniteapp\\shell\\recipe\\viewmodels\\recipeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -26,7 +9,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -55,58 +38,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "SetViewModel.cs",
-              "DocumentMoniker": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Shell\\Home\\ViewModels\\SetViewModel.cs",
-              "RelativeDocumentMoniker": "IgniteApp\\Shell\\Home\\ViewModels\\SetViewModel.cs",
-              "ToolTip": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Shell\\Home\\ViewModels\\SetViewModel.cs",
-              "RelativeToolTip": "IgniteApp\\Shell\\Home\\ViewModels\\SetViewModel.cs",
-              "ViewState": "AQIAABUAAAAAAAAAAADwvy0AAAAeAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-14T16:04:45.817Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UserInfoViewModel.cs",
-              "DocumentMoniker": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Shell\\Home\\ViewModels\\UserInfoViewModel.cs",
-              "RelativeDocumentMoniker": "IgniteApp\\Shell\\Home\\ViewModels\\UserInfoViewModel.cs",
-              "ToolTip": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Shell\\Home\\ViewModels\\UserInfoViewModel.cs",
-              "RelativeToolTip": "IgniteApp\\Shell\\Home\\ViewModels\\UserInfoViewModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-14T16:04:45.136Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "RecipeViewModel.cs",
-              "DocumentMoniker": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Shell\\Recipe\\ViewModels\\RecipeViewModel.cs",
-              "RelativeDocumentMoniker": "IgniteApp\\Shell\\Recipe\\ViewModels\\RecipeViewModel.cs",
-              "ToolTip": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Shell\\Recipe\\ViewModels\\RecipeViewModel.cs",
-              "RelativeToolTip": "IgniteApp\\Shell\\Recipe\\ViewModels\\RecipeViewModel.cs",
-              "ViewState": "AQIAABgAAAAAAAAAAADwv0EAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-14T15:57:04.42Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "DefaultViewModel.cs",
-              "DocumentMoniker": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Shell\\Home\\ViewModels\\DefaultViewModel.cs",
-              "RelativeDocumentMoniker": "IgniteApp\\Shell\\Home\\ViewModels\\DefaultViewModel.cs",
-              "ToolTip": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Shell\\Home\\ViewModels\\DefaultViewModel.cs",
-              "RelativeToolTip": "IgniteApp\\Shell\\Home\\ViewModels\\DefaultViewModel.cs",
-              "ViewState": "AQIAAFcAAAAAAAAAAADwvwAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-14T15:57:00.539Z",
-              "EditorCaption": ""
             }
           ]
         }

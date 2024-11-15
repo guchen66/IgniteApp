@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace IgniteApp.Shell.Home.Views
+namespace IgniteApp.Shell.Set.Views
 {
     /// <summary>
-    /// MonitorView.xaml 的交互逻辑
+    /// SetView.xaml 的交互逻辑
     /// </summary>
-    public partial class MonitorView : UserControl
+    public partial class SetView : UserControl
     {
-        public MonitorView()
+        public SetView()
         {
             InitializeComponent();
         }

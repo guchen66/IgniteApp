@@ -198,6 +198,7 @@
     </Compile>
     <Compile Include="ExceptionHandler.cs" />
     <Compile Include="Interfaces\IMenuItem.cs" />
+    <Compile Include="Interfaces\INavigatRoute.cs" />
     <Compile Include="Interfaces\IViewFactory.cs" />
     <Compile Include="Modules\AutoModules.cs" />
     <Compile Include="Modules\HomeModules.cs" />
@@ -224,8 +225,6 @@
     <Compile Include="Shell\Home\ViewModels\DefaultViewModel.cs" />
     <Compile Include="Shell\Home\ViewModels\HomeViewModel.cs" />
     <Compile Include="Shell\Home\ViewModels\ImageContextMenuViewModel.cs" />
-    <Compile Include="Shell\Home\ViewModels\MonitorViewModel.cs" />
-    <Compile Include="Shell\Home\ViewModels\SetViewModel.cs" />
     <Compile Include="Shell\Home\ViewModels\UserInfoViewModel.cs" />
     <Compile Include="Shell\Home\ViewModels\_404ViewModel.cs" />
     <Compile Include="Shell\Home\Views\DefaultView.xaml.cs">
@@ -233,12 +232,6 @@
     </Compile>
     <Compile Include="Shell\Home\Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Shell\Home\Views\MonitorView.xaml.cs">
-      <DependentUpon>MonitorView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Shell\Home\Views\SetView.xaml.cs">
-      <DependentUpon>SetView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Shell\Home\Views\UserInfoView.xaml.cs">
       <DependentUpon>UserInfoView.xaml</DependentUpon>
@@ -254,22 +247,48 @@
     <Compile Include="Shell\Maintion\Views\MaintainView.xaml.cs">
       <DependentUpon>MaintainView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Shell\Monitor\ViewModels\MonitorViewModel.cs" />
+    <Compile Include="Shell\Monitor\Views\MonitorView.xaml.cs">
+      <DependentUpon>MonitorView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Shell\Recipe\Models\RecipeMenuItem.cs" />
     <Compile Include="Shell\Recipe\ViewModels\RecipeViewModel.cs" />
     <Compile Include="Shell\Recipe\Views\RecipeView.xaml.cs">
       <DependentUpon>RecipeView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Shell\Set\Models\AccountSetItem.cs" />
     <Compile Include="Shell\Set\Models\AxisItem.cs" />
+    <Compile Include="Shell\Set\Models\NetSetItem.cs" />
     <Compile Include="Shell\Set\Models\ProcessItem.cs" />
     <Compile Include="Shell\Set\Models\SystemMenuItem.cs" />
+    <Compile Include="Shell\Set\ViewModels\AccountSetViewModel.cs" />
+    <Compile Include="Shell\Set\ViewModels\AssistSetViewModel.cs" />
     <Compile Include="Shell\Set\ViewModels\AxisArgsViewModel.cs" />
+    <Compile Include="Shell\Set\ViewModels\CommonSetViewModel.cs" />
+    <Compile Include="Shell\Set\ViewModels\NetSetViewModel.cs" />
     <Compile Include="Shell\Set\ViewModels\ProcessViewModel.cs" />
+    <Compile Include="Shell\Set\ViewModels\SetViewModel.cs" />
     <Compile Include="Shell\Set\ViewModels\SystemSetViewModel.cs" />
+    <Compile Include="Shell\Set\Views\AccountSetView.xaml.cs">
+      <DependentUpon>AccountSetView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\Set\Views\AssistSetView.xaml.cs">
+      <DependentUpon>AssistSetView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Shell\Set\Views\AxisArgsView.xaml.cs">
       <DependentUpon>AxisArgsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Shell\Set\Views\CommonSetView.xaml.cs">
+      <DependentUpon>CommonSetView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\Set\Views\NetSetView.xaml.cs">
+      <DependentUpon>NetSetView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Shell\Set\Views\ProcessView.xaml.cs">
       <DependentUpon>ProcessView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\Set\Views\SetView.xaml.cs">
+      <DependentUpon>SetView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Shell\Set\Views\SystemSetView.xaml.cs">
       <DependentUpon>SystemSetView.xaml</DependentUpon>
@@ -351,14 +370,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Shell\Home\Views\MonitorView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Shell\Home\Views\SetView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Shell\Home\Views\UserInfoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -375,7 +386,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Shell\Monitor\Views\MonitorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Shell\Recipe\Views\RecipeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shell\Set\Views\AccountSetView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shell\Set\Views\AssistSetView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -383,7 +406,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Shell\Set\Views\CommonSetView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shell\Set\Views\NetSetView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Shell\Set\Views\ProcessView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shell\Set\Views\SetView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -432,6 +467,7 @@
   <ItemGroup>
     <Resource Include="Assets\Images\Light.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -1,5 +1,6 @@
 ﻿using IgniteApp.Shell.Home.ViewModels;
 using IgniteApp.Shell.Maintion.ViewModels;
+using IgniteApp.Shell.Monitor.ViewModels;
 using IgniteApp.Shell.Recipe.ViewModels;
 using IgniteApp.Shell.Set.ViewModels;
 using Stylet;
@@ -17,10 +18,31 @@ namespace IgniteApp.Interfaces
         DefaultViewModel DefaultViewModel();
         SetViewModel SetViewModel();
         UserInfoViewModel UserInfoViewModel();
-        MonitorViewModel MonitorViewModel();
-        MaintainViewModel MaintionViewModel();
-        RecipeViewModel RecipeViewModel();
+       
+       
+       
         _404ViewModel _404ViewModel();
+
+        #region--主页--
+        #endregion
+
+        #region--用户--
+        #endregion
+
+        #region--设置--
+        #endregion
+
+        #region--维护--
+        MaintainViewModel MaintionViewModel();
+        #endregion
+
+        #region--监控--
+        MonitorViewModel MonitorViewModel();
+        #endregion
+
+        #region--配方--
+        RecipeViewModel RecipeViewModel();
+        #endregion
 
         ProcessViewModel ProcessViewModel();
         AxisArgsViewModel AxisArgsViewModel();

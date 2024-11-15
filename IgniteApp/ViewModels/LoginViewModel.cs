@@ -90,6 +90,7 @@ namespace IgniteApp.ViewModels
             UserManager.SaveXml(LoginDto);
             // 显示主窗口
             _windowManager.ShowWindow(_mainViewModel);
+            //关闭登录窗口
             RequestClose();
         }
 

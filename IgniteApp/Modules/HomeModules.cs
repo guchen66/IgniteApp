@@ -1,4 +1,6 @@
 ﻿using IgniteApp.Interfaces;
+using IgniteDb.IRepositorys;
+using IgniteDb.Repositorys;
 using StyletIoC;
 using System;
 using System.Collections.Generic;
@@ -13,6 +15,7 @@ namespace IgniteApp.Modules
         protected override void Load()
         {
             Bind<IViewFactory>().ToAbstractFactory();
+            Bind<INavigatRoute>().To<NavigatRoute>().InSingletonScope();
         }
     }
 }

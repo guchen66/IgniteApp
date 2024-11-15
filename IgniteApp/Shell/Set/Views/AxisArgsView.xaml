@@ -75,7 +75,7 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <ListBox
-            Margin="10,0,10,0"
+            VerticalAlignment="Stretch" HorizontalAlignment="Center"
             IsSynchronizedWithCurrentItem="True"
             ItemsSource="{Binding Source={StaticResource MyAxis}}"
             ScrollViewer.VerticalScrollBarVisibility="Disabled"
@@ -84,7 +84,7 @@
             Style="{DynamicResource StackPanelVerticalListBox}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Margin="10" Text="{Binding AxisName}" />
+                    <TextBlock Margin="10" Text="{Binding AxisName}" FontSize="18"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
             <ListBox.ItemContainerStyle>

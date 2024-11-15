@@ -328,6 +328,10 @@
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
         <hc:TabControl ItemsSource="{Binding ProcessItems}">
             <hc:TabControl.ItemTemplate>
                 <DataTemplate>
@@ -339,5 +343,8 @@
                 <StaticResource ResourceKey="ProcessDetail"/>
             </hc:TabControl.ContentTemplate>
         </hc:TabControl>
+        <Grid Grid.Row="1">
+            <Button Width="100" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="保存" Command="{s:Action SaveProcess}"/>
+        </Grid>
     </Grid>
 </UserControl>

@@ -1,7 +1,6 @@
 ﻿using IgniteApp.Bases;
 using IgniteApp.Interfaces;
 using IgniteApp.Shell.Home.Models;
-using IgniteApp.Shell.Set.ViewModels;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -9,16 +8,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IgniteApp.Shell.Home.ViewModels
+namespace IgniteApp.Shell.Set.ViewModels
 {
-   public class MonitorViewModel : SectionViewModel
+    public class SetViewModel : NavigatViewModel
     {
-        private BindableCollection<MonitorMenuItem> _monitorMenuList;
+        private BindableCollection<SetMenuItem> _setMenuList;
 
-        public BindableCollection<MonitorMenuItem> MonitorMenuList
+        public BindableCollection<SetMenuItem> SetMenuList
         {
-            get => _monitorMenuList;
-            set => SetAndNotify(ref _monitorMenuList, value);
+            get => _setMenuList;
+            set => SetAndNotify(ref _setMenuList, value);
         }
         private int _selectedIndex;
 
@@ -29,17 +28,16 @@ namespace IgniteApp.Shell.Home.ViewModels
         }
 
         public IViewFactory _viewFactory;
-        public MonitorViewModel(IViewFactory viewFactory)
+        public SetViewModel(IViewFactory viewFactory)
         {
             this._viewFactory = viewFactory;
-            MonitorMenuItem Item = new MonitorMenuItem();
             //字典转列表
-            var lists = Item.ReadAppConfigToDic("MonitorMenu").Select(kvp => new MonitorMenuItem
+            var lists = this.ReadAppConfigToDic("SetMenu").Select(kvp => new SetMenuItem
             {
                 MenuName = kvp.Value,
-               
+                SetMenuToView = kvp.Value,
             }).ToList();
-            MonitorMenuList = new BindableCollection<MonitorMenuItem>(lists);
+            SetMenuList = new BindableCollection<SetMenuItem>(lists);
             this.BindAndInvoke(viewModel => viewModel.SelectedIndex, (obj, args) => DoNavigateToView());
         }
 
@@ -57,6 +55,29 @@ namespace IgniteApp.Shell.Home.ViewModels
         public ProcessViewModel ProcessViewModel;
         public AxisArgsViewModel AxisArgsViewModel;
         public SystemSetViewModel SystemSetViewModel;
+        private Screen _defaultScreen;
 
+        public Screen DefaultScreen
+        {
+            get => _defaultScreen;
+            set => SetAndNotify(ref _defaultScreen, value);
+        }
+
+        /// <summary>
+        /// 默认打开首页
+        /// </summary>
+        /// <param name="screen"></param>
+      /*  public void ExecuteLoad(Screen screen)
+        {
+            ActivateItem(screen ?? (screen = _viewFactory.ProcessViewModel()));
+        }*/
+        protected override void OnActivate()
+        {
+            base.OnActivate();
+        }
+        protected override void OnInitialActivate()
+        {
+            base.OnInitialActivate();
+        }
     }
 }

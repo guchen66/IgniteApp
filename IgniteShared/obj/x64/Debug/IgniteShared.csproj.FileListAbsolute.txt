@@ -1,6 +1,10 @@
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\Db\demo.db
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\IgniteShared.dll.config
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\IgniteShared.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\IgniteShared.pdb
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\AutoMapper.dll
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\EntityFramework.dll
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\EntityFramework.SqlServer.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\IT.Tangdao.Framework.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\Microsoft.Bcl.AsyncInterfaces.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
@@ -9,6 +13,10 @@ E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\Newtonsoft.Js
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\System.Runtime.CompilerServices.Unsafe.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\System.Threading.Tasks.Extensions.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\System.ValueTuple.dll
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\AutoMapper.xml
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\EntityFramework.xml
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\EntityFramework.SqlServer.xml
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\IT.Tangdao.Framework.pdb
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\Microsoft.Bcl.AsyncInterfaces.xml
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\Microsoft.Extensions.DependencyInjection.xml
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
@@ -23,11 +31,3 @@ E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\obj\x64\Debug\IgniteShared.
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\obj\x64\Debug\IgniteSh.C207E57B.Up2Date
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\obj\x64\Debug\IgniteShared.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\obj\x64\Debug\IgniteShared.pdb
-E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\IgniteShared.dll.config
-E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\EntityFramework.dll
-E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\EntityFramework.SqlServer.dll
-E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\EntityFramework.xml
-E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\EntityFramework.SqlServer.xml
-E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\AutoMapper.dll
-E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\AutoMapper.xml
-E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\IT.Tangdao.Framework.pdb

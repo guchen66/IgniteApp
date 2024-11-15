@@ -24,7 +24,7 @@ using System.Threading.Tasks;
 
 namespace IgniteApp.Shell.Recipe.ViewModels
 {
-    public class RecipeViewModel : SectionViewModel
+    public class RecipeViewModel : NavigatViewModel
     {
         #region--字段--
 
