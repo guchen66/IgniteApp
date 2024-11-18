@@ -52,6 +52,9 @@ namespace IgniteApp.Shell.Set.Models
 
     }
 
+    /// <summary>
+    /// 模拟数据，后期从数据库获取或者从本地获取
+    /// </summary>
     public class AxisProvider: ObservableCollection<AxisItem>
     {
         List<AxisItem> AxisItems = new List<AxisItem>();
@@ -62,8 +65,6 @@ namespace IgniteApp.Shell.Set.Models
             Load();
         }
       
-     
-
         private readonly IReadService _readService;
         private readonly IWriteService _writeService;
         protected  void Load()

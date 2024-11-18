@@ -30,8 +30,8 @@ namespace IgniteApp.Shell.Monitor.ViewModels
         }
 
         public IViewFactory _viewFactory;
-        private readonly INavigatRoute _navigatRoute;
-        public MonitorViewModel(IViewFactory viewFactory, INavigatRoute navigatRoute)
+        private readonly INavigateRoute _navigatRoute;
+        public MonitorViewModel(IViewFactory viewFactory, INavigateRoute navigatRoute)
         {
             this._viewFactory = viewFactory;
             MonitorMenuItem Item = new MonitorMenuItem();
@@ -44,23 +44,24 @@ namespace IgniteApp.Shell.Monitor.ViewModels
             MonitorMenuList = new BindableCollection<MonitorMenuItem>(lists);
             this.BindAndInvoke(viewModel => viewModel.SelectedIndex, (obj, args) => DoNavigateToView());
             _navigatRoute = navigatRoute;
-            _navigatRoute.GetRouteName();
+           
         }
 
         private void DoNavigateToView()
         {
             switch (SelectedIndex)
             {
-                case 0: ActivateItem(ProcessViewModel ?? (ProcessViewModel = _viewFactory.ProcessViewModel())); break;
-                case 1: ActivateItem(AxisArgsViewModel ?? (AxisArgsViewModel = _viewFactory.AxisArgsViewModel())); break;
-                case 2: ActivateItem(SystemSetViewModel ?? (SystemSetViewModel = _viewFactory.SystemSetViewModel())); break;
+                case 0: ActivateItem(IOMonViewModel ?? (IOMonViewModel = _viewFactory.IOMonViewModel())); break;
+                case 1: ActivateItem(AxisMonViewModel ?? (AxisMonViewModel = _viewFactory.AxisMonViewModel())); break;
+                case 2: ActivateItem(PlcMonViewModel ?? (PlcMonViewModel = _viewFactory.PlcMonViewModel())); break;
+                case 3: ActivateItem(ReportViewModel ?? (ReportViewModel = _viewFactory.ReportViewModel())); break;
                 default:
                     break;
             }
         }
-        public ProcessViewModel ProcessViewModel;
-        public AxisArgsViewModel AxisArgsViewModel;
-        public SystemSetViewModel SystemSetViewModel;
-
+        public IOMonViewModel IOMonViewModel;
+        public AxisMonViewModel AxisMonViewModel;
+        public PlcMonViewModel PlcMonViewModel;
+        public ReportViewModel ReportViewModel;
     }
 }

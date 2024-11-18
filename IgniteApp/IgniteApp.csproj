@@ -73,6 +73,9 @@
     <Reference Include="IT.Tangdao.Framework, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\IT.Tangdao.Framework.3.0.7\lib\net48\IT.Tangdao.Framework.dll</HintPath>
     </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -198,7 +201,8 @@
     </Compile>
     <Compile Include="ExceptionHandler.cs" />
     <Compile Include="Interfaces\IMenuItem.cs" />
-    <Compile Include="Interfaces\INavigatRoute.cs" />
+    <Compile Include="Interfaces\INavigateEntry.cs" />
+    <Compile Include="Interfaces\INavigateRoute.cs" />
     <Compile Include="Interfaces\IViewFactory.cs" />
     <Compile Include="Modules\AutoModules.cs" />
     <Compile Include="Modules\HomeModules.cs" />
@@ -207,6 +211,10 @@
     <Compile Include="Shell\Aside\ViewModels\AsideViewModel.cs" />
     <Compile Include="Shell\Aside\Views\AsideView.xaml.cs">
       <DependentUpon>AsideView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\Calibration\ViewModels\CalibrationViewModel.cs" />
+    <Compile Include="Shell\Calibration\Views\CalibrationView.xaml.cs">
+      <DependentUpon>CalibrationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Shell\Footer\Models\FooterItem.cs" />
     <Compile Include="Shell\Footer\ViewModels\FooterViewModel.cs" />
@@ -243,13 +251,52 @@
       <DependentUpon>_404View.xaml</DependentUpon>
     </Compile>
     <Compile Include="Shell\Maintion\Models\MaintainMenuItem.cs" />
+    <Compile Include="Shell\Maintion\ViewModels\ElectViewModel.cs" />
+    <Compile Include="Shell\Maintion\ViewModels\LightViewModel.cs" />
     <Compile Include="Shell\Maintion\ViewModels\MaintainViewModel.cs" />
+    <Compile Include="Shell\Maintion\ViewModels\PressureViewModel.cs" />
+    <Compile Include="Shell\Maintion\ViewModels\ResistiveViewModel.cs" />
+    <Compile Include="Shell\Maintion\ViewModels\TempAndHumViewModel.cs" />
+    <Compile Include="Shell\Maintion\Views\ElectView.xaml.cs">
+      <DependentUpon>ElectView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\Maintion\Views\LightView.xaml.cs">
+      <DependentUpon>LightView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Shell\Maintion\Views\MaintainView.xaml.cs">
       <DependentUpon>MaintainView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Shell\Maintion\Views\PressureView.xaml.cs">
+      <DependentUpon>PressureView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\Maintion\Views\ResistiveView.xaml.cs">
+      <DependentUpon>ResistiveView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\Maintion\Views\TempAndHumView.xaml.cs">
+      <DependentUpon>TempAndHumView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\Monitor\Models\AxisMonItem.cs" />
+    <Compile Include="Shell\Monitor\Models\IOMonItem.cs" />
+    <Compile Include="Shell\Monitor\Models\PlcMonItem.cs" />
+    <Compile Include="Shell\Monitor\ViewModels\AxisMonViewModel.cs" />
+    <Compile Include="Shell\Monitor\ViewModels\IOMonViewModel.cs" />
     <Compile Include="Shell\Monitor\ViewModels\MonitorViewModel.cs" />
+    <Compile Include="Shell\Monitor\ViewModels\PlcMonViewModel.cs" />
+    <Compile Include="Shell\Monitor\ViewModels\ReportViewModel.cs" />
+    <Compile Include="Shell\Monitor\Views\AxisMonView.xaml.cs">
+      <DependentUpon>AxisMonView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\Monitor\Views\IOMonView.xaml.cs">
+      <DependentUpon>IOMonView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Shell\Monitor\Views\MonitorView.xaml.cs">
       <DependentUpon>MonitorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\Monitor\Views\PlcMonView.xaml.cs">
+      <DependentUpon>PlcMonView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\Monitor\Views\ReportView.xaml.cs">
+      <DependentUpon>ReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Shell\Recipe\Models\RecipeMenuItem.cs" />
     <Compile Include="Shell\Recipe\ViewModels\RecipeViewModel.cs" />
@@ -354,6 +401,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Shell\Calibration\Views\CalibrationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Shell\Footer\Views\FooterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -382,11 +433,47 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Shell\Maintion\Views\ElectView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shell\Maintion\Views\LightView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Shell\Maintion\Views\MaintainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Shell\Maintion\Views\PressureView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shell\Maintion\Views\ResistiveView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shell\Maintion\Views\TempAndHumView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shell\Monitor\Views\AxisMonView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shell\Monitor\Views\IOMonView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Shell\Monitor\Views\MonitorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shell\Monitor\Views\PlcMonView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shell\Monitor\Views\ReportView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -448,6 +535,10 @@
     <ProjectReference Include="..\IgniteDb\IgniteDb.csproj">
       <Project>{46ba1e29-687a-4979-889b-54fecbf79c11}</Project>
       <Name>IgniteDb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IgniteDevices\IgniteDevices.csproj">
+      <Project>{5B5595C1-B458-4BFD-BD62-36BDC512AB68}</Project>
+      <Name>IgniteDevices</Name>
     </ProjectReference>
     <ProjectReference Include="..\IgniteShared\IgniteShared.csproj">
       <Project>{99109e4d-f7d9-4a89-b0a0-113af42f7919}</Project>

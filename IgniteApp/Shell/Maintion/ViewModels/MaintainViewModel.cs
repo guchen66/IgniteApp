@@ -31,9 +31,11 @@ namespace IgniteApp.Shell.Maintion.ViewModels
         }
 
         public IViewFactory _viewFactory;
-        public MaintainViewModel(IViewFactory viewFactory)
+        private readonly INavigateRoute _navigatRoute;
+        public MaintainViewModel(IViewFactory viewFactory, INavigateRoute navigatRoute)
         {
-            this._viewFactory = viewFactory;
+            _viewFactory = viewFactory;
+            _navigatRoute = navigatRoute;
             MaintainMenuItem Item = new MaintainMenuItem();
             
             var lists = Item.ReadAppConfigToDic("MaintainMenu").Select(kvp => new MaintainMenuItem
@@ -47,18 +49,29 @@ namespace IgniteApp.Shell.Maintion.ViewModels
 
         private void DoNavigateToView()
         {
+            /*  var viewModel=_navigatRoute.GetRoute(SelectedIndex);
+              if (viewModel != null)
+              {
+                  ActivateItem(viewModel);
+              }*/
+
+
             switch (SelectedIndex)
             {
-                case 0: ActivateItem(ProcessViewModel ?? (ProcessViewModel = _viewFactory.ProcessViewModel())); break;
-                case 1: ActivateItem(AxisArgsViewModel ?? (AxisArgsViewModel = _viewFactory.AxisArgsViewModel())); break;
-                case 2: ActivateItem(SystemSetViewModel ?? (SystemSetViewModel = _viewFactory.SystemSetViewModel())); break;
+                case 0: ActivateItem(ResistiveViewModel ?? (ResistiveViewModel = _viewFactory.ResistiveViewModel())); break;
+                case 1: ActivateItem(PressureViewModel ?? (PressureViewModel = _viewFactory.PressureViewModel())); break;
+                case 2: ActivateItem(ElectViewModel ?? (ElectViewModel = _viewFactory.ElectViewModel())); break;
+                case 3: ActivateItem(LightViewModel ?? (LightViewModel = _viewFactory.LightViewModel())); break;
+                case 4: ActivateItem(TempAndHumViewModel ?? (TempAndHumViewModel = _viewFactory.TempAndHumViewModel())); break;
                 default:
                     break;
             }
         }
-        public ProcessViewModel ProcessViewModel;
-        public AxisArgsViewModel AxisArgsViewModel;
-        public SystemSetViewModel SystemSetViewModel;
+        public ResistiveViewModel ResistiveViewModel;
+        public PressureViewModel PressureViewModel;
+        public LightViewModel LightViewModel;
+        public ElectViewModel ElectViewModel;
+        public TempAndHumViewModel TempAndHumViewModel;
 
     }
 }

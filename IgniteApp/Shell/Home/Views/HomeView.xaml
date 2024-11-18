@@ -22,11 +22,10 @@
             <RowDefinition Height="auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-
         <ListBox
             x:Name="list"
             Height="40"
-            ItemsSource="{Binding HomeMenuItem}" 
+            ItemsSource="{Binding HomeMenuItems}" 
             Style="{DynamicResource StackPanelHorizontalListBox}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -35,7 +34,7 @@
                             <Button
                                 Height="32" Width="80"
                                 Command="{s:Action ExecuteNavigatToView}"
-                                CommandParameter="{Binding Title}"
+                                CommandParameter="{Binding ViewModelName}"
                                 Content="{Binding Title}" />
                         </DockPanel>
                     </Border>

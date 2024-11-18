@@ -12,6 +12,7 @@ namespace IgniteApp.Shell.Set.ViewModels
 {
     public class SetViewModel : NavigatViewModel
     {
+        public override string Name => "设置";
         private BindableCollection<SetMenuItem> _setMenuList;
 
         public BindableCollection<SetMenuItem> SetMenuList
@@ -61,23 +62,6 @@ namespace IgniteApp.Shell.Set.ViewModels
         {
             get => _defaultScreen;
             set => SetAndNotify(ref _defaultScreen, value);
-        }
-
-        /// <summary>
-        /// 默认打开首页
-        /// </summary>
-        /// <param name="screen"></param>
-      /*  public void ExecuteLoad(Screen screen)
-        {
-            ActivateItem(screen ?? (screen = _viewFactory.ProcessViewModel()));
-        }*/
-        protected override void OnActivate()
-        {
-            base.OnActivate();
-        }
-        protected override void OnInitialActivate()
-        {
-            base.OnInitialActivate();
         }
     }
 }

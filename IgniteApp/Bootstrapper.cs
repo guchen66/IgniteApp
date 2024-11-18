@@ -16,6 +16,7 @@ using IgniteShared.Models;
 using IT.Tangdao.Framework.Helpers;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using IgniteDevices.TempAndHum;
 namespace IgniteApp
 {
     public class Bootstrapper : Bootstrapper<LoginViewModel>

@@ -16,9 +16,9 @@ namespace IgniteApp.Shell.Home.Models
     {
         public string Title { get; set; }
 
-        public string ViewName { get; set; }
+        public string ViewModelName { get; set; }
 
-        public IScreen View { get; set; }
+        public IScreen ViewModel { get; set; }
 
         /// <summary>
         /// 重置

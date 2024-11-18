@@ -5,11 +5,13 @@ using IgniteApp.Common;
 using IgniteApp.Interfaces;
 using IgniteApp.Shell.Home.Models;
 using IgniteApp.ViewModels;
+using IT.Tangdao.Framework;
 using IT.Tangdao.Framework.DaoCommands;
 using IT.Tangdao.Framework.Extensions;
 using Stylet;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -20,12 +22,12 @@ namespace IgniteApp.Shell.Home.ViewModels
 {
     public class HomeViewModel: NavigatViewModel
     {      
-        private BindableCollection<HomeMenuItem> _homeMenuItem;
+        private BindableCollection<HomeMenuItem> _homeMenuItems;
 
-        public BindableCollection<HomeMenuItem> HomeMenuItem
+        public BindableCollection<HomeMenuItem> HomeMenuItems
         {
-            get => _homeMenuItem ?? (_homeMenuItem = new BindableCollection<HomeMenuItem>());
-            set => SetAndNotify(ref _homeMenuItem, value);
+            get => _homeMenuItems ?? (_homeMenuItems = new BindableCollection<HomeMenuItem>());
+            set => SetAndNotify(ref _homeMenuItems, value);
         }
         private Screen _defaultScreen;
 
@@ -50,21 +52,21 @@ namespace IgniteApp.Shell.Home.ViewModels
             List<HomeMenuItem> menuItems = dicts.Select(kvp => new HomeMenuItem
             {
                 Title = kvp.Key,
-                ViewName =  kvp.Value
+                ViewModelName =  kvp.Value
 
             }).ToList();
 
-            HomeMenuItem.AddRange(menuItems);
+            HomeMenuItems.AddRange(menuItems);
             
         }
 
-        public void ExecuteNavigatToView(string title)
+        public void ExecuteNavigatToView(string viewModelName)
         {
-            var dicts=HomeMenuItem.ToDictionary(obj=>obj.Title,obj=>obj.View);
-            if (dicts.ContainsKey(title))
+            var dicts=HomeMenuItems.ToDictionary(obj=>obj.ViewModelName, obj=>obj.ViewModel);
+            if (dicts.ContainsKey(viewModelName))
             {
-                dicts.TryGetValue(title,out IScreen screen);
-                ActivateItem(screen ?? (screen = _viewFactory.CreateViewModel(title)));
+                dicts.TryGetValue(viewModelName, out IScreen screen);
+                ActivateItem(screen ?? (screen = _viewFactory.CreateViewModel(viewModelName)));
             }
         }
 

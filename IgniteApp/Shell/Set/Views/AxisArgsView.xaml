@@ -10,30 +10,7 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
     <UserControl.Resources>
-        <Style TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="Padding" Value="0" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsPressed" Value="True">
-                                <!--  定义按钮被按下时的样式  -->
-                                <Setter Property="Background" Value="Aqua" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style TargetType="{x:Type ListBox}">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderBrush" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="0" />
-        </Style>
+      
         <ObjectDataProvider x:Key="MyAxis" ObjectType="{x:Type model:AxisProvider}" />
         <DataTemplate x:Key="DetailTemplate">
             <GroupBox Header="参数区间">
@@ -75,33 +52,35 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <ListBox
+            Width="100"
             VerticalAlignment="Stretch" HorizontalAlignment="Center"
             IsSynchronizedWithCurrentItem="True"
             ItemsSource="{Binding Source={StaticResource MyAxis}}"
             ScrollViewer.VerticalScrollBarVisibility="Disabled"
             SelectedIndex="0"
             SelectionMode="Single"
-            Style="{DynamicResource StackPanelVerticalListBox}">
+            >
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Margin="10" Text="{Binding AxisName}" FontSize="18"/>
+                    <TextBlock Margin="10" Text="{Binding AxisName}" FontSize="16"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="VerticalAlignment" Value="Stretch"/>
+                    <!-- 注意这里是VerticalContentAlignment -->
                     <Setter Property="BorderThickness" Value="0" />
                     <Setter Property="Background" Value="Transparent" />
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                                <Grid>
-                                    <Border Name="border" />
+                                <Border Name="border" >
                                     <ContentPresenter />
-                                </Grid>
+                                </Border>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsSelected" Value="True">
-                                        <Setter TargetName="border" Property="Background" Value="Transparent" />
+                                        <Setter TargetName="border" Property="Background" Value="#F0F0F0" />
                                     </Trigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>

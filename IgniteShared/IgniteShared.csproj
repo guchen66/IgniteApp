@@ -123,6 +123,7 @@
     <Compile Include="Globals\Local\UserInfoLocation.cs" />
     <Compile Include="Globals\System\SysLoginInfo.cs" />
     <Compile Include="Globals\System\SysPlcInfo.cs" />
+    <Compile Include="Globals\System\SysTempAndHum.cs" />
     <Compile Include="Models\PlcConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
