@@ -4,6 +4,8 @@ FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Dialogs\Views\AddRecipeView.x
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Dialogs\Views\SafePopupView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Aside\Views\AsideView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Calibration\Views\CalibrationView.xaml;;
+FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Calibration\Views\LoadCalibrationView.xaml;;
+FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Calibration\Views\UnLoadCalibrationView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Footer\Views\FooterView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Header\Views\HeaderView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Home\Views\DefaultView.xaml;;

@@ -157,3 +157,7 @@ E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\obj\x64\Debug\Shell\Maintion\V
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\obj\x64\Debug\Shell\Maintion\Views\LightView.baml
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\obj\x64\Debug\Shell\Maintion\Views\PressureView.baml
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\obj\x64\Debug\Shell\Maintion\Views\TempAndHumView.baml
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\obj\x64\Debug\Shell\Calibration\Views\LoadCalibrationView.g.cs
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\obj\x64\Debug\Shell\Calibration\Views\UnLoadCalibrationView.g.cs
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\obj\x64\Debug\Shell\Calibration\Views\LoadCalibrationView.baml
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\obj\x64\Debug\Shell\Calibration\Views\UnLoadCalibrationView.baml

@@ -31,9 +31,9 @@
                 Text="已连接:" />
             <!--  -多个RadioButton最好不用绑定，WPF内部会自动识别，容易栈溢出，在不同面板容器内部的RadioButton不受影响  -->
             <RadioButton
-                Width="180"
                 Margin="5"
                 IsChecked="{Binding IsConnTemp,UpdateSourceTrigger=PropertyChanged}" />
+            <Button Width="100"  Margin="5" Content="连接" Command="{s:Action ExecuteConn}"/>
 
         </StackPanel>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
@@ -44,15 +44,16 @@
             <TextBox
                 Width="180"
                 Margin="5"
-                Text="{Binding Hum}" />
+                Text="{Binding Content}" />
             <TextBlock
                 Margin="5"
                 VerticalAlignment="Center"
                 Text="已连接:" />
             <RadioButton
-                Width="180"
                 Margin="5"
                 IsChecked="{Binding IsConnHum}" />
+            <Button Width="100"  Margin="5" Content="连接" Command="{s:Action ExecuteConn}"/>
+            <Button Width="100"  Margin="5" Content="读取" Command="{s:Action Read}"/>
         </StackPanel>
     </Grid>
 </UserControl>

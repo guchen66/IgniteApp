@@ -182,10 +182,11 @@
     </Compile>
     <Compile Include="Bases\BindViewMide.cs" />
     <Compile Include="Bases\ControlViewModelBase.cs" />
-    <Compile Include="Bases\SectionViewModel.cs" />
+    <Compile Include="Bases\NavigatViewModel.cs" />
     <Compile Include="Bases\ViewModelBase.cs" />
     <Compile Include="Bases\WindowViewModelBase.cs" />
     <Compile Include="Behaviors\DragBehavior.cs" />
+    <Compile Include="Behaviors\ProgressButtonExtension.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Common\MenuList.cs" />
     <Compile Include="Converters\IdConverter.cs" />
@@ -200,6 +201,8 @@
       <DependentUpon>SafePopupView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ExceptionHandler.cs" />
+    <Compile Include="Extensions\ReadItemExtension.cs" />
+    <Compile Include="Interfaces\IAppConfigProvider.cs" />
     <Compile Include="Interfaces\IMenuItem.cs" />
     <Compile Include="Interfaces\INavigateEntry.cs" />
     <Compile Include="Interfaces\INavigateRoute.cs" />
@@ -212,9 +215,18 @@
     <Compile Include="Shell\Aside\Views\AsideView.xaml.cs">
       <DependentUpon>AsideView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Shell\Calibration\Models\CalibrationMenuItem.cs" />
     <Compile Include="Shell\Calibration\ViewModels\CalibrationViewModel.cs" />
+    <Compile Include="Shell\Calibration\ViewModels\LoadCalibrationViewModel.cs" />
+    <Compile Include="Shell\Calibration\ViewModels\UnLoadCalibrationViewModel.cs" />
     <Compile Include="Shell\Calibration\Views\CalibrationView.xaml.cs">
       <DependentUpon>CalibrationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\Calibration\Views\LoadCalibrationView.xaml.cs">
+      <DependentUpon>LoadCalibrationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\Calibration\Views\UnLoadCalibrationView.xaml.cs">
+      <DependentUpon>UnLoadCalibrationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Shell\Footer\Models\FooterItem.cs" />
     <Compile Include="Shell\Footer\ViewModels\FooterViewModel.cs" />
@@ -402,6 +414,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Shell\Calibration\Views\CalibrationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shell\Calibration\Views\LoadCalibrationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shell\Calibration\Views\UnLoadCalibrationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

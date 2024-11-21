@@ -1,4 +1,5 @@
 ﻿using IgniteApp.Bases;
+using IgniteApp.Extensions;
 using IgniteApp.Interfaces;
 using IgniteApp.Shell.Home.Models;
 using IgniteApp.Shell.Set.ViewModels;
@@ -11,12 +12,12 @@ using System.Threading.Tasks;
 
 namespace IgniteApp.Shell.Monitor.ViewModels
 {
-    public class MonitorViewModel : NavigatViewModel
+    public class MonitorViewModel : NavigatViewModel,IAppConfigProvider
     {
-        public override string Name => "监控";
-        private BindableCollection<MonitorMenuItem> _monitorMenuList;
+        public string HandlerName { get; set; } = "MonitorMenu";
+        private BindableCollection<IMenuItem> _monitorMenuList;
 
-        public BindableCollection<MonitorMenuItem> MonitorMenuList
+        public BindableCollection<IMenuItem> MonitorMenuList
         {
             get => _monitorMenuList;
             set => SetAndNotify(ref _monitorMenuList, value);
@@ -34,14 +35,13 @@ namespace IgniteApp.Shell.Monitor.ViewModels
         public MonitorViewModel(IViewFactory viewFactory, INavigateRoute navigatRoute)
         {
             this._viewFactory = viewFactory;
-            MonitorMenuItem Item = new MonitorMenuItem();
             //字典转列表
-            var lists = Item.ReadAppConfigToDic("MonitorMenu").Select(kvp => new MonitorMenuItem
+            var lists = this.ReadAppConfigToDic(HandlerName).Select(kvp => new MenuChildItem
             {
                 MenuName = kvp.Value,
 
             }).ToList();
-            MonitorMenuList = new BindableCollection<MonitorMenuItem>(lists);
+            MonitorMenuList = new BindableCollection<IMenuItem>(lists);
             this.BindAndInvoke(viewModel => viewModel.SelectedIndex, (obj, args) => DoNavigateToView());
             _navigatRoute = navigatRoute;
            

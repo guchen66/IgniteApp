@@ -21,7 +21,8 @@ using System.Windows.Input;
 namespace IgniteApp.Shell.Home.ViewModels
 {
     public class HomeViewModel: NavigatViewModel
-    {      
+    {
+        #region--属性--
         private BindableCollection<HomeMenuItem> _homeMenuItems;
 
         public BindableCollection<HomeMenuItem> HomeMenuItems
@@ -38,31 +39,38 @@ namespace IgniteApp.Shell.Home.ViewModels
         }
 
         private readonly IViewFactory _viewFactory;
+        #endregion
+
+        #region--.ctor--
         public HomeViewModel(IViewFactory viewFactory)
         {
             InitMenuData();
-         
+
             _viewFactory = viewFactory;
         }
+        #endregion
 
+        #region--方法--
         private void InitMenuData()
-        {           
+        {
             HomeMenuItem menuItem = new HomeMenuItem();
             var dicts = menuItem.ReadUnityConfig("MenuConfiguration");
             List<HomeMenuItem> menuItems = dicts.Select(kvp => new HomeMenuItem
             {
                 Title = kvp.Key,
-                ViewModelName =  kvp.Value
+                ViewModelName = kvp.Value
 
             }).ToList();
-
             HomeMenuItems.AddRange(menuItems);
-            
         }
 
+        /// <summary>
+        /// 导航到具体页面
+        /// </summary>
+        /// <param name="viewModelName"></param>
         public void ExecuteNavigatToView(string viewModelName)
         {
-            var dicts=HomeMenuItems.ToDictionary(obj=>obj.ViewModelName, obj=>obj.ViewModel);
+            var dicts = HomeMenuItems.ToDictionary(obj => obj.ViewModelName, obj => obj.ViewModel);
             if (dicts.ContainsKey(viewModelName))
             {
                 dicts.TryGetValue(viewModelName, out IScreen screen);
@@ -78,5 +86,7 @@ namespace IgniteApp.Shell.Home.ViewModels
         {
             ActivateItem(screen ?? (screen = _viewFactory.DefaultViewModel()));
         }
+        #endregion
+
     }
 }

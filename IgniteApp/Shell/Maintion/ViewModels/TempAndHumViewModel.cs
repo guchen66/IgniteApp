@@ -1,4 +1,5 @@
-﻿using IgniteApp.Bases;
+﻿using HandyControl.Controls;
+using IgniteApp.Bases;
 using IgniteDevices.TempAndHum;
 using IgniteShared.Globals.System;
 using Stylet;
@@ -43,6 +44,15 @@ namespace IgniteApp.Shell.Maintion.ViewModels
             get => _isConnHum;
             set => SetAndNotify(ref _isConnHum, value);
         }
+
+        private string _content;
+
+        public string Content
+        {
+            get => _content;
+            set => SetAndNotify(ref _content, value);
+        }
+
         TempAndHumClient _tempAndHumClient;
         public TempAndHumViewModel()
         {
@@ -51,32 +61,37 @@ namespace IgniteApp.Shell.Maintion.ViewModels
           
         }
       
-        private ManualResetEvent _manualResetEvent = new ManualResetEvent(false);
+        private ManualResetEventSlim _manual = new ManualResetEventSlim(false);
 		public void Init()
-		{
-           
-            Task.Run(async () => 
+        {
+            Task.Run(() => 
             {
-                await _tempAndHumClient.Modify();
-                while (!_manualResetEvent.WaitOne(500))
+                while (!_manual.IsSet)
                 {
-                    Temp = SysTempAndHum.Temp;
-                    Hum = SysTempAndHum.Hum;
-                    IsConnTemp = SysTempAndHum.IsConnTemp;
-                    IsConnHum = SysTempAndHum.IsConnHum;
+                    _tempAndHumClient.Initinalized(_manual);
+                    Execute.OnUIThread(() =>
+                    {
+                        Content = SysTempAndHum.Content;
+                        Temp = SysTempAndHum.Temp;
+                        Hum = SysTempAndHum.Hum;
+                        IsConnTemp = SysTempAndHum.IsConnTemp;
+                        IsConnHum = SysTempAndHum.IsConnHum;
+
+                    });
+                  
                 }
+                MessageBox.Show("数据读取完成");
             });
-           
-        
-        /*    while (!_manualResetEvent.WaitOne(500))
-            {
-               
-            }*/
-			/*Execute.OnUIThread(() => 
-			{
-               
-            });*/
         }
 
+        public void ExecuteConn()
+        {
+            _tempAndHumClient.GetConnection();
+        }
+
+        public void Read()
+        {
+            _manual.Set();
+        }
     }
 }

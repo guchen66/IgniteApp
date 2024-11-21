@@ -17,7 +17,7 @@ namespace IgniteApp.Shell.Set.ViewModels
 			set => SetAndNotify(ref _languages, value);
 		}
 
-		private string _language="123";
+		private string _language;
 
 		public string Language
         {
@@ -27,7 +27,9 @@ namespace IgniteApp.Shell.Set.ViewModels
 
 		public CommonSetViewModel()
         {
-            Languages = new string[] { "English","汉语"};
+            Languages = new string[] { "English", "汉语", "한국어", "русский" };
+            // 设置默认选中值
+            Language = Languages[1]; // 默认选中English
         }
     }
 }

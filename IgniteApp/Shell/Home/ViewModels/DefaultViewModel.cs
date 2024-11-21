@@ -70,7 +70,6 @@ namespace IgniteApp.Shell.Home.ViewModels
         private readonly IReadService _readService;
         #endregion
        
-
         #region--ctor--
         public DefaultViewModel(IMaterialRepository materialRepository, IReadService readService, IProductRepository productRepository)
         {
@@ -84,6 +83,8 @@ namespace IgniteApp.Shell.Home.ViewModels
             ImageURI = path;
         }
         #endregion
+
+        #region--方法--
 
         private void Init()
         {
@@ -102,7 +103,6 @@ namespace IgniteApp.Shell.Home.ViewModels
                 NgCount = 100,
                 OutputCount = 121,
             };
-
         }
 
         public void ExecuteUpdate(int? i)
@@ -115,8 +115,12 @@ namespace IgniteApp.Shell.Home.ViewModels
 
             StaticticInfo.SetReset();
         }
-   
+        #endregion
+
+        #region--命令--
+
         public ICommand UpdateCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
+        #endregion     
     }
 }

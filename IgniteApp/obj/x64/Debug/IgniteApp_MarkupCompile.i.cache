@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\App.xaml
-34-1971621562
+36-1733160527
 
-1072054464626
+1152097491511
 54-1748333468
-Assets\Styles\BackgroundBrushStyle.xaml;Dialogs\Views\AddRecipeView.xaml;Dialogs\Views\SafePopupView.xaml;Shell\Aside\Views\AsideView.xaml;Shell\Calibration\Views\CalibrationView.xaml;Shell\Footer\Views\FooterView.xaml;Shell\Header\Views\HeaderView.xaml;Shell\Home\Views\DefaultView.xaml;Shell\Home\Views\HomeView.xaml;Shell\Home\Views\UserInfoView.xaml;Shell\Home\Views\WatermarkView.xaml;Shell\Home\Views\_404View.xaml;Shell\Maintion\Views\ElectView.xaml;Shell\Maintion\Views\LightView.xaml;Shell\Maintion\Views\MaintainView.xaml;Shell\Maintion\Views\PressureView.xaml;Shell\Maintion\Views\ResistiveView.xaml;Shell\Maintion\Views\TempAndHumView.xaml;Shell\Monitor\Views\AxisMonView.xaml;Shell\Monitor\Views\IOMonView.xaml;Shell\Monitor\Views\MonitorView.xaml;Shell\Monitor\Views\PlcMonView.xaml;Shell\Monitor\Views\ReportView.xaml;Shell\Recipe\Views\RecipeView.xaml;Shell\Set\Views\AccountSetView.xaml;Shell\Set\Views\AssistSetView.xaml;Shell\Set\Views\AxisArgsView.xaml;Shell\Set\Views\CommonSetView.xaml;Shell\Set\Views\NetSetView.xaml;Shell\Set\Views\ProcessView.xaml;Shell\Set\Views\SetView.xaml;Shell\Set\Views\SystemSetView.xaml;Views\LoginView.xaml;Views\MainView.xaml;
+Assets\Styles\BackgroundBrushStyle.xaml;Dialogs\Views\AddRecipeView.xaml;Dialogs\Views\SafePopupView.xaml;Shell\Aside\Views\AsideView.xaml;Shell\Calibration\Views\CalibrationView.xaml;Shell\Calibration\Views\LoadCalibrationView.xaml;Shell\Calibration\Views\UnLoadCalibrationView.xaml;Shell\Footer\Views\FooterView.xaml;Shell\Header\Views\HeaderView.xaml;Shell\Home\Views\DefaultView.xaml;Shell\Home\Views\HomeView.xaml;Shell\Home\Views\UserInfoView.xaml;Shell\Home\Views\WatermarkView.xaml;Shell\Home\Views\_404View.xaml;Shell\Maintion\Views\ElectView.xaml;Shell\Maintion\Views\LightView.xaml;Shell\Maintion\Views\MaintainView.xaml;Shell\Maintion\Views\PressureView.xaml;Shell\Maintion\Views\ResistiveView.xaml;Shell\Maintion\Views\TempAndHumView.xaml;Shell\Monitor\Views\AxisMonView.xaml;Shell\Monitor\Views\IOMonView.xaml;Shell\Monitor\Views\MonitorView.xaml;Shell\Monitor\Views\PlcMonView.xaml;Shell\Monitor\Views\ReportView.xaml;Shell\Recipe\Views\RecipeView.xaml;Shell\Set\Views\AccountSetView.xaml;Shell\Set\Views\AssistSetView.xaml;Shell\Set\Views\AxisArgsView.xaml;Shell\Set\Views\CommonSetView.xaml;Shell\Set\Views\NetSetView.xaml;Shell\Set\Views\ProcessView.xaml;Shell\Set\Views\SetView.xaml;Shell\Set\Views\SystemSetView.xaml;Views\LoginView.xaml;Views\MainView.xaml;
 
 True
 

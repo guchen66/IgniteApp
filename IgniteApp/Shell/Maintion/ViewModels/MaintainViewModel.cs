@@ -1,4 +1,5 @@
 ﻿using IgniteApp.Bases;
+using IgniteApp.Extensions;
 using IgniteApp.Interfaces;
 using IgniteApp.Shell.Home.Models;
 using IgniteApp.Shell.Maintion.Models;
@@ -12,9 +13,9 @@ using System.Threading.Tasks;
 
 namespace IgniteApp.Shell.Maintion.ViewModels
 {
-    public class MaintainViewModel : NavigatViewModel
+    public class MaintainViewModel : NavigatViewModel, IAppConfigProvider
     {
-        public override string Name => "维护";
+        public string HandlerName { get; set; } = "MaintainMenu";
         private BindableCollection<MaintainMenuItem> _maintainMenuList;
 
         public BindableCollection<MaintainMenuItem> MaintainMenuList
@@ -36,9 +37,7 @@ namespace IgniteApp.Shell.Maintion.ViewModels
         {
             _viewFactory = viewFactory;
             _navigatRoute = navigatRoute;
-            MaintainMenuItem Item = new MaintainMenuItem();
-            
-            var lists = Item.ReadAppConfigToDic("MaintainMenu").Select(kvp => new MaintainMenuItem
+            var lists = this.ReadAppConfigToDic(HandlerName).Select(kvp => new MaintainMenuItem
             {
                 MenuName = kvp.Value,
                
@@ -49,13 +48,6 @@ namespace IgniteApp.Shell.Maintion.ViewModels
 
         private void DoNavigateToView()
         {
-            /*  var viewModel=_navigatRoute.GetRoute(SelectedIndex);
-              if (viewModel != null)
-              {
-                  ActivateItem(viewModel);
-              }*/
-
-
             switch (SelectedIndex)
             {
                 case 0: ActivateItem(ResistiveViewModel ?? (ResistiveViewModel = _viewFactory.ResistiveViewModel())); break;

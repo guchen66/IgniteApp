@@ -1,4 +1,5 @@
 ﻿using IgniteApp.Bases;
+using IgniteApp.Extensions;
 using IgniteApp.Interfaces;
 using IgniteApp.Shell.Home.Models;
 using Stylet;
@@ -10,12 +11,13 @@ using System.Threading.Tasks;
 
 namespace IgniteApp.Shell.Set.ViewModels
 {
-    public class SetViewModel : NavigatViewModel
+    public class SetViewModel : NavigatViewModel, IAppConfigProvider
     {
-        public override string Name => "设置";
-        private BindableCollection<SetMenuItem> _setMenuList;
+        public string HandlerName { get ; set ; }= "Setting";
 
-        public BindableCollection<SetMenuItem> SetMenuList
+        private BindableCollection<IMenuItem> _setMenuList;
+
+        public BindableCollection<IMenuItem> SetMenuList
         {
             get => _setMenuList;
             set => SetAndNotify(ref _setMenuList, value);
@@ -33,12 +35,12 @@ namespace IgniteApp.Shell.Set.ViewModels
         {
             this._viewFactory = viewFactory;
             //字典转列表
-            var lists = this.ReadAppConfigToDic("SetMenu").Select(kvp => new SetMenuItem
+            var lists = this.ReadAppConfigToDic(HandlerName).Select(kvp => new MenuChildItem
             {
                 MenuName = kvp.Value,
-                SetMenuToView = kvp.Value,
+              //  SetMenuToView = kvp.Value,
             }).ToList();
-            SetMenuList = new BindableCollection<SetMenuItem>(lists);
+            SetMenuList = new BindableCollection<IMenuItem>(lists);
             this.BindAndInvoke(viewModel => viewModel.SelectedIndex, (obj, args) => DoNavigateToView());
         }
 
@@ -63,5 +65,6 @@ namespace IgniteApp.Shell.Set.ViewModels
             get => _defaultScreen;
             set => SetAndNotify(ref _defaultScreen, value);
         }
+       
     }
 }

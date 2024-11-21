@@ -13,5 +13,6 @@ namespace IgniteApp.Shell.Maintion.Models
     {
         public string MenuName { get ; set ; }
         public UserControl UserControl { get ; set ; }
+        public int Id { get; set ; }
     }
 }

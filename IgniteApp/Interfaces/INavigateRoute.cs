@@ -14,6 +14,7 @@ namespace IgniteApp.Interfaces
     public interface INavigateRoute
     {
         IScreen GetRoute<T>(T t);
+        void GetRoute(int id,string screenName);
        // void GetName();
     }
 
@@ -60,7 +61,7 @@ namespace IgniteApp.Interfaces
             foreach (var classType in classTypes) 
             {
                var s= Activator.CreateInstance(classType) as NavigatViewModel;
-                s.Name = classType.Name;
+              //  s.Name = classType.Name;
             }
            
         }
@@ -71,6 +72,14 @@ namespace IgniteApp.Interfaces
             HeaderTypes = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.GetCustomAttributes(typeof(HeaderAttribute), false).Any()).ToList();
             List<string> lists=HeaderTypes.Select(t => t.Name).ToList();
 
+        }
+
+        public void GetRoute(int id, string screenName)
+        {
+            NavigatViewModel  viewModel = ServiceLocator.GetService<NavigatViewModel>();
+            MethodInfo methodInfo = viewModel.GetType().GetMethod(screenName);
+            Screen screen=(Screen)methodInfo.Invoke(viewModel, new object[] { });
+            viewModel.ActivateItem(screen);
         }
     }
 

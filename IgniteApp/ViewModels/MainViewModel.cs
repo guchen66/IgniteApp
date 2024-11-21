@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace IgniteApp.ViewModels
 {
-    public class MainViewModel: WindowViewModelBase// Conductor<Screen>.Collection.OneActive
+    public class MainViewModel: WindowViewModelBase
     {
         #region--属性--
 

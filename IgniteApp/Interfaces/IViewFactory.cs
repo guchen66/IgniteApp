@@ -58,9 +58,12 @@ namespace IgniteApp.Interfaces
 
         RecipeViewModel RecipeViewModel();
         #endregion
+
         #region--标定--
 
         CalibrationViewModel CalibrationViewModel();
+        LoadCalibrationViewModel LoadCalibrationViewModel();
+        UnLoadCalibrationViewModel UnLoadCalibrationViewModel();
         #endregion
         _404ViewModel _404ViewModel();
 

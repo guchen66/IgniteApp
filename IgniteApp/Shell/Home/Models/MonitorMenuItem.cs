@@ -17,9 +17,9 @@ namespace IgniteApp.Shell.Home.Models
 {
     public class MonitorMenuItem : DaoViewModelBase, IMenuItem
     {
+        public int Id { get; set; }
         public string MenuName { get; set; }
 
-        public string Description => throw new NotImplementedException();
     }
 
     public static class MonitorItemExtension
