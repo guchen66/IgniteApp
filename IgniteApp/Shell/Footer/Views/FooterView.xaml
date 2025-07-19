@@ -7,6 +7,8 @@
     xmlns:hc="https://handyorg.github.io/handycontrol"
     xmlns:local="clr-namespace:IgniteApp.Shell.Footer.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:be="clr-namespace:IgniteApp.Behaviors"
     xmlns:s="https://github.com/canton7/Stylet"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -15,6 +17,11 @@
         <conver:BoolToColorConverter x:Key="deviceState" />
     </UserControl.Resources>
     <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
         <StatusBar Height="30">
             <StatusBarItem>
                 <StackPanel Orientation="Horizontal">
@@ -43,11 +50,19 @@
                     <Ellipse
                       Width="10"
                       Height="10"
-                      Margin="0,0,5,0"
-                      Fill="{Binding IsConn, Converter={StaticResource deviceState}}" />
+                      Margin="0,0,5,0">
+                        <i:Interaction.Behaviors>
+                            <be:ShapeBehavior IsConnected="{Binding ElementName=btn,Path=IsEnabled}" />
+                        </i:Interaction.Behaviors>
+                    </Ellipse>
                     <TextBlock Text="其他" />
                 </StackPanel>
             </StatusBarItem>
         </StatusBar>
+
+        <StackPanel Orientation="Horizontal" Grid.Column="1">
+            <Button Command="{s:Action OpenEQP}" Content="账料" x:Name="btn" />
+            <Button Command="{s:Action OpenTTView}" Content="TT" />
+        </StackPanel>
     </Grid>
 </UserControl>

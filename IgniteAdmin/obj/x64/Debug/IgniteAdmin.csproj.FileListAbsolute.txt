@@ -18,7 +18,6 @@ E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\x64\Debug\IgniteDevices.
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\x64\Debug\IgniteShared.pdb
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\x64\Debug\IgniteShared.dll.config
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\x64\Debug\AutoMapper.xml
-E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\x64\Debug\IT.Tangdao.Framework.pdb
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\x64\Debug\Microsoft.Bcl.AsyncInterfaces.xml
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\x64\Debug\Microsoft.Extensions.DependencyInjection.xml
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\x64\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml

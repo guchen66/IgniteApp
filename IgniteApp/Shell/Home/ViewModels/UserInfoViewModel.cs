@@ -7,6 +7,10 @@ using IgniteShared.Globals.Local;
 using IgniteShared.Globals.System;
 using IT.Tangdao.Framework.DaoAdmin.IServices;
 using IT.Tangdao.Framework.Helpers;
+using MiniExcelLibs;
+using MiniExcelLibs.Attributes;
+using MiniExcelLibs.OpenXml;
+using Newtonsoft.Json.Linq;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -21,7 +25,7 @@ using System.Xml.Serialization;
 
 namespace IgniteApp.Shell.Home.ViewModels
 {
-    public class UserInfoViewModel:ControlViewModelBase
+    public class UserInfoViewModel : ViewModelBase
     {
         private BindableCollection<LoginDto> _loginInfos;
 
@@ -33,22 +37,23 @@ namespace IgniteApp.Shell.Home.ViewModels
 
         public IWindowManager windowManager;
         public IReadService readService;
-        public UserInfoViewModel(IWindowManager windowManager,IReadService readService)
+
+        public UserInfoViewModel(IWindowManager windowManager, IReadService readService)
         {
             this.windowManager = windowManager;
             this.readService = readService;
 
-            InitData();
+            ShowUserInfo();
         }
 
-        public void InitData()
+        public void ShowUserInfo()
         {
-            var xmlData = readService.Read(UserInfoLocation.UserInfoPath);
+            var xmlData = readService.Read(IgniteInfoLocation.UserInfoPath);
             XDocument doc = XDocument.Parse(xmlData);
             List<LoginDto> loginList = doc.Descendants("Login")
            .Select(login => new LoginDto
            {
-              // Id = (int)login.Attribute("Id"),
+               // Id = (int)login.Attribute("Id"),
                UserName = (string)login.Element("UserName"),
                Password = (string)login.Element("Password"),
                Role = (RoleType)Enum.Parse(typeof(RoleType), (string)login.Element("Role")),
@@ -58,9 +63,14 @@ namespace IgniteApp.Shell.Home.ViewModels
            .ToList();
             //Descendants选择文档所有名称是Login的元素
             //var ips = doc.Descendants("Login").Select(node => node.Element("IP").Value).ToList();
-            LoginInfos = new BindableCollection<LoginDto>(loginList); 
-
+            LoginInfos = new BindableCollection<LoginDto>(loginList);
         }
 
+        public void GenerateReport()
+        {
+            List<LoginDto> loginDtos = new List<LoginDto>();
+            loginDtos.Where(x => x.IP == "1");
+            loginDtos.FirstOrDefault(x => x.IP == "");
+        }
     }
 }

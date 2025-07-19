@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace IgniteApp.Shell.Monitor.ViewModels
 {
-    public class AxisMonViewModel:ControlViewModelBase
+    public class AxisMonViewModel:ViewModelBase
     {
         private string[] _selectedMode;
 

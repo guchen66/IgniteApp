@@ -1,24 +1,29 @@
-﻿using IgniteApp.Bases;
+﻿using HandyControl.Controls;
+using IgniteApp.Bases;
 using IgniteApp.Shell.Set.Models;
+using IgniteShared.Globals.Local;
+using IT.Tangdao.Framework.DaoAdmin;
+using IT.Tangdao.Framework.DaoAdmin.IServices;
+using IT.Tangdao.Framework.DaoAdmin.Services;
+using IT.Tangdao.Framework.DaoEnums;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace IgniteApp.Shell.Set.ViewModels
 {
-    public class ProcessViewModel:ControlViewModelBase
+    public class ProcessViewModel : ViewModelBase
     {
         #region--字段--
+        private readonly IReadService _readService;
+        private readonly IWriteService _writeService;
         #endregion
+
         #region--属性--
-        #endregion
-        #region--.ctor--
-        #endregion
-        #region--方法--
-        #endregion
         private ObservableCollection<ProcessItem> _processItems;
 
         public ObservableCollection<ProcessItem> ProcessItems
@@ -27,18 +32,61 @@ namespace IgniteApp.Shell.Set.ViewModels
             set => SetAndNotify(ref _processItems, value);
         }
 
-        public ProcessViewModel()
+        #endregion
+
+        #region--.ctor--
+
+        public ProcessViewModel(IReadService readService, IWriteService writeService)
         {
-            ProcessItems = new ObservableCollection<ProcessItem>()
+            _readService = readService;
+            _writeService = writeService;
+            InitializalData();
+        }
+
+        #endregion
+
+        #region--方法--
+
+        public void InitializalData()
+        {
+            var xmlData = _readService.Read(IgniteInfoLocation.ProcessInfoPath);
+
+            if (xmlData == null)
             {
-                 new ProcessItem() {Name="生产模式", IsFeeding=true,IsBoardMade=true,IsBoardCheck=true,IsSeal=true,IsSafe=true,IsCharge=true,IsBlanking=true},
-                 new ProcessItem() {Name="空跑模式", IsFeeding=true,IsBoardMade=false,IsBoardCheck=false,IsSeal=false,IsSafe=false,IsCharge=false,IsBlanking=false},
-            };
+                return;
+            }
+            _readService.Load(xmlData);
+
+            var readResult = _readService.Current.Descendants("ProcessItem", x => new ProcessItem
+            {
+                Name = x.Element("Name")?.Value,
+                IsFeeding = (bool)x.Element("IsFeeding"),
+                IsBoardMade = (bool)x.Element("IsBoardMade"),
+                IsBoardCheck = (bool)x.Element("IsBoardCheck"),
+                IsSeal = (bool)x.Element("IsSeal"),
+                IsSafe = (bool)x.Element("IsSafe"),
+                IsCharge = (bool)x.Element("IsCharge"),
+                IsBlanking = (bool)x.Element("IsBlanking"),
+            });
+
+            if (readResult.Status)
+            {
+                ProcessItems = new ObservableCollection<ProcessItem>(readResult.Result);
+            }
         }
 
-        public void SaveProcess()
+        public void RefreshProcessData()
         {
-
+            MessageBox.Success("流程刷新成功");
         }
+
+        public void SaveProcessData()
+        {
+            //将数据写成XML格式保存在本地
+            _writeService.WriteEntityToXml(ProcessItems, IgniteInfoLocation.ProcessInfoPath, DaoFileType.Xml);
+            MessageBox.Success("流程保存成功");
+        }
+
+        #endregion
     }
 }

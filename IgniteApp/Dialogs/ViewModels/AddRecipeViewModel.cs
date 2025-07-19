@@ -1,4 +1,5 @@
 ﻿using IgniteApp.Bases;
+using IgniteApp.Shell.Recipe.ViewModels;
 using IgniteDb.IRepositorys;
 using IgniteShared.Dtos;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace IgniteApp.Dialogs.ViewModels
 {
-    public class AddRecipeViewModel : WindowViewModelBase
+    public class AddRecipeViewModel : ViewModelBase
     {
         public new string TitleName => "添加配方";
         private string _inputName;
@@ -19,6 +20,7 @@ namespace IgniteApp.Dialogs.ViewModels
             get { return _inputName; }
             set { SetAndNotify(ref _inputName, value); }
         }
+
         private string _type;
 
         public string InputTypeName
@@ -42,6 +44,7 @@ namespace IgniteApp.Dialogs.ViewModels
             get { return _price; }
             set { SetAndNotify(ref _price, value); }
         }
+
         private string _tag;
 
         public string InputTag
@@ -50,13 +53,14 @@ namespace IgniteApp.Dialogs.ViewModels
             set { SetAndNotify(ref _tag, value); }
         }
 
-
         private DateTime _dateValue = DateTime.Now;
+
         public DateTime DateValue
         {
             get { return _dateValue; }
             set { SetAndNotify(ref _dateValue, value); }
         }
+
         private int? _userId;
 
         public int? InputUserId
@@ -72,11 +76,14 @@ namespace IgniteApp.Dialogs.ViewModels
             get { return _username; }
             set { SetAndNotify(ref _username, value); }
         }
+
         private readonly IRecipeRepository db;
+
         public AddRecipeViewModel(IRecipeRepository db)
         {
             this.db = db;
         }
+
         //输出关闭子窗体的返回结果
         public void ExecuteSave()
         {
@@ -88,11 +95,16 @@ namespace IgniteApp.Dialogs.ViewModels
             dto.Remark = InputTag;
             dto.ViewName = InputTag;
             db.AddRecipe(dto);
+            if (Parent is RecipeViewModel parent)
+            {
+                //parent.re
+            }
             this.RequestClose(true);
         }
+
         public void ExecuteClose()
         {
-            this.RequestClose(false);           
+            this.RequestClose(false);
         }
     }
 }

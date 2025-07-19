@@ -1,5 +1,7 @@
 ﻿using IgniteApp.Bases;
 using IgniteApp.Shell.Monitor.Models;
+using IgniteDevices.PLC;
+using IgniteShared.Enums;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -9,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace IgniteApp.Shell.Monitor.ViewModels
 {
-    public class PlcMonViewModel:ControlViewModelBase
+    public class PlcMonViewModel : ViewModelBase
     {
-        private string[] _selectedMode;
+        private SelectModes _selectedMode;
 
-        public string[] SelectedMode
+        public SelectModes SelectedMode
         {
-            get => _selectedMode;
+            get => _selectedMode = SelectModes.Load;
             set => SetAndNotify(ref _selectedMode, value);
         }
 
@@ -37,10 +39,10 @@ namespace IgniteApp.Shell.Monitor.ViewModels
 
         public PlcMonViewModel()
         {
-            SelectedMode = new string[]
-            {
-                "全部","Load","UpLoad"
-            };
+            /*  SelectedMode = new string[]
+              {
+                  "全部","Load","UpLoad"
+              };*/
 
             this.Bind(viewModel => viewModel.SelectItem, (obj, sender) => DoExecute());
         }
@@ -48,6 +50,21 @@ namespace IgniteApp.Shell.Monitor.ViewModels
         private void DoExecute()
         {
             var s1 = SelectItem;
+        }
+
+        public void AutoTriggerAlarm()
+        {
+            OmronManager.AlarmChenged?.Invoke("模拟报警_温度过高");
+        }
+
+        public void AutoTriggerAlarm2()
+        {
+            OmronManager.AlarmChenged?.Invoke("模拟报警_采集数据过大");
+        }
+
+        public void AutoTriggerAlarm3()
+        {
+            OmronManager.AlarmChenged?.Invoke("模拟报警_集尘器报警");
         }
     }
 }

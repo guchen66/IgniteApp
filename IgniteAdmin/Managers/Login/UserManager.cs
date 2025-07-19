@@ -21,9 +21,9 @@ namespace IgniteAdmin.Managers.Login
         {
             XmlDocument xmlDocument = new XmlDocument();
             XmlElement userElement;
-            if (File.Exists(UserInfoLocation.UserInfoPath))
+            if (File.Exists(IgniteInfoLocation.UserInfoPath))
             {
-                xmlDocument.Load(UserInfoLocation.UserInfoPath);
+                xmlDocument.Load(IgniteInfoLocation.UserInfoPath);
                 userElement = xmlDocument.DocumentElement;
             }
             else
@@ -83,7 +83,7 @@ namespace IgniteAdmin.Managers.Login
                 userElement.AppendChild(Login);
              
             }
-            xmlDocument.Save(UserInfoLocation.UserInfoPath);
+            xmlDocument.Save(IgniteInfoLocation.UserInfoPath);
         }
     }
 

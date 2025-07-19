@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IgniteApp.Shell.Set.ViewModels
 {
-    public class CommonSetViewModel:ControlViewModelBase
+    public class CommonSetViewModel:ViewModelBase
     {
 		private string[] _languages;
 

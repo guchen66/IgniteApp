@@ -1,36 +1,47 @@
 ﻿using IgniteAdmin.Managers.Main;
+using IgniteAdmin.Providers;
 using IgniteApp.Bases;
+using IgniteApp.Extensions;
+using IgniteShared.Globals.Local;
+using IgniteShared.Globals.System;
+using IT.Tangdao.Framework.DaoAdmin;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
+using IgniteShared.Extensions;
+using IgniteApp.Common.Enums;
 
 namespace IgniteApp.Shell.Aside.ViewModels
 {
-    public class AsideViewModel:ControlViewModelBase
+    public class AsideViewModel : ViewModelBase
     {
-        private string _currentTime;
+        private bool _isInitFinish;
 
-        public string CurrentTime
+        public bool IsInitFinish
         {
-            get => _currentTime;
-            set => SetAndNotify(ref _currentTime, value);
+            get => _isInitFinish;
+            set => SetAndNotify(ref _isInitFinish, value);
         }
 
-        DispatcherTimer timer;
+        private RunStatus _currentStatus = RunStatus.Stop;
+
+        public RunStatus CurrentStatus
+        {
+            get => _currentStatus;
+            set => SetAndNotify(ref _currentStatus, value);
+        }
+
+        private static readonly IDaoLogger Logger = DaoLogger.Get(typeof(AsideViewModel));
+        private DispatcherTimer timer;
+        private IAutoRun _autoRun;
+
         public AsideViewModel()
         {
-
-            timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(1);
-            timer.Tick += Timer_Tick;
-            timer.Start();
-        }
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            CurrentTime = DateTime.Now.ToString();
+            _autoRun = ServiceLocator.GetService<IAutoRun>();
         }
 
         #region--方法--
@@ -42,28 +53,53 @@ namespace IgniteApp.Shell.Aside.ViewModels
 
         public void ExecuteAuto()
         {
-            PlcManager.GetPlcSignal<int>(1);
+            SysProcessInfo.IsAuto = true;
+            SysProcessInfo.IsCannel = false;
         }
 
-        public void ExecuteStartRun()
+        /// <summary>
+        /// 开始
+        /// </summary>
+        public void ExecuteStart()
         {
-            PlcManager.GetPlcSignal<int>(1);
+            _autoRun.Run();
+            CurrentStatus = RunStatus.Running;
         }
 
+        /// <summary>
+        /// 停止
+        /// </summary>
         public void ExecuteStop()
         {
-            PlcManager.GetPlcSignal<int>(1);
+            //SysProcessInfo.IsCannel = true;
+            CurrentStatus = RunStatus.Stop;
+            _autoRun.Stop();
         }
 
-        public void ExecuteStep()
+        /// <summary>
+        /// 暂停
+        /// </summary>
+        public void ExecutePause()
         {
-            PlcManager.GetPlcSignal<int>(1);
+            CurrentStatus = RunStatus.Pause;
         }
 
+        /// <summary>
+        /// 初始化
+        /// </summary>
         public void ExecuteInit()
         {
-            PlcManager.GetPlcSignal<int>(1);
+            //初始化的时候发送示教位置给PLC，下发配方给PLC，下发系统级参数给PLC
+            SendDataToPlc();
+            SysProcessInfo.IsInitFinish = IsInitFinish = true;
+            CurrentStatus = RunStatus.Init;
+            Logger.WriteLocal("初始化完成");
         }
+
+        public void SendDataToPlc()
+        {
+        }
+
         #endregion
     }
 }

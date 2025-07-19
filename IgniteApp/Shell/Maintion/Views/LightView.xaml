@@ -6,13 +6,17 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:hc="https://handyorg.github.io/handycontrol"
     xmlns:local="clr-namespace:IgniteApp.Shell.Maintion.Views"
+    xmlns:conver="clr-namespace:IgniteApp.Converters"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="https://github.com/canton7/Stylet"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+    <UserControl.Resources>
+        <conver:ContentToColorConverter x:Key="bg"/>
+    </UserControl.Resources>
     <Grid>
-        <StackPanel>
+        <StackPanel Orientation="Horizontal">
             <hc:ProgressButton
                 x:Name="pro"
                 Width="180"
@@ -22,7 +26,9 @@
                 Progress="{Binding Progress}"
                 Content="0%"
                 Style="{StaticResource ProgressButtonPrimary}" />
-          
+
+            <Button Command="{s:Action Execute}" Width="200" Background="{Binding Content,Converter={StaticResource bg}}"/>
+
         </StackPanel>
     </Grid>
 </UserControl>

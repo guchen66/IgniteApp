@@ -158,7 +158,6 @@
                     Fill="#FF0078D7"
                     Points="-20,0 100,0 120,20 100,40 -20,40 0,20"
                     StrokeThickness="1" />
-
             </StackPanel>
             <StackPanel Panel.ZIndex="1" Orientation="Horizontal">
                 <TextBlock
@@ -260,7 +259,7 @@
                                     Grid.Row="0"
                                     Grid.Column="1"
                                     Height="30"
-                                    Text="{Binding StaticticInfo.OkCount, UpdateSourceTrigger=PropertyChanged}" />
+                                    Text="{Binding StaticticInfo.OkCount, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
                                 <TextBlock
                                     Grid.Row="1"
                                     Grid.Column="0"
@@ -271,7 +270,7 @@
                                     Grid.Row="1"
                                     Grid.Column="1"
                                     Height="30"
-                                    Text="{Binding StaticticInfo.NgCount}" />
+                                    Text="{Binding StaticticInfo.NgCount,UpdateSourceTrigger=PropertyChanged}" />
                                 <TextBlock
                                     Grid.Row="2"
                                     Grid.Column="0"
@@ -282,7 +281,7 @@
                                     Grid.Row="2"
                                     Grid.Column="1"
                                     Height="30"
-                                    Text="{Binding StaticticInfo.OutputCount}" />
+                                    Text="{Binding StaticticInfo.OutputCount,UpdateSourceTrigger=PropertyChanged}" />
                                 <Button
                                     Grid.Row="3"
                                     Grid.Column="1"
@@ -290,9 +289,7 @@
                                     Command="{s:Action ExecuteReset}"
                                     Content="重置" />
                             </Grid>
-
                         </Border>
-
                     </GroupBox>
                 </Grid>
             </hc:TabItem>

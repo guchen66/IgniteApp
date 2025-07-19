@@ -10,5 +10,6 @@ namespace IgniteApp.Interfaces
     {
         string HandlerName { get; set; }
       
+
     }
 }

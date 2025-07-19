@@ -11,16 +11,12 @@ using System.Threading.Tasks;
 
 namespace IgniteApp.Shell.Set.ViewModels
 {
-    public class SystemSetViewModel:ControlViewModelBase
+    public class SystemSetViewModel : ViewModelBase
     {
         #region--字段--
         #endregion
+
         #region--属性--
-        #endregion
-        #region--.ctor--
-        #endregion
-        #region--方法--
-        #endregion
         private ObservableCollection<SystemMenuItem> _systemLists;
 
         public ObservableCollection<SystemMenuItem> SystemLists
@@ -29,7 +25,6 @@ namespace IgniteApp.Shell.Set.ViewModels
             set => SetAndNotify(ref _systemLists, value);
         }
 
-      
         private SystemMenuItem _systemItem;
 
         public SystemMenuItem SystemItem
@@ -38,16 +33,24 @@ namespace IgniteApp.Shell.Set.ViewModels
             set => SetAndNotify(ref _systemItem, value);
         }
 
+        #endregion
+
+        #region--.ctor--
+
         public SystemSetViewModel()
         {
             SystemLists = new ObservableCollection<SystemMenuItem>()
             {
                 new SystemMenuItem(){ Id=1,Name="通用设置",CurrentView=new CommonSetView() },
                 new SystemMenuItem(){ Id=2,Name="账户设置",CurrentView=new AccountSetView()},
-                new SystemMenuItem(){ Id=3,Name="网络设置",CurrentView=new NetSetView()},           
+                new SystemMenuItem(){ Id=3,Name="网络设置",CurrentView=new NetSetView()},
                 new SystemMenuItem(){ Id=4,Name="辅助设置", CurrentView=new AssistSetView()},
-            };       
+            };
         }
+
+        #endregion
+
+        #region--方法--
 
         protected override void OnActivate()
         {
@@ -58,5 +61,7 @@ namespace IgniteApp.Shell.Set.ViewModels
         {
             base.OnInitialActivate();
         }
+
+        #endregion
     }
 }

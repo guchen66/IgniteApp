@@ -24,12 +24,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Xml.Linq;
 using System.IO;
+using IgniteApp.Common;
 
 namespace IgniteApp.Shell.Home.ViewModels
 {
-    public class DefaultViewModel:ControlViewModelBase
+    public class DefaultViewModel : ViewModelBase// IScreenState
     {
-        #region--属性--    
+        #region--属性--
         private BindableCollection<ProductDto> _productList;
 
         public BindableCollection<ProductDto> ProductList
@@ -37,6 +38,7 @@ namespace IgniteApp.Shell.Home.ViewModels
             get => _productList ?? (_productList = new BindableCollection<ProductDto>());
             set => SetAndNotify(ref _productList, value);
         }
+
         private BindableCollection<MaterialInfo> _materialInfoList;
 
         public BindableCollection<MaterialInfo> MaterialInfoList
@@ -44,6 +46,7 @@ namespace IgniteApp.Shell.Home.ViewModels
             get => _materialInfoList ?? (_materialInfoList = new BindableCollection<MaterialInfo>());
             set => SetAndNotify(ref _materialInfoList, value);
         }
+
         private BindableCollection<StaticticDto> _staticticList;
 
         public BindableCollection<StaticticDto> StaticticList
@@ -51,13 +54,15 @@ namespace IgniteApp.Shell.Home.ViewModels
             get => _staticticList;
             set => SetAndNotify(ref _staticticList, value);
         }
+
         private StaticticDto _staticticInfo;
 
         public StaticticDto StaticticInfo
         {
-            get => _staticticInfo;
+            get => _staticticInfo ?? (_staticticInfo = new StaticticDto());
             set => SetAndNotify(ref _staticticInfo, value);
         }
+
         private string _imageURI;
 
         public string ImageURI
@@ -65,23 +70,28 @@ namespace IgniteApp.Shell.Home.ViewModels
             get => _imageURI;
             set => SetAndNotify(ref _imageURI, value);
         }
+
         private readonly IMaterialRepository _materialRepository;
         private readonly IProductRepository _productRepository;
         private readonly IReadService _readService;
         #endregion
-       
+
         #region--ctor--
+
         public DefaultViewModel(IMaterialRepository materialRepository, IReadService readService, IProductRepository productRepository)
         {
             _materialRepository = materialRepository;
             _readService = readService;
             _productRepository = productRepository;
             InitData();
-           
+
             UpdateCommand = MinidaoCommand.Create<int?>(ExecuteUpdate);
             string path = "../../../Assets/Images/404.png";
             ImageURI = path;
+            IgniteEventHandler.StatisticUpdated -= OnStatisticUpdated;
+            IgniteEventHandler.StatisticUpdated += OnStatisticUpdated;
         }
+
         #endregion
 
         #region--方法--
@@ -91,36 +101,42 @@ namespace IgniteApp.Shell.Home.ViewModels
             ImageContextMenuViewModel imageContextMenuViewModel = new ImageContextMenuViewModel();
             imageContextMenuViewModel.CreateGrayImage(ImageURI);
         }
+
         public void InitData()
         {
             var materialModel = _materialRepository.GetAllMaterialInfo();//.MaterialInfos.ToList();
             MaterialInfoList.AddRange(materialModel);
             var productModel = _productRepository.GetAllProductInfo();
             ProductList.AddRange(productModel);
-            StaticticInfo = new StaticticDto
+        }
+
+        private void OnStatisticUpdated(object sender, StatisticUpdateEventArgs e)
+        {
+            if (e.StatisticDto != null)
             {
-                OkCount = 1,
-                NgCount = 100,
-                OutputCount = 121,
-            };
+                StaticticInfo = e.StatisticDto;
+            }
         }
 
         public void ExecuteUpdate(int? i)
         {
+        }
 
+        protected override void OnActivate()
+        {
         }
 
         public void ExecuteReset()
         {
-
             StaticticInfo.SetReset();
         }
+
         #endregion
 
         #region--命令--
 
         public ICommand UpdateCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
-        #endregion     
+        #endregion
     }
 }

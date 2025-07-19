@@ -32,10 +32,10 @@ using Unity;
 
 namespace IgniteApp.Shell.Footer.ViewModels
 {
-    public class FooterViewModel : ControlViewModelBase
+    public class FooterViewModel : ViewModelBase
     {
-        #region--属性--    
-      
+        #region--属性--
+
         private PlcDto _plcDto;
 
         public PlcDto PlcDto
@@ -51,30 +51,44 @@ namespace IgniteApp.Shell.Footer.ViewModels
             get => _isConn;
             set => SetAndNotify(ref _isConn, value);
         }
+
         private readonly IPlcProvider _plcProvider;
-    
+
         #endregion
 
         #region--ctor--
-        public FooterViewModel(IPlcProvider plcProvider)
+        private IWindowManager _WindowManager;
+
+        public FooterViewModel(IPlcProvider plcProvider, IWindowManager windowManager)
         {
             _plcProvider = plcProvider;
-         
-            QueryPlcStatus();
+            _WindowManager = windowManager;
 
+            QueryPlcStatus();
         }
+
         #endregion
 
         public void QueryPlcStatus()
         {
-            Task.Run(() => 
+            Task.Run(() =>
             {
-                IsConn=_plcProvider.ConnectionSiglePLC().IsSuccess;
-           
-               // IsConn = true;
+                IsConn = _plcProvider.ConnectionSiglePLC().IsSuccess;
+
+                // IsConn = true;
             });
-          
+        }
+
+        public void OpenEQP()
+        {
+        }
+
+        [Inject]
+        public TTForgeViewModel tTForgeViewModel { get; set; }
+
+        public void OpenTTView()
+        {
+            _WindowManager.ShowWindow(tTForgeViewModel);
         }
     }
-  
 }

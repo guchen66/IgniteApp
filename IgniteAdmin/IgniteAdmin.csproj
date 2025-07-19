@@ -53,8 +53,9 @@
     <Reference Include="AutoMapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.10.0.0\lib\net461\AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="IT.Tangdao.Framework, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\IT.Tangdao.Framework.3.0.7\lib\net48\IT.Tangdao.Framework.dll</HintPath>
+    <Reference Include="IT.Tangdao.Framework, Version=3.0.1.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\nuget\MyPackages\IT.Tangdao.Framework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -118,7 +119,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Providers\AutoMapperProvider.cs" />
+    <Compile Include="Providers\AutoRun.cs" />
     <Compile Include="Providers\IAutoMapperProvider.cs" />
+    <Compile Include="Providers\IAutoRun.cs" />
     <Compile Include="Providers\IPlcProvider.cs" />
     <Compile Include="Providers\PlcProvider.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

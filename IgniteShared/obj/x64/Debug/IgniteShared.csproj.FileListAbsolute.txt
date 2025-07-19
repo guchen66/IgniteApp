@@ -16,7 +16,6 @@ E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\System.ValueT
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\AutoMapper.xml
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\EntityFramework.xml
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\EntityFramework.SqlServer.xml
-E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\IT.Tangdao.Framework.pdb
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\Microsoft.Bcl.AsyncInterfaces.xml
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\Microsoft.Extensions.DependencyInjection.xml
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\x64\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml

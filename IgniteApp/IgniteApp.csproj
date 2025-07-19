@@ -70,8 +70,9 @@
     <Reference Include="HandyControl, Version=3.5.1.0, Culture=neutral, PublicKeyToken=45be8712787a1e5b, processorArchitecture=MSIL">
       <HintPath>..\packages\HandyControl.3.5.1\lib\net48\HandyControl.dll</HintPath>
     </Reference>
-    <Reference Include="IT.Tangdao.Framework, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\IT.Tangdao.Framework.3.0.7\lib\net48\IT.Tangdao.Framework.dll</HintPath>
+    <Reference Include="IT.Tangdao.Framework, Version=3.0.1.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\nuget\MyPackages\IT.Tangdao.Framework.dll</HintPath>
     </Reference>
     <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
@@ -96,6 +97,9 @@
     </Reference>
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.122\lib\net462\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
+    <Reference Include="MiniExcel, Version=1.38.0.0, Culture=neutral, PublicKeyToken=e7310002a53eac39, processorArchitecture=MSIL">
+      <HintPath>..\packages\MiniExcel.1.38.0\lib\net45\MiniExcel.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -123,6 +127,7 @@
       <HintPath>..\packages\System.Data.SQLite.Linq.1.0.119.0\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -181,57 +186,70 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bases\BindViewMide.cs" />
-    <Compile Include="Bases\ControlViewModelBase.cs" />
     <Compile Include="Bases\NavigatViewModel.cs" />
     <Compile Include="Bases\ViewModelBase.cs" />
-    <Compile Include="Bases\WindowViewModelBase.cs" />
+    <Compile Include="Behaviors\AdminBehavior.cs" />
     <Compile Include="Behaviors\DragBehavior.cs" />
     <Compile Include="Behaviors\ProgressButtonExtension.cs" />
+    <Compile Include="Behaviors\ShapeBehavior.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Common\AlarmPopupNotifier.cs" />
+    <Compile Include="Common\AlarmPublisher.cs" />
+    <Compile Include="Common\AsyncTaskManager.cs" />
+    <Compile Include="Common\Enums\RunStatus.cs" />
+    <Compile Include="Common\IgniteEventHandler.cs" />
     <Compile Include="Common\MenuList.cs" />
+    <Compile Include="Converters\BoolToColorConverter.cs" />
+    <Compile Include="Converters\ContentToColorConverter.cs" />
+    <Compile Include="Converters\DeviceStatusConverter.cs" />
+    <Compile Include="Converters\GetWindowExtension.cs" />
     <Compile Include="Converters\IdConverter.cs" />
     <Compile Include="Converters\RoleTypeConverter.cs" />
     <Compile Include="Converters\StringToImageConverter.cs" />
     <Compile Include="Dialogs\ViewModels\AddRecipeViewModel.cs" />
+    <Compile Include="Dialogs\ViewModels\AlarmPopupViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\SafePopupViewModel.cs" />
+    <Compile Include="Dialogs\ViewModels\SetCalibrationParameterViewModel.cs" />
     <Compile Include="Dialogs\Views\AddRecipeView.xaml.cs">
       <DependentUpon>AddRecipeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Views\AlarmPopupView.xaml.cs">
+      <DependentUpon>AlarmPopupView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\Views\SafePopupView.xaml.cs">
       <DependentUpon>SafePopupView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\Views\SetCalibrationParameterView.xaml.cs">
+      <DependentUpon>SetCalibrationParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Events\NavigateToLoginEvent.cs" />
+    <Compile Include="Events\NavigateToRegisterEvent.cs" />
     <Compile Include="ExceptionHandler.cs" />
-    <Compile Include="Extensions\ReadItemExtension.cs" />
+    <Compile Include="Extensions\StyleIocExtensions.cs" />
     <Compile Include="Interfaces\IAppConfigProvider.cs" />
-    <Compile Include="Interfaces\IMenuItem.cs" />
     <Compile Include="Interfaces\INavigateEntry.cs" />
     <Compile Include="Interfaces\INavigateRoute.cs" />
+    <Compile Include="Interfaces\INavigationService.cs" />
     <Compile Include="Interfaces\IViewFactory.cs" />
     <Compile Include="Modules\AutoModules.cs" />
     <Compile Include="Modules\HomeModules.cs" />
     <Compile Include="Modules\SqliteModules.cs" />
     <Compile Include="Modules\TangdaoModules.cs" />
+    <Compile Include="Procedures\AbstractProcedure.cs" />
+    <Compile Include="Procedures\IgniteProcedure.cs" />
+    <Compile Include="Procedures\IIgniteProcedure.cs" />
     <Compile Include="Shell\Aside\ViewModels\AsideViewModel.cs" />
     <Compile Include="Shell\Aside\Views\AsideView.xaml.cs">
       <DependentUpon>AsideView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Shell\Calibration\Models\CalibrationMenuItem.cs" />
-    <Compile Include="Shell\Calibration\ViewModels\CalibrationViewModel.cs" />
-    <Compile Include="Shell\Calibration\ViewModels\LoadCalibrationViewModel.cs" />
-    <Compile Include="Shell\Calibration\ViewModels\UnLoadCalibrationViewModel.cs" />
-    <Compile Include="Shell\Calibration\Views\CalibrationView.xaml.cs">
-      <DependentUpon>CalibrationView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Shell\Calibration\Views\LoadCalibrationView.xaml.cs">
-      <DependentUpon>LoadCalibrationView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Shell\Calibration\Views\UnLoadCalibrationView.xaml.cs">
-      <DependentUpon>UnLoadCalibrationView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Shell\Footer\Models\FooterItem.cs" />
     <Compile Include="Shell\Footer\ViewModels\FooterViewModel.cs" />
+    <Compile Include="Shell\Footer\ViewModels\TTForgeViewModel.cs" />
     <Compile Include="Shell\Footer\Views\FooterView.xaml.cs">
       <DependentUpon>FooterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\Footer\Views\TTForgeView.xaml.cs">
+      <DependentUpon>TTForgeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Shell\Header\Models\HeaderItem.cs" />
     <Compile Include="Shell\Header\ViewModels\HeaderViewModel.cs" />
@@ -240,7 +258,6 @@
     </Compile>
     <Compile Include="Shell\Home\Models\HomeMenuItem.cs" />
     <Compile Include="Shell\Home\Models\HomeMenuProvider.cs" />
-    <Compile Include="Shell\Home\Models\MonitorMenuItem.cs" />
     <Compile Include="Shell\Home\Models\SetMenuItem.cs" />
     <Compile Include="Shell\Home\ViewModels\DefaultViewModel.cs" />
     <Compile Include="Shell\Home\ViewModels\HomeViewModel.cs" />
@@ -262,7 +279,8 @@
     <Compile Include="Shell\Home\Views\_404View.xaml.cs">
       <DependentUpon>_404View.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Shell\Maintion\Models\MaintainMenuItem.cs" />
+    <Compile Include="Shell\Maintion\Models\ElectricityModel.cs" />
+    <Compile Include="Shell\Maintion\Models\ElectStatus.cs" />
     <Compile Include="Shell\Maintion\ViewModels\ElectViewModel.cs" />
     <Compile Include="Shell\Maintion\ViewModels\LightViewModel.cs" />
     <Compile Include="Shell\Maintion\ViewModels\MaintainViewModel.cs" />
@@ -310,6 +328,30 @@
     <Compile Include="Shell\Monitor\Views\ReportView.xaml.cs">
       <DependentUpon>ReportView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Shell\ProcessParame\Models\CalibrationMenuItem.cs" />
+    <Compile Include="Shell\ProcessParame\Models\HistoryDataManager.cs" />
+    <Compile Include="Shell\ProcessParame\Models\ITaskController.cs" />
+    <Compile Include="Shell\ProcessParame\Models\ITaskService.cs" />
+    <Compile Include="Shell\ProcessParame\Models\MotionCalibrationModel.cs" />
+    <Compile Include="Shell\ProcessParame\Models\OffsetModel.cs" />
+    <Compile Include="Shell\ProcessParame\Models\TaskContext.cs" />
+    <Compile Include="Shell\ProcessParame\Models\TaskState.cs" />
+    <Compile Include="Shell\ProcessParame\ViewModels\AccuracyOffsetViewModel.cs" />
+    <Compile Include="Shell\ProcessParame\ViewModels\LoadCalibrationViewModel.cs" />
+    <Compile Include="Shell\ProcessParame\ViewModels\ParameBaseViewModel.cs" />
+    <Compile Include="Shell\ProcessParame\ViewModels\UnLoadCalibrationViewModel.cs" />
+    <Compile Include="Shell\ProcessParame\Views\AccuracyOffsetView.xaml.cs">
+      <DependentUpon>AccuracyOffsetView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\ProcessParame\Views\LoadCalibrationView.xaml.cs">
+      <DependentUpon>LoadCalibrationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\ProcessParame\Views\ParameBaseView.xaml.cs">
+      <DependentUpon>ParameBaseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\ProcessParame\Views\UnLoadCalibrationView.xaml.cs">
+      <DependentUpon>UnLoadCalibrationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Shell\Recipe\Models\RecipeMenuItem.cs" />
     <Compile Include="Shell\Recipe\ViewModels\RecipeViewModel.cs" />
     <Compile Include="Shell\Recipe\Views\RecipeView.xaml.cs">
@@ -354,11 +396,15 @@
     </Compile>
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegisterView.xaml.cs">
+      <DependentUpon>RegisterView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -397,7 +443,31 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Assets\DataTemplates\ToggleButtonTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Assets\Styles\BackgroundBrushStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Assets\Styles\IgniteListStyleBase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Assets\Styles\ImageRelativePath.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Assets\Styles\LoginBackgroundStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Assets\Styles\RecipeListViewStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Assets\Styles\UserInfoListViewStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -405,7 +475,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Dialogs\Views\AlarmPopupView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dialogs\Views\SafePopupView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\Views\SetCalibrationParameterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -413,19 +491,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Shell\Calibration\Views\CalibrationView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Shell\Calibration\Views\LoadCalibrationView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Shell\Calibration\Views\UnLoadCalibrationView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Shell\Footer\Views\FooterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shell\Footer\Views\TTForgeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -497,6 +567,22 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Shell\ProcessParame\Views\AccuracyOffsetView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shell\ProcessParame\Views\LoadCalibrationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shell\ProcessParame\Views\ParameBaseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shell\ProcessParame\Views\UnLoadCalibrationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Shell\Recipe\Views\RecipeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -538,6 +624,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RegisterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

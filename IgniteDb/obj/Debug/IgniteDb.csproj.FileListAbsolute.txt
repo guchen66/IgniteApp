@@ -29,7 +29,6 @@ E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\AutoMapper.xml
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\EntityFramework.xml
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\EntityFramework.DynamicFilters.xml
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\EntityFramework.SqlServer.xml
-E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\IT.Tangdao.Framework.pdb
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\Microsoft.Extensions.DependencyInjection.xml
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml

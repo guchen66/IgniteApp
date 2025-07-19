@@ -1,0 +1,56 @@
+﻿<UserControl
+    x:Class="IgniteApp.Shell.ProcessParame.Views.UnLoadCalibrationView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:IgniteApp.Shell.ProcessParame.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:s="https://github.com/canton7/Stylet">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <WrapPanel>
+            <Button
+                Width="120"
+                Height="30"
+                Margin="5"
+                Command="{s:Action StartCalibration}"
+                Content="开始标定" />
+            <Button
+                Width="120"
+                Height="30"
+                Margin="5"
+                Command="{s:Action PauseCalibration}"
+                Content="暂停标定" />
+            <Button
+                Width="120"
+                Height="30"
+                Margin="5"
+                Command="{s:Action ResumeCalibration}"
+                Content="恢复标定" />
+            <Button
+                Width="120"
+                Height="30"
+                Margin="5"
+                Command="{s:Action StopCalibration}"
+                Content="停止标定" />
+            <Label Content="下料" />
+        </WrapPanel>
+
+        <DataGrid
+            Grid.Row="1"
+            AutoGenerateColumns="False"
+            ItemsSource="{Binding UnLoadCalibrationDataList}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Header="Id" />
+                <DataGridTextColumn Binding="{Binding CaliType}" Header="标定类型" />
+                <DataGridTextColumn Binding="{Binding StartValue}" Header="X" />
+                <DataGridTextColumn Binding="{Binding EndValue}" Header="Y" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

@@ -2,6 +2,9 @@
 using IgniteApp.Extensions;
 using IgniteApp.Interfaces;
 using IgniteApp.Shell.Home.Models;
+using IT.Tangdao.Framework.DaoAdmin.IServices;
+using IT.Tangdao.Framework.DaoDtos.Items;
+using IT.Tangdao.Framework.Extensions;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -13,7 +16,7 @@ namespace IgniteApp.Shell.Set.ViewModels
 {
     public class SetViewModel : NavigatViewModel, IAppConfigProvider
     {
-        public string HandlerName { get ; set ; }= "Setting";
+        public string HandlerName { get; set; } = "Setting";
 
         private BindableCollection<IMenuItem> _setMenuList;
 
@@ -22,6 +25,7 @@ namespace IgniteApp.Shell.Set.ViewModels
             get => _setMenuList;
             set => SetAndNotify(ref _setMenuList, value);
         }
+
         private int _selectedIndex;
 
         public int SelectedIndex
@@ -31,16 +35,22 @@ namespace IgniteApp.Shell.Set.ViewModels
         }
 
         public IViewFactory _viewFactory;
-        public SetViewModel(IViewFactory viewFactory)
+        public IReadService _readService;
+
+        public SetViewModel(IViewFactory viewFactory, IReadService readService)
         {
             this._viewFactory = viewFactory;
-            //字典转列表
-            var lists = this.ReadAppConfigToDic(HandlerName).Select(kvp => new MenuChildItem
+            this._readService = readService;
+            var model = _readService.Current.SelectConfig(HandlerName).Result;
+            if (model is Dictionary<string, string> dictss)
             {
-                MenuName = kvp.Value,
-              //  SetMenuToView = kvp.Value,
-            }).ToList();
-            SetMenuList = new BindableCollection<IMenuItem>(lists);
+                var listss = dictss.TryOrderBy().Select(kvp => new TangdaoMenuItem
+                {
+                    MenuName = kvp.Value,
+                }).ToList();
+                SetMenuList = new BindableCollection<IMenuItem>(listss);
+            }
+
             this.BindAndInvoke(viewModel => viewModel.SelectedIndex, (obj, args) => DoNavigateToView());
         }
 
@@ -55,6 +65,7 @@ namespace IgniteApp.Shell.Set.ViewModels
                     break;
             }
         }
+
         public ProcessViewModel ProcessViewModel;
         public AxisArgsViewModel AxisArgsViewModel;
         public SystemSetViewModel SystemSetViewModel;
@@ -65,6 +76,5 @@ namespace IgniteApp.Shell.Set.ViewModels
             get => _defaultScreen;
             set => SetAndNotify(ref _defaultScreen, value);
         }
-       
     }
 }

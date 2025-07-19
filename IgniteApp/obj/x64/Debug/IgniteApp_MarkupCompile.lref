@@ -1,12 +1,12 @@
 ﻿
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\App.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Dialogs\Views\AddRecipeView.xaml;;
+FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Dialogs\Views\AlarmPopupView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Dialogs\Views\SafePopupView.xaml;;
+FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Dialogs\Views\SetCalibrationParameterView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Aside\Views\AsideView.xaml;;
-FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Calibration\Views\CalibrationView.xaml;;
-FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Calibration\Views\LoadCalibrationView.xaml;;
-FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Calibration\Views\UnLoadCalibrationView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Footer\Views\FooterView.xaml;;
+FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Footer\Views\TTForgeView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Header\Views\HeaderView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Home\Views\DefaultView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Home\Views\HomeView.xaml;;
@@ -24,6 +24,10 @@ FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Monitor\Views\IOMonView
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Monitor\Views\MonitorView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Monitor\Views\PlcMonView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Monitor\Views\ReportView.xaml;;
+FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\ProcessParame\Views\AccuracyOffsetView.xaml;;
+FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\ProcessParame\Views\LoadCalibrationView.xaml;;
+FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\ProcessParame\Views\ParameBaseView.xaml;;
+FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\ProcessParame\Views\UnLoadCalibrationView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Recipe\Views\RecipeView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Set\Views\AccountSetView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Set\Views\AssistSetView.xaml;;
@@ -35,4 +39,5 @@ FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Set\Views\SetView.xaml;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Set\Views\SystemSetView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Views\LoginView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Views\MainView.xaml;;
+FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Views\RegisterView.xaml;;
 

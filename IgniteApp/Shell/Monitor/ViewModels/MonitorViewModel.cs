@@ -3,6 +3,9 @@ using IgniteApp.Extensions;
 using IgniteApp.Interfaces;
 using IgniteApp.Shell.Home.Models;
 using IgniteApp.Shell.Set.ViewModels;
+using IT.Tangdao.Framework.DaoAdmin.IServices;
+using IT.Tangdao.Framework.DaoDtos.Items;
+using IT.Tangdao.Framework.Extensions;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -12,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace IgniteApp.Shell.Monitor.ViewModels
 {
-    public class MonitorViewModel : NavigatViewModel,IAppConfigProvider
+    public class MonitorViewModel : NavigatViewModel, IAppConfigProvider
     {
         public string HandlerName { get; set; } = "MonitorMenu";
         private BindableCollection<IMenuItem> _monitorMenuList;
@@ -22,6 +25,7 @@ namespace IgniteApp.Shell.Monitor.ViewModels
             get => _monitorMenuList;
             set => SetAndNotify(ref _monitorMenuList, value);
         }
+
         private int _selectedIndex;
 
         public int SelectedIndex
@@ -30,21 +34,28 @@ namespace IgniteApp.Shell.Monitor.ViewModels
             set => SetAndNotify(ref _selectedIndex, value);
         }
 
-        public IViewFactory _viewFactory;
+        public readonly IViewFactory _viewFactory;
         private readonly INavigateRoute _navigatRoute;
-        public MonitorViewModel(IViewFactory viewFactory, INavigateRoute navigatRoute)
-        {
-            this._viewFactory = viewFactory;
-            //字典转列表
-            var lists = this.ReadAppConfigToDic(HandlerName).Select(kvp => new MenuChildItem
-            {
-                MenuName = kvp.Value,
+        private readonly IReadService _readService;
 
-            }).ToList();
-            MonitorMenuList = new BindableCollection<IMenuItem>(lists);
-            this.BindAndInvoke(viewModel => viewModel.SelectedIndex, (obj, args) => DoNavigateToView());
+        public MonitorViewModel(IViewFactory viewFactory, INavigateRoute navigatRoute, IReadService readService)
+        {
+            _viewFactory = viewFactory;
             _navigatRoute = navigatRoute;
-           
+            _readService = readService;
+            //字典转列表
+            var result = _readService.Current.SelectConfig(HandlerName).Result;
+
+            if (result is Dictionary<string, string> d1)
+            {
+                var lists = d1.TryOrderBy().Select(kvp => new TangdaoMenuItem
+                {
+                    MenuName = kvp.Value,
+                }).ToList();
+                MonitorMenuList = new BindableCollection<IMenuItem>(lists);
+            }
+
+            this.BindAndInvoke(viewModel => viewModel.SelectedIndex, (obj, args) => DoNavigateToView());
         }
 
         private void DoNavigateToView()
@@ -59,6 +70,7 @@ namespace IgniteApp.Shell.Monitor.ViewModels
                     break;
             }
         }
+
         public IOMonViewModel IOMonViewModel;
         public AxisMonViewModel AxisMonViewModel;
         public PlcMonViewModel PlcMonViewModel;

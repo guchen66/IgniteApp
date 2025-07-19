@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace IgniteApp.Shell.Monitor.ViewModels
 {
-    public class IOMonViewModel:ControlViewModelBase
+    public class IOMonViewModel : ViewModelBase
     {
-		private string[] _selectedMode;
+        private string[] _selectedMode;
 
-		public string[] SelectedMode
+        public string[] SelectedMode
         {
-			get => _selectedMode;
-			set => SetAndNotify(ref _selectedMode, value);
+            get => _selectedMode;
+            set => SetAndNotify(ref _selectedMode, value);
         }
 
         private string _selectItem;
@@ -37,19 +37,17 @@ namespace IgniteApp.Shell.Monitor.ViewModels
 
         public IOMonViewModel()
         {
-            SelectedMode=new string[] 
+            SelectedMode = new string[]
             {
                 "全部","Load","UpLoad"
             };
 
-            this.Bind(viewModel=>viewModel.SelectItem,(obj,sender)=>DoExecute());
+            this.Bind(viewModel => viewModel.SelectItem, (obj, sender) => DoExecute());
         }
 
         private void DoExecute()
         {
             var s1 = SelectItem;
         }
-
-    
     }
 }

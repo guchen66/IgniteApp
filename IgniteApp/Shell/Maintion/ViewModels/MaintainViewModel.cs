@@ -2,8 +2,11 @@
 using IgniteApp.Extensions;
 using IgniteApp.Interfaces;
 using IgniteApp.Shell.Home.Models;
-using IgniteApp.Shell.Maintion.Models;
 using IgniteApp.Shell.Set.ViewModels;
+using IT.Tangdao.Framework.DaoAdmin.IServices;
+using IT.Tangdao.Framework.DaoAdmin.Services;
+using IT.Tangdao.Framework.DaoDtos.Items;
+using IT.Tangdao.Framework.Extensions;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -16,13 +19,14 @@ namespace IgniteApp.Shell.Maintion.ViewModels
     public class MaintainViewModel : NavigatViewModel, IAppConfigProvider
     {
         public string HandlerName { get; set; } = "MaintainMenu";
-        private BindableCollection<MaintainMenuItem> _maintainMenuList;
+        private BindableCollection<IMenuItem> _maintainMenuList;
 
-        public BindableCollection<MaintainMenuItem> MaintainMenuList
+        public BindableCollection<IMenuItem> MaintainMenuList
         {
             get => _maintainMenuList;
             set => SetAndNotify(ref _maintainMenuList, value);
         }
+
         private int _selectedIndex;
 
         public int SelectedIndex
@@ -31,18 +35,28 @@ namespace IgniteApp.Shell.Maintion.ViewModels
             set => SetAndNotify(ref _selectedIndex, value);
         }
 
-        public IViewFactory _viewFactory;
+        private readonly IViewFactory _viewFactory;
         private readonly INavigateRoute _navigatRoute;
-        public MaintainViewModel(IViewFactory viewFactory, INavigateRoute navigatRoute)
+        private readonly IReadService _readService;
+
+        public MaintainViewModel(IViewFactory viewFactory, INavigateRoute navigatRoute, IReadService readService)
         {
             _viewFactory = viewFactory;
             _navigatRoute = navigatRoute;
-            var lists = this.ReadAppConfigToDic(HandlerName).Select(kvp => new MaintainMenuItem
+            _readService = readService;
+
+            //读取AppConfig文件
+            var result = _readService.Current.SelectConfig(HandlerName).Result;
+
+            if (result is Dictionary<string, string> d1)
             {
-                MenuName = kvp.Value,
-               
-            }).ToList();
-            MaintainMenuList = new BindableCollection<MaintainMenuItem>(lists);
+                var lists = d1.TryOrderBy().Select(kvp => new TangdaoMenuItem
+                {
+                    MenuName = kvp.Value,
+                }).ToList();
+                MaintainMenuList = new BindableCollection<IMenuItem>(lists);
+            }
+
             this.BindAndInvoke(viewModel => viewModel.SelectedIndex, (obj, args) => DoNavigateToView());
         }
 
@@ -59,11 +73,11 @@ namespace IgniteApp.Shell.Maintion.ViewModels
                     break;
             }
         }
+
         public ResistiveViewModel ResistiveViewModel;
         public PressureViewModel PressureViewModel;
         public LightViewModel LightViewModel;
         public ElectViewModel ElectViewModel;
         public TempAndHumViewModel TempAndHumViewModel;
-
     }
 }

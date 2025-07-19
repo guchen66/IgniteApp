@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace IgniteApp.Shell.Maintion.ViewModels
 {
-    public class ResistiveViewModel : ControlViewModelBase
+    public class ResistiveViewModel : ViewModelBase
     {
     }
 }

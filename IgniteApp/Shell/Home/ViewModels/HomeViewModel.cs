@@ -6,6 +6,7 @@ using IgniteApp.Interfaces;
 using IgniteApp.Shell.Home.Models;
 using IgniteApp.ViewModels;
 using IT.Tangdao.Framework;
+using IT.Tangdao.Framework.DaoAdmin.IServices;
 using IT.Tangdao.Framework.DaoCommands;
 using IT.Tangdao.Framework.Extensions;
 using Stylet;
@@ -20,7 +21,7 @@ using System.Windows.Input;
 
 namespace IgniteApp.Shell.Home.ViewModels
 {
-    public class HomeViewModel: NavigatViewModel
+    public class HomeViewModel : NavigatViewModel
     {
         #region--属性--
         private BindableCollection<HomeMenuItem> _homeMenuItems;
@@ -30,6 +31,7 @@ namespace IgniteApp.Shell.Home.ViewModels
             get => _homeMenuItems ?? (_homeMenuItems = new BindableCollection<HomeMenuItem>());
             set => SetAndNotify(ref _homeMenuItems, value);
         }
+
         private Screen _defaultScreen;
 
         public Screen DefaultScreen
@@ -39,29 +41,34 @@ namespace IgniteApp.Shell.Home.ViewModels
         }
 
         private readonly IViewFactory _viewFactory;
+        private readonly IReadService _readService;
         #endregion
 
         #region--.ctor--
-        public HomeViewModel(IViewFactory viewFactory)
-        {
-            InitMenuData();
 
+        public HomeViewModel(IViewFactory viewFactory, IReadService readService)
+        {
             _viewFactory = viewFactory;
+            _readService = readService;
+            InitMenuData();
         }
+
         #endregion
 
         #region--方法--
+
         private void InitMenuData()
         {
-            HomeMenuItem menuItem = new HomeMenuItem();
-            var dicts = menuItem.ReadUnityConfig("MenuConfiguration");
-            List<HomeMenuItem> menuItems = dicts.Select(kvp => new HomeMenuItem
+            var model = _readService.Current.SelectCustomConfig("unity.config", "Tangdao").Result;
+            if (model is Dictionary<string, string> dicts)
             {
-                Title = kvp.Key,
-                ViewModelName = kvp.Value
-
-            }).ToList();
-            HomeMenuItems.AddRange(menuItems);
+                List<HomeMenuItem> menuItems = dicts.Select(kvp => new HomeMenuItem
+                {
+                    Title = kvp.Key,
+                    ViewModelName = kvp.Value
+                }).ToList();
+                HomeMenuItems.AddRange(menuItems);
+            }
         }
 
         /// <summary>
@@ -86,7 +93,7 @@ namespace IgniteApp.Shell.Home.ViewModels
         {
             ActivateItem(screen ?? (screen = _viewFactory.DefaultViewModel()));
         }
-        #endregion
 
+        #endregion
     }
 }

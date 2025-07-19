@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IgniteApp.Shell.Maintion.ViewModels
 {
-    public class PressureViewModel: ControlViewModelBase
+    public class PressureViewModel: ViewModelBase
     {
     }
 }

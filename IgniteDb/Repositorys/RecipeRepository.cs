@@ -17,14 +17,15 @@ namespace IgniteDb.Repositorys
     {
         private readonly AccessDbContext _context;
         private readonly IMapper _mapper;
-        public RecipeRepository(AccessDbContext context,IMapper mapper)
+
+        public RecipeRepository(AccessDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
+
         public void AddRecipe(int id)
         {
-            
         }
 
         public RecipeDto AddRecipe(RecipeDto dto)
@@ -55,13 +56,12 @@ namespace IgniteDb.Repositorys
             {
                 throw new KeyNotFoundException($"RecipeInfo with ID {recipeDto.Id} not found.");
             }
-
         }
 
         public RecipeDto GetRecipeById(int id)
         {
-            var info= _context.RecipeInfos.Find(id);
-            RecipeDto recipeDto=_mapper.Map<RecipeDto>(info);
+            var info = _context.RecipeInfos.Find(id);
+            RecipeDto recipeDto = _mapper.Map<RecipeDto>(info);
             return recipeDto;
         }
 
@@ -74,9 +74,12 @@ namespace IgniteDb.Repositorys
 
         public void DeleteRecipe(RecipeDto dto)
         {
-            RecipeInfo info = _context.RecipeInfos.Find(dto.Id);        //这里需要使用Find方法来跟踪EF6的数据库数据，Entity Framework 的上下文被（DbContext）跟踪
-            _context.RecipeInfos.Remove(info);
-            _context.SaveChanges();
+            if (dto != null)
+            {
+                RecipeInfo info = _context.RecipeInfos.Find(dto.Id);        //这里需要使用Find方法来跟踪EF6的数据库数据，Entity Framework 的上下文被（DbContext）跟踪
+                _context.RecipeInfos.Remove(info);
+                _context.SaveChanges();
+            }
         }
     }
 }

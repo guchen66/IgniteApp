@@ -8,6 +8,8 @@
     xmlns:local="clr-namespace:IgniteApp.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="https://github.com/canton7/Stylet"
+    xmlns:shared="clr-namespace:IgniteShared.Entitys.Common;assembly=IgniteShared"
+    xmlns:conver="clr-namespace:IT.Tangdao.Framework.DaoConverters;assembly=IT.Tangdao.Framework"
     x:Name="LoginWin"
     Title="LoginView"
     Width="600"
@@ -16,6 +18,13 @@
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     mc:Ignorable="d">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Assets/Styles/LoginBackgroundStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid Background="Transparent" MouseLeftButtonDown="{s:Action DragMove}">
         <DockPanel LastChildFill="False">
             <StackPanel
@@ -24,7 +33,7 @@
                 DockPanel.Dock="Left">
                 <Image
                     Margin="20,60,0,0"
-                    Source="../Assets/Images/dotNet.jpg"
+                    Source="{StaticResource dotNetSource}"
                     Stretch="Fill" />
             </StackPanel>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -40,9 +49,9 @@
                         Width="250"
                         Margin="10,0"
                         hc:InfoElement.Placeholder="请输入账号"
-                        CaretBrush="#FFD94448"
+                        CaretBrush="{StaticResource PeonyBrush}"
                         FontSize="16"
-                        SelectionBrush="#FFD94448"
+                        SelectionBrush="{StaticResource PeonyBrush}"
                         Text="{Binding LoginDto.UserName}" />
                 </StackPanel>
                 <StackPanel Margin="20,10,0,0" Orientation="Horizontal">
@@ -51,24 +60,31 @@
                         Width="250"
                         Margin="10,0"
                         hc:InfoElement.Placeholder="请输入密码"
-                        CaretBrush="#FFD94448"
-                        FontSize="16" hc:UnsafePassword="{Binding LoginDto.Password}"
+                        hc:UnsafePassword="{Binding LoginDto.Password}"
+                        CaretBrush="{StaticResource PeonyBrush}"
+                        FontSize="16"
                         IsSafeEnabled="False"
-                        SelectionBrush="#FFD94448"
+                        SelectionBrush="{StaticResource PeonyBrush}"
                         ShowEyeButton="True" />
                 </StackPanel>
 
                 <StackPanel Margin="20,15,0,0" Orientation="Horizontal">
                     <CheckBox
                         Margin="10,15,0,0"
+                        Command="{s:Action ExecuteRememberPwd}"
                         Content="记住密码"
                         FontSize="16"
-                        Command="{s:Action ExecuteRememberPwd}"
                         IsChecked="{Binding Path=LoginDto.IsRemember, Mode=TwoWay}" />
                     <TextBlock
                         Margin="100,15,0,0"
                         FontSize="16"
-                        Text="忘记密码" />
+                        Text="忘记密码">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                <i:InvokeCommandAction Command="{Binding RegisterCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Button
@@ -76,9 +92,8 @@
                         Height="30"
                         Margin="40,20,20,-100"
                         HorizontalAlignment="Center"
-                        Background="#FF0078D7"
+                        Background="{StaticResource OceanBlueBrush}"
                         Command="{s:Action ExecuteLogin}"
-                        
                         Content="登录"
                         IsDefault="True" />
                     <Button
@@ -86,7 +101,7 @@
                         Height="30"
                         Margin="20,20,20,-100"
                         HorizontalAlignment="Center"
-                        Background="#FF0078D7"
+                        Background="{StaticResource OceanBlueBrush}"
                         Command="{s:Action ExecuteCancel}"
                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
                         Content="取消"

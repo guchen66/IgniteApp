@@ -1,7 +1,24 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|e:\\csharp project\\applyclient\\igniteapp\\igniteapp\\views\\loginview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|solutionrelative:igniteapp\\views\\loginview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|e:\\csharp project\\applyclient\\igniteapp\\igniteapp\\viewmodels\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|solutionrelative:igniteapp\\viewmodels\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|e:\\csharp project\\applyclient\\igniteapp\\igniteapp\\viewmodels\\registerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|solutionrelative:igniteapp\\viewmodels\\registerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|e:\\csharp project\\applyclient\\igniteapp\\igniteapp\\modules\\homemodules.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|solutionrelative:igniteapp\\modules\\homemodules.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,6 +55,57 @@
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "LoginView.xaml",
+              "DocumentMoniker": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Views\\LoginView.xaml",
+              "RelativeDocumentMoniker": "IgniteApp\\Views\\LoginView.xaml",
+              "ToolTip": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Views\\LoginView.xaml",
+              "RelativeToolTip": "IgniteApp\\Views\\LoginView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-07-19T15:41:58.499Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "HomeModules.cs",
+              "DocumentMoniker": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Modules\\HomeModules.cs",
+              "RelativeDocumentMoniker": "IgniteApp\\Modules\\HomeModules.cs",
+              "ToolTip": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Modules\\HomeModules.cs",
+              "RelativeToolTip": "IgniteApp\\Modules\\HomeModules.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvwwAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-19T15:17:39.689Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LoginViewModel.cs",
+              "DocumentMoniker": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\ViewModels\\LoginViewModel.cs",
+              "RelativeDocumentMoniker": "IgniteApp\\ViewModels\\LoginViewModel.cs",
+              "ToolTip": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\ViewModels\\LoginViewModel.cs",
+              "RelativeToolTip": "IgniteApp\\ViewModels\\LoginViewModel.cs",
+              "ViewState": "AQIAAMAAAAAAAAAAAAAswNEAAAA0AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-19T15:16:35.05Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RegisterViewModel.cs",
+              "DocumentMoniker": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\ViewModels\\RegisterViewModel.cs",
+              "RelativeDocumentMoniker": "IgniteApp\\ViewModels\\RegisterViewModel.cs",
+              "ToolTip": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\ViewModels\\RegisterViewModel.cs",
+              "RelativeToolTip": "IgniteApp\\ViewModels\\RegisterViewModel.cs",
+              "ViewState": "AQIAAEgAAAAAAAAAAAAowFcAAABCAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-19T15:15:47.491Z",
+              "EditorCaption": ""
             }
           ]
         }

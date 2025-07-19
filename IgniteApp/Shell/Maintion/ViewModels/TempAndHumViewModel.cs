@@ -1,7 +1,11 @@
 ﻿using HandyControl.Controls;
 using IgniteApp.Bases;
+using IgniteApp.Extensions;
+using IgniteDevices;
 using IgniteDevices.TempAndHum;
 using IgniteShared.Globals.System;
+using IT.Tangdao.Framework.DaoAdmin.IServices;
+using IT.Tangdao.Framework.DaoDevices;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -9,33 +13,34 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+
 namespace IgniteApp.Shell.Maintion.ViewModels
 {
-    public class TempAndHumViewModel : ControlViewModelBase
+    public class TempAndHumViewModel : ViewModelBase
     {
-		private double _temp;
+        private double _temp;
 
-		public double Temp
+        public double Temp
         {
-			get => _temp;
-			set => SetAndNotify(ref _temp, value);
-		}
+            get => _temp;
+            set => SetAndNotify(ref _temp, value);
+        }
 
-		private double _hum;
+        private double _hum;
 
-		public double Hum
-		{
-			get => _hum;
-			set => SetAndNotify(ref _hum, value);
-		}
-
-		private bool _isConnTemp=false;
-
-		public bool IsConnTemp
+        public double Hum
         {
-			get => _isConnTemp;
-			set => SetAndNotify(ref _isConnTemp, value);
-		}
+            get => _hum;
+            set => SetAndNotify(ref _hum, value);
+        }
+
+        private bool _isConnTemp = false;
+
+        public bool IsConnTemp
+        {
+            get => _isConnTemp;
+            set => SetAndNotify(ref _isConnTemp, value);
+        }
 
         private bool _isConnHum = false;
 
@@ -53,19 +58,27 @@ namespace IgniteApp.Shell.Maintion.ViewModels
             set => SetAndNotify(ref _content, value);
         }
 
-        TempAndHumClient _tempAndHumClient;
+        private TempAndHumClient _tempAndHumClient;
+
+        public IReadService _readService;
+        public IDeviceProvider _deviceProvider;
+
         public TempAndHumViewModel()
         {
-            _tempAndHumClient=ServiceLocator.GetService<TempAndHumClient>();
-            Init();
-          
+            //_readService = readService;
+
+            // var s1 = _deviceProvider.DefaultTemp;
+            //  var s2 = ServiceLocator.GetService<Temperature>();
+            // Init();
         }
-      
+
         private ManualResetEventSlim _manual = new ManualResetEventSlim(false);
-		public void Init()
+
+        public void Init()
         {
-            Task.Run(() => 
+            Task.Run(() =>
             {
+                _readService.Device.Read();
                 while (!_manual.IsSet)
                 {
                     _tempAndHumClient.Initinalized(_manual);
@@ -76,9 +89,7 @@ namespace IgniteApp.Shell.Maintion.ViewModels
                         Hum = SysTempAndHum.Hum;
                         IsConnTemp = SysTempAndHum.IsConnTemp;
                         IsConnHum = SysTempAndHum.IsConnHum;
-
                     });
-                  
                 }
                 MessageBox.Show("数据读取完成");
             });

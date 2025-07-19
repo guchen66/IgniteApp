@@ -11,7 +11,7 @@ using IgniteApp.Bases;
 
 namespace IgniteApp.Shell.Header.ViewModels
 {
-    public class HeaderViewModel : ControlViewModelBase
+    public class HeaderViewModel : ViewModelBase
     {
         #region--属性--
         private Window CurrentWindow => GetCurrentWindow();

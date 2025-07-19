@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace IgniteApp.Shell.Set.ViewModels
 {
-    public class AccountSetViewModel:ControlViewModelBase
+    public class AccountSetViewModel:ViewModelBase
     {
 		private AccountSetItem _accountSetItem;
 

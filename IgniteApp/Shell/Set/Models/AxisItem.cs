@@ -17,7 +17,7 @@ using System.Xml.Linq;
 
 namespace IgniteApp.Shell.Set.Models
 {
-    public class AxisItem:DaoViewModelBase
+    public class AxisItem : DaoViewModelBase
     {
         private string _title;
 
@@ -26,6 +26,7 @@ namespace IgniteApp.Shell.Set.Models
             get => _title;
             set => SetProperty(ref _title, value);
         }
+
         private string _axisName;
 
         public string AxisName
@@ -49,32 +50,49 @@ namespace IgniteApp.Shell.Set.Models
             get => _axisMaxValue;
             set => SetProperty(ref _axisMaxValue, value);
         }
-
     }
 
     /// <summary>
     /// 模拟数据，后期从数据库获取或者从本地获取
     /// </summary>
-    public class AxisProvider: ObservableCollection<AxisItem>
+    public class AxisProvider : ObservableCollection<AxisItem>
     {
-        List<AxisItem> AxisItems = new List<AxisItem>();
+        private List<AxisItem> AxisItems = new List<AxisItem>();
+
         public AxisProvider()
         {
             _readService = ServiceLocator.GetService<IReadService>();
-            _writeService= ServiceLocator.GetService<IWriteService>();
-            Load();
+            _writeService = ServiceLocator.GetService<IWriteService>();
+            InitializalData();
         }
-      
+
         private readonly IReadService _readService;
         private readonly IWriteService _writeService;
-        protected  void Load()
+
+        public void InitializalData()
+        {
+            var xmlData = _readService.Read(IgniteInfoLocation.AxisInfoPath);
+
+            if (xmlData == null)
+            {
+                return;
+            }
+            _readService.Load(xmlData);
+
+            List<AxisItem> AxisItems = XmlFolderHelper.Deserialize<List<AxisItem>>(xmlData);
+            foreach (var item in AxisItems)
+            {
+                Add(item);
+            }
+        }
+
+        protected void Load()
         {
             try
             {
-               
                 for (int i = 0; i < 5; i++)
                 {
-                    Add(new AxisItem() 
+                    Add(new AxisItem()
                     {
                         Title = "标题" + i,
                         AxisName = "轴" + i,
@@ -82,39 +100,22 @@ namespace IgniteApp.Shell.Set.Models
                         AxisMinValue = i
                     });
                 }
+                var s = this as ObservableCollection<AxisItem>;
+                AxisItems = new List<AxisItem>(s);
+
                 var info = XmlFolderHelper.SerializeXML<List<AxisItem>>(AxisItems);
-                _writeService.WriteString(DeviceInfoLocation.AxisInfoPath, info);
-                var xmlData = _readService.Read(DeviceInfoLocation.AxisInfoPath);
+                _writeService.WriteString(IgniteInfoLocation.AxisInfoPath, info);
+                var xmlData = _readService.Read(IgniteInfoLocation.AxisInfoPath);
 
                 if (xmlData == null)
                 {
                     return;
                 }
                 var doc = XDocument.Parse(xmlData);
-                //  var name=doc.Elements("LoginDto").Select(node=>node.Element("UserName").Value).ToList().FirstOrDefault();
-              /*  List<string> result = doc.Root.Elements().Select(node => node.Value).ToList();
-                var isRememberValue = doc.Element("LoginDto").Element("IsRemember").Value; // 获取元素的值
-
-                // 将字符串转换为bool类型
-                if (bool.TryParse(isRememberValue, out bool isRemember))
-                {
-                    if (isRemember)
-                    {
-                        LoginDto = XmlFolderHelper.Deserialize<LoginDto>(xmlData);
-                    }
-                    else
-                    {
-                        LoginDto = null;
-                    }
-                }*/
             }
             catch (Exception ex)
             {
-               
             }
         }
-
     }
-
-   
 }

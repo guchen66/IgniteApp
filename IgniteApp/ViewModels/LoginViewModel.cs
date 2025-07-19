@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using System.Xml.Linq;
 using IgniteAdmin.Managers.Login;
 using IgniteAdmin.Managers.Transmit;
@@ -16,58 +17,79 @@ using IgniteShared.Globals.System;
 using IT.Tangdao.Framework.DaoAdmin;
 using IT.Tangdao.Framework.DaoAdmin.IServices;
 using IT.Tangdao.Framework.DaoAdmin.Services;
+using IT.Tangdao.Framework.DaoDtos.Globals;
+using IT.Tangdao.Framework.DaoEnums;
 using IT.Tangdao.Framework.Helpers;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 using Stylet;
 using StyletIoC;
+using System.IO;
+using IT.Tangdao.Framework.DaoCommands;
+using IgniteApp.Views;
+using IgniteApp.Interfaces;
+using System.Windows.Navigation;
+using IT.Tangdao.Framework;
+using IT.Tangdao.Framework.DaoEvents;
+using System.Threading;
+using IgniteApp.Extensions;
 
 namespace IgniteApp.ViewModels
 {
-    public class LoginViewModel : WindowViewModelBase
+    public class LoginViewModel : ViewModelBase
     {
         #region--字段--
 
         [Inject]
         private MainViewModel _mainViewModel;
+
+        private INavigationService _navigationService;
         private readonly IWriteService _writeService;
         private readonly IReadService _readService;
         private readonly IWindowManager _windowManager;
+        private readonly IEventAggregator _eventAggregator;
+        private readonly INavigateService _navigateService;
         private readonly IContainer _container;
         private static readonly IDaoLogger Logger = DaoLogger.Get(typeof(LoginViewModel));
-
+        public ICommand RegisterCommand { get; set; }
         #endregion
 
         #region--属性--
 
         private LoginDto _loginDto;
-        
+
         public LoginDto LoginDto
         {
             get => _loginDto ?? (_loginDto = new LoginDto());
             set => SetAndNotify(ref _loginDto, value);
         }
-       
+
         #endregion
 
         #region--ctor--
 
-        public LoginViewModel(IWriteService writeService, IContainer container)
+        public LoginViewModel(IWriteService writeService, IContainer container, INavigationService navigationService, IEventAggregator eventAggregator, INavigateService navigateService)
         {
             _writeService = writeService;
             _readService = ServiceLocator.GetService<IReadService>();
             _windowManager = ServiceLocator.GetService<IWindowManager>();
             _container = container;
+            _navigationService = navigationService;
+            _eventAggregator = eventAggregator;
+            RegisterCommand = MinidaoCommand.Create(ExecuteRegister);
+            _navigateService = navigateService;
         }
 
         #endregion
 
         #region--方法--
+
         /// <summary>
         /// 登录
         /// </summary>
-        public void ExecuteLogin() 
+        public void ExecuteLogin()
         {
-           
-            if (LoginDto.UserName=="Admin")
+            if (LoginDto.UserName == "Admin")
             {
                 ExecuteAdminLogin();
             }
@@ -109,6 +131,7 @@ namespace IgniteApp.ViewModels
             _windowManager.ShowWindow(_mainViewModel);
             RequestClose();
         }
+
         /// <summary>
         /// 退出
         /// </summary>
@@ -122,12 +145,11 @@ namespace IgniteApp.ViewModels
         /// </summary>
         public void ExecuteRememberPwd()
         {
-            if (LoginDto.UserName=="Admin")
+            if (LoginDto.UserName == "Admin")
             {
                 LoginDto.IsAdmin = true;
             }
-            var info = XmlFolderHelper.SerializeXML<LoginDto>(LoginDto);         
-            _writeService.WriteString(LoginInfoLocation.LoginPath, info);
+            var info = XmlFolderHelper.SerializeXML<LoginDto>(LoginDto);
         }
 
         /// <summary>
@@ -140,14 +162,15 @@ namespace IgniteApp.ViewModels
             {
                 var xmlData = _readService.Read(LoginInfoLocation.LoginPath);
 
-                if (xmlData==null)
+                if (xmlData == null)
                 {
                     return;
                 }
-                var doc = XDocument.Parse(xmlData);
-              //  var name=doc.Elements("LoginDto").Select(node=>node.Element("UserName").Value).ToList().FirstOrDefault();
-                List<string> result = doc.Root.Elements().Select(node => node.Value).ToList();
-                var isRememberValue = doc.Element("LoginDto").Element("IsRemember").Value; // 获取元素的值
+                _readService.Load(xmlData);
+
+                var isRememberValue = _readService.Current.SelectNode("IsRemember").Value;// 获取元素的值
+                //  var name=doc.Elements("LoginDto").Select(node=>node.Element("UserName").Value).ToList().FirstOrDefault();
+                //  List<string> result = doc.Root.Elements().Select(node => node.Value).ToList();
 
                 // 将字符串转换为bool类型
                 if (bool.TryParse(isRememberValue, out bool isRemember))
@@ -172,6 +195,34 @@ namespace IgniteApp.ViewModels
         {
             Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive).DragMove();
         }
+
+        [Inject]
+        private RegisterViewModel _registerViewModel;
+
+        private void ExecuteRegister()
+        {
+            //RegisterViewModel创建的迟了，所以这里我必须先进行RegisterViewModel的构造，然后进行数据的发送
+            //我使用我自己写的事件聚合器和Stylet自带的都测试一遍，效果相同
+            ITangdaoParameter parameter = new TangdaoParameter();
+            parameter.Add("userName", LoginDto.UserName);
+            parameter.Add("password", LoginDto.Password);
+            parameter.AddCommand<bool?>("close", RequestClose);
+            _navigationService.NavigateToRegister();
+            _eventAggregator.Publish(parameter);
+
+            //DialogParameters dialogParameters = new DialogParameters();
+            //dialogParameters.Add("userName", LoginDto.UserName);
+            //dialogParameters.Add("password", LoginDto.Password);
+
+            //var dialog = _windowManager.ShowDialogEx(_registerViewModel, dialogParameters);
+            //if (dialog.Result.HasValue)
+            //{
+            //    RequestClose();
+            //}
+            //
+            //
+        }
+
         #endregion
     }
 }

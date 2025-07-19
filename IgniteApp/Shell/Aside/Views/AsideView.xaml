@@ -9,9 +9,10 @@
     xmlns:manager="clr-namespace:IgniteAdmin.Managers.Home;assembly=IgniteAdmin"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="https://github.com/canton7/Stylet"
+    xmlns:selector="clr-namespace:IT.Tangdao.Framework.DaoSelectors;assembly=IT.Tangdao.Framework"
     xmlns:user="clr-namespace:IgniteShared.Globals.System;assembly=IgniteShared"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    d:DesignHeight="850"
+    d:DesignWidth="300"
     mc:Ignorable="d">
     <UserControl.Resources>
         <ObjectDataProvider
@@ -19,6 +20,8 @@
             MethodName="ShowCurrentTime"
             ObjectType="{x:Type manager:TimeManager}" />
         <conver:RoleTypeConverter x:Key="RoleConverter" />
+        <conver:ContentToColorConverter x:Key="IsConn" />
+        <conver:DeviceStatusConverter x:Key="StatusConverter" />
         <user:SysLoginInfo x:Key="Login" />
     </UserControl.Resources>
     <Grid>
@@ -32,7 +35,7 @@
                 <Image
                     Width="50"
                     Height="50"
-                    Source="../../../Assets/Images/user.jpg">
+                    Source="{StaticResource UserSource}">
                     <Image.Clip>
                         <EllipseGeometry
                             Center="25,25"
@@ -56,50 +59,56 @@
             </StackPanel>
         </DockPanel>
 
-
         <StackPanel Grid.Row="1">
             <Button
                 Width="100"
                 Height="40"
                 Margin="10"
-                Command="{s:Action ExecuteManual}"
+                Command="{s:Action ExecuteAuto}"
                 Content="自动" />
             <Button
                 Width="100"
                 Height="40"
                 Margin="10"
-                Command="{s:Action ExecuteAuto}"
+                Command="{s:Action ExecuteManual}"
                 Content="手动" />
             <Button
                 Width="100"
                 Height="40"
                 Margin="10"
-                Command="{s:Action ExecuteStartRun}"
-                Content="开始启动" />
+                Command="{s:Action ExecuteInit}"
+                Content="初始化"
+                IsEnabled="{Binding CurrentStatus, Converter={StaticResource StatusConverter}, ConverterParameter=Init}" />
+
+            <Button
+                Width="100"
+                Height="40"
+                Margin="10"
+                Command="{s:Action ExecuteStart}"
+                Content="开始"
+                IsEnabled="{Binding CurrentStatus, Converter={StaticResource StatusConverter}, ConverterParameter=Start}" />
+
+            <Button
+                Width="100"
+                Height="40"
+                Margin="10"
+                Command="{s:Action ExecutePause}"
+                Content="暂停"
+                IsEnabled="{Binding CurrentStatus, Converter={StaticResource StatusConverter}, ConverterParameter=Pause}" />
+
             <Button
                 Width="100"
                 Height="40"
                 Margin="10"
                 Command="{s:Action ExecuteStop}"
-                Content="暂停" />
-            <Button
-                Width="100"
-                Height="40"
-                Margin="10"
-                Command="{s:Action ExecuteStep}"
-                Content="步进" />
-            <Button
-                Width="100"
-                Height="40"
-                Margin="10"
-                Command="{s:Action ExecuteInit}"
-                Content="初始化" />
+                Content="停止"
+                IsEnabled="{Binding CurrentStatus, Converter={StaticResource StatusConverter}, ConverterParameter=Stop}" />
         </StackPanel>
         <StackPanel
             Grid.Row="2"
             HorizontalAlignment="Center"
             VerticalAlignment="Center">
-            <TextBlock Margin="10" Text="{Binding CurrentTime}" />
+            <TextBlock Text="{Binding Source={x:Static selector:DateTimeSelector.Instance}, Path=CurrentDate, StringFormat='yyyy-MM-dd HH:mm:ss'}" />
         </StackPanel>
     </Grid>
 </UserControl>

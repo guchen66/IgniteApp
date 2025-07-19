@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace IgniteApp.Dialogs.ViewModels
 {
-    public class SafePopupViewModel: WindowViewModelBase
+    public class SafePopupViewModel: ViewModelBase
     {
         public bool IsShould;
 

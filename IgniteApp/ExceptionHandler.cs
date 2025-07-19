@@ -63,6 +63,7 @@ namespace IgniteApp
                         MessageBoxButton.OK,
                         MessageBoxImage.Error);
                     break;
+
                 case NotSupportedException _:
                     MessageBox.Show(
                         "Sorry! The feature has NOT been SUPPORTED. Please wait for the next version. ",
@@ -70,6 +71,7 @@ namespace IgniteApp
                         MessageBoxButton.OK,
                         MessageBoxImage.Error);
                     break;
+
                 default:
                     var result = MessageBox.Show(
                         $"Sorry! An uncaught EXCEPTION occurred. {Environment.NewLine}" +
@@ -78,7 +80,7 @@ namespace IgniteApp
                         "Fatal",
                         MessageBoxButton.YesNo,
                         MessageBoxImage.Error);
-                  
+
                     if (result == MessageBoxResult.Yes)
                     {
                         Process.Start(IgniteLocation.Logs);
@@ -86,7 +88,7 @@ namespace IgniteApp
 
                     break;
             }
-          //  ProcessController.Restart(-1);
+            //  ProcessController.Restart(-1);
         }
     }
 }

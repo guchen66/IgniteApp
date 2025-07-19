@@ -62,8 +62,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="IT.Tangdao.Framework, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\IT.Tangdao.Framework.3.0.7\lib\net48\IT.Tangdao.Framework.dll</HintPath>
+    <Reference Include="IT.Tangdao.Framework, Version=3.0.1.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\nuget\MyPackages\IT.Tangdao.Framework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -112,18 +113,22 @@
     <Compile Include="Dtos\ProductDto.cs" />
     <Compile Include="Dtos\RecipeDto.cs" />
     <Compile Include="Dtos\StaticticDto.cs" />
+    <Compile Include="Entitys\Common\ColorInfo.cs" />
     <Compile Include="Entitys\EntityBase.cs" />
     <Compile Include="Entitys\MaterialInfo.cs" />
     <Compile Include="Entitys\ProductInfo.cs" />
     <Compile Include="Entitys\RecipeInfo.cs" />
     <Compile Include="Entitys\StaticticInfo.cs" />
-    <Compile Include="Globals\Local\DeviceInfoLocation.cs" />
+    <Compile Include="Enums\SelectModes.cs" />
+    <Compile Include="Extensions\LoggerExtensions.cs" />
     <Compile Include="Globals\Local\IgniteLocation.cs" />
     <Compile Include="Globals\Local\LoginInfoLocation.cs" />
-    <Compile Include="Globals\Local\UserInfoLocation.cs" />
+    <Compile Include="Globals\Local\IgniteInfoLocation.cs" />
     <Compile Include="Globals\System\SysLoginInfo.cs" />
     <Compile Include="Globals\System\SysPlcInfo.cs" />
+    <Compile Include="Globals\System\SysProcessInfo.cs" />
     <Compile Include="Globals\System\SysTempAndHum.cs" />
+    <Compile Include="Globals\System\SysTest.cs" />
     <Compile Include="Models\PlcConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

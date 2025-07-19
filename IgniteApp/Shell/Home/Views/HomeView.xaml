@@ -25,7 +25,7 @@
         <ListBox
             x:Name="list"
             Height="40"
-            ItemsSource="{Binding HomeMenuItems}" 
+            ItemsSource="{Binding HomeMenuItems}"
             Style="{DynamicResource StackPanelHorizontalListBox}">
             <ListBox.ItemTemplate>
                 <DataTemplate>

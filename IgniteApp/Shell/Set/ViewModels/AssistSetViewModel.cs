@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IgniteApp.Shell.Set.ViewModels
 {
-    public class AssistSetViewModel:ControlViewModelBase
+    public class AssistSetViewModel:ViewModelBase
     {
 		/// <summary>
 		/// 高对比度
