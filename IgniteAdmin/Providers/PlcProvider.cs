@@ -1,12 +1,19 @@
 ﻿using AutoMapper;
 using IgniteDevices;
+using IgniteDevices.Connections;
+using IgniteDevices.Core.Models.Results;
 using IgniteDevices.PLC;
+using IgniteDevices.PLC.Services;
+using IgniteShared.Extensions;
 using IgniteShared.Globals.System;
 using IgniteShared.Models;
 using IT.Tangdao.Framework.DaoAdmin;
 using IT.Tangdao.Framework.DaoDtos.Options;
 using IT.Tangdao.Framework.DaoEnums;
 using IT.Tangdao.Framework.DaoIoc;
+using IT.Tangdao.Framework.Extensions;
+using Modbus.Device;
+using Stylet;
 using StyletIoC;
 using System;
 using System.Collections.Generic;
@@ -18,62 +25,39 @@ using System.Threading.Tasks;
 namespace IgniteAdmin.Providers
 {
     public class PlcProvider : IPlcProvider
-    {   
-        public PlcClient Client { get; set; }
-        public PlcProvider()
-        {
-            PlcIocService.RegisterPlcServer(new PlcOption()
-            {
-                IsAutoConnection = true,
-                PlcIpAddress = "127.0.0.1",
-                Port = "502",
-                PlcType = PlcType.Siemens
+    {
+        private static readonly IDaoLogger Logger = DaoLogger.Get(typeof(PlcProvider));
+        private ConnectionContext _context;
+        public ConnectionContext Context => _context;
 
-            });
-        }
-        public IPlcBuilder Builder()
+        public PlcProvider(ConnectionContext context)
         {
-           
-           
-            throw new NotImplementedException();
+            _context = context;
         }
 
-
-        private readonly MapperConfiguration _config;
-        public PlcProvider(IContainer container)
+        public PlcResult ConnectionSiglePLC()
         {
-            _config = new MapperConfiguration(configure =>
-            {
-                // 使用显式类型转换来调用正确的Get方法
-                configure.ConstructServicesUsing(type => (object)container.Get(type));
-                configure.AddMaps("IgniteAdmin");
-            });
-        }
-        public PlcBackResult ConnectionSiglePLC()
-        {
+            var plcResult = new PlcResult();
             try
             {
-                PlcResult = new PlcBackResult();
-                TcpClient tcpClient = new TcpClientWithTimeout(SysPlcInfo.IP, SysPlcInfo.Port, 1000).Connect();      //超时时间1秒
-                if (!tcpClient.Connected)
-                {
-                    PlcResult.Message = "连接失败.";
-                    PlcResult.IsSuccess = false;
-                    return PlcResult;
-                }
+                Logger.WriteLocal("开始PLC连接流程");
+                var result = Context.Connect();
 
-                // 创建Modbus连接
-              
-                PlcResult.IsSuccess = true;
-                PlcResult.Message = "连接成功.";
+                plcResult.IsSuccess = result.IsSuccess;
+                plcResult.Message = result.Message;
+
+                Logger.WriteLocal(result.IsSuccess
+                    ? "PLC连接成功"
+                    : $"PLC连接失败: {result.Message}");
             }
             catch (Exception ex)
             {
-                PlcResult.Message = $"连接失败.{ex.Message}";
-                PlcResult.IsSuccess = false;
+                plcResult.IsSuccess = false;
+                plcResult.Message = $"连接异常: {ex.Message}";
+                Logger.WriteLocal($"PLC连接异常: {ex.Message}");
             }
-            return PlcResult;
+
+            return plcResult;
         }
-        public PlcBackResult PlcResult { get; set; }   //PLC的返回结果
     }
 }

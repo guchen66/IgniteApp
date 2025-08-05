@@ -62,7 +62,7 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="IT.Tangdao.Framework, Version=3.0.1.0, Culture=neutral, processorArchitecture=AMD64">
+    <Reference Include="IT.Tangdao.Framework, Version=3.0.13.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\nuget\MyPackages\IT.Tangdao.Framework.dll</HintPath>
     </Reference>
@@ -119,8 +119,10 @@
     <Compile Include="Entitys\ProductInfo.cs" />
     <Compile Include="Entitys\RecipeInfo.cs" />
     <Compile Include="Entitys\StaticticInfo.cs" />
+    <Compile Include="Enums\ConnectionType.cs" />
     <Compile Include="Enums\SelectModes.cs" />
     <Compile Include="Extensions\LoggerExtensions.cs" />
+    <Compile Include="Globals\Common\TextStatus.cs" />
     <Compile Include="Globals\Local\IgniteLocation.cs" />
     <Compile Include="Globals\Local\LoginInfoLocation.cs" />
     <Compile Include="Globals\Local\IgniteInfoLocation.cs" />
@@ -148,6 +150,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="App.config" />
+    <None Include="Configures\appsetting.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Db\demo.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

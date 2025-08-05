@@ -1,5 +1,6 @@
 ﻿using HandyControl.Tools.Extension;
 using IgniteApp.Bases;
+using IgniteApp.Common;
 using IgniteApp.Extensions;
 using IgniteApp.Interfaces;
 using IgniteApp.Shell.Maintion.Views;
@@ -22,7 +23,7 @@ using IContainer = StyletIoC.IContainer;
 
 namespace IgniteApp.ViewModels
 {
-    public class RegisterViewModel : ViewModelBase, IHandle<ITangdaoParameter>, IHaveDialogParameters
+    public class RegisterViewModel : ViewModelBase, IHandle<ITangdaoParameter>, IDialogProvider
     {
         private INavigationService _navigationService;
 

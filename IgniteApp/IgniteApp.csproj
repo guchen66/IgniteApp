@@ -70,7 +70,7 @@
     <Reference Include="HandyControl, Version=3.5.1.0, Culture=neutral, PublicKeyToken=45be8712787a1e5b, processorArchitecture=MSIL">
       <HintPath>..\packages\HandyControl.3.5.1\lib\net48\HandyControl.dll</HintPath>
     </Reference>
-    <Reference Include="IT.Tangdao.Framework, Version=3.0.1.0, Culture=neutral, processorArchitecture=AMD64">
+    <Reference Include="IT.Tangdao.Framework, Version=3.0.13.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\nuget\MyPackages\IT.Tangdao.Framework.dll</HintPath>
     </Reference>
@@ -185,6 +185,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Bases\BaseDeviceViewModel.cs" />
     <Compile Include="Bases\BindViewMide.cs" />
     <Compile Include="Bases\NavigatViewModel.cs" />
     <Compile Include="Bases\ViewModelBase.cs" />
@@ -193,28 +194,41 @@
     <Compile Include="Behaviors\ProgressButtonExtension.cs" />
     <Compile Include="Behaviors\ShapeBehavior.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Common\AlarmPopupManager.cs" />
     <Compile Include="Common\AlarmPopupNotifier.cs" />
     <Compile Include="Common\AlarmPublisher.cs" />
     <Compile Include="Common\AsyncTaskManager.cs" />
+    <Compile Include="Common\DialogParameters.cs" />
+    <Compile Include="Common\DialogResult.cs" />
     <Compile Include="Common\Enums\RunStatus.cs" />
     <Compile Include="Common\IgniteEventHandler.cs" />
     <Compile Include="Common\MenuList.cs" />
+    <Compile Include="Common\ReadOnlyMenuItemManager.cs" />
     <Compile Include="Converters\BoolToColorConverter.cs" />
     <Compile Include="Converters\ContentToColorConverter.cs" />
     <Compile Include="Converters\DeviceStatusConverter.cs" />
     <Compile Include="Converters\GetWindowExtension.cs" />
     <Compile Include="Converters\IdConverter.cs" />
+    <Compile Include="Converters\NullToBoolConverter.cs" />
+    <Compile Include="Converters\RecipeUnlockConverter.cs" />
     <Compile Include="Converters\RoleTypeConverter.cs" />
+    <Compile Include="Converters\SingleStateToBoolConverter.cs" />
+    <Compile Include="Converters\StringArrayTypeConverter.cs" />
     <Compile Include="Converters\StringToImageConverter.cs" />
     <Compile Include="Dialogs\ViewModels\AddRecipeViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\AlarmPopupViewModel.cs" />
+    <Compile Include="Dialogs\ViewModels\ImageInfoCardViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\SafePopupViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\SetCalibrationParameterViewModel.cs" />
+    <Compile Include="Dialogs\ViewModels\TestViewModel.cs" />
     <Compile Include="Dialogs\Views\AddRecipeView.xaml.cs">
       <DependentUpon>AddRecipeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\Views\AlarmPopupView.xaml.cs">
       <DependentUpon>AlarmPopupView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Views\ImageInfoCardView.xaml.cs">
+      <DependentUpon>ImageInfoCardView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\Views\SafePopupView.xaml.cs">
       <DependentUpon>SafePopupView.xaml</DependentUpon>
@@ -222,10 +236,20 @@
     <Compile Include="Dialogs\Views\SetCalibrationParameterView.xaml.cs">
       <DependentUpon>SetCalibrationParameterView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\Views\TestView.xaml.cs">
+      <DependentUpon>TestView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Events\CloseAlarmPopupEvent.cs" />
+    <Compile Include="Events\ImageInfoTranEvent.cs" />
     <Compile Include="Events\NavigateToLoginEvent.cs" />
     <Compile Include="Events\NavigateToRegisterEvent.cs" />
     <Compile Include="ExceptionHandler.cs" />
+    <Compile Include="Extensions\BoolExtensions.cs" />
+    <Compile Include="Extensions\BoolToStringModeExtension.cs" />
+    <Compile Include="Extensions\IDialogProvider.cs" />
+    <Compile Include="Extensions\SelectModeExtension.cs" />
     <Compile Include="Extensions\StyleIocExtensions.cs" />
+    <Compile Include="Extensions\WindowManagerExtensions.cs" />
     <Compile Include="Interfaces\IAppConfigProvider.cs" />
     <Compile Include="Interfaces\INavigateEntry.cs" />
     <Compile Include="Interfaces\INavigateRoute.cs" />
@@ -279,8 +303,14 @@
     <Compile Include="Shell\Home\Views\_404View.xaml.cs">
       <DependentUpon>_404View.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Shell\Maintion\Args\ElectricityArgs.cs" />
+    <Compile Include="Shell\Maintion\Args\UsualArgs.cs" />
+    <Compile Include="Shell\Maintion\Models\ElectAdapter.cs" />
     <Compile Include="Shell\Maintion\Models\ElectricityModel.cs" />
     <Compile Include="Shell\Maintion\Models\ElectStatus.cs" />
+    <Compile Include="Shell\Maintion\Models\IElectService.cs" />
+    <Compile Include="Shell\Maintion\Services\DeviceMediator.cs" />
+    <Compile Include="Shell\Maintion\Services\IDeviceObserver.cs" />
     <Compile Include="Shell\Maintion\ViewModels\ElectViewModel.cs" />
     <Compile Include="Shell\Maintion\ViewModels\LightViewModel.cs" />
     <Compile Include="Shell\Maintion\ViewModels\MaintainViewModel.cs" />
@@ -330,12 +360,16 @@
     </Compile>
     <Compile Include="Shell\ProcessParame\Models\CalibrationMenuItem.cs" />
     <Compile Include="Shell\ProcessParame\Models\HistoryDataManager.cs" />
-    <Compile Include="Shell\ProcessParame\Models\ITaskController.cs" />
-    <Compile Include="Shell\ProcessParame\Models\ITaskService.cs" />
     <Compile Include="Shell\ProcessParame\Models\MotionCalibrationModel.cs" />
     <Compile Include="Shell\ProcessParame\Models\OffsetModel.cs" />
+    <Compile Include="Shell\ProcessParame\Models\OffsetModelManager.cs" />
     <Compile Include="Shell\ProcessParame\Models\TaskContext.cs" />
     <Compile Include="Shell\ProcessParame\Models\TaskState.cs" />
+    <Compile Include="Shell\ProcessParame\Services\ITaskController.cs" />
+    <Compile Include="Shell\ProcessParame\Services\ITaskService.cs" />
+    <Compile Include="Shell\ProcessParame\Services\LocalCalibrationService.cs" />
+    <Compile Include="Shell\ProcessParame\Services\TaskController.cs" />
+    <Compile Include="Shell\ProcessParame\Services\TaskService.cs" />
     <Compile Include="Shell\ProcessParame\ViewModels\AccuracyOffsetViewModel.cs" />
     <Compile Include="Shell\ProcessParame\ViewModels\LoadCalibrationViewModel.cs" />
     <Compile Include="Shell\ProcessParame\ViewModels\ParameBaseViewModel.cs" />
@@ -425,7 +459,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="appsetting.json">
+    <None Include="Configure\appsetting.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configure\connection.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
@@ -448,6 +485,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Assets\Styles\BackgroundBrushStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Assets\Styles\CustomDeviceStatusBarStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -479,11 +520,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Dialogs\Views\ImageInfoCardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dialogs\Views\SafePopupView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialogs\Views\SetCalibrationParameterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\Views\TestView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

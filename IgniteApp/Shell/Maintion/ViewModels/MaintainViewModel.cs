@@ -1,4 +1,5 @@
 ﻿using IgniteApp.Bases;
+using IgniteApp.Common;
 using IgniteApp.Extensions;
 using IgniteApp.Interfaces;
 using IgniteApp.Shell.Home.Models;
@@ -19,9 +20,9 @@ namespace IgniteApp.Shell.Maintion.ViewModels
     public class MaintainViewModel : NavigatViewModel, IAppConfigProvider
     {
         public string HandlerName { get; set; } = "MaintainMenu";
-        private BindableCollection<IMenuItem> _maintainMenuList;
+        private IReadOnlyCollection<IMenuItem> _maintainMenuList;
 
-        public BindableCollection<IMenuItem> MaintainMenuList
+        public IReadOnlyCollection<IMenuItem> MaintainMenuList
         {
             get => _maintainMenuList;
             set => SetAndNotify(ref _maintainMenuList, value);
@@ -44,18 +45,8 @@ namespace IgniteApp.Shell.Maintion.ViewModels
             _viewFactory = viewFactory;
             _navigatRoute = navigatRoute;
             _readService = readService;
-
-            //读取AppConfig文件
-            var result = _readService.Current.SelectConfig(HandlerName).Result;
-
-            if (result is Dictionary<string, string> d1)
-            {
-                var lists = d1.TryOrderBy().Select(kvp => new TangdaoMenuItem
-                {
-                    MenuName = kvp.Value,
-                }).ToList();
-                MaintainMenuList = new BindableCollection<IMenuItem>(lists);
-            }
+            //MaintainMenuList = ReadOnlyMenuItemManager.Create(readService, HandlerName);
+            MaintainMenuList = ReadOnlyMenuItemManager.Create2(readService, HandlerName);
 
             this.BindAndInvoke(viewModel => viewModel.SelectedIndex, (obj, args) => DoNavigateToView());
         }

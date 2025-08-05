@@ -37,9 +37,11 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
             set => SetAndNotify(ref _accuracyOffsetList, value);
         }
 
+        private readonly RecipeManager _recipeManager = new RecipeManager();
+        private readonly OffsetCaretaker _caretaker = new OffsetCaretaker();
+
         public AccuracyOffsetViewModel()
         {
-            Name = "1111";
             AccuracyOffsetList = new ObservableCollection<OffsetModel>()
             {
                 new OffsetModel() {Id=1,StartValue=1,EndValue=10,IsXDirty=false,IsYDirty=false, CutType="X1"},
@@ -59,12 +61,9 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
                 new OffsetModel() {Id=15,StartValue=1,EndValue=10, IsXDirty=false,IsYDirty=false,CutType = "Y2"},
                 new OffsetModel() {Id=16,StartValue=1,EndValue=10, IsXDirty=false,IsYDirty=false, CutType = "Y2"},
             };
-        }
 
-        public string[] OffsetList { get; set; } = new string[]
-        {
-            "X1","X2","Y1","Y2"
-        };
+            _recipeManager.CompensationData = AccuracyOffsetList;
+        }
 
         private double _offset;
 
@@ -102,65 +101,22 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
                 item.StartValue -= Offset;
             }
         }
-    }
 
-    [TypeConverter(typeof(OffsetModel))]
-    public class OffsetModelList : DaoViewModelBase
-    {
-        private int _id;
-
-        public int Id
+        public void SaveData()
         {
-            get => _id;
-            set => SetProperty(ref _id, value);
+            _caretaker.Backup(_recipeManager);
+            _recipeManager.SaveRecipe();
         }
 
-        private bool _isXDirty;
-
-        public bool IsXDirty
+        public void Undo()
         {
-            get => _isXDirty;
-            set => SetProperty(ref _isXDirty, value);
+            _caretaker.Undo(_recipeManager);
+            // RaiseErrorsChanged(nameof(AccuracyOffsetList)); // 通知UI更新
         }
 
-        private bool _isYDirty;
-
-        public bool IsYDirty
+        public void DeleteData()
         {
-            get => _isYDirty;
-            set => SetProperty(ref _isYDirty, value);
-        }
-
-        private double _startValue;
-
-        public double StartValue
-        {
-            get => _startValue;
-            set
-            {
-                SetProperty(ref _startValue, value);
-                IsXDirty = true;
-            }
-        }
-
-        private double _endValue;
-
-        public double EndValue
-        {
-            get => _endValue;
-            set
-            {
-                SetProperty(ref _endValue, value);
-                IsYDirty = true;
-            }
-        }
-
-        private string _cutTYpe;
-
-        public string CutType
-        {
-            get => _cutTYpe;
-            set => SetProperty(ref _cutTYpe, value);
+            AccuracyOffsetList.Clear();
         }
     }
 }

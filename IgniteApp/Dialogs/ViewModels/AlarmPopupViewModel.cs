@@ -1,4 +1,7 @@
-﻿using IgniteDevices.PLC;
+﻿using IgniteApp.Events;
+using IgniteDevices.PLC;
+using IgniteShared.Extensions;
+using IT.Tangdao.Framework.DaoAdmin;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -11,12 +14,13 @@ using System.Xml.Linq;
 
 namespace IgniteApp.Dialogs.ViewModels
 {
-    public class AlarmPopupViewModel : Screen
+    public class AlarmPopupViewModel : Screen, IHandle<CloseAlarmPopupEvent>, IHandle<OpenAlarmPopupEvent>
     {
         public string Name { get; }
         public DateTime TriggerTime { get; }
         public ICommand AcknowledgeCommand { get; }
         private bool _isMinimized;
+        private static readonly IDaoLogger Logger = DaoLogger.Get(typeof(AlarmPopupViewModel));
 
         public bool IsMinimized
         {
@@ -24,14 +28,14 @@ namespace IgniteApp.Dialogs.ViewModels
             set => SetAndNotify(ref _isMinimized, value);
         }
 
-        //public AlarmPopupViewModel(AlarmMessage alarm)
-        //{
-        //    Name = alarm.Name;
-        //    TriggerTime = alarm.TriggerTime;
-        //    //AcknowledgeCommand = new RelayCommand(ClosePopup);
-        //}
-        public AlarmPopupViewModel()
+        private IEventAggregator _eventAggregator;
+        private IWindowManager _windowManager;
+
+        public AlarmPopupViewModel(IEventAggregator eventAggregator, IWindowManager windowManager)
         {
+            _eventAggregator = eventAggregator;
+            _windowManager = windowManager;
+            _eventAggregator.Subscribe(this);
         }
 
         private string _currentAlarm;
@@ -69,10 +73,26 @@ namespace IgniteApp.Dialogs.ViewModels
             });
         }
 
-        // 关闭弹窗时调用
-        public void CloseAlarm()
+        public void Handle(CloseAlarmPopupEvent message)
         {
+            Logger.WriteLocal($"关闭前AlarmPopupViewModel状态：{this.ScreenState}");
             this.RequestClose();
+            Logger.WriteLocal($"关闭后AlarmPopupViewModel状态：{this.ScreenState}");
+        }
+
+        public void Handle(OpenAlarmPopupEvent message)
+        {
+            // 确保弹窗未激活时才打开
+            if (this.ScreenState != ScreenState.Active)
+            {
+                _windowManager.ShowWindow(this);
+            }
+        }
+
+        protected override void OnClose()
+        {
+            _eventAggregator.Unsubscribe(this);
+            base.OnClose();
         }
     }
 }

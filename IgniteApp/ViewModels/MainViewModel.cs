@@ -48,25 +48,43 @@ namespace IgniteApp.ViewModels
         // [Inject]
         public readonly AlarmPublisher _alarmPublisher;
 
+        public AlarmPopupManager _alarmPopupManager;
         #endregion
 
         #region--ctor--
 
-        public MainViewModel(IEventAggregator eventAggregator, IWindowManager windowManager, AlarmPublisher alarmPublisher, AlarmPopupNotifier alarmPopupNotifier, AlarmPopupViewModel alarmPopupViewModel)
+        public MainViewModel(IEventAggregator eventAggregator, IWindowManager windowManager, AlarmPublisher alarmPublisher, AlarmPopupNotifier alarmPopupNotifier, AlarmPopupManager alarmPopupManager)
         {
-            //  ActivateItem(HeaderViewModel);
-            //InitException();
             _windowManager = windowManager;
             _eventAggregator = eventAggregator;
             _alarmPublisher = alarmPublisher;
-            _alarmPopupNotifier = alarmPopupNotifier;// new AlarmPopupNotifier(_windowManager);
-            OmronManager.AlarmChenged += OnAlarmChanged;
+            _alarmPopupNotifier = alarmPopupNotifier;
+            _alarmPopupManager = alarmPopupManager;
+            // OmronManager.AlarmChenged += OnAlarmChanged;
+            OmronManager.AlarmChenged += OnAlarmChangedPublish;
             _alarmPublisher.Subscribe(_alarmPopupNotifier);
         }
 
+        /// <summary>
+        /// 全局接收PLC报警事件（使用观察者模式）
+        /// </summary>
+        /// <param name="name"></param>
         private void OnAlarmChanged(string name)
         {
             _alarmPublisher.NotifyAlarm(name);
+        }
+
+        /// <summary>
+        /// 全局接收PLC报警事件（使用发布订阅模式）
+        /// </summary>
+        /// <param name="name"></param>
+        private void OnAlarmChangedPublish(string name)
+        {
+            _alarmPopupManager.OpenAlarmPopup();
+
+            Execute.OnUIThread(() => { });
+            Execute.PostToUIThread(() => { });
+            Execute.PostToUIThreadAsync(() => { });
         }
 
         #endregion

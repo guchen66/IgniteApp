@@ -1,4 +1,5 @@
-﻿using IgniteApp.Bases;
+﻿using HandyControl.Controls;
+using IgniteApp.Bases;
 using IgniteApp.Shell.Monitor.Models;
 using Stylet;
 using System;
@@ -11,17 +12,9 @@ namespace IgniteApp.Shell.Monitor.ViewModels
 {
     public class IOMonViewModel : ViewModelBase
     {
-        private string[] _selectedMode;
+        private int _selectItem;
 
-        public string[] SelectedMode
-        {
-            get => _selectedMode;
-            set => SetAndNotify(ref _selectedMode, value);
-        }
-
-        private string _selectItem;
-
-        public string SelectItem
+        public int SelectItem
         {
             get => _selectItem;
             set => SetAndNotify(ref _selectItem, value);
@@ -37,17 +30,23 @@ namespace IgniteApp.Shell.Monitor.ViewModels
 
         public IOMonViewModel()
         {
-            SelectedMode = new string[]
-            {
-                "全部","Load","UpLoad"
-            };
-
             this.Bind(viewModel => viewModel.SelectItem, (obj, sender) => DoExecute());
         }
 
         private void DoExecute()
         {
-            var s1 = SelectItem;
+            // var s1 = SelectItem;
+        }
+
+        public void Search(string selectedItem)
+        {
+            MessageBox.Show(selectedItem);
+        }
+
+        protected override void OnActivate()
+        {
+            base.OnActivate();
+            // SelectItem = 0;
         }
     }
 }

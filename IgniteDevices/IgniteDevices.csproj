@@ -32,11 +32,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="IT.Tangdao.Framework, Version=3.0.13.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\nuget\MyPackages\IT.Tangdao.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NModbus4, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NModbus4.2.1.0\lib\net40\NModbus4.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -51,10 +62,24 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connections\ConnectionContext.cs" />
+    <Compile Include="Connections\ConnectionResult.cs" />
+    <Compile Include="Connections\Interfaces\IConnectionState.cs" />
+    <Compile Include="Connections\SerialState.cs" />
+    <Compile Include="Connections\TcpState.cs" />
+    <Compile Include="Core\Interfaces\IDeviceResult.cs" />
+    <Compile Include="Core\Models\ConnectionData.cs" />
+    <Compile Include="Core\Models\PlcData.cs" />
+    <Compile Include="Core\Models\Results\DeviceResult.cs" />
+    <Compile Include="Core\Models\Results\PlcResult.cs" />
     <Compile Include="DeviceGroupService.cs" />
     <Compile Include="PLC\AlarmMessage.cs" />
     <Compile Include="PLC\OmronManager.cs" />
     <Compile Include="PLC\PlcClient1.cs" />
+    <Compile Include="PLC\Services\IPlcCommunicator.cs" />
+    <Compile Include="PLC\Services\IPlcConfigService.cs" />
+    <Compile Include="PLC\Services\PlcModbusCommunicator .cs" />
+    <Compile Include="PLC\Services\PlcConfigService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -36,5 +36,10 @@ namespace IgniteShared.Globals.Local
         ///注意操作SaveFileDialog的时候使用反斜杠，否则报错System.ArgumentException:“值不在预期的范围内
         /// </summary>
         public const string CameraPhotoPath = "E:\\IgniteDatas\\Images";
+
+        /// <summary>
+        /// Excel模板地址
+        /// </summary>
+        public const string TempframeworkPath = "E://IgniteDatas//Framework";
     }
 }

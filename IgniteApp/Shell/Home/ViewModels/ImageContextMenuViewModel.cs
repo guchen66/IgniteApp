@@ -14,14 +14,105 @@ using System.IO;
 using System.Windows.Media.Imaging;
 using HandyControl.Controls;
 using IgniteShared.Globals.Local;
+using Stylet;
+using IgniteApp.Events;
+using IgniteApp.Dialogs.ViewModels;
+using StyletIoC;
 
 namespace IgniteApp.Shell.Home.ViewModels
 {
-    public class ImageContextMenuViewModel:ViewModelBase
+    public class ImageContextMenuViewModel : ViewModelBase
     {
-        public ImageContextMenuViewModel()
+        public ImageContextMenuViewModel(IWindowManager windowManager, IEventAggregator eventAggregator)
         {
+            _windowManager = windowManager;
+            _eventAggregator = eventAggregator;
             SaveImageCommand = new TangdaoCommand<ImageSource>(ExecuteSaveImage);
+            GetImageInfoCommand = new TangdaoCommand<ImageSource>(ExecuteGetImageInfo);
+        }
+
+        private void ExecuteGetImageInfo(ImageSource imageSource)
+        {
+            if (imageSource == null) return;
+
+            try
+            {
+                string filePath = string.Empty;
+                long fileSize = 0;
+                DateTime? creationTime = null;
+                DateTime? lastWriteTime = null;
+                Size imageSize = Size.Empty;
+                if (imageSource is BitmapImage bitmapImage && bitmapImage.UriSource != null)
+                {
+                    // bitmapImage.BaseUri
+                }
+                // 处理基于文件的图像（如从文件加载的BitmapImage）
+                //if (imageSource is BitmapImage bitmapImage && bitmapImage.UriSource != null)
+                //{
+                //    filePath = bitmapImage.UriSource.LocalPath;
+                //    var fileInfo = new FileInfo(filePath);
+
+                //    fileSize = fileInfo.Length;
+                //    creationTime = fileInfo.CreationTime;
+                //    lastWriteTime = fileInfo.LastWriteTime;
+
+                //    // 获取实际图像尺寸
+                //    using (var img = System.Drawing.Image.FromFile(filePath))
+                //    {
+                //        imageSize = img.Size;
+                //    }
+                //}
+                //// 处理其他可能的ImageSource类型（如MemoryStream）
+                //else if (imageSource is BitmapFrame bitmapFrame)
+                //{
+                //    // 尝试获取文件路径（如果是从文件加载的）
+                //    if (bitmapFrame.Decoder is BitmapDecoder decoder &&
+                //        decoder.Frames.Count > 0 &&
+                //        decoder.Frames[0] is BitmapFrame frame)
+                //    {
+                //        filePath = frame.ToString(); // 可能是URI
+
+                //        if (Uri.TryCreate(filePath, UriKind.Absolute, out var uri) && uri.IsFile)
+                //        {
+                //            filePath = uri.LocalPath;
+                //            var fileInfo = new FileInfo(filePath);
+
+                //            fileSize = fileInfo.Length;
+                //            creationTime = fileInfo.CreationTime;
+                //            lastWriteTime = fileInfo.LastWriteTime;
+                //        }
+                //    }
+
+                //    // 获取图像尺寸（即使没有文件路径）
+                //    imageSize = new Size(bitmapFrame.PixelWidth, bitmapFrame.PixelHeight);
+                //}
+                ImageInfoTranEvent imageInfoTranEvent = new ImageInfoTranEvent()
+                {
+                    FilePath = filePath,
+                    FileName = "Memory Image",
+                    FileSize = fileSize.ToString(),
+                };
+                // 组装信息对象
+                //var imageInfo = new
+                //{
+                //    FileName = !string.IsNullOrEmpty(filePath) ? Path.GetFileName(filePath) : "Memory Image",
+                //    FilePath = filePath,
+                //    FileSize = fileSize,
+                //    FileSizeKB = fileSize > 0 ? fileSize / 1024 : 0,
+                //    Dimensions = $"{imageSize.Width} x {imageSize.Height}",
+                //    CreationTime = creationTime,
+                //    LastWriteTime = lastWriteTime
+                //};
+                // ImageInfoCardViewModel = ServiceLocator.GetService<ImageInfoCardViewModel>();
+                //WindowManager = ServiceLocator.GetService<IWindowManager>();
+                _windowManager.ShowWindow(ImageInfoCardViewModel);
+                _eventAggregator.Publish(imageInfoTranEvent);
+            }
+            catch (Exception ex)
+            {
+                // 处理异常（记录日志或显示错误）
+                Console.WriteLine($"获取图片信息失败: {ex.Message}");
+            }
         }
 
         private void ExecuteSaveImage(ImageSource imageSource)
@@ -39,7 +130,7 @@ namespace IgniteApp.Shell.Home.ViewModels
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
                 saveFileDialog.Filter = "JPEG Image|*.jpg|PNG Image|*.png|Bitmap Image|*.bmp";
                 saveFileDialog.Title = "保存图片";
-              
+
                 saveFileDialog.InitialDirectory = openFilePath;
                 string currentTime = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
                 saveFileDialog.FileName = currentTime;
@@ -48,7 +139,7 @@ namespace IgniteApp.Shell.Home.ViewModels
                 {
                     // 获取文件完整路径
                     string filename = saveFileDialog.FileName;
-                 
+
                     // 根据文件扩展名选择编码器
                     BitmapEncoder encoder;
                     if (Path.GetExtension(filename).ToLower() == ".jpg")
@@ -72,7 +163,10 @@ namespace IgniteApp.Shell.Home.ViewModels
                         MessageBox.Success("保存成功");
                     }
                 }
-              
+                else
+                {
+                    MessageBox.Success("保存图片已取消");
+                }
             }
             else
             {
@@ -98,12 +192,14 @@ namespace IgniteApp.Shell.Home.ViewModels
             }
             System.Runtime.InteropServices.Marshal.Copy(rgbValues, 0, ptr, bytes);
             curBitmap.UnlockBits(bmpData);
-
         }
 
-       
-        public ICommand SaveImageCommand {  get; set; }
+        public ICommand SaveImageCommand { get; set; }
+        public ICommand GetImageInfoCommand { get; set; }
+        public IEventAggregator _eventAggregator { get; set; }
+        public IWindowManager _windowManager { get; set; }
 
-
+        [Inject]
+        public ImageInfoCardViewModel ImageInfoCardViewModel { get; set; }
     }
 }

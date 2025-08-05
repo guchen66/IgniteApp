@@ -1,4 +1,5 @@
 ﻿using IgniteApp.Bases;
+using IgniteApp.Common;
 using IgniteApp.Extensions;
 using IgniteApp.Interfaces;
 using IgniteApp.Shell.Home.Models;
@@ -18,9 +19,9 @@ namespace IgniteApp.Shell.Monitor.ViewModels
     public class MonitorViewModel : NavigatViewModel, IAppConfigProvider
     {
         public string HandlerName { get; set; } = "MonitorMenu";
-        private BindableCollection<IMenuItem> _monitorMenuList;
+        private IReadOnlyCollection<IMenuItem> _monitorMenuList;
 
-        public BindableCollection<IMenuItem> MonitorMenuList
+        public IReadOnlyCollection<IMenuItem> MonitorMenuList
         {
             get => _monitorMenuList;
             set => SetAndNotify(ref _monitorMenuList, value);
@@ -43,17 +44,7 @@ namespace IgniteApp.Shell.Monitor.ViewModels
             _viewFactory = viewFactory;
             _navigatRoute = navigatRoute;
             _readService = readService;
-            //字典转列表
-            var result = _readService.Current.SelectConfig(HandlerName).Result;
-
-            if (result is Dictionary<string, string> d1)
-            {
-                var lists = d1.TryOrderBy().Select(kvp => new TangdaoMenuItem
-                {
-                    MenuName = kvp.Value,
-                }).ToList();
-                MonitorMenuList = new BindableCollection<IMenuItem>(lists);
-            }
+            MonitorMenuList = ReadOnlyMenuItemManager.Create2(readService, HandlerName);
 
             this.BindAndInvoke(viewModel => viewModel.SelectedIndex, (obj, args) => DoNavigateToView());
         }

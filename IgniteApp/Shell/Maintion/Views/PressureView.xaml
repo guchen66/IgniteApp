@@ -1,12 +1,28 @@
-﻿<UserControl x:Class="IgniteApp.Shell.Maintion.Views.PressureView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:IgniteApp.Shell.Maintion.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+﻿<UserControl
+    x:Class="IgniteApp.Shell.Maintion.Views.PressureView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:IgniteApp.Shell.Maintion.Views"
+    xmlns:marup="clr-namespace:IgniteApp.Extensions"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:textStatus="clr-namespace:IgniteShared.Globals.Common;assembly=IgniteShared"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
     <Grid>
-        <TextBlock Text="压力表"/>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <StatusBar VerticalAlignment="Top" Style="{StaticResource CustomStatusBarStyle}">
+            <StatusBarItem>
+                <TextBlock Text="{marup:BoolToStringMode Binding={Binding BoolValue}, FalseValue='{x:Static textStatus:TextStatus.Falied}', TrueValue='{x:Static textStatus:TextStatus.Sucess}'}" />
+            </StatusBarItem>
+            <Separator />
+        </StatusBar>
     </Grid>
 </UserControl>

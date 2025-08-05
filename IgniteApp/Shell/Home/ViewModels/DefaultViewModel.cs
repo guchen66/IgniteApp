@@ -25,6 +25,8 @@ using System.Windows.Media.Imaging;
 using System.Xml.Linq;
 using System.IO;
 using IgniteApp.Common;
+using IgniteApp.Dialogs.ViewModels;
+using StyletIoC;
 
 namespace IgniteApp.Shell.Home.ViewModels
 {
@@ -71,6 +73,9 @@ namespace IgniteApp.Shell.Home.ViewModels
             set => SetAndNotify(ref _imageURI, value);
         }
 
+        [Inject]
+        public ImageContextMenuViewModel ImageContextMenuViewModel { get; set; }
+
         private readonly IMaterialRepository _materialRepository;
         private readonly IProductRepository _productRepository;
         private readonly IReadService _readService;
@@ -98,8 +103,8 @@ namespace IgniteApp.Shell.Home.ViewModels
 
         private void Init()
         {
-            ImageContextMenuViewModel imageContextMenuViewModel = new ImageContextMenuViewModel();
-            imageContextMenuViewModel.CreateGrayImage(ImageURI);
+            //ImageContextMenuViewModel imageContextMenuViewModel = new ImageContextMenuViewModel();
+            //imageContextMenuViewModel.CreateGrayImage(ImageURI);
         }
 
         public void InitData()

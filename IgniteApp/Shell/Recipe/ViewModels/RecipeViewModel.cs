@@ -54,6 +54,16 @@ namespace IgniteApp.Shell.Recipe.ViewModels
             set => SetAndNotify(ref _selectedIndex, value);
         }
 
+        //CurrentIndex
+
+        private int _currentIndex = -1;
+
+        public int CurrentIndex
+        {
+            get => _currentIndex;
+            set => SetAndNotify(ref _currentIndex, value);
+        }
+
         private string _selectedValue;
 
         public string SelectedValue
@@ -111,6 +121,13 @@ namespace IgniteApp.Shell.Recipe.ViewModels
         }
 
         public void ExecuteEdit()
+        {
+            //对CurrentIndex设置默认值为-1，表示程序启动，与所有当前值都不一致
+            //当当前值与选中值一致时，可以解锁
+            CurrentIndex = SelectedIndex;
+        }
+
+        public void ExecuteUpdate()
         {
             var result = _windowManager.ShowDialog(SafePopupViewModel);
             IsEnabled = result.HasValue;

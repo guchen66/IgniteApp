@@ -1,112 +1,133 @@
-﻿<UserControl x:Class="IgniteApp.Shell.Monitor.Views.PlcMonView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:IgniteApp.Shell.Monitor.Views"
-             xmlns:s="https://github.com/canton7/Stylet"
-             xmlns:shared="clr-namespace:IgniteShared.Enums;assembly=IgniteShared"
-             xmlns:daoMarkup="clr-namespace:IT.Tangdao.Framework.DaoConverters;assembly=IT.Tangdao.Framework"
-             mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800">
+﻿<UserControl
+    x:Class="IgniteApp.Shell.Monitor.Views.PlcMonView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:daoMarkup="clr-namespace:IT.Tangdao.Framework.DaoConverters;assembly=IT.Tangdao.Framework"
+    xmlns:local="clr-namespace:IgniteApp.Shell.Monitor.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:s="https://github.com/canton7/Stylet"
+    xmlns:shared="clr-namespace:IgniteShared.Enums;assembly=IgniteShared"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
     <UserControl.Resources>
 
         <daoMarkup:EnumBindSourceValueConverter x:Key="mode" EnumType="{x:Type shared:SelectModes}" />
     </UserControl.Resources>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="200" />
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="筛选" Margin="10 10" />
-            <ComboBox Grid.Column="1" ItemsSource="{Binding Source={StaticResource mode} }" SelectedItem="{Binding SelectedMode}" SelectedIndex="0" />
-            <TextBlock Text="" />
-        </Grid>
-        <DataGrid
-           Name="down"
-           Grid.Row="1"
-           Margin="5"
-           VerticalAlignment="Top"
-           AlternationCount="2"
-           AutoGenerateColumns="False"
-           CanUserAddRows="False"
-           CanUserReorderColumns="False"
-           CanUserResizeColumns="False"
-           CanUserResizeRows="False"
-           CanUserSortColumns="False"
-           IsReadOnly="True"
-           ItemsSource="{Binding PlcMonItems}"
-           RowHeaderWidth="0"
-           SelectionMode="Single">
-            <DataGrid.Columns>
-                <DataGridTextColumn
-                   Width="150"
-                   Binding="{Binding Id}"
-                   Header="Id" />
+    <TabControl>
+        <TabItem Header="PLC连接">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80" />
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Margin="10,10" Text="筛选" />
+                    <ComboBox
+                        Grid.Column="1"
+                        ItemsSource="{Binding Source={StaticResource mode}}"
+                        SelectedIndex="0"
+                        SelectedItem="{Binding SelectedMode}" />
+                    <TextBlock Text="" />
+                </Grid>
+                <DataGrid
+                    Name="down"
+                    Grid.Row="1"
+                    Margin="5"
+                    VerticalAlignment="Top"
+                    AlternationCount="2"
+                    AutoGenerateColumns="False"
+                    CanUserAddRows="False"
+                    CanUserReorderColumns="False"
+                    CanUserResizeColumns="False"
+                    CanUserResizeRows="False"
+                    CanUserSortColumns="False"
+                    IsReadOnly="True"
+                    ItemsSource="{Binding PlcMonItems}"
+                    RowHeaderWidth="0"
+                    SelectionMode="Single">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn
+                            Width="150"
+                            Binding="{Binding Id}"
+                            Header="Id" />
 
-                <DataGridTextColumn
-                   Width="120"
-                   Binding="{Binding Name}"
-                   Header="名称" />
+                        <DataGridTextColumn
+                            Width="120"
+                            Binding="{Binding Name}"
+                            Header="名称" />
 
-                <DataGridTextColumn
-                   Width="*"
-                   Binding="{Binding Status}"
-                   Header="状态" />
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding Status}"
+                            Header="状态" />
 
-                <DataGridTextColumn
-                   Width="120"
-                   Binding="{Binding Remark}"
-                   Header="注释" />
+                        <DataGridTextColumn
+                            Width="120"
+                            Binding="{Binding Remark}"
+                            Header="注释" />
 
-                <!--<DataGridTextColumn
-                   Width="120"
-                   Binding="{Binding CreateTime, StringFormat='yyyy/MM/dd'}"
-                   Header="创建日期" />
+                        <!--<DataGridTextColumn
+                Width="120"
+                Binding="{Binding CreateTime, StringFormat='yyyy/MM/dd'}"
+                Header="创建日期" />
 
-               <DataGridTemplateColumn Width="200" Header="操作">
-                   <DataGridTemplateColumn.CellTemplate>
-                       <DataTemplate>
-                           <StackPanel
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               Orientation="Horizontal">
-                               <Button
-                                   Width="70"
-                                   Margin="0,0,15,0"
-                                   Background="LightGreen"
-                                   Command="{Binding DataContext.UpdateUserCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"
-                                   CommandParameter="{Binding Id}"
-                                   Content="修改"
-                                   FontSize="14"
-                                   Foreground="Black" />
-                               <Button
-                                   Width="70"
-                                   Background="Red"
-                                   Command="{Binding DataContext.DelUserCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"
-                                   CommandParameter="{Binding Id}"
-                                   Content="删除"
-                                   FontSize="14"
-                                   Foreground="Black" />
-                           </StackPanel>
-                       </DataTemplate>
-                   </DataGridTemplateColumn.CellTemplate>
-               </DataGridTemplateColumn>-->
-            </DataGrid.Columns>
-        </DataGrid>
-        <StackPanel Grid.Row="2">
-            <Button Command="{s:Action AutoTriggerAlarm}" Content="触发报警" />
-            <Button Command="{s:Action AutoTriggerAlarm2}" Content="触发报警" />
-            <Button Command="{s:Action AutoTriggerAlarm3}" Content="触发报警" />
-        </StackPanel>
-    </Grid>
+            <DataGridTemplateColumn Width="200" Header="操作">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <StackPanel
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+                            <Button
+                                Width="70"
+                                Margin="0,0,15,0"
+                                Background="LightGreen"
+                                Command="{Binding DataContext.UpdateUserCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"
+                                CommandParameter="{Binding Id}"
+                                Content="修改"
+                                FontSize="14"
+                                Foreground="Black" />
+                            <Button
+                                Width="70"
+                                Background="Red"
+                                Command="{Binding DataContext.DelUserCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"
+                                CommandParameter="{Binding Id}"
+                                Content="删除"
+                                FontSize="14"
+                                Foreground="Black" />
+                        </StackPanel>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>-->
+                    </DataGrid.Columns>
+                </DataGrid>
+                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                    <Button Command="{s:Action AutoTriggerAlarm}" Content="触发报警" />
+                    <Button Command="{s:Action AutoTriggerAlarm2}" Content="触发报警" />
+                    <Button Command="{s:Action AutoTriggerAlarm3}" Content="触发报警" />
+                    <Button Command="{s:Action SolvedAlarm}" Content="清除报警" />
+                </StackPanel>
+            </Grid>
+        </TabItem>
+        <TabItem Header="模拟数据">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBox Width="200" Text="{Binding ReceiveData}" />
+                <Button Grid.Row="1" Content="获取数据" Command="{s:Action GetData}" />
+            </Grid>
+        </TabItem>
+    </TabControl>
 </UserControl>

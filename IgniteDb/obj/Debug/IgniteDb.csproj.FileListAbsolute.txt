@@ -47,3 +47,4 @@ E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\obj\Debug\IgniteDb.csproj.CoreC
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\obj\Debug\IgniteDb.csproj.Up2Date
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\obj\Debug\IgniteDb.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\obj\Debug\IgniteDb.pdb
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteDb\bin\Debug\Configures\appsetting.json

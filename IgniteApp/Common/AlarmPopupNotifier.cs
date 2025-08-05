@@ -1,6 +1,9 @@
 ﻿using IgniteApp.Dialogs.ViewModels;
 using IgniteApp.Dialogs.Views;
 using IgniteDevices.PLC;
+using IgniteShared.Extensions;
+using IT.Tangdao.Framework.DaoAdmin;
+using IT.Tangdao.Framework.DaoEnums;
 using Stylet;
 using StyletIoC;
 using System;
@@ -15,14 +18,13 @@ namespace IgniteApp.Common
     public class AlarmPopupNotifier : IObserver<AlarmMessage>
     {
         private readonly IWindowManager _windowManager;
-
-        //  [Inject]
-        private AlarmPopupViewModel _popupVm;
+        private AlarmPopupViewModel _alarmPopupViewModel;
+        private static readonly IDaoLogger Logger = DaoLogger.Get(typeof(AlarmPopupNotifier));
 
         public AlarmPopupNotifier(IWindowManager windowManager, AlarmPopupViewModel alarmPopupViewModel)
         {
             _windowManager = windowManager;
-            _popupVm = alarmPopupViewModel;
+            _alarmPopupViewModel = alarmPopupViewModel;
         }
 
         public void OnNext(AlarmMessage alarm)
@@ -30,17 +32,20 @@ namespace IgniteApp.Common
             Application.Current.Dispatcher.Invoke(() =>
             {
                 // 更新单例ViewModel的数据
-                _popupVm.UpdateAlarm(alarm);
-                var s1 = _popupVm.ScreenState;
+                Logger.WriteLocal("更新单例ViewModel的数据");
+                _alarmPopupViewModel.UpdateAlarm(alarm);
+
+                Logger.WriteLocal($"打开前AlarmPopupViewModel状态：{_alarmPopupViewModel.ScreenState}");
                 // 如果窗口未显示，则显示（Stylet的Show是非模态的）
-                if (!_popupVm.IsActive)
+                if (!_alarmPopupViewModel.IsActive)
                 {
-                    _windowManager.ShowWindow(_popupVm);
+                    _windowManager.ShowWindow(_alarmPopupViewModel);
+                    Logger.WriteLocal($"打开后AlarmPopupViewModel状态：{_alarmPopupViewModel.ScreenState}");
                 }
                 else
                 {
                     // 显式调用恢复窗口
-                    _popupVm.RequestBringToFront();
+                    _alarmPopupViewModel.RequestBringToFront();
                 }
             });
         }

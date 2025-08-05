@@ -5,12 +5,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IgniteDevices.Core.Models.Results;
+using Modbus.Device;
+using IgniteDevices.Connections;
 
 namespace IgniteAdmin.Providers
 {
     public interface IPlcProvider
     {
-        IPlcBuilder Builder();
-        PlcBackResult ConnectionSiglePLC();
+        ConnectionContext Context { get; }
+
+        PlcResult ConnectionSiglePLC();
     }
 }

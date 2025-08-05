@@ -43,5 +43,27 @@ namespace IgniteApp.Shell.ProcessParame.Models
             get => _endValue;
             set => SetProperty(ref _endValue, value);
         }
+
+        /// <summary>
+        /// 标定时间
+        /// </summary>
+        private string _caliTime;
+
+        public string CaliTime
+        {
+            get => _caliTime;
+            set => SetProperty(ref _caliTime, value);
+        }
+
+        /// <summary>
+        /// 标定结果
+        /// </summary>
+        private bool _result;
+
+        public bool Result
+        {
+            get => _result;
+            set => SetProperty(ref _result, value);
+        }
     }
 }

@@ -48,8 +48,10 @@ namespace IgniteApp.ViewModels
         private readonly IReadService _readService;
         private readonly IWindowManager _windowManager;
         private readonly IEventAggregator _eventAggregator;
-        private readonly INavigateService _navigateService;
+
+        //  private readonly INavigateService _navigateService;
         private readonly IContainer _container;
+
         private static readonly IDaoLogger Logger = DaoLogger.Get(typeof(LoginViewModel));
         public ICommand RegisterCommand { get; set; }
         #endregion
@@ -68,7 +70,7 @@ namespace IgniteApp.ViewModels
 
         #region--ctor--
 
-        public LoginViewModel(IWriteService writeService, IContainer container, INavigationService navigationService, IEventAggregator eventAggregator, INavigateService navigateService)
+        public LoginViewModel(IWriteService writeService, IContainer container, INavigationService navigationService, IEventAggregator eventAggregator)
         {
             _writeService = writeService;
             _readService = ServiceLocator.GetService<IReadService>();
@@ -77,7 +79,7 @@ namespace IgniteApp.ViewModels
             _navigationService = navigationService;
             _eventAggregator = eventAggregator;
             RegisterCommand = MinidaoCommand.Create(ExecuteRegister);
-            _navigateService = navigateService;
+            //   _navigateService = navigateService;
         }
 
         #endregion
@@ -149,7 +151,7 @@ namespace IgniteApp.ViewModels
             {
                 LoginDto.IsAdmin = true;
             }
-            var info = XmlFolderHelper.SerializeXML<LoginDto>(LoginDto);
+            var info = XmlFolderHelper.SerializeXML(LoginDto);
         }
 
         /// <summary>
@@ -160,13 +162,13 @@ namespace IgniteApp.ViewModels
             base.OnActivate();
             try
             {
-                var xmlData = _readService.Read(LoginInfoLocation.LoginPath);
+                _readService.Current.XMLData = _readService.Read(LoginInfoLocation.LoginPath);
 
-                if (xmlData == null)
+                if (_readService.Current.XMLData == null)
                 {
                     return;
                 }
-                _readService.Load(xmlData);
+                _readService.Current.Load();
 
                 var isRememberValue = _readService.Current.SelectNode("IsRemember").Value;// 获取元素的值
                 //  var name=doc.Elements("LoginDto").Select(node=>node.Element("UserName").Value).ToList().FirstOrDefault();
@@ -177,7 +179,7 @@ namespace IgniteApp.ViewModels
                 {
                     if (isRemember)
                     {
-                        LoginDto = XmlFolderHelper.Deserialize<LoginDto>(xmlData);
+                        LoginDto = XmlFolderHelper.Deserialize<LoginDto>(_readService.Current.XMLData);
                     }
                     else
                     {

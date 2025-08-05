@@ -1,5 +1,8 @@
-﻿using Stylet;
+﻿using IgniteDevices.Connections;
+using IgniteDevices.PLC.Services;
+using Stylet;
 using StyletIoC;
+using StyletIoC.Creation;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -19,89 +22,29 @@ namespace IgniteApp.Extensions
             action.Invoke();
             return Bind;
         }
-    }
 
-    public static class WindowManagerExtensions
-    {
-        public static DialogResult ShowDialogEx(this IWindowManager windowManager, object viewModel, DialogParameters parameters = null)
+        public static IInScopeOrWithKeyOrAsWeakBinding ToCustom<T>(this IToAnyService service) where T : IRegistration
         {
-            // 1. 注入输入参数
-            if (viewModel is IHaveDialogParameters dialogAware)
-            {
-                dialogAware.OnDialogOpened(parameters ?? new DialogParameters());
-            }
-
-            // 2. 显示对话框（原生 Stylet）
-            bool? result = windowManager.ShowDialog(viewModel);
-
-            // 3. 获取输出参数
-            var dialogResult = new DialogResult { Result = result };
-            if (viewModel is IHaveDialogParameters dialogAwareOut)
-            {
-                var output = dialogAwareOut.OnDialogClosing();
-                if (output != null)
-                {
-                    foreach (var kvp in output.OutputParameters)
-                    {
-                        dialogResult.AddOutput(kvp.Key, kvp.Value);
-                    }
-                }
-            }
-
-            return dialogResult;
-        }
-    }
-
-    // ViewModel 需实现的接口
-    public interface IHaveDialogParameters
-    {
-        void OnDialogOpened(DialogParameters parameters);
-
-        // 返回输出参数（返回 DialogResult）
-        DialogResult OnDialogClosing();
-    }
-
-    public class DialogResult
-    {
-        private readonly Dictionary<string, object> _outputParameters = new Dictionary<string, object>();
-
-        public bool? Result { get; set; }
-
-        // 添加输出参数
-        public DialogResult AddOutput(string key, object value)
-        {
-            _outputParameters[key] = value;
-            return this;
+            return service.ToFactory(c => c.Get<IRegistration>().GetGenerator()(c));
         }
 
-        // 获取输出参数
-        public T GetOutput<T>(string key, T defaultValue = default)
-        {
-            return _outputParameters.TryGetValue(key, out var value) ? (T)value : defaultValue;
-        }
+        //public static IInScopeOrWithKeyOrAsWeakBinding ToConnectedInstance<T>(this IToAnyService service) where T : class, IDisposable
+        //{
+        //    return (IInScopeOrWithKeyOrAsWeakBinding)service.ToFactory(container =>
+        //    {
+        //        // 获取配置服务
+        //        var configService = container.Get<IPlcConfigService>();
 
-        // 直接访问字典（备用）
-        public IReadOnlyDictionary<string, object> OutputParameters => _outputParameters;
-    }
+        //        // 创建并连接实例
+        //        if (typeof(T) == typeof(ConnectionContext))
+        //        {
+        //            var context = new ConnectionContext(configService.GetConfig());
+        //            context.Connect();
+        //            return context;
+        //        }
 
-    public class DialogParameters
-    {
-        private readonly Dictionary<string, object> _parameters = new Dictionary<string, object>();
-
-        // 添加参数（支持链式调用）
-        public DialogParameters Add(string key, object value)
-        {
-            _parameters[key] = value;
-            return this;
-        }
-
-        // 安全获取参数（泛型 + 默认值）
-        public T GetValue<T>(string key, T defaultValue = default)
-        {
-            return _parameters.TryGetValue(key, out var value) ? (T)value : defaultValue;
-        }
-
-        // 直接访问字典（备用）
-        public IReadOnlyDictionary<string, object> Parameters => _parameters;
+        //        throw new InvalidOperationException($"不支持的类型: {typeof(T).Name}");
+        //    }).InSingletonScope();
+        //}
     }
 }

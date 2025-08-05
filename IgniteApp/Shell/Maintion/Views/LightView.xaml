@@ -9,14 +9,26 @@
     xmlns:conver="clr-namespace:IgniteApp.Converters"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="https://github.com/canton7/Stylet"
+     xmlns:marup="clr-namespace:IgniteApp.Extensions"
+      xmlns:textStatus="clr-namespace:IgniteShared.Globals.Common;assembly=IgniteShared"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
     <UserControl.Resources>
-        <conver:ContentToColorConverter x:Key="bg"/>
+        <conver:ContentToColorConverter x:Key="bg" />
     </UserControl.Resources>
     <Grid>
-        <StackPanel Orientation="Horizontal">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <StatusBar VerticalAlignment="Top" Style="{StaticResource CustomStatusBarStyle}">
+            <StatusBarItem>
+                <TextBlock Text="{marup:BoolToStringMode Binding={Binding BoolValue}, FalseValue='{x:Static textStatus:TextStatus.Falied}', TrueValue='{x:Static textStatus:TextStatus.Sucess}'}" />
+            </StatusBarItem>
+            <Separator />
+        </StatusBar>
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
             <hc:ProgressButton
                 x:Name="pro"
                 Width="180"
@@ -27,8 +39,7 @@
                 Content="0%"
                 Style="{StaticResource ProgressButtonPrimary}" />
 
-            <Button Command="{s:Action Execute}" Width="200" Background="{Binding Content,Converter={StaticResource bg}}"/>
-
+            <Button Command="{s:Action Execute}" Width="200" Background="{Binding Content,Converter={StaticResource bg}}" />
         </StackPanel>
     </Grid>
 </UserControl>

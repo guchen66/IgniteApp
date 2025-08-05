@@ -9,16 +9,8 @@ using System.Threading.Tasks;
 
 namespace IgniteApp.Shell.Monitor.ViewModels
 {
-    public class AxisMonViewModel:ViewModelBase
+    public class AxisMonViewModel : ViewModelBase
     {
-        private string[] _selectedMode;
-
-        public string[] SelectedMode
-        {
-            get => _selectedMode;
-            set => SetAndNotify(ref _selectedMode, value);
-        }
-
         private string _selectItem;
 
         public string SelectItem
@@ -37,11 +29,6 @@ namespace IgniteApp.Shell.Monitor.ViewModels
 
         public AxisMonViewModel()
         {
-            SelectedMode = new string[]
-            {
-                "全部","Load","UpLoad"
-            };
-
             this.Bind(viewModel => viewModel.SelectItem, (obj, sender) => DoExecute());
         }
 

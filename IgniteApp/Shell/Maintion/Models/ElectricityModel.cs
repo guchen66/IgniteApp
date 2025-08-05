@@ -1,4 +1,5 @@
-﻿using IT.Tangdao.Framework.DaoMvvm;
+﻿using IgniteApp.Shell.Maintion.Args;
+using IT.Tangdao.Framework.DaoMvvm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,26 +10,60 @@ namespace IgniteApp.Shell.Maintion.Models
 {
     public class ElectricityModel : DaoViewModelBase
     {
-        public bool IsOverload { get; }
-        public bool IsLow { get; }
-        public double Value { get; }
+        public IElectService IElectService { get; set; }
+        private int _id;
 
-        public ElectricityModel(bool isOverload, bool isLow, double value)
+        public int Id
         {
-            IsOverload = isOverload;
-            IsLow = isLow;
-            Value = value;
+            get => _id;
+            set => SetProperty(ref _id, value);
+        }
+
+        private string _name;
+
+        public string Name
+        {
+            get => _name;
+            set => SetProperty(ref _name, value);
+        }
+
+        private double _currentValue;
+
+        public double CurrentValue
+        {
+            get => _currentValue;
+            set => SetProperty(ref _currentValue, value);
+        }
+
+        private double _range;
+
+        public double Range
+        {
+            get => _range;
+            set => SetProperty(ref _range, value);
+        }
+
+        private bool _isSelected;
+
+        public bool IsSelected
+        {
+            get => _isSelected;
+            set => SetProperty(ref _isSelected, value);
+        }
+
+        private SingleState _status;
+
+        public SingleState Status
+        {
+            get => _status;
+            set => SetProperty(ref _status, value);
         }
     }
 
-    public class ElectricityArgs : EventArgs
+    public enum SingleState
     {
-        public ElectricityModel ElectricityModel { get; set; }
-
-        public ElectricityArgs(ElectricityModel electricityModel)
-        {
-            ElectricityModel = electricityModel;
-        }
+        Disabled = 0,
+        Enabled = 1
     }
 
     public class ElectricityMotion
@@ -40,14 +75,14 @@ namespace IgniteApp.Shell.Maintion.Models
         public void CheckElectricity(ElectricityModel model)
         {
             ElectricityArgs args = new ElectricityArgs(model);
-            if (model.Value > 39)
-            {
-                OverLoad?.Invoke(this, args);
-            }
-            else if (model.Value < 0)
-            {
-                LowLoad?.Invoke(this, args);
-            }
+            //if (model.Value > 39)
+            //{
+            //    OverLoad?.Invoke(this, args);
+            //}
+            //else if (model.Value < 0)
+            //{
+            //    LowLoad?.Invoke(this, args);
+            //}
         }
     }
 }

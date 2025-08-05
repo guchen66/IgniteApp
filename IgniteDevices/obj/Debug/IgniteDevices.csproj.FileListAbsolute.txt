@@ -2,13 +2,15 @@ E:\CSharp Project\ApplyClient\IgniteApp\IgniteDevices\bin\Debug\Db\demo.db
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDevices\bin\Debug\IgniteDevices.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDevices\bin\Debug\IgniteDevices.pdb
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDevices\bin\Debug\IgniteShared.dll
-E:\CSharp Project\ApplyClient\IgniteApp\IgniteDevices\bin\Debug\NModbus4.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDevices\bin\Debug\IT.Tangdao.Framework.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDevices\bin\Debug\Newtonsoft.Json.dll
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteDevices\bin\Debug\NModbus4.dll
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteDevices\bin\Debug\System.ValueTuple.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDevices\bin\Debug\IgniteShared.pdb
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDevices\bin\Debug\IgniteShared.dll.config
-E:\CSharp Project\ApplyClient\IgniteApp\IgniteDevices\bin\Debug\NModbus4.xml
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDevices\bin\Debug\Newtonsoft.Json.xml
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteDevices\bin\Debug\NModbus4.xml
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteDevices\bin\Debug\System.ValueTuple.xml
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDevices\obj\Debug\IgniteDevices.csproj.AssemblyReference.cache
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDevices\obj\Debug\IgniteDevices.Properties.Resources.resources
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDevices\obj\Debug\IgniteDevices.csproj.GenerateResource.cache
@@ -16,3 +18,4 @@ E:\CSharp Project\ApplyClient\IgniteApp\IgniteDevices\obj\Debug\IgniteDevices.cs
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDevices\obj\Debug\IgniteDe.05E68012.Up2Date
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDevices\obj\Debug\IgniteDevices.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDevices\obj\Debug\IgniteDevices.pdb
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteDevices\bin\Debug\Configures\appsetting.json

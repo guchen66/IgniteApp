@@ -1,6 +1,8 @@
 ﻿using HandyControl.Controls;
 using IgniteAdmin.Providers;
 using IgniteApp.Bases;
+using IgniteApp.Dialogs.ViewModels;
+using IgniteApp.Extensions;
 using IgniteApp.Modules;
 using IgniteApp.Shell.Home.Models;
 using IgniteApp.ViewModels;
@@ -57,26 +59,58 @@ namespace IgniteApp.Shell.Footer.ViewModels
         #endregion
 
         #region--ctor--
-        private IWindowManager _WindowManager;
+        private IWindowManager _windowManager;
+        private readonly System.Timers.Timer _statusTimer;
 
         public FooterViewModel(IPlcProvider plcProvider, IWindowManager windowManager)
         {
             _plcProvider = plcProvider;
-            _WindowManager = windowManager;
+            _windowManager = windowManager;
+            // 初始化定时器（间隔1秒，自动重置）
+            _statusTimer = new System.Timers.Timer(1000) { AutoReset = true };
+            _statusTimer.Elapsed += async (s, e) => await CheckPlcStatusAsync();
+            // _statusTimer.Start();
 
+            // 立即执行首次检查
+            // Task.Run(CheckPlcStatusAsync);
             QueryPlcStatus();
         }
 
         #endregion
 
+        private async Task CheckPlcStatusAsync()
+        {
+            var isConnected = _plcProvider.ConnectionSiglePLC().IsSuccess;
+            await Execute.OnUIThreadAsync(() => IsConn = isConnected);
+        }
+
+        public void Dispose()
+        {
+            _statusTimer?.Stop();
+            _statusTimer?.Dispose();
+        }
+
         public void QueryPlcStatus()
         {
+            // 先订阅事件，再执行连接检查
+            _plcProvider.Context.ConnectionStateChanged += Context_ConnectionStateChanged;
+
             Task.Run(() =>
             {
                 IsConn = _plcProvider.ConnectionSiglePLC().IsSuccess;
-
-                // IsConn = true;
             });
+        }
+
+        private void Context_ConnectionStateChanged(object sender, IgniteDevices.Connections.ConnectionStateEventArgs e)
+        {
+            IsConn = _plcProvider.ConnectionSiglePLC().IsSuccess;
+            // Execute.OnUIThreadAsync(() => _plcProvider.Context.IsConnected = e.IsConnected);
+        }
+
+        public void Test()
+        {
+            _windowManager.ShowDialogEx(TestViewModel);
+            // _windowManager.ShowWindow(ImageInfoCardViewModel);
         }
 
         public void OpenEQP()
@@ -84,11 +118,17 @@ namespace IgniteApp.Shell.Footer.ViewModels
         }
 
         [Inject]
+        public TestViewModel TestViewModel { get; set; }
+
+        [Inject]
+        public ImageInfoCardViewModel ImageInfoCardViewModel { get; set; }
+
+        [Inject]
         public TTForgeViewModel tTForgeViewModel { get; set; }
 
         public void OpenTTView()
         {
-            _WindowManager.ShowWindow(tTForgeViewModel);
+            _windowManager.ShowWindow(tTForgeViewModel);
         }
     }
 }

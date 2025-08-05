@@ -13,12 +13,13 @@ namespace IgniteDb.Repositorys
     {
         private readonly IMapper _mapper;
         private readonly AccessDbContext _context;
+
         public StaticticRepository(AccessDbContext context, IMapper mapper)
         {
             _mapper = mapper;
             _context = context;
-
         }
+
         public List<StaticticDto> GetAll()
         {
             var staticticInfos = _context.StaticticInfos.ToList();

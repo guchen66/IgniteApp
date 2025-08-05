@@ -17,7 +17,7 @@ namespace IgniteShared.Extensions
         {
             var currentTime = DateTime.Now.ToString("yyyyMMdd"); // 使用yyyyMMdd格式以避免文件名中的斜杠
             // 添加换行符
-            message = $"{message}{DateTime.Now.ToString("F")}{Environment.NewLine}";
+            message = $"{message}    {DateTime.Now.ToString("F")}{Environment.NewLine}";
 
             // 获取日志文件的完整路径
             var logDirectory = IgniteInfoLocation.LoggerPath;

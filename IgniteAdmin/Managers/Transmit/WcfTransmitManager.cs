@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,7 +15,7 @@ namespace IgniteAdmin.Managers.Transmit
     {
         public static async Task<bool> StartWcfAsync()
         {
-           var json= await JsonConverHelper.GetDecisionJsonAsync("appsetting.json","WCF");
+            var json = await JsonConverHelper.GetDecisionJsonAsync("appsetting.json", "WCF");
 
             var model = JsonConvert.DeserializeObject<WCFTransmitData>(json);
             return model.Startup;
@@ -22,7 +23,7 @@ namespace IgniteAdmin.Managers.Transmit
 
         public static bool StartWcf()
         {
-            var json =  GetDecisionJson("appsetting.json", "WCF");
+            var json = GetDecisionJson("appsetting.json", "WCF");
 
             var model = JsonConvert.DeserializeObject<WCFTransmitData>(json);
             return model.Startup;
@@ -54,6 +55,24 @@ namespace IgniteAdmin.Managers.Transmit
                 return json;
             }
         }
+
+        // 优先从执行目录查找，找不到则回退到嵌入资源
+        public static string LoadConfig(string fileName)
+        {
+            // 尝试从输出目录读取
+            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
+            if (File.Exists(filePath)) return File.ReadAllText(filePath);
+
+            // 从嵌入资源读取
+            var assembly = Assembly.GetExecutingAssembly();
+            var resourceName = $"{assembly.GetName().Name}.{fileName}";
+
+            var stream = assembly.GetManifestResourceStream(resourceName);
+            if (stream == null) throw new FileNotFoundException($"未找到 {fileName}");
+
+            var reader = new StreamReader(stream);
+            return reader.ReadToEnd();
+        }
     }
 
     public class WCFTransmitData
@@ -62,6 +81,6 @@ namespace IgniteAdmin.Managers.Transmit
 
         public string Name { get; set; }
 
-        public bool Startup {  get; set; }
+        public bool Startup { get; set; }
     }
 }

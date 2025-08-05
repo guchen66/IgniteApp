@@ -1,4 +1,5 @@
 ﻿using IgniteApp.Bases;
+using IgniteApp.Common;
 using IgniteApp.Interfaces;
 using IT.Tangdao.Framework.DaoAdmin.IServices;
 using IT.Tangdao.Framework.DaoDtos.Items;
@@ -6,6 +7,7 @@ using IT.Tangdao.Framework.Extensions;
 using Stylet;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,9 +18,9 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
     {
         public string HandlerName { get; set; } = "ProcessParameters";
 
-        private BindableCollection<IMenuItem> _parameMenuList;
+        private IReadOnlyCollection<IMenuItem> _parameMenuList;
 
-        public BindableCollection<IMenuItem> ParameMenuList
+        public IReadOnlyCollection<IMenuItem> ParameMenuList
         {
             get => _parameMenuList;
             set => SetAndNotify(ref _parameMenuList, value);
@@ -39,19 +41,7 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
         {
             _viewFactory = viewFactory;
             _readService = readService;
-
-            //字典转列表
-            var result = _readService.Current.SelectConfig(HandlerName).Result;
-
-            if (result is Dictionary<string, string> d1)
-            {
-                var lists = d1.TryOrderBy().Select(kvp => new TangdaoMenuItem
-                {
-                    MenuName = kvp.Value,
-                }).ToList();
-                ParameMenuList = new BindableCollection<IMenuItem>(lists);
-            }
-
+            ParameMenuList = ReadOnlyMenuItemManager.Create2(readService, HandlerName);
             this.BindAndInvoke(viewModel => viewModel.SelectedIndex, (obj, args) => DoNavigateToView());
         }
 

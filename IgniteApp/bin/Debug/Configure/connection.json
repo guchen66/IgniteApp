@@ -1,0 +1,8 @@
+{
+  "ConnectionPolicy": {
+    "DefaultProtocol": "TCP",
+    "FallbackProtocol": "Serial",
+    "TimeoutSeconds": 5,
+    "MaxRetries": 3
+  }
+}

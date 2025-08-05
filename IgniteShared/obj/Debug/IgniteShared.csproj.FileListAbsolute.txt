@@ -30,3 +30,4 @@ E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\obj\Debug\IgniteShared.cspr
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\obj\Debug\IgniteSh.C207E57B.Up2Date
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\obj\Debug\IgniteShared.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\obj\Debug\IgniteShared.pdb
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteShared\bin\Debug\Configures\appsetting.json

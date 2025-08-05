@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace IgniteApp.Shell.Maintion.ViewModels
 {
-    public class LightViewModel: ViewModelBase, INavigateEntry
+    public class LightViewModel : BaseDeviceViewModel, INavigateEntry
     {
-		private double _progress;
+        private double _progress;
 
-		public double Progress
+        public double Progress
         {
-			get => _progress;
-			set => SetAndNotify(ref _progress, value);
-		}
+            get => _progress;
+            set => SetAndNotify(ref _progress, value);
+        }
 
         private bool _content;
 
@@ -27,23 +27,22 @@ namespace IgniteApp.Shell.Maintion.ViewModels
             set => SetAndNotify(ref _content, value);
         }
 
-        public LightViewModel()
+        public LightViewModel() : base("Light")
         {
-           
         }
 
         public async Task ExecuteGetProcess()
         {
             for (int i = 0; i <= 100; i++)
             {
-               await Task.Delay(100);
+                await Task.Delay(100);
                 Progress = i;
             }
         }
 
         public void Execute()
         {
-            Content=!Content;
+            Content = !Content;
         }
     }
 }

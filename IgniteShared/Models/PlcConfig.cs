@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IgniteShared.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,12 +11,10 @@ namespace IgniteShared.Models
     {
         public string IP { get; set; }
         public string Port { get; set; }
-    }
+        public string PlcType { get; set; }
+        public string ComPort { get; set; }
+        public int BaudRate { get; set; }
 
-    public class PlcBackResult
-    {
-        public bool IsSuccess { get; set; } = true;
-        public string Message { get; set; }
-
+        // public ConnectionType ConnectionType { get; set; }
     }
 }

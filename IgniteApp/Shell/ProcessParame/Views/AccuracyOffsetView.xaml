@@ -8,6 +8,7 @@
     xmlns:local="clr-namespace:IgniteApp.Shell.ProcessParame.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
+    xmlns:markup="clr-namespace:IgniteApp.Extensions"
     xmlns:s="https://github.com/canton7/Stylet"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -42,11 +43,24 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top" Margin="10">
-            <ComboBox x:Name="com" ItemsSource="{Binding OffsetList}" Width="100" Height="30" Margin="5" />
-            <TextBox Text="{Binding Offset}" Width="100" Height="30" Margin="5" />
-            <Button Command="{s:Action OneKeyAdd}" CommandParameter="{Binding SelectedItem,ElementName=com}" Width="80" Height="30" Content="增加" Margin="5" />
-            <Button Command="{s:Action OneKeyDecrease}" CommandParameter="{Binding SelectedItem,ElementName=com}" Width="80" Height="30" Content="减少" Margin="5" />
-        </StackPanel>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10">
+                <ComboBox x:Name="com" ItemsSource="{markup:SelectMode CustomItems='X1,X2,Y1,Y2'}" SelectedIndex="0" Width="100" Height="30" Margin="5" />
+                <TextBox Text="{Binding Offset}" Width="100" Height="30" Margin="5" />
+                <Button Command="{s:Action OneKeyAdd}" CommandParameter="{Binding SelectedItem,ElementName=com}" Width="80" Height="30" Content="增加" Margin="5" />
+                <Button Command="{s:Action OneKeyDecrease}" CommandParameter="{Binding SelectedItem,ElementName=com}" Width="80" Height="30" Content="减少" Margin="5" />
+            </StackPanel>
+
+            <StackPanel Margin="10" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Command="{s:Action SaveData}" CommandParameter="{Binding SelectedItem,ElementName=com}" Width="80" Height="30" Content="保存" Margin="5" />
+                <Button Command="{s:Action Undo}" CommandParameter="{Binding SelectedItem,ElementName=com}" Width="80" Height="30" Content="撤销" Margin="5" />
+                <Button Command="{s:Action DeleteData}" CommandParameter="{Binding SelectedItem,ElementName=com}" Width="80" Height="30" Content="删除" Margin="5" />
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

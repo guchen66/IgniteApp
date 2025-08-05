@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:IgniteApp.Shell.Monitor.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="https://github.com/canton7/Stylet"
+    xmlns:markup="clr-namespace:IgniteApp.Extensions"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -13,16 +14,17 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition />
+            <RowDefinition Height="50" />
         </Grid.RowDefinitions>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="200" />
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <TextBlock Text="筛选" Margin="10 10"/>
-            <ComboBox Grid.Column="1" ItemsSource="{Binding SelectedMode}" SelectedItem="0" Text="{Binding SelectItem}"/>
+            <TextBlock Text="筛选" Margin="10 10" />
+            <ComboBox x:Name="com" Grid.Column="1" ItemsSource="{markup:SelectMode}" SelectedIndex="0" />
             <TextBlock Text="" />
         </Grid>
         <DataGrid
@@ -97,5 +99,9 @@
                 </DataGridTemplateColumn>-->
             </DataGrid.Columns>
         </DataGrid>
+
+        <StackPanel Grid.Row="2">
+            <Button Width="100" Height="30" Command="{s:Action Search}" CommandParameter="{Binding Path=SelectedItem,ElementName=com}" />
+        </StackPanel>
     </Grid>
 </UserControl>

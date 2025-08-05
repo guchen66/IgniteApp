@@ -61,6 +61,7 @@
         </StatusBar>
 
         <StackPanel Orientation="Horizontal" Grid.Column="1">
+            <Button Command="{s:Action Test}" Content="测试" />
             <Button Command="{s:Action OpenEQP}" Content="账料" x:Name="btn" />
             <Button Command="{s:Action OpenTTView}" Content="TT" />
         </StackPanel>

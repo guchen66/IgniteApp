@@ -49,15 +49,15 @@ namespace IgniteApp.Shell.Set.ViewModels
 
         public void InitializalData()
         {
-            var xmlData = _readService.Read(IgniteInfoLocation.ProcessInfoPath);
+            var xmlData = _readService.Current.XMLData = _readService.Read(IgniteInfoLocation.ProcessInfoPath);
 
             if (xmlData == null)
             {
                 return;
             }
-            _readService.Load(xmlData);
+            _readService.Current.Load();
 
-            var readResult = _readService.Current.Descendants("ProcessItem", x => new ProcessItem
+            var readResult = _readService.Current.SelectNodes("ProcessItem", x => new ProcessItem
             {
                 Name = x.Element("Name")?.Value,
                 IsFeeding = (bool)x.Element("IsFeeding"),
