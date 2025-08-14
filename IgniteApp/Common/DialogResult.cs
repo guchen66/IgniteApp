@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IgniteDevices.Core.Models.Results;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,10 @@ namespace IgniteApp.Common
         private readonly Dictionary<string, object> _outputParameters = new Dictionary<string, object>();
 
         public bool? Result { get; set; }
+
+        public object ResultValue { get; set; }
+
+        public static DialogResult None => new DialogResult() { Result = false };
 
         // 添加输出参数
         public DialogResult AddOutput(string key, object value)

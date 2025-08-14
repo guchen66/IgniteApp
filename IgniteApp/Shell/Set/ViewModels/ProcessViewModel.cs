@@ -1,14 +1,17 @@
 ﻿using HandyControl.Controls;
 using IgniteApp.Bases;
 using IgniteApp.Shell.Set.Models;
+using IgniteShared.Dtos;
 using IgniteShared.Globals.Local;
 using IT.Tangdao.Framework.DaoAdmin;
 using IT.Tangdao.Framework.DaoAdmin.IServices;
 using IT.Tangdao.Framework.DaoAdmin.Services;
 using IT.Tangdao.Framework.DaoEnums;
+using IT.Tangdao.Framework.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,26 +52,19 @@ namespace IgniteApp.Shell.Set.ViewModels
 
         public void InitializalData()
         {
-            var xmlData = _readService.Current.XMLData = _readService.Read(IgniteInfoLocation.ProcessInfoPath);
+            var foldPath = Path.Combine(IgniteInfoLocation.Recipe, "ProcessInfo.xml");
+            var xmlData = _readService.Read(foldPath);
 
             if (xmlData == null)
             {
+                ProcessItems = new ObservableCollection<ProcessItem>()
+                {
+                     new ProcessItem(){Name="生产模式",IsFeeding=false,IsBoardMade=false,IsBoardCheck=false,IsSafe=false,IsCharge=true}
+                };
                 return;
             }
-            _readService.Current.Load();
-
-            var readResult = _readService.Current.SelectNodes("ProcessItem", x => new ProcessItem
-            {
-                Name = x.Element("Name")?.Value,
-                IsFeeding = (bool)x.Element("IsFeeding"),
-                IsBoardMade = (bool)x.Element("IsBoardMade"),
-                IsBoardCheck = (bool)x.Element("IsBoardCheck"),
-                IsSeal = (bool)x.Element("IsSeal"),
-                IsSafe = (bool)x.Element("IsSafe"),
-                IsCharge = (bool)x.Element("IsCharge"),
-                IsBlanking = (bool)x.Element("IsBlanking"),
-            });
-
+            _readService.Current.Load(xmlData);
+            var readResult = _readService.Current.SelectNodes<ProcessItem>();
             if (readResult.Status)
             {
                 ProcessItems = new ObservableCollection<ProcessItem>(readResult.Result);
@@ -82,8 +78,9 @@ namespace IgniteApp.Shell.Set.ViewModels
 
         public void SaveProcessData()
         {
+            var foldPath = Path.Combine(IgniteInfoLocation.Recipe, "ProcessInfo.xml");
             //将数据写成XML格式保存在本地
-            _writeService.WriteEntityToXml(ProcessItems, IgniteInfoLocation.ProcessInfoPath, DaoFileType.Xml);
+            _writeService.WriteEntityToXml(ProcessItems, foldPath);
             MessageBox.Success("流程保存成功");
         }
 

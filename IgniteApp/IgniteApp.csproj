@@ -215,11 +215,16 @@
     <Compile Include="Converters\SingleStateToBoolConverter.cs" />
     <Compile Include="Converters\StringArrayTypeConverter.cs" />
     <Compile Include="Converters\StringToImageConverter.cs" />
+    <Compile Include="Dialogs\Manage\IPhotoView.cs" />
     <Compile Include="Dialogs\ViewModels\AddRecipeViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\AlarmPopupViewModel.cs" />
+    <Compile Include="Dialogs\ViewModels\CheckProcessPhotoViewModel.cs" />
+    <Compile Include="Dialogs\ViewModels\GlobalPhotoViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\ImageInfoCardViewModel.cs" />
+    <Compile Include="Dialogs\ViewModels\LoadPrePhotoViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\SafePopupViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\SetCalibrationParameterViewModel.cs" />
+    <Compile Include="Dialogs\ViewModels\TakePhotoViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\TestViewModel.cs" />
     <Compile Include="Dialogs\Views\AddRecipeView.xaml.cs">
       <DependentUpon>AddRecipeView.xaml</DependentUpon>
@@ -227,8 +232,17 @@
     <Compile Include="Dialogs\Views\AlarmPopupView.xaml.cs">
       <DependentUpon>AlarmPopupView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\Views\CheckProcessPhotoView.xaml.cs">
+      <DependentUpon>CheckProcessPhotoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Views\GlobalPhotoView.xaml.cs">
+      <DependentUpon>GlobalPhotoView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\Views\ImageInfoCardView.xaml.cs">
       <DependentUpon>ImageInfoCardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Views\LoadPrePhotoView.xaml.cs">
+      <DependentUpon>LoadPrePhotoView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\Views\SafePopupView.xaml.cs">
       <DependentUpon>SafePopupView.xaml</DependentUpon>
@@ -236,10 +250,14 @@
     <Compile Include="Dialogs\Views\SetCalibrationParameterView.xaml.cs">
       <DependentUpon>SetCalibrationParameterView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\Views\TakePhotoView.xaml.cs">
+      <DependentUpon>TakePhotoView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\Views\TestView.xaml.cs">
       <DependentUpon>TestView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Events\CloseAlarmPopupEvent.cs" />
+    <Compile Include="Events\CloseRegisterEvent.cs" />
     <Compile Include="Events\ImageInfoTranEvent.cs" />
     <Compile Include="Events\NavigateToLoginEvent.cs" />
     <Compile Include="Events\NavigateToRegisterEvent.cs" />
@@ -251,6 +269,7 @@
     <Compile Include="Extensions\StyleIocExtensions.cs" />
     <Compile Include="Extensions\WindowManagerExtensions.cs" />
     <Compile Include="Interfaces\IAppConfigProvider.cs" />
+    <Compile Include="Interfaces\IDialogService.cs" />
     <Compile Include="Interfaces\INavigateEntry.cs" />
     <Compile Include="Interfaces\INavigateRoute.cs" />
     <Compile Include="Interfaces\INavigationService.cs" />
@@ -373,6 +392,7 @@
     <Compile Include="Shell\ProcessParame\ViewModels\AccuracyOffsetViewModel.cs" />
     <Compile Include="Shell\ProcessParame\ViewModels\LoadCalibrationViewModel.cs" />
     <Compile Include="Shell\ProcessParame\ViewModels\ParameBaseViewModel.cs" />
+    <Compile Include="Shell\ProcessParame\ViewModels\TeachingViewModel.cs" />
     <Compile Include="Shell\ProcessParame\ViewModels\UnLoadCalibrationViewModel.cs" />
     <Compile Include="Shell\ProcessParame\Views\AccuracyOffsetView.xaml.cs">
       <DependentUpon>AccuracyOffsetView.xaml</DependentUpon>
@@ -382,6 +402,9 @@
     </Compile>
     <Compile Include="Shell\ProcessParame\Views\ParameBaseView.xaml.cs">
       <DependentUpon>ParameBaseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\ProcessParame\Views\TeachingView.xaml.cs">
+      <DependentUpon>TeachingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Shell\ProcessParame\Views\UnLoadCalibrationView.xaml.cs">
       <DependentUpon>UnLoadCalibrationView.xaml</DependentUpon>
@@ -520,7 +543,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Dialogs\Views\CheckProcessPhotoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\Views\GlobalPhotoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dialogs\Views\ImageInfoCardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\Views\LoadPrePhotoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -529,6 +564,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialogs\Views\SetCalibrationParameterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\Views\TakePhotoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -625,6 +664,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Shell\ProcessParame\Views\ParameBaseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shell\ProcessParame\Views\TeachingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -33,14 +33,25 @@ using IT.Tangdao.Framework;
 using IT.Tangdao.Framework.DaoEvents;
 using System.Threading;
 using IgniteApp.Extensions;
+using IgniteShared.Extensions;
+using System.Security.Principal;
+using IgniteApp.Common;
+using IgniteApp.Events;
+using System.Windows.Shapes;
+using Path = System.IO.Path;
+using HandyControl.Controls;
+using MessageBox = HandyControl.Controls.MessageBox;
+using Window = System.Windows.Window;
+using IgniteShared.Delegates;
+using System.Windows.Markup;
 
 namespace IgniteApp.ViewModels
 {
-    public class LoginViewModel : ViewModelBase
+    public class LoginViewModel : ViewModelBase, IHandle<CloseRegisterEvent>
     {
         #region--字段--
 
-        [Inject]
+        // [Inject]
         private MainViewModel _mainViewModel;
 
         private INavigationService _navigationService;
@@ -48,10 +59,6 @@ namespace IgniteApp.ViewModels
         private readonly IReadService _readService;
         private readonly IWindowManager _windowManager;
         private readonly IEventAggregator _eventAggregator;
-
-        //  private readonly INavigateService _navigateService;
-        private readonly IContainer _container;
-
         private static readonly IDaoLogger Logger = DaoLogger.Get(typeof(LoginViewModel));
         public ICommand RegisterCommand { get; set; }
         #endregion
@@ -70,16 +77,17 @@ namespace IgniteApp.ViewModels
 
         #region--ctor--
 
-        public LoginViewModel(IWriteService writeService, IContainer container, INavigationService navigationService, IEventAggregator eventAggregator)
+        public LoginViewModel(IWriteService writeService, INavigationService navigationService, IEventAggregator eventAggregator, MainViewModel mainViewModel)
         {
+            _mainViewModel = mainViewModel;
             _writeService = writeService;
             _readService = ServiceLocator.GetService<IReadService>();
             _windowManager = ServiceLocator.GetService<IWindowManager>();
-            _container = container;
+
             _navigationService = navigationService;
             _eventAggregator = eventAggregator;
+            _eventAggregator.Subscribe(this);
             RegisterCommand = MinidaoCommand.Create(ExecuteRegister);
-            //   _navigateService = navigateService;
         }
 
         #endregion
@@ -91,47 +99,19 @@ namespace IgniteApp.ViewModels
         /// </summary>
         public void ExecuteLogin()
         {
-            if (LoginDto.UserName == "Admin")
+            //查找本地是否有登录过的账号
+            var cacheData = UserManager.SearchCache(LoginDto);
+            if (cacheData)
             {
-                ExecuteAdminLogin();
+                var foldPath = Path.Combine(IgniteInfoLocation.Cache, "LoginInfo.xml");
+                _windowManager.ShowWindow(_mainViewModel);
+                _writeService.WriteEntityToXml(LoginDto, foldPath);
+                RequestClose();
             }
             else
             {
-                ExecuteCommonLogin();
+                MessageBox.Error("账号未注册");
             }
-        }
-
-        /// <summary>
-        /// 管理员登录
-        /// </summary>
-        public void ExecuteAdminLogin()
-        {
-            LoginDto.IsAdmin = true;
-            LoginDto.IP = IPHelper.GetLocalIPByLinq();
-            SysLoginInfo.Role = LoginDto.Role = RoleType.管理员;
-            SysLoginInfo.UserName = LoginDto.UserName;
-            SysLoginInfo.Password = LoginDto.Password;
-            UserManager.SaveXml(LoginDto);
-            // 显示主窗口
-            _windowManager.ShowWindow(_mainViewModel);
-            //关闭登录窗口
-            RequestClose();
-        }
-
-        /// <summary>
-        /// 普通用户登录
-        /// </summary>
-        public void ExecuteCommonLogin()
-        {
-            LoginDto.IsAdmin = false;
-            LoginDto.IP = IPHelper.GetLocalIPByLinq();
-            SysLoginInfo.Role = LoginDto.Role = RoleType.普通用户;
-            SysLoginInfo.UserName = LoginDto.UserName;
-            SysLoginInfo.Password = LoginDto.Password;
-            UserManager.SaveXml(LoginDto);
-            // 显示主窗口
-            _windowManager.ShowWindow(_mainViewModel);
-            RequestClose();
         }
 
         /// <summary>
@@ -147,11 +127,10 @@ namespace IgniteApp.ViewModels
         /// </summary>
         public void ExecuteRememberPwd()
         {
-            if (LoginDto.UserName == "Admin")
-            {
-                LoginDto.IsAdmin = true;
-            }
-            var info = XmlFolderHelper.SerializeXML(LoginDto);
+            bool isAdmin = RoleSelectors.DetermineIfAdmin(LoginDto.UserName);
+            var roleSelector = RoleSelectors.GetRoleSelector(isAdmin).Invoke(RoleType.管理员, RoleType.普通用户);
+            LoginDto.Role = roleSelector;
+            LoginDto.IsAdmin = isAdmin;
         }
 
         /// <summary>
@@ -162,24 +141,21 @@ namespace IgniteApp.ViewModels
             base.OnActivate();
             try
             {
-                _readService.Current.XMLData = _readService.Read(LoginInfoLocation.LoginPath);
-
-                if (_readService.Current.XMLData == null)
+                var foldPath = Path.Combine(IgniteInfoLocation.Cache, "LoginInfo.xml");
+                var xmlData = _readService.Read(foldPath);
+                if (xmlData == null)
                 {
+                    File.Create(foldPath);
                     return;
                 }
-                _readService.Current.Load();
-
+                _readService.Current.Load(xmlData);
                 var isRememberValue = _readService.Current.SelectNode("IsRemember").Value;// 获取元素的值
-                //  var name=doc.Elements("LoginDto").Select(node=>node.Element("UserName").Value).ToList().FirstOrDefault();
-                //  List<string> result = doc.Root.Elements().Select(node => node.Value).ToList();
-
                 // 将字符串转换为bool类型
                 if (bool.TryParse(isRememberValue, out bool isRemember))
                 {
                     if (isRemember)
                     {
-                        LoginDto = XmlFolderHelper.Deserialize<LoginDto>(_readService.Current.XMLData);
+                        LoginDto = XmlFolderHelper.Deserialize<LoginDto>(xmlData);
                     }
                     else
                     {
@@ -189,7 +165,7 @@ namespace IgniteApp.ViewModels
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                Logger.WriteLocal(ex.ToString());
             }
         }
 
@@ -198,31 +174,18 @@ namespace IgniteApp.ViewModels
             Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive).DragMove();
         }
 
-        [Inject]
-        private RegisterViewModel _registerViewModel;
-
         private void ExecuteRegister()
         {
-            //RegisterViewModel创建的迟了，所以这里我必须先进行RegisterViewModel的构造，然后进行数据的发送
-            //我使用我自己写的事件聚合器和Stylet自带的都测试一遍，效果相同
-            ITangdaoParameter parameter = new TangdaoParameter();
-            parameter.Add("userName", LoginDto.UserName);
-            parameter.Add("password", LoginDto.Password);
-            parameter.AddCommand<bool?>("close", RequestClose);
             _navigationService.NavigateToRegister();
-            _eventAggregator.Publish(parameter);
+            RequestClose();
+        }
 
-            //DialogParameters dialogParameters = new DialogParameters();
-            //dialogParameters.Add("userName", LoginDto.UserName);
-            //dialogParameters.Add("password", LoginDto.Password);
-
-            //var dialog = _windowManager.ShowDialogEx(_registerViewModel, dialogParameters);
-            //if (dialog.Result.HasValue)
-            //{
-            //    RequestClose();
-            //}
-            //
-            //
+        public void Handle(CloseRegisterEvent closeRegister)
+        {
+            LoginDto.UserName = closeRegister.Name;
+            LoginDto.Password = closeRegister.Pwd;
+            //在这里关闭注册窗口
+            // tangdaoParameter.ExecuteCommand<bool?>("Close", null);
         }
 
         #endregion

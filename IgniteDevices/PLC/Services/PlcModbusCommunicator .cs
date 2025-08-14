@@ -20,11 +20,6 @@ namespace IgniteDevices.PLC.Services
         private IModbusMaster _master;
         private readonly IDaoLogger _logger = DaoLogger.Get(typeof(PlcModbusCommunicator));
 
-        //public PlcModbusCommunicator(IConnectionState connectionStrategy)
-        //{
-        //    _connectionStrategy = connectionStrategy;
-        //    _master = _connectionStrategy.CreateModbusMaster();
-        //}
         public PlcModbusCommunicator(ConnectionContext context)
         {
             _master = context.Master;

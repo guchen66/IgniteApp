@@ -60,7 +60,7 @@
                         Width="250"
                         Margin="10,0"
                         hc:InfoElement.Placeholder="请输入密码"
-                        hc:UnsafePassword="{Binding LoginDto.Password}"
+                        hc:UnsafePassword="{Binding LoginDto.Password,UpdateSourceTrigger=PropertyChanged}"
                         CaretBrush="{StaticResource PeonyBrush}"
                         FontSize="16"
                         IsSafeEnabled="False"

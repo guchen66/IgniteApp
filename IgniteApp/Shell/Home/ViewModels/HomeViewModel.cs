@@ -50,26 +50,13 @@ namespace IgniteApp.Shell.Home.ViewModels
         {
             _viewFactory = viewFactory;
             _readService = readService;
-            InitMenuData();
+            HomeMenuItems.AddRange(ReadOnlyMenuItemManager.Create(readService, "unity.config", "Tangdao"));
+            //InitMenuData();
         }
 
         #endregion
 
         #region--方法--
-
-        private void InitMenuData()
-        {
-            var model = _readService.Current.SelectCustomConfig("unity.config", "Tangdao").Result;
-            if (model is Dictionary<string, string> dicts)
-            {
-                List<HomeMenuItem> menuItems = dicts.Select(kvp => new HomeMenuItem
-                {
-                    Title = kvp.Key,
-                    ViewModelName = kvp.Value
-                }).ToList();
-                HomeMenuItems.AddRange(menuItems);
-            }
-        }
 
         /// <summary>
         /// 导航到具体页面

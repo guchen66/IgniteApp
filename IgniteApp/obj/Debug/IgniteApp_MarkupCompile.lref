@@ -2,9 +2,13 @@
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\App.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Dialogs\Views\AddRecipeView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Dialogs\Views\AlarmPopupView.xaml;;
+FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Dialogs\Views\CheckProcessPhotoView.xaml;;
+FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Dialogs\Views\GlobalPhotoView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Dialogs\Views\ImageInfoCardView.xaml;;
+FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Dialogs\Views\LoadPrePhotoView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Dialogs\Views\SafePopupView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Dialogs\Views\SetCalibrationParameterView.xaml;;
+FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Dialogs\Views\TakePhotoView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Dialogs\Views\TestView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Aside\Views\AsideView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Footer\Views\FooterView.xaml;;
@@ -29,6 +33,7 @@ FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Monitor\Views\ReportVie
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\ProcessParame\Views\AccuracyOffsetView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\ProcessParame\Views\LoadCalibrationView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\ProcessParame\Views\ParameBaseView.xaml;;
+FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\ProcessParame\Views\TeachingView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\ProcessParame\Views\UnLoadCalibrationView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Recipe\Views\RecipeView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Set\Views\AccountSetView.xaml;;

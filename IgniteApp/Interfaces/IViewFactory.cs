@@ -87,6 +87,8 @@ namespace IgniteApp.Interfaces
 
         AccuracyOffsetViewModel AccuracyOffsetViewModel();
 
+        TeachingViewModel TeachingViewModel();
+
         #endregion
 
         _404ViewModel _404ViewModel();

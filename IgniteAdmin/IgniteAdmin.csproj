@@ -102,6 +102,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IRoute.cs" />
+    <Compile Include="Interfaces\IWorkstation.cs" />
     <Compile Include="Managers\Home\TimeManager.cs" />
     <Compile Include="Managers\Login\UserManager.cs" />
     <Compile Include="Managers\Main\CcdManager.cs" />
@@ -127,6 +128,12 @@
     <Compile Include="Providers\IAutoRun.cs" />
     <Compile Include="Providers\IPlcProvider.cs" />
     <Compile Include="Providers\PlcProvider.cs" />
+    <Compile Include="Workers\CutWorkstation.cs" />
+    <Compile Include="Workers\LoadWorkstation.cs" />
+    <Compile Include="Workers\SegmentWorkstation.cs" />
+    <Compile Include="Workers\UnLoadWorkstation.cs" />
+    <Compile Include="Workers\WorkstationBase.cs" />
+    <Compile Include="Workers\WorkstationManager.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

@@ -13,30 +13,37 @@ namespace IgniteShared.Extensions
 {
     public static class LoggerExtensions
     {
-        public static void WriteLocal(this IDaoLogger daoLogger, string message)
+        public static void WriteLocal(this IDaoLogger daoLogger, string message, string category = null)
         {
-            var currentTime = DateTime.Now.ToString("yyyyMMdd"); // 使用yyyyMMdd格式以避免文件名中的斜杠
-            // 添加换行符
-            message = $"{message}    {DateTime.Now.ToString("F")}{Environment.NewLine}";
-
-            // 获取日志文件的完整路径
-            var logDirectory = IgniteInfoLocation.LoggerPath;
-
-            // 检查日志目录是否存在，如果不存在则创建
-            if (!Directory.Exists(logDirectory))
+            try
             {
+                // 确定日志目录路径
+                var logDirectory = string.IsNullOrEmpty(category)
+                    ? IgniteInfoLocation.Logger
+                    : Path.Combine(IgniteInfoLocation.Logger, category);
+
+                // 确保目录存在
                 Directory.CreateDirectory(logDirectory);
+
+                // 格式化日志消息
+                var timestamp = DateTime.Now;
+                var formattedMessage = $"{message}    {timestamp:F}{Environment.NewLine}";
+
+                // 构建日志文件路径
+                var logFileName = $"{timestamp:yyyyMMdd}.log";
+                var logFilePath = Path.Combine(logDirectory, logFileName);
+
+                // 使用更高效的文件追加方法
+                File.AppendAllText(logFilePath, formattedMessage);
             }
-
-            // 获取当前日期作为日志文件名的一部分
-
-            // 日志文件的完整路径
-            var logFilePath = Path.Combine(logDirectory, $"{currentTime}.log");
-
-            // 将消息追加到日志文件
-            File.AppendAllText(logFilePath, message);
+            catch (Exception ex)
+            {
+                // 在实际应用中，可以考虑将错误记录到其他位置或通知管理员
+                Console.WriteLine($"Failed to write log: {ex.Message}");
+            }
         }
 
+        // 可以移除这个重载方法，因为上面的方法已经处理了category为null的情况
         public static void WriteLocal(this IDaoLogger logger, string category, string message, Exception e = null)
         {
             try

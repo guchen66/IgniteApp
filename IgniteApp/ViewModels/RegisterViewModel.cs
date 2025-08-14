@@ -1,13 +1,20 @@
 ﻿using HandyControl.Tools.Extension;
+using IgniteAdmin.Managers.Login;
 using IgniteApp.Bases;
 using IgniteApp.Common;
+using IgniteApp.Events;
 using IgniteApp.Extensions;
 using IgniteApp.Interfaces;
 using IgniteApp.Shell.Maintion.Views;
+using IgniteShared.Delegates;
+using IgniteShared.Dtos;
+using IgniteShared.Globals.System;
 using IT.Tangdao.Framework;
 using IT.Tangdao.Framework.DaoCommands;
+using IT.Tangdao.Framework.DaoEnums;
 using IT.Tangdao.Framework.DaoEvents;
 using IT.Tangdao.Framework.DaoMvvm;
+using IT.Tangdao.Framework.Helpers;
 using Stylet;
 using Stylet.Xaml;
 using StyletIoC;
@@ -23,7 +30,7 @@ using IContainer = StyletIoC.IContainer;
 
 namespace IgniteApp.ViewModels
 {
-    public class RegisterViewModel : ViewModelBase, IHandle<ITangdaoParameter>, IDialogProvider
+    public class RegisterViewModel : ViewModelBase
     {
         private INavigationService _navigationService;
 
@@ -47,18 +54,12 @@ namespace IgniteApp.ViewModels
         public ICommand CloseCommand { get; set; }
 
         public ITangdaoHandler _tangdaoHandler;
-        private ITangdaoMessage _tangdaoMessage;
         private IEventAggregator _eventAggregator;
 
         public RegisterViewModel(INavigationService navigationService, IEventAggregator eventAggregator)
         {
             _navigationService = navigationService;
             _eventAggregator = eventAggregator;
-            // _tangdaoMessage = tangdaoMessage;
-            eventAggregator.Subscribe(this);
-            //  var s1 = ServiceLocator.GetService<ITangdaoMessage>();
-            //  s1 = this;
-            // _eventTransmit.Subscribe<EventParameter>(ExecuteHandle);
             BackLoginCommand = MinidaoCommand.Create(ExecuteBackLogin);
             CloseCommand = MinidaoCommand.Create<Window>(ExecuteClose);
         }
@@ -81,31 +82,26 @@ namespace IgniteApp.ViewModels
             RequestClose();
         }
 
-        public void Handle(ITangdaoParameter tangdaoParameter)
+        public void Confirm()
         {
-            Account = tangdaoParameter.Get<string>("userName");
-            Password = tangdaoParameter.Get<string>("password");
-            //在这里关闭登录窗口
-            tangdaoParameter.ExecuteCommand<bool?>("close", null);
-        }
+            bool isAdmin = RoleSelectors.DetermineIfAdmin(Account);
 
-        public void OpenWindowExecute(ITangdaoParameter tangdaoParameter)
-        {
-            Account = tangdaoParameter.Get<string>("userName");
-            tangdaoParameter.ExecuteCommand<bool?>("close", null);
-        }
+            // 柯里化：动态生成 Role 选择器
+            var roleSelector = RoleSelectors.GetRoleSelector(isAdmin).Invoke(RoleType.管理员, RoleType.普通用户);
 
-        public void OnDialogOpened(DialogParameters parameters)
-        {
-            Account = parameters.GetValue<string>("userName");
-            Password = parameters.GetValue<string>("password");
-        }
+            LoginDto loginDto = new LoginDto
+            {
+                UserName = Account,
+                Password = Password,
+                IsAdmin = isAdmin,
+                Role = roleSelector,
+                IP = IPHelper.GetLocalIPByLinq()
+            };
 
-        public DialogResult OnDialogClosing()
-        {
-            DialogResult dialogResult = new DialogResult();
-            dialogResult.Result = true;
-            return dialogResult;
+            UserManager.SaveUserInfo(loginDto);
+            _eventAggregator.Publish(new CloseRegisterEvent(loginDto.UserName, loginDto.Password));
+            _navigationService.NavigateToLogin();
+            RequestClose();
         }
     }
 

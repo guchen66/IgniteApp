@@ -30,6 +30,8 @@ using StyletIoC.Creation;
 using System.Linq.Expressions;
 using IgniteApp.Extensions;
 using Unity.Injection;
+using System.ComponentModel;
+using IContainer = StyletIoC.IContainer;
 
 namespace IgniteApp.Modules
 {
@@ -39,9 +41,9 @@ namespace IgniteApp.Modules
         {
             Bind<IViewFactory>().ToAbstractFactory();
             Bind<INavigateRoute>().To<NavigateRoute>().InSingletonScope();
-            Bind<INavigationService>().To<NavigationService>().InSingletonScope();
+            Bind<INavigationService>().To<NavigationService<IContainer>>().InSingletonScope();
             Bind<IEventAggregator>().To<EventAggregator>().InSingletonScope();
-            Bind<IWindowManager>().To<WindowManager>().InSingletonScope();
+            //Bind<IWindowManager>().To<WindowManager>().InSingletonScope();
             Bind<IAutoRun>().To<AutoRun>().InSingletonScope();
             Bind<IElectService>().To<ElectService>().InSingletonScope();
             Bind<LoginViewModel>().ToSelf().InSingletonScope();
@@ -50,7 +52,8 @@ namespace IgniteApp.Modules
             Bind<TempAndHumClient>().ToSelf().InSingletonScope();
             Bind<ITaskController>().To<TaskController>().InSingletonScope();
             Bind<ITaskService>().To<TaskService>().InSingletonScope();
-            Bind<TTForgeViewModel>().ToSelf().InSingletonScope();
+            Bind<TTForgeViewModel>().ToSelf().InSingletonScope();// (new TTForgeViewModel());//.ToSelf().InSingletonScope();
+
             Bind<ConnectionContext>().ToSelf().InSingletonScope();
             // Bind<ConnectionContext>().ToConnectedInstance<ConnectionContext>();
             Bind<IConnectionState>().ToFactory(GetConnectionObject).InSingletonScope();

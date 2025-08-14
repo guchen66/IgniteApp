@@ -41,7 +41,9 @@ namespace IgniteApp.Modules
             Bind<IReadService>().To<ReadService>();//.WithKey("111");
             Bind<IPlcProvider>().To<PlcProvider>();
             Bind<IDeviceProvider>().To<DeviceProvider>().InSingletonScope();
-            //ITangdaoProvider
+            Bind<IDialogService>().To<DialogService>().InSingletonScope();
+            //唐刀事件聚合器
+            Bind<IDaoEventAggregator>().To<DaoEventAggregator>().InSingletonScope();
             Bind<ITangdaoProvider>().To<TangdaoProvider>().InSingletonScope();
             // Bind<INavigateService>().To<NavigateService>().InSingletonScope();
             //   Bind<IServiceProvider>().To<ServiceProvider>().InSingletonScope();

@@ -106,6 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\SugarTableAttribute.cs" />
+    <Compile Include="Delegates\RoleSelector.cs" />
     <Compile Include="Dtos\DataBase.cs" />
     <Compile Include="Dtos\LoginDto.cs" />
     <Compile Include="Dtos\MaterialDto.cs" />

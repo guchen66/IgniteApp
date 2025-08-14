@@ -2,6 +2,7 @@
 using IgniteDevices.PLC;
 using IgniteShared.Extensions;
 using IT.Tangdao.Framework.DaoAdmin;
+using IT.Tangdao.Framework.DaoEvents;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ using System.Xml.Linq;
 
 namespace IgniteApp.Dialogs.ViewModels
 {
-    public class AlarmPopupViewModel : Screen, IHandle<CloseAlarmPopupEvent>, IHandle<OpenAlarmPopupEvent>
+    public class AlarmPopupViewModel : Screen, IHandle<OpenAlarmPopupEvent>//, IHandle<CloseAlarmPopupEvent>, IHandle<OpenAlarmPopupEvent>
     {
         public string Name { get; }
         public DateTime TriggerTime { get; }
@@ -30,12 +31,23 @@ namespace IgniteApp.Dialogs.ViewModels
 
         private IEventAggregator _eventAggregator;
         private IWindowManager _windowManager;
+        private IDaoEventAggregator _daoEventAggregator;
 
-        public AlarmPopupViewModel(IEventAggregator eventAggregator, IWindowManager windowManager)
+        public AlarmPopupViewModel(IEventAggregator eventAggregator, IWindowManager windowManager, IDaoEventAggregator daoEventAggregator)
         {
             _eventAggregator = eventAggregator;
             _windowManager = windowManager;
+            _daoEventAggregator = daoEventAggregator;
+            _daoEventAggregator.SubscribeAsync<CloseAlarmPopupEvent>(ExecuteHandlerAlarm);
             _eventAggregator.Subscribe(this);
+        }
+
+        private async Task ExecuteHandlerAlarm(CloseAlarmPopupEvent @event)
+        {
+            Logger.WriteLocal($"关闭前AlarmPopupViewModel状态：{this.ScreenState}");
+            this.RequestClose();
+            Logger.WriteLocal($"关闭后AlarmPopupViewModel状态：{this.ScreenState}");
+            await Task.CompletedTask;
         }
 
         private string _currentAlarm;
@@ -91,7 +103,7 @@ namespace IgniteApp.Dialogs.ViewModels
 
         protected override void OnClose()
         {
-            _eventAggregator.Unsubscribe(this);
+            // _eventAggregator.Unsubscribe(this);
             base.OnClose();
         }
     }

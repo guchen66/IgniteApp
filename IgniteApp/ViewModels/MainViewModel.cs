@@ -35,7 +35,7 @@ namespace IgniteApp.ViewModels
         [Inject]
         public HomeViewModel HomeViewModel { get; set; }
 
-        [Inject]
+        // [Inject]
         public FooterViewModel FooterViewModel { get; set; }
 
         public IEventAggregator _eventAggregator;
@@ -53,8 +53,9 @@ namespace IgniteApp.ViewModels
 
         #region--ctor--
 
-        public MainViewModel(IEventAggregator eventAggregator, IWindowManager windowManager, AlarmPublisher alarmPublisher, AlarmPopupNotifier alarmPopupNotifier, AlarmPopupManager alarmPopupManager)
+        public MainViewModel(IEventAggregator eventAggregator, IWindowManager windowManager, AlarmPublisher alarmPublisher, AlarmPopupNotifier alarmPopupNotifier, AlarmPopupManager alarmPopupManager, FooterViewModel footerViewModel)
         {
+            FooterViewModel = footerViewModel;
             _windowManager = windowManager;
             _eventAggregator = eventAggregator;
             _alarmPublisher = alarmPublisher;
@@ -81,10 +82,6 @@ namespace IgniteApp.ViewModels
         private void OnAlarmChangedPublish(string name)
         {
             _alarmPopupManager.OpenAlarmPopup();
-
-            Execute.OnUIThread(() => { });
-            Execute.PostToUIThread(() => { });
-            Execute.PostToUIThreadAsync(() => { });
         }
 
         #endregion

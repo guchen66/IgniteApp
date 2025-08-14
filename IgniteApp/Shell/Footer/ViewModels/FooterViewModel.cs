@@ -3,6 +3,7 @@ using IgniteAdmin.Providers;
 using IgniteApp.Bases;
 using IgniteApp.Dialogs.ViewModels;
 using IgniteApp.Extensions;
+using IgniteApp.Interfaces;
 using IgniteApp.Modules;
 using IgniteApp.Shell.Home.Models;
 using IgniteApp.ViewModels;
@@ -10,8 +11,10 @@ using IgniteDb;
 using IgniteDb.IRepositorys;
 using IgniteShared.Dtos;
 using IgniteShared.Entitys;
+using IgniteShared.Extensions;
 using IgniteShared.Globals.Local;
 using IgniteShared.Models;
+using IT.Tangdao.Framework.DaoAdmin;
 using IT.Tangdao.Framework.DaoAdmin.IServices;
 using IT.Tangdao.Framework.DaoAdmin.Services;
 using IT.Tangdao.Framework.DaoCommands;
@@ -55,25 +58,28 @@ namespace IgniteApp.Shell.Footer.ViewModels
         }
 
         private readonly IPlcProvider _plcProvider;
-
+        private static readonly IDaoLogger Logger = DaoLogger.Get(typeof(FooterViewModel));
         #endregion
 
         #region--ctor--
         private IWindowManager _windowManager;
         private readonly System.Timers.Timer _statusTimer;
+        private IDialogService _dialogService;
 
-        public FooterViewModel(IPlcProvider plcProvider, IWindowManager windowManager)
+        public FooterViewModel(IPlcProvider plcProvider, IWindowManager windowManager, IDialogService dialogService, Func<TTForgeViewModel> viewModelFactory)
         {
             _plcProvider = plcProvider;
             _windowManager = windowManager;
+            _dialogService = dialogService;
+            // TTForgeViewModel = tTForgeViewModel;
             // 初始化定时器（间隔1秒，自动重置）
             _statusTimer = new System.Timers.Timer(1000) { AutoReset = true };
             _statusTimer.Elapsed += async (s, e) => await CheckPlcStatusAsync();
             // _statusTimer.Start();
 
             // 立即执行首次检查
-            // Task.Run(CheckPlcStatusAsync);
             QueryPlcStatus();
+            _viewModelFactory = viewModelFactory;
         }
 
         #endregion
@@ -109,8 +115,11 @@ namespace IgniteApp.Shell.Footer.ViewModels
 
         public void Test()
         {
-            _windowManager.ShowDialogEx(TestViewModel);
-            // _windowManager.ShowWindow(ImageInfoCardViewModel);
+            _windowManager.ShowDialog(TestViewModel);
+            //_dialogService.Show(TestViewModel, result: (result) =>
+            //{
+            //    var str = result.ResultValue;
+            //});
         }
 
         public void OpenEQP()
@@ -124,11 +133,28 @@ namespace IgniteApp.Shell.Footer.ViewModels
         public ImageInfoCardViewModel ImageInfoCardViewModel { get; set; }
 
         [Inject]
-        public TTForgeViewModel tTForgeViewModel { get; set; }
+        public TTForgeViewModel TTForgeViewModel;
+
+        private readonly Func<TTForgeViewModel> _viewModelFactory;
 
         public void OpenTTView()
         {
-            _windowManager.ShowWindow(tTForgeViewModel);
+            //TTForgeViewModel = ServiceLocator.GetService<TTForgeViewModel>();
+            // TTForgeViewModel = _viewModelFactory.Invoke();
+            // TTForgeViewModel = new TTForgeViewModel();
+            Logger.WriteLocal(TTForgeViewModel.DisplayName);
+            Logger.WriteLocal(TTForgeViewModel.IsActive.ToString());
+            Logger.WriteLocal(TTForgeViewModel.ScreenState.ToString());
+            Logger.WriteLocal(TTForgeViewModel.GetHashCode().ToString());
+            _windowManager.ShowWindow(TTForgeViewModel);
+        }
+
+        [Inject]
+        public GlobalPhotoViewModel GlobalPhotoViewModel { get; set; }
+
+        public void OpenPhotoView()
+        {
+            _windowManager.ShowWindow(GlobalPhotoViewModel);
         }
     }
 }

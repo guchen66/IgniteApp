@@ -44,7 +44,7 @@ namespace IgniteApp.Shell.Monitor.ViewModels
             _viewFactory = viewFactory;
             _navigatRoute = navigatRoute;
             _readService = readService;
-            MonitorMenuList = ReadOnlyMenuItemManager.Create2(readService, HandlerName);
+            MonitorMenuList = ReadOnlyMenuItemManager.Create(readService, HandlerName);
 
             this.BindAndInvoke(viewModel => viewModel.SelectedIndex, (obj, args) => DoNavigateToView());
         }

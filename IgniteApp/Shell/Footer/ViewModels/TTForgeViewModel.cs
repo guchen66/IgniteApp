@@ -28,15 +28,15 @@ namespace IgniteApp.Shell.Footer.ViewModels
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Interval = TimeSpan.FromSeconds(1);
             dispatcherTimer.Tick += DispatcherTimer_Tick;
-            // dispatcherTimer.Start();
+            dispatcherTimer.Start();
             // timer=new Timer();
 
-            _saveTimer = new System.Timers.Timer(5000);  // 5秒保存一次
+            _saveTimer = new System.Timers.Timer(3000);  // 5秒保存一次
             _saveTimer.Elapsed += async (s, e) => await SaveReportToFileAsync();
             _saveTimer.AutoReset = true;
-            //  _saveTimer.Start();
+            _saveTimer.Start();
 
-            Loaded();
+            // Loaded();
         }
 
         private void Loaded()
@@ -53,12 +53,34 @@ namespace IgniteApp.Shell.Footer.ViewModels
 
         private async Task SaveReportToFileAsync()
         {
+            Number++;
             await Task.CompletedTask;
         }
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
             Number++;
+        }
+
+        protected override void OnActivate()
+        {
+            base.OnActivate();
+        }
+
+        protected override void OnInitialActivate()
+        {
+            base.OnInitialActivate();
+        }
+
+        protected override void OnViewLoaded()
+        {
+            base.OnViewLoaded();
+        }
+
+        protected override void OnDeactivate()
+        {
+            _saveTimer?.Dispose();
+            dispatcherTimer.Stop();
         }
     }
 

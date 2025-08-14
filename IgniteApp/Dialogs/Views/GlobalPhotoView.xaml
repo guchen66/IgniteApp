@@ -1,0 +1,64 @@
+﻿<Window
+    x:Class="IgniteApp.Dialogs.Views.GlobalPhotoView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:convert="clr-namespace:IgniteApp.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:IgniteApp.Dialogs.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:s="https://github.com/canton7/Stylet"
+    Width="900"
+    Height="650"
+    ResizeMode="CanResizeWithGrip"
+    WindowStartupLocation="CenterOwner"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <convert:BoolToColorConverter
+            x:Key="BoolToColorConverter"
+            FalseValue="LightGray"
+            TrueValue="DodgerBlue" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!--  动态内容区  -->
+        <ContentControl
+            HorizontalContentAlignment="Stretch"
+            VerticalContentAlignment="Stretch"
+            s:View.Model="{Binding CurrentView}" />
+
+        <!--  智能控制栏  -->
+        <Border
+            Grid.Row="1"
+            Padding="10"
+            Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <!--  导航按钮  -->
+                <Button
+                    Width="100"
+                    Command="{s:Action Previous}"
+                    Content="◄ 上一页"
+                    IsEnabled="{Binding CanPrevious}" />
+
+                <!--  自动轮播开关 Mode=OneWay允许 UI 反映状态，但禁止 UI 修改状态  -->
+                <ToggleButton
+                    Width="200"
+                    Margin="20,0"
+                    Background="{Binding IsAutoRotating, Converter={StaticResource BoolToColorConverter}}"
+                    Command="{s:Action ToggleAutoCarousel}"
+                    Content="{Binding AutoRotateStatusText}"
+                    IsChecked="{Binding IsAutoRotating, Mode=OneWay}" />
+
+                <!--  导航按钮  -->
+                <Button
+                    Width="100"
+                    Command="{s:Action Next}"
+                    Content="下一页 ►"
+                    IsEnabled="{Binding CanNext}" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

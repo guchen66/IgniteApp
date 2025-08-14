@@ -120,7 +120,7 @@ namespace IgniteApp.Shell.Home.ViewModels
             // 确保ImageSource是BitmapSource类型
             if (imageSource is BitmapSource bitmapSource)
             {
-                var openFilePath = IgniteInfoLocation.CameraPhotoPath;
+                var openFilePath = IgniteInfoLocation.Images;
                 // 检查路径是否存在，如果不存在则使用默认路径
                 if (!Directory.Exists(openFilePath))
                 {

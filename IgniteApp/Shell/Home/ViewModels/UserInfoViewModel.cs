@@ -48,7 +48,7 @@ namespace IgniteApp.Shell.Home.ViewModels
 
         public void ShowUserInfo()
         {
-            var xmlData = readService.Read(IgniteInfoLocation.UserInfoPath);
+            var xmlData = readService.Read(Path.Combine(IgniteInfoLocation.User, "UserInfo.xml"));
             XDocument doc = XDocument.Parse(xmlData);
             List<LoginDto> loginList = doc.Descendants("Login")
            .Select(login => new LoginDto

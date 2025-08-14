@@ -17,20 +17,21 @@ namespace IgniteAdmin.Managers.Login
 {
     public class UserManager
     {
-        public static void SaveXml(LoginDto loginDto)
+        public static void SaveUserInfo(LoginDto loginDto)
         {
             XmlDocument xmlDocument = new XmlDocument();
             XmlElement userElement;
-            if (File.Exists(IgniteInfoLocation.UserInfoPath))
+            var filePath = Path.Combine(IgniteInfoLocation.User, "UserInfo.xml");
+            if (File.Exists(filePath))
             {
-                xmlDocument.Load(IgniteInfoLocation.UserInfoPath);
+                xmlDocument.Load(filePath);
                 userElement = xmlDocument.DocumentElement;
             }
             else
             {
-                XmlDeclaration xmlDeclaration = xmlDocument.CreateXmlDeclaration("1.0","utf-8",null);
+                XmlDeclaration xmlDeclaration = xmlDocument.CreateXmlDeclaration("1.0", "utf-8", null);
                 xmlDocument.AppendChild(xmlDeclaration);
-                userElement= xmlDocument.CreateElement("UserInfo");
+                userElement = xmlDocument.CreateElement("UserInfo");
                 xmlDocument.AppendChild(userElement);
             }
             // 假设userElement是已经加载的XmlElement
@@ -81,9 +82,20 @@ namespace IgniteAdmin.Managers.Login
                 Login.AppendChild(IP);
 
                 userElement.AppendChild(Login);
-             
             }
-            xmlDocument.Save(IgniteInfoLocation.UserInfoPath);
+            xmlDocument.Save(filePath);
+        }
+
+        public static bool SearchCache(LoginDto loginDto)
+        {
+            var localLoginData = Path.Combine(IgniteInfoLocation.User, "UserInfo.xml");
+            XElement xElement = XElement.Load(localLoginData);
+            List<XElement> xElements = xElement.Descendants().ToList();
+            bool isValidUser = xElement.Descendants("Login")
+                                .Any(login =>
+                                    (string)login.Element("UserName") == loginDto.UserName &&
+                                    (string)login.Element("Password") == loginDto.Password);
+            return isValidUser;
         }
     }
 
@@ -91,9 +103,5 @@ namespace IgniteAdmin.Managers.Login
     {
         private static readonly Lazy<LoginDto> _instance = new Lazy<LoginDto>(() => new LoginDto());
         public static LoginDto Instance = _instance.Value;
-
-       
     }
-
-    
 }

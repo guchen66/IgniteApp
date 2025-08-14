@@ -22,6 +22,7 @@ using IgniteShared.Extensions;
 using IgniteApp.Dialogs.ViewModels;
 using IgniteApp.Common;
 using IgniteDevices.PLC;
+using IgniteApp.Shell.Footer.ViewModels;
 
 namespace IgniteApp
 {
@@ -37,11 +38,10 @@ namespace IgniteApp
             builder.AddModule(new AutoModules());
             // 只有真正需要全局唯一的对象才注册为单例
             builder.Bind<AlarmPublisher>().ToSelf().InSingletonScope();
-            builder.Bind<AlarmPopupViewModel>().ToSelf().InSingletonScope(); // 弹窗VM单例
-                                                                             // builder.Bind<IObserver<AlarmMessage>>().To<AlarmPopupNotifier>();
-                                                                             // 其他对象保持瞬态（Transient）或根据需要注册
-            builder.Bind<AlarmPopupNotifier>().ToSelf(); // 非单例
-            Logger.WriteLocal("注册成功");
+            builder.Bind<AlarmPopupViewModel>().ToSelf().InSingletonScope();
+
+            builder.Bind<AlarmPopupNotifier>().ToSelf();
+            Logger.WriteLocal($"注册成功");
         }
 
         protected override void Configure()

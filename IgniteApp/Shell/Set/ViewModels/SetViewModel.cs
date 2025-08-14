@@ -1,4 +1,5 @@
 ﻿using IgniteApp.Bases;
+using IgniteApp.Common;
 using IgniteApp.Extensions;
 using IgniteApp.Interfaces;
 using IgniteApp.Shell.Home.Models;
@@ -18,9 +19,9 @@ namespace IgniteApp.Shell.Set.ViewModels
     {
         public string HandlerName { get; set; } = "Setting";
 
-        private BindableCollection<IMenuItem> _setMenuList;
+        private IReadOnlyCollection<IMenuItem> _setMenuList;
 
-        public BindableCollection<IMenuItem> SetMenuList
+        public IReadOnlyCollection<IMenuItem> SetMenuList
         {
             get => _setMenuList;
             set => SetAndNotify(ref _setMenuList, value);
@@ -41,16 +42,7 @@ namespace IgniteApp.Shell.Set.ViewModels
         {
             this._viewFactory = viewFactory;
             this._readService = readService;
-            var model = _readService.Current.SelectConfig(HandlerName).Result;
-            if (model is Dictionary<string, string> dictss)
-            {
-                var listss = dictss.TryOrderBy().Select(kvp => new TangdaoMenuItem
-                {
-                    MenuName = kvp.Value,
-                }).ToList();
-                SetMenuList = new BindableCollection<IMenuItem>(listss);
-            }
-
+            SetMenuList = ReadOnlyMenuItemManager.Create(readService, HandlerName);
             this.BindAndInvoke(viewModel => viewModel.SelectedIndex, (obj, args) => DoNavigateToView());
         }
 

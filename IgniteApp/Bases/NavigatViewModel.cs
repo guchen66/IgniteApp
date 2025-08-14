@@ -1,4 +1,5 @@
 ﻿using IgniteApp.Interfaces;
+using IT.Tangdao.Framework.DaoAdmin.IServices;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -8,12 +9,15 @@ using System.Threading.Tasks;
 
 namespace IgniteApp.Bases
 {
-    public class NavigatViewModel : Conductor<IScreen>.Collection.OneActive
+    public abstract class NavigatViewModel : Conductor<IScreen>.Collection.OneActive
     {
         // public virtual string Name { get; set; }
         public IViewFactory ViewFactoryService;
 
+        // private readonly IReadService Read;
         public readonly INavigateRoute NavigatRouteService;
+
+        //public string HandlerName { get; set; }
 
         public NavigatViewModel()
         {

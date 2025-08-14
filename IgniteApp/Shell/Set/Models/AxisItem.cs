@@ -71,15 +71,15 @@ namespace IgniteApp.Shell.Set.Models
 
         public void InitializalData()
         {
-            _readService.Current.XMLData = _readService.Read(IgniteInfoLocation.AxisInfoPath);
+            var xmlData = _readService.Read(IgniteInfoLocation.AxisInfoPath);
 
-            if (_readService.Current.XMLData == null)
+            if (xmlData == null)
             {
                 return;
             }
-            _readService.Current.Load();
+            _readService.Current.Load(xmlData);
 
-            List<AxisItem> AxisItems = XmlFolderHelper.Deserialize<List<AxisItem>>(_readService.Current.XMLData);
+            List<AxisItem> AxisItems = XmlFolderHelper.Deserialize<List<AxisItem>>(xmlData);
             foreach (var item in AxisItems)
             {
                 Add(item);

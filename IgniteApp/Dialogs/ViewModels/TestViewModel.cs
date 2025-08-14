@@ -15,9 +15,17 @@ namespace IgniteApp.Dialogs.ViewModels
 {
     public class TestViewModel : Screen, IDialogProvider
     {
+        public TestViewModel()
+        {
+        }
+
         public DialogResult OnDialogClosing()
         {
-            return new DialogResult();
+            return new DialogResult()
+            {
+                Result = true,
+                ResultValue = "Hello,World"
+            };
         }
 
         private ObservableCollection<string> _propertyList;

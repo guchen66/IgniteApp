@@ -1,0 +1,5 @@
+2025-08-07 08:31:36.669 [1] C:\USERS\LIUXIN\APPDATA\ROAMING\IGNITE\APPS IT.Tangdao.Framework.DaoAdmin.DaoLogger
+System.InvalidOperationException: 不支持的文件类型: None
+   在 IT.Tangdao.Framework.DaoAdmin.Read.Load(String data)
+   在 IgniteApp.ViewModels.LoginViewModel.OnActivate() 位置 E:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\ViewModels\LoginViewModel.cs:行号 178
+

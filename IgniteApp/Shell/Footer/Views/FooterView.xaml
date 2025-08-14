@@ -45,7 +45,7 @@
                 </StackPanel>
             </StatusBarItem>
             <Separator />
-            <StatusBarItem>
+            <!--<StatusBarItem>
                 <StackPanel Orientation="Horizontal">
                     <Ellipse
                       Width="10"
@@ -57,13 +57,14 @@
                     </Ellipse>
                     <TextBlock Text="其他" />
                 </StackPanel>
-            </StatusBarItem>
+            </StatusBarItem>-->
         </StatusBar>
 
         <StackPanel Orientation="Horizontal" Grid.Column="1">
-            <Button Command="{s:Action Test}" Content="测试" />
-            <Button Command="{s:Action OpenEQP}" Content="账料" x:Name="btn" />
-            <Button Command="{s:Action OpenTTView}" Content="TT" />
+            <Button Command="{s:Action Test}" Content="测试" Margin="5" />
+            <Button Command="{s:Action OpenEQP}" Content="账料" Margin="5" />
+            <Button Command="{s:Action OpenTTView}" Content="TT" Margin="5" />
+            <Button Command="{s:Action OpenPhotoView}" Content="拍照" Margin="5" />
         </StackPanel>
     </Grid>
 </UserControl>

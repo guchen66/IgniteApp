@@ -46,7 +46,7 @@ namespace IgniteApp.Shell.Maintion.ViewModels
             _navigatRoute = navigatRoute;
             _readService = readService;
             //MaintainMenuList = ReadOnlyMenuItemManager.Create(readService, HandlerName);
-            MaintainMenuList = ReadOnlyMenuItemManager.Create2(readService, HandlerName);
+            MaintainMenuList = ReadOnlyMenuItemManager.Create(readService, HandlerName);
 
             this.BindAndInvoke(viewModel => viewModel.SelectedIndex, (obj, args) => DoNavigateToView());
         }

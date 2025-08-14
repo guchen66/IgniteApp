@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Windows.Threading;
 using IgniteShared.Extensions;
 using IgniteApp.Common.Enums;
+using IgniteAdmin.Workers;
 
 namespace IgniteApp.Shell.Aside.ViewModels
 {
@@ -60,9 +61,10 @@ namespace IgniteApp.Shell.Aside.ViewModels
         /// <summary>
         /// 开始
         /// </summary>
-        public void ExecuteStart()
+        public async void ExecuteStart()
         {
-            _autoRun.Run();
+            await new WorkstationManager().StartAllAsync();
+            await _autoRun.Run();
             CurrentStatus = RunStatus.Running;
         }
 

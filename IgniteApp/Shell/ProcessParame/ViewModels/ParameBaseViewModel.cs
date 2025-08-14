@@ -41,18 +41,20 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
         {
             _viewFactory = viewFactory;
             _readService = readService;
-            ParameMenuList = ReadOnlyMenuItemManager.Create2(readService, HandlerName);
+            ParameMenuList = ReadOnlyMenuItemManager.Create(readService, HandlerName);
             this.BindAndInvoke(viewModel => viewModel.SelectedIndex, (obj, args) => DoNavigateToView());
         }
 
         private void DoNavigateToView()
         {
+            //ActionActivate.ExecuteActivation(ActivateItem, _viewFactory.CreateViewModel(HandlerName), SelectedIndex);
             //  NavigatRouteService.GetRoute(SelectedIndex,DisplayName);
             switch (SelectedIndex)
             {
                 case 0: ActivateItem(LoadCalibrationViewModel ?? (LoadCalibrationViewModel = _viewFactory.LoadCalibrationViewModel())); break;
                 case 1: ActivateItem(UnLoadCalibrationViewModel ?? (UnLoadCalibrationViewModel = _viewFactory.UnLoadCalibrationViewModel())); break;
                 case 2: ActivateItem(AccuracyOffsetViewModel ?? (AccuracyOffsetViewModel = _viewFactory.AccuracyOffsetViewModel())); break;
+                case 3: ActivateItem(TeachingViewModel ?? (TeachingViewModel = _viewFactory.TeachingViewModel())); break;
                 default:
                     break;
             }
@@ -61,5 +63,16 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
         public LoadCalibrationViewModel LoadCalibrationViewModel;
         public UnLoadCalibrationViewModel UnLoadCalibrationViewModel;
         public AccuracyOffsetViewModel AccuracyOffsetViewModel;
+        public TeachingViewModel TeachingViewModel;
+    }
+
+    public delegate void ActivateItemDelegate<T>(T item);
+
+    public class ActionActivate
+    {
+        public static void ExecuteActivation<T>(ActivateItemDelegate<T> activator, T item, int i)
+        {
+            activator(item);
+        }
     }
 }

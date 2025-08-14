@@ -98,11 +98,11 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
         {
             string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory);
             // 规范输出文件路径
-            string outputPath = Path.Combine(IgniteInfoLocation.TempframeworkPath, "001.xlsx");
+            string outputPath = Path.Combine(IgniteInfoLocation.Framework, "001.xlsx");
 
             // 规范模板文件路径（假设模板放在程序目录下）
             //  string templatePath = Path.Combine(filePath, "temp.xlsx");
-            string templatePath = Path.Combine(IgniteInfoLocation.TempframeworkPath, "tempframework.xlsx");
+            string templatePath = Path.Combine(IgniteInfoLocation.Framework, "tempframework.xlsx");
 
             var TemplateData = new TemplateData() { Data = LoadCalibrationDataList.ToList() };
             // MiniExcel.SaveAsByTemplate(outputPath, templatePath, new { datas });

@@ -1,7 +1,16 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|e:\\csharp project\\applyclient\\igniteapp\\igniteapp\\dialogs\\views\\globalphotoview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|solutionrelative:igniteapp\\dialogs\\views\\globalphotoview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|E:\\CSharp Project\\ApplyClient\\IgniteApp\\igniteapp\\dialogs\\viewmodels\\globalphotoviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|solutionrelative:igniteapp\\dialogs\\viewmodels\\globalphotoviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,6 +47,31 @@
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "GlobalPhotoView.xaml",
+              "DocumentMoniker": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Dialogs\\Views\\GlobalPhotoView.xaml",
+              "RelativeDocumentMoniker": "IgniteApp\\Dialogs\\Views\\GlobalPhotoView.xaml",
+              "ToolTip": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Dialogs\\Views\\GlobalPhotoView.xaml",
+              "RelativeToolTip": "IgniteApp\\Dialogs\\Views\\GlobalPhotoView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-08-14T14:53:10.092Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GlobalPhotoViewModel.cs",
+              "DocumentMoniker": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Dialogs\\ViewModels\\GlobalPhotoViewModel.cs",
+              "RelativeDocumentMoniker": "IgniteApp\\Dialogs\\ViewModels\\GlobalPhotoViewModel.cs",
+              "ToolTip": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Dialogs\\ViewModels\\GlobalPhotoViewModel.cs",
+              "RelativeToolTip": "IgniteApp\\Dialogs\\ViewModels\\GlobalPhotoViewModel.cs",
+              "ViewState": "AQIAABsAAAAAAAAAAAAcwCcAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-14T13:43:03.047Z",
+              "EditorCaption": ""
             }
           ]
         }

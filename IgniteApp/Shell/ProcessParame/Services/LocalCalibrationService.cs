@@ -34,7 +34,7 @@ namespace IgniteApp.Shell.ProcessParame.Services
                 string day = DateTime.Now.Day.ToString("00");    // 补零，如"01"
 
                 string directoryPath = Path.Combine(
-                    IgniteInfoLocation.TempframeworkPath,
+                    IgniteInfoLocation.Framework,
                     year,
                     month,
                     day
@@ -107,7 +107,7 @@ namespace IgniteApp.Shell.ProcessParame.Services
                 ["Ng报表"] = withIdData.Where(x => x.Result.ToYAndN() == "N").ToList(),
                 ["统计"] = CalculateStatistics(withIdData)
             };
-            string templatePath = Path.Combine(IgniteInfoLocation.TempframeworkPath, "tempframework.xlsx");
+            string templatePath = Path.Combine(IgniteInfoLocation.Framework, "tempframework.xlsx");
 
             var TemplateData = new TemplateData() { Data = newData.ToList() };
             //var TemplateData = new TemplateData() { Data = initialSheets };
@@ -139,7 +139,7 @@ namespace IgniteApp.Shell.ProcessParame.Services
                 var localData = MiniExcel.Query<MotionCalibrationModel>(filePath);
                 //// 2. 计算新数据的起始ID（现有最大ID + 1）
                 int nextId = localData.Count() > 0 ? localData.Max(x => x.Id) + 1 : 0;
-                nextId = localData.Count() ;
+                nextId = localData.Count();
                 //// 3. 为新数据分配自增ID
                 for (int i = 0; i < realData.Count; i++)
                 {
@@ -160,9 +160,9 @@ namespace IgniteApp.Shell.ProcessParame.Services
 
                 // 写入临时文件
                 // MiniExcel.SaveAs(tempFile, updatedSheets);
-               
+
                 var updateData = localData.Concat(realData);
-                string templatePath = Path.Combine(IgniteInfoLocation.TempframeworkPath, "tempframework.xlsx");
+                string templatePath = Path.Combine(IgniteInfoLocation.Framework, "tempframework.xlsx");
 
                 var TemplateData = new TemplateData() { Data = updateData.ToList() };
                 //var TemplateData = new TemplateData() { Data = updatedSheets };

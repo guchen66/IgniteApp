@@ -10,14 +10,6 @@ namespace IgniteShared.Globals.Local
 {
     public static class IgniteLocation
     {
-        static IgniteLocation()
-        {
-            Directory.CreateDirectory(Apps);
-            Directory.CreateDirectory(Logs);
-            Directory.CreateDirectory(Database);
-            Directory.CreateDirectory(Temp);
-        }
-
         /// <summary>
         /// It represents the path where the "Accelerider.Windows.exe" is located.
         /// </summary>
@@ -36,7 +28,7 @@ namespace IgniteShared.Globals.Local
         /// <summary>
         /// %AppData%\Accelerider\Apps
         /// </summary>
-        public static readonly string Apps = Path.Combine(AppData, nameof(Apps));
+        //public static readonly string Apps = Path.Combine(IgniteInfoLocation.LoggerPath, nameof(Apps));
 
         /// <summary>
         /// %AppData%\Accelerider\Logs
