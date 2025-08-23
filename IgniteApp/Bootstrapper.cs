@@ -23,6 +23,7 @@ using IgniteApp.Dialogs.ViewModels;
 using IgniteApp.Common;
 using IgniteDevices.PLC;
 using IgniteApp.Shell.Footer.ViewModels;
+using IgniteApp.Tests;
 
 namespace IgniteApp
 {
@@ -53,6 +54,22 @@ namespace IgniteApp
                 WorkerId = 1,// 取值范围0~63,默认1
                              // DataCenterId=1,//数据中心Id
             });
+        }
+
+        protected override void OnLaunch()
+        {
+            base.OnLaunch();
+            // 启动监控服务
+            var monitorService = Container.Get<IMonitorService>();
+            monitorService.XmlFileChanged += OnXmlFileChanged;
+            monitorService.StartMonitoring();
+        }
+
+        private void OnXmlFileChanged(object sender, XmlFileChangedEventArgs e)
+        {
+            Logger.WriteLocal($"XML 文件变化: {e.FilePath}, 变化类型: {e.ChangeType}，变化详情：{e.ChangeDetails}，old:{e.OldContent},new:{e.NewContent}");
+            // 在这里处理文件变化逻辑
+            // 可以使用 Messenger 发送消息到 ViewModel
         }
 
         protected override void OnStart()

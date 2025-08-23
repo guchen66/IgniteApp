@@ -10,6 +10,7 @@ using Stylet;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -71,8 +72,8 @@ namespace IgniteApp.Shell.Set.Models
 
         public void InitializalData()
         {
-            var xmlData = _readService.Read(IgniteInfoLocation.AxisInfoPath);
-
+            var foldPath = Path.Combine(IgniteInfoLocation.Recipe, "AxisInfo.xml");
+            var xmlData = _readService.Read(foldPath);
             if (xmlData == null)
             {
                 return;
@@ -104,8 +105,9 @@ namespace IgniteApp.Shell.Set.Models
                 AxisItems = new List<AxisItem>(s);
 
                 var info = XmlFolderHelper.SerializeXML<List<AxisItem>>(AxisItems);
-                _writeService.WriteString(IgniteInfoLocation.AxisInfoPath, info);
-                var xmlData = _readService.Read(IgniteInfoLocation.AxisInfoPath);
+                var foldPath = Path.Combine(IgniteInfoLocation.Recipe, "AxisInfo.xml");
+                _writeService.WriteString(foldPath, info);
+                var xmlData = _readService.Read(foldPath);
 
                 if (xmlData == null)
                 {

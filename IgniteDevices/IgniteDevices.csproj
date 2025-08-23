@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="halcondotnetxl">
+      <HintPath>..\..\..\..\nuget\StartDll\halcondotnetxl.dll</HintPath>
+    </Reference>
     <Reference Include="IT.Tangdao.Framework, Version=3.0.13.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\nuget\MyPackages\IT.Tangdao.Framework.dll</HintPath>
@@ -62,15 +65,14 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Camera\Manager\ImageViewer.cs" />
     <Compile Include="Connections\ConnectionContext.cs" />
     <Compile Include="Connections\ConnectionResult.cs" />
     <Compile Include="Connections\Interfaces\IConnectionState.cs" />
     <Compile Include="Connections\SerialState.cs" />
     <Compile Include="Connections\TcpState.cs" />
-    <Compile Include="Core\Interfaces\IDeviceResult.cs" />
     <Compile Include="Core\Models\ConnectionData.cs" />
     <Compile Include="Core\Models\PlcData.cs" />
-    <Compile Include="Core\Models\Results\DeviceResult.cs" />
     <Compile Include="Core\Models\Results\PlcResult.cs" />
     <Compile Include="DeviceGroupService.cs" />
     <Compile Include="PLC\AlarmMessage.cs" />
@@ -106,7 +108,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Camera\" />
+    <Folder Include="Core\Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IgniteShared\IgniteShared.csproj">

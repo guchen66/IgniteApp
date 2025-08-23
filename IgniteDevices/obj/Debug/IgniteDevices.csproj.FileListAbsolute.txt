@@ -2,6 +2,7 @@ E:\CSharp Project\ApplyClient\IgniteApp\IgniteDevices\bin\Debug\Configures\appse
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDevices\bin\Debug\Db\demo.db
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDevices\bin\Debug\IgniteDevices.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDevices\bin\Debug\IgniteDevices.pdb
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteDevices\bin\Debug\halcondotnetxl.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDevices\bin\Debug\IgniteShared.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDevices\bin\Debug\IT.Tangdao.Framework.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteDevices\bin\Debug\Newtonsoft.Json.dll

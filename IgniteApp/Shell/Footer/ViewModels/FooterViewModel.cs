@@ -1,11 +1,12 @@
-﻿using HandyControl.Controls;
-using IgniteAdmin.Providers;
+﻿using IgniteAdmin.Providers;
 using IgniteApp.Bases;
+using IgniteApp.Common;
 using IgniteApp.Dialogs.ViewModels;
 using IgniteApp.Extensions;
 using IgniteApp.Interfaces;
 using IgniteApp.Modules;
 using IgniteApp.Shell.Home.Models;
+using IgniteApp.Shell.Set.Models;
 using IgniteApp.ViewModels;
 using IgniteDb;
 using IgniteDb.IRepositorys;
@@ -25,12 +26,14 @@ using Stylet;
 using StyletIoC;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Xml.Linq;
 using Unity;
@@ -65,8 +68,9 @@ namespace IgniteApp.Shell.Footer.ViewModels
         private IWindowManager _windowManager;
         private readonly System.Timers.Timer _statusTimer;
         private IDialogService _dialogService;
+        private IReadService _readService;
 
-        public FooterViewModel(IPlcProvider plcProvider, IWindowManager windowManager, IDialogService dialogService, Func<TTForgeViewModel> viewModelFactory)
+        public FooterViewModel(IPlcProvider plcProvider, IWindowManager windowManager, IDialogService dialogService, Func<TTForgeViewModel> viewModelFactory, IReadService readService)
         {
             _plcProvider = plcProvider;
             _windowManager = windowManager;
@@ -80,6 +84,7 @@ namespace IgniteApp.Shell.Footer.ViewModels
             // 立即执行首次检查
             QueryPlcStatus();
             _viewModelFactory = viewModelFactory;
+            _readService = readService;
         }
 
         #endregion
@@ -115,11 +120,50 @@ namespace IgniteApp.Shell.Footer.ViewModels
 
         public void Test()
         {
-            _windowManager.ShowDialog(TestViewModel);
+            // var wins = System.Windows.Application.Current.Windows;
+            // var view = GetWindowFromViewModel(TestViewModel);
+            SplitScreenManager.OpenOnSecondaryScreen(_windowManager, TestViewModel);
+            var s = TestViewModel.View;
+            // _windowManager.ShowDialog(TestViewModel);
             //_dialogService.Show(TestViewModel, result: (result) =>
             //{
             //    var str = result.ResultValue;
             //});
+        }
+
+        public void Test2()
+        {
+            var foldPath = Path.Combine(IgniteInfoLocation.Recipe, "ProcessItem.xml");
+            var xmlData = _readService.Read(foldPath);
+
+            if (xmlData == null)
+            {
+                return;
+            }
+            _readService.Current.Load(xmlData);
+            var readResult = _readService.Current.SelectNodes<ProcessItem>();
+            if (readResult.IsSuccess)
+            {
+                var ProcessItems = new ObservableCollection<ProcessItem>(readResult.Data);
+                if (ProcessItems.FirstOrDefault().IsFeeding)
+                {
+                }
+            }
+            var s = TestViewModel.View;
+        }
+
+        private Window GetWindowFromViewModel(object viewModel)
+        {
+            // 通过Application.Current.Windows查找对应的窗口
+            foreach (Window window in System.Windows.Application.Current.Windows)
+            {
+                if (window.DataContext == viewModel)
+                {
+                    return window;
+                }
+            }
+
+            return null;
         }
 
         public void OpenEQP()
@@ -154,7 +198,38 @@ namespace IgniteApp.Shell.Footer.ViewModels
 
         public void OpenPhotoView()
         {
-            _windowManager.ShowWindow(GlobalPhotoViewModel);
+            // 获取窗口引用
+            var win = GlobalPhotoViewModel.View as Window;
+
+            // 情况1：窗口尚未创建或显示
+            if (win == null || win.Visibility != Visibility.Visible)
+            {
+                _windowManager.ShowWindow(GlobalPhotoViewModel);
+                return;
+            }
+
+            // 情况2：窗口已存在，需要激活并带到前台
+            // 无论最小化还是被遮挡，都统一处理
+
+            // 1. 确保可见（防止被隐藏）
+            win.Visibility = Visibility.Visible;
+
+            // 2. 如果是最小化，先还原到正常状态
+            if (win.WindowState == WindowState.Minimized)
+            {
+                win.WindowState = WindowState.Normal;
+            }
+
+            // 3. 激活窗口并带到前台
+            win.Activate();
+
+            // 4. 可选：强制置顶一下（解决某些系统的激活限制）
+            var originalTopmost = win.Topmost;
+            win.Topmost = true;
+            win.Topmost = originalTopmost;
+
+            // 5. 尝试获取焦点（双重保险）
+            win.Focus();
         }
     }
 }

@@ -149,7 +149,7 @@ namespace IgniteApp.ViewModels
                     return;
                 }
                 _readService.Current.Load(xmlData);
-                var isRememberValue = _readService.Current.SelectNode("IsRemember").Value;// 获取元素的值
+                var isRememberValue = _readService.Current.SelectNode("IsRemember").Result;// 获取元素的值
                 // 将字符串转换为bool类型
                 if (bool.TryParse(isRememberValue, out bool isRemember))
                 {

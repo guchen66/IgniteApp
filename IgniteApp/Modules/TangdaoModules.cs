@@ -27,7 +27,6 @@ using IgniteApp.ViewModels;
 using IgniteApp.Shell.Maintion.ViewModels;
 using IT.Tangdao.Framework;
 using IT.Tangdao.Framework.DaoEvents;
-using Microsoft.Extensions.DependencyInjection;
 using StyletIoC.Creation;
 using IgniteShared.Dtos;
 
@@ -61,6 +60,8 @@ namespace IgniteApp.Modules
               {
                   dispatcher.Subscribe(handler);
               }*/
+
+            Bind(typeof(IReadProvider<>)).To(typeof(XmlReadProvider<>));
         }
 
         private ITangdaoMessage Builder(IRegistrationContext context)

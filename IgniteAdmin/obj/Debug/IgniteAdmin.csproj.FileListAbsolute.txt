@@ -15,6 +15,7 @@ E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\Debug\Stylet.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\Debug\System.Threading.Tasks.Extensions.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\Debug\System.ValueTuple.dll
+E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\Debug\halcondotnetxl.dll
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\Debug\IgniteDevices.pdb
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\Debug\IgniteShared.pdb
 E:\CSharp Project\ApplyClient\IgniteApp\IgniteAdmin\bin\Debug\IgniteShared.dll.config

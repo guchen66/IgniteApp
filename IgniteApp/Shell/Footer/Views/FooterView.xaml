@@ -14,7 +14,13 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
     <UserControl.Resources>
-        <conver:BoolToColorConverter x:Key="deviceState" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary />
+            </ResourceDictionary.MergedDictionaries>
+
+            <conver:BoolToColorConverter x:Key="deviceState" />
+        </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
 
@@ -45,23 +51,24 @@
                 </StackPanel>
             </StatusBarItem>
             <Separator />
-            <!--<StatusBarItem>
+            <StatusBarItem>
                 <StackPanel Orientation="Horizontal">
-                    <Ellipse
+                    <!--<Ellipse
                       Width="10"
                       Height="10"
                       Margin="0,0,5,0">
                         <i:Interaction.Behaviors>
                             <be:ShapeBehavior IsConnected="{Binding ElementName=btn,Path=IsEnabled}" />
                         </i:Interaction.Behaviors>
-                    </Ellipse>
+                    </Ellipse>-->
                     <TextBlock Text="其他" />
                 </StackPanel>
-            </StatusBarItem>-->
+            </StatusBarItem>
         </StatusBar>
 
         <StackPanel Orientation="Horizontal" Grid.Column="1">
             <Button Command="{s:Action Test}" Content="测试" Margin="5" />
+            <Button Command="{s:Action Test2}" Content="测试2" Margin="5" />
             <Button Command="{s:Action OpenEQP}" Content="账料" Margin="5" />
             <Button Command="{s:Action OpenTTView}" Content="TT" Margin="5" />
             <Button Command="{s:Action OpenPhotoView}" Content="拍照" Margin="5" />

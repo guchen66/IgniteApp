@@ -3,13 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace IgniteShared.Globals.Local
 {
     /// <summary>
-    /// 保存的信息地址
+    /// 保存的数据的所有地址
     /// </summary>
     public class IgniteInfoLocation
     {
@@ -27,11 +28,6 @@ namespace IgniteShared.Globals.Local
         }
 
         public static readonly string AppData = Path.Combine("E:\\IgniteDatas");
-
-        /// <summary>
-        /// 轴参数保存地址
-        /// </summary>
-        public const string AxisInfoPath = "E://IgniteDatas//axisInfo.xml";
 
         /// <summary>
         /// 用户
@@ -77,5 +73,17 @@ namespace IgniteShared.Globals.Local
         /// Log地址
         /// </summary>
         public static readonly string Logger = Path.Combine(AppData, nameof(Logger));
+    }
+
+    public static class IgniteInfoLocationExtensions
+    {
+        public static IEnumerable<string> GetDirectoriesToMonitor(this IgniteInfoLocation location)
+        {
+            return typeof(IgniteInfoLocation)
+                .GetFields(BindingFlags.Static | BindingFlags.Public)
+                .Where(f => f.FieldType == typeof(string))
+                .Select(f => (string)f.GetValue(null))
+                .Where(Directory.Exists);
+        }
     }
 }

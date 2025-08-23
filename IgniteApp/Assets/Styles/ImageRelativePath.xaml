@@ -8,4 +8,10 @@
     <BitmapImage x:Key="LightSource" UriSource="pack://application:,,,/IgniteApp;component/Assets/Images/Light.png" />
     <!--  正确写法2：简化路径（需确认程序集名称）  -->
     <BitmapImage x:Key="imageSource2" UriSource="/Assets/Images/dotNet.jpg" />
+
+    <!--  轮播图测试图片  -->
+    <BitmapImage x:Key="Zero" UriSource="/Assets/Images/0.png" />
+    <BitmapImage x:Key="One" UriSource="/Assets/Images/1.png" />
+    <BitmapImage x:Key="Two" UriSource="/Assets/Images/2.png" />
+    <BitmapImage x:Key="Three" UriSource="/Assets/Images/3.png" />
 </ResourceDictionary>

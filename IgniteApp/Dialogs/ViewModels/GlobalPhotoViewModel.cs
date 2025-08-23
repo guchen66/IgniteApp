@@ -10,7 +10,7 @@ using System.Windows.Threading;
 
 namespace IgniteApp.Dialogs.ViewModels
 {
-    public class GlobalPhotoViewModel : Screen
+    public class GlobalPhotoViewModel : Screen//, IHaveDisplayName
     {
         private readonly BindableCollection<IPhotoView> _photoViews = new BindableCollection<IPhotoView>();
         private IPhotoView _currentView;
@@ -38,18 +38,6 @@ namespace IgniteApp.Dialogs.ViewModels
                 NotifyOfPropertyChange();
             }
         }
-
-        //private bool _isAutoRotating;
-
-        //public bool IsAutoRotating
-        //{
-        //    get => _isAutoRotating;
-        //    set
-        //    {
-        //        SetAndNotify(ref _isAutoRotating, value);
-        //        NotifyOfPropertyChange(nameof(AutoRotateStatusText));
-        //    }
-        //}
 
         public string AutoRotateStatusText => IsAutoRotating ? "自动轮播开启中" : "自动轮播已禁用";
 
@@ -111,6 +99,25 @@ namespace IgniteApp.Dialogs.ViewModels
             _currentIndex = (_currentIndex + 1) % _photoViews.Count;
             CurrentView = _photoViews[_currentIndex];
             RefreshNavigationState();
+        }
+
+        protected override void OnViewLoaded()
+        {
+            base.OnViewLoaded();
+            var win = View;
+            DisplayName = "全局图片显示";
+        }
+
+        protected override void OnInitialActivate()
+        {
+            base.OnInitialActivate();
+            var win = View;
+        }
+
+        protected override void OnActivate()
+        {
+            base.OnActivate();
+            var win = View;
         }
 
         protected override void OnDeactivate()

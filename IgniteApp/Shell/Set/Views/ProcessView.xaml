@@ -25,7 +25,7 @@
         <hc:TabControl ItemsSource="{Binding ProcessItems}">
             <hc:TabControl.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Name}" />
+                    <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
                 </DataTemplate>
             </hc:TabControl.ItemTemplate>
             <hc:TabControl.ContentTemplate>
@@ -34,8 +34,18 @@
             </hc:TabControl.ContentTemplate>
         </hc:TabControl>
         <Grid Grid.Row="1">
-            <Button Width="100" Height="30" Command="{s:Action RefreshProcessData}" />
-            <Button Width="100" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="保存" Command="{s:Action SaveProcessData}" />
+            <Button
+                Width="100"
+                Height="30"
+                Command="{s:Action RefreshProcessData}"
+                Content="刷新数据" />
+            <Button
+                Width="100"
+                Height="30"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Command="{s:Action SaveProcessData}"
+                Content="保存" />
         </Grid>
     </Grid>
 </UserControl>

@@ -1,5 +1,6 @@
 ﻿using IgniteApp.Shell.Home.Models;
 using IT.Tangdao.Framework.DaoAdmin.IServices;
+using IT.Tangdao.Framework.DaoAdmin.Results;
 using IT.Tangdao.Framework.DaoAdmin.Services;
 using IT.Tangdao.Framework.DaoDtos.Items;
 using IT.Tangdao.Framework.Extensions;
@@ -20,7 +21,7 @@ namespace IgniteApp.Common
         public static ReadOnlyCollection<IMenuItem> Create(IReadService readService, string readTitle)
         {
             //字典转列表
-            var result = readService.Current.SelectConfig(readTitle).Result;
+            var result = readService.Current.SelectConfig(readTitle).ToReadResult<Dictionary<string, string>>().Data;
 
             if (result is Dictionary<string, string> d1)
             {
@@ -39,7 +40,7 @@ namespace IgniteApp.Common
 
         public static IReadOnlyCollection<IMenuItem> Create2<T>(IReadService readService, string readTitle)
         {
-            var result = readService.Current.SelectConfig(readTitle).Result;
+            var result = readService.Current.SelectConfig(readTitle).ToReadResult<Dictionary<string, string>>().Data;
 
             if (result is Dictionary<string, T> dict)
             {
@@ -55,8 +56,12 @@ namespace IgniteApp.Common
 
         public static IReadOnlyCollection<HomeMenuItem> Create(IReadService readService, string readTitle, string section)
         {
-            var model = readService.Current.SelectCustomConfig(readTitle, section).Result;
-            if (model is Dictionary<string, string> dicts)
+            var s1 = readService.Current.SelectCustomConfig(readTitle, section);
+            var s2 = s1.ToReadResult<Dictionary<string, string>>();
+            var dicts = readService.Current.SelectCustomConfig(readTitle, section).ToReadResult<Dictionary<string, string>>().Data;
+
+            //   var model = readService.Current.SelectCustomConfig(readTitle, section).ToGenericResult<Dictionary<string, string>>().Data;
+            if (dicts != null)
             {
                 List<HomeMenuItem> menuItems = dicts.Select(kvp => new HomeMenuItem
                 {

@@ -13,6 +13,11 @@ namespace IgniteApp.Dialogs.ViewModels
         public string ViewName => "上料预校";
         public int DisplayOrder => 1;
 
+        public LoadPrePhotoViewModel()
+        {
+            DisplayName = ViewName;
+        }
+
         // 业务逻辑...
     }
 }

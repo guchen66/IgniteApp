@@ -1,5 +1,7 @@
 ﻿using HandyControl.Controls;
+using IgniteAdmin.Providers;
 using IgniteApp.Bases;
+using IgniteApp.Interfaces;
 using IgniteApp.Shell.Set.Models;
 using IgniteShared.Dtos;
 using IgniteShared.Globals.Local;
@@ -8,6 +10,7 @@ using IT.Tangdao.Framework.DaoAdmin.IServices;
 using IT.Tangdao.Framework.DaoAdmin.Services;
 using IT.Tangdao.Framework.DaoEnums;
 using IT.Tangdao.Framework.Helpers;
+using Stylet;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,22 +30,24 @@ namespace IgniteApp.Shell.Set.ViewModels
         #endregion
 
         #region--属性--
-        private ObservableCollection<ProcessItem> _processItems;
+        private BindableCollection<ProcessItem> _processItems;
 
-        public ObservableCollection<ProcessItem> ProcessItems
+        public BindableCollection<ProcessItem> ProcessItems
         {
             get => _processItems;
             set => SetAndNotify(ref _processItems, value);
         }
 
+        private IReadProvider<ProcessItem> _readProvider;
         #endregion
 
         #region--.ctor--
 
-        public ProcessViewModel(IReadService readService, IWriteService writeService)
+        public ProcessViewModel(IReadService readService, IWriteService writeService, IReadProvider<ProcessItem> readProvider)
         {
             _readService = readService;
             _writeService = writeService;
+            _readProvider = readProvider;
             InitializalData();
         }
 
@@ -52,33 +57,24 @@ namespace IgniteApp.Shell.Set.ViewModels
 
         public void InitializalData()
         {
-            var foldPath = Path.Combine(IgniteInfoLocation.Recipe, "ProcessInfo.xml");
-            var xmlData = _readService.Read(foldPath);
-
-            if (xmlData == null)
+            var operations = _readProvider.SelectList(IgniteInfoLocation.Recipe);
+            if (operations.IsSuccess)
             {
-                ProcessItems = new ObservableCollection<ProcessItem>()
-                {
-                     new ProcessItem(){Name="生产模式",IsFeeding=false,IsBoardMade=false,IsBoardCheck=false,IsSafe=false,IsCharge=true}
-                };
-                return;
+                ProcessItems = new BindableCollection<ProcessItem>(operations.Data);
             }
-            _readService.Current.Load(xmlData);
-            var readResult = _readService.Current.SelectNodes<ProcessItem>();
-            if (readResult.Status)
-            {
-                ProcessItems = new ObservableCollection<ProcessItem>(readResult.Result);
-            }
+            NotifyOfPropertyChange(nameof(ProcessItems));
         }
 
         public void RefreshProcessData()
         {
+            InitializalData();
+
             MessageBox.Success("流程刷新成功");
         }
 
         public void SaveProcessData()
         {
-            var foldPath = Path.Combine(IgniteInfoLocation.Recipe, "ProcessInfo.xml");
+            var foldPath = Path.Combine(IgniteInfoLocation.Recipe, "ProcessItem.xml");
             //将数据写成XML格式保存在本地
             _writeService.WriteEntityToXml(ProcessItems, foldPath);
             MessageBox.Success("流程保存成功");

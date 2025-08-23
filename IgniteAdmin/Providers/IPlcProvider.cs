@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using IgniteDevices.Core.Models.Results;
 using Modbus.Device;
 using IgniteDevices.Connections;
+using IT.Tangdao.Framework.DaoAdmin.Results;
 
 namespace IgniteAdmin.Providers
 {
@@ -15,6 +16,6 @@ namespace IgniteAdmin.Providers
     {
         ConnectionContext Context { get; }
 
-        PlcResult ConnectionSiglePLC();
+        DeviceResult ConnectionSiglePLC();
     }
 }

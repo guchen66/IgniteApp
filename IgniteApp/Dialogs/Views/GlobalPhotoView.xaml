@@ -2,7 +2,7 @@
     x:Class="IgniteApp.Dialogs.Views.GlobalPhotoView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:convert="clr-namespace:IgniteApp.Converters"
+    xmlns:convert="clr-namespace:IT.Tangdao.Framework.DaoConverters;assembly=IT.Tangdao.Framework"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:IgniteApp.Dialogs.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"

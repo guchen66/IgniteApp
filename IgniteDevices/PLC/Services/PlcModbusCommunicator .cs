@@ -3,6 +3,7 @@ using IgniteDevices.Connections.Interfaces;
 using IgniteDevices.Core.Models;
 using IgniteDevices.Core.Models.Results;
 using IT.Tangdao.Framework.DaoAdmin;
+using IT.Tangdao.Framework.DaoAdmin.Results;
 using Modbus.Device;
 using System;
 using System.Collections.Generic;
@@ -37,16 +38,12 @@ namespace IgniteDevices.PLC.Services
             try
             {
                 var rawData = _master.ReadHoldingRegisters(1, startAddress, length);
-
-                return new DeviceResult<PlcData>
-                {
-                    IsSuccess = true,
-                    Data = PlcData.ConvertToPlcData(rawData, startAddress, DataType.UInt16)
-                };
+                var data = PlcData.ConvertToPlcData(rawData, startAddress, DataType.UInt16);
+                return DeviceResult<PlcData>.Success(data: data, "1");
             }
             catch (Exception ex)
             {
-                return DeviceResult<PlcData>.Fail($"地址[{startAddress}-{startAddress + length}]读取失败: {ex.Message}");
+                return DeviceResult<PlcData>.Failure($"地址[{startAddress}-{startAddress + length}]读取失败: {ex.Message}");
             }
         }
 
@@ -60,11 +57,11 @@ namespace IgniteDevices.PLC.Services
             try
             {
                 var value = _master.ReadHoldingRegisters(1, address, 1)[0];
-                return DeviceResult<ushort>.Success(value);
+                return DeviceResult<ushort>.Success(value, "1");
             }
             catch (Exception ex)
             {
-                return DeviceResult<ushort>.Fail($"地址{address}读取失败: {ex.Message}");
+                return DeviceResult<ushort>.Failure($"地址{address}读取失败: {ex.Message}");
             }
         }
 

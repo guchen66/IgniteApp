@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         xmlns:s="https://github.com/canton7/Stylet"
         xmlns:hc="https://handyorg.github.io/handycontrol"
-        Title="TestView" Height="450" Width="800">
+         Height="450" Width="800">
     <StackPanel>
         <ToggleButton  Width="300" IsChecked="{Binding IsChecked}"  Style="{StaticResource ToggleButtonSwitch}" />
         <Button Command="{s:Action Open}" />

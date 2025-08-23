@@ -13,6 +13,11 @@ namespace IgniteApp.Dialogs.ViewModels
         public string ViewName => "拍照前";
         public int DisplayOrder => 2;
 
+        public TakePhotoViewModel()
+        {
+            DisplayName = ViewName;
+        }
+
         // 业务逻辑...
     }
 }

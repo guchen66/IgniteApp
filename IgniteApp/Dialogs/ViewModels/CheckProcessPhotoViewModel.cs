@@ -1,4 +1,5 @@
-﻿using IgniteApp.Dialogs.Manage;
+﻿using IgniteApp.Common;
+using IgniteApp.Dialogs.Manage;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,11 @@ namespace IgniteApp.Dialogs.ViewModels
     {
         public string ViewName => "检测流程";
         public int DisplayOrder => 3;
+
+        public CheckProcessPhotoViewModel()
+        {
+            DisplayName = ViewName;
+        }
 
         // 业务逻辑...
     }
