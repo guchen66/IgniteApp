@@ -1,5 +1,7 @@
 ﻿
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\App.xaml;;
+FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Assets\DataTemplates\PressureDataTemplate.xaml;;
+FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Assets\DataTemplates\TeachingTemplate.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Dialogs\Views\AddRecipeView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Dialogs\Views\AlarmPopupView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Dialogs\Views\CheckProcessPhotoView.xaml;;
@@ -19,22 +21,29 @@ FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Home\Views\HomeView.xam
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Home\Views\UserInfoView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Home\Views\WatermarkView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Home\Views\_404View.xaml;;
+FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Maintion\Views\DifferentialGaugeView.xaml;;
+FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Maintion\Views\DigitalSmartGaugeView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Maintion\Views\ElectView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Maintion\Views\LightView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Maintion\Views\MaintainView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Maintion\Views\PressureView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Maintion\Views\ResistiveView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Maintion\Views\TempAndHumView.xaml;;
+FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Maintion\Views\VacuumGaugeView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Monitor\Views\AxisMonView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Monitor\Views\IOMonView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Monitor\Views\MonitorView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Monitor\Views\PlcMonView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Monitor\Views\ReportView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\ProcessParame\Views\AccuracyOffsetView.xaml;;
+FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\ProcessParame\Views\CO2TeachView.xaml;;
+FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\ProcessParame\Views\IRTeachView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\ProcessParame\Views\LoadCalibrationView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\ProcessParame\Views\ParameBaseView.xaml;;
+FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\ProcessParame\Views\RobotTeachView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\ProcessParame\Views\TeachingView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\ProcessParame\Views\UnLoadCalibrationView.xaml;;
+FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\ProcessParame\Views\UVTeachView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Recipe\Views\RecipeView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Set\Views\AccountSetView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Shell\Set\Views\AssistSetView.xaml;;

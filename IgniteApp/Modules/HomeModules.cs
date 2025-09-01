@@ -32,6 +32,9 @@ using IgniteApp.Extensions;
 using Unity.Injection;
 using System.ComponentModel;
 using IContainer = StyletIoC.IContainer;
+using IgniteApp.Dialogs.Manage;
+using IgniteApp.Tests;
+using IT.Tangdao.Framework.DaoAdmin.Navigates;
 
 namespace IgniteApp.Modules
 {
@@ -40,6 +43,8 @@ namespace IgniteApp.Modules
         protected override void Load()
         {
             Bind<IViewFactory>().ToAbstractFactory();
+
+            //  Bind<INagateController>().To<StyletNagateController>();
             Bind<INavigateRoute>().To<NavigateRoute>().InSingletonScope();
             Bind<INavigationService>().To<NavigationService<IContainer>>().InSingletonScope();
             Bind<IEventAggregator>().To<EventAggregator>().InSingletonScope();

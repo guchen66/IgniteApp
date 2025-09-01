@@ -18,7 +18,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Threading;
 using System.Xml.Linq;
+using MessageBox = HandyControl.Controls.MessageBox;
 
 namespace IgniteApp.Shell.Set.ViewModels
 {
@@ -62,14 +65,29 @@ namespace IgniteApp.Shell.Set.ViewModels
             {
                 ProcessItems = new BindableCollection<ProcessItem>(operations.Data);
             }
-            NotifyOfPropertyChange(nameof(ProcessItems));
+            //NotifyOfPropertyChange(nameof(ProcessItems));
         }
 
         public void RefreshProcessData()
         {
-            InitializalData();
-
+            // InitializalData();
+            var operations = _readProvider.SelectList(IgniteInfoLocation.Recipe);
+            if (operations.IsSuccess)
+            {
+                ProcessItems.Clear();
+                foreach (var item in operations.Data)
+                    ProcessItems.Add(item);
+            }
             MessageBox.Success("流程刷新成功");
+            ProcessItems.Refresh();
+            // MessageBox.Success("流程刷新成功");
+            //Application.Current.Dispatcher.Invoke(() => { });
+            //Dispatcher.CurrentDispatcher.Invoke(() => { });
+
+            //Dispatcher.CurrentDispatcher.InvokeAsync(() => { });
+            //Dispatcher.CurrentDispatcher.BeginInvoke();
+            //Dispatcher dispatcher;
+            //dispatcher = dispatcher = Dispatcher.CurrentDispatcher;
         }
 
         public void SaveProcessData()

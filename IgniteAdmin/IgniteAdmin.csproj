@@ -101,7 +101,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IRoute.cs" />
+    <Compile Include="Interfaces\ITangdaoContainerAdapter.cs" />
     <Compile Include="Interfaces\IWorkstation.cs" />
     <Compile Include="Managers\Home\TimeManager.cs" />
     <Compile Include="Managers\Login\UserManager.cs" />

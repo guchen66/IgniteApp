@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 
 namespace IgniteApp.Interfaces
 {
+    /// <summary>
+    /// 进行二次封装
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface IReadProvider<T> where T : new()
     {
         QueryableResult<T> SelectSingle(string recipe);

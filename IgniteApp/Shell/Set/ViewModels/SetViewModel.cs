@@ -4,7 +4,7 @@ using IgniteApp.Extensions;
 using IgniteApp.Interfaces;
 using IgniteApp.Shell.Home.Models;
 using IT.Tangdao.Framework.DaoAdmin.IServices;
-using IT.Tangdao.Framework.DaoDtos.Items;
+using IT.Tangdao.Framework.DaoParameters.Infrastructure;
 using IT.Tangdao.Framework.Extensions;
 using Stylet;
 using System;
@@ -19,9 +19,9 @@ namespace IgniteApp.Shell.Set.ViewModels
     {
         public string HandlerName { get; set; } = "Setting";
 
-        private IReadOnlyCollection<IMenuItem> _setMenuList;
+        private IReadOnlyCollection<ITangdaoMenuItem> _setMenuList;
 
-        public IReadOnlyCollection<IMenuItem> SetMenuList
+        public IReadOnlyCollection<ITangdaoMenuItem> SetMenuList
         {
             get => _setMenuList;
             set => SetAndNotify(ref _setMenuList, value);

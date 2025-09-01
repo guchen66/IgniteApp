@@ -5,7 +5,7 @@ using IgniteApp.Interfaces;
 using IgniteApp.Shell.Home.Models;
 using IgniteApp.Shell.Set.ViewModels;
 using IT.Tangdao.Framework.DaoAdmin.IServices;
-using IT.Tangdao.Framework.DaoDtos.Items;
+using IT.Tangdao.Framework.DaoParameters.Infrastructure;
 using IT.Tangdao.Framework.Extensions;
 using Stylet;
 using System;
@@ -19,9 +19,9 @@ namespace IgniteApp.Shell.Monitor.ViewModels
     public class MonitorViewModel : NavigatViewModel, IAppConfigProvider
     {
         public string HandlerName { get; set; } = "MonitorMenu";
-        private IReadOnlyCollection<IMenuItem> _monitorMenuList;
+        private IReadOnlyCollection<ITangdaoMenuItem> _monitorMenuList;
 
-        public IReadOnlyCollection<IMenuItem> MonitorMenuList
+        public IReadOnlyCollection<ITangdaoMenuItem> MonitorMenuList
         {
             get => _monitorMenuList;
             set => SetAndNotify(ref _monitorMenuList, value);

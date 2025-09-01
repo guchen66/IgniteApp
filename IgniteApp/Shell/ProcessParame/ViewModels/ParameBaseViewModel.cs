@@ -2,7 +2,7 @@
 using IgniteApp.Common;
 using IgniteApp.Interfaces;
 using IT.Tangdao.Framework.DaoAdmin.IServices;
-using IT.Tangdao.Framework.DaoDtos.Items;
+using IT.Tangdao.Framework.DaoParameters.Infrastructure;
 using IT.Tangdao.Framework.Extensions;
 using Stylet;
 using System;
@@ -18,9 +18,9 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
     {
         public string HandlerName { get; set; } = "ProcessParameters";
 
-        private IReadOnlyCollection<IMenuItem> _parameMenuList;
+        private IReadOnlyCollection<ITangdaoMenuItem> _parameMenuList;
 
-        public IReadOnlyCollection<IMenuItem> ParameMenuList
+        public IReadOnlyCollection<ITangdaoMenuItem> ParameMenuList
         {
             get => _parameMenuList;
             set => SetAndNotify(ref _parameMenuList, value);

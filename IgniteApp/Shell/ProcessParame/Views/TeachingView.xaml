@@ -6,8 +6,27 @@
              xmlns:local="clr-namespace:IgniteApp.Shell.ProcessParame.Views"
              mc:Ignorable="d"
              xmlns:s="https://github.com/canton7/Stylet"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
              d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid>
+            <!--  路由视图容器  -->
+            <ContentControl Grid.Row="0" Content="{Binding Router.CurrentView}" />
+        </Grid>
+        <Grid Grid.Row="1">
+            <Border>
+                <hc:ButtonGroup>
+                    <RadioButton Content="CO2示教" Command="{s:Action OpenTeachView}" CommandParameter="CO2Teach" Width="120" Margin="5" />
+                    <RadioButton Content="UV示教" Command="{s:Action OpenTeachView}" CommandParameter="UVTeach" Width="120" Margin="5" />
+                    <RadioButton Content="IR示教" Command="{s:Action OpenTeachView}" CommandParameter="IRTeach" Width="120" Margin="5" />
+                </hc:ButtonGroup>
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>

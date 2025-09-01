@@ -5,9 +5,16 @@ using IgniteApp.Tests;
 using IgniteDb;
 using IgniteDb.IRepositorys;
 using IgniteDb.Repositorys;
+using IgniteShared.Delegates;
+using IgniteShared.Globals.Local;
+using IT.Tangdao.Framework.DaoAdmin.IServices;
+using IT.Tangdao.Framework.DaoAdmin.Services;
+using IT.Tangdao.Framework.DaoDtos.Options;
+using IT.Tangdao.Framework.DaoEnums;
 using StyletIoC;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -19,8 +26,16 @@ namespace IgniteApp.Modules
     {
         protected override void Load()
         {
-            //Bind<IMonitorService>().To<MonitorService>().InSingletonScope();
-            Bind<IMonitorService>().To<XmlFileMonitorService>().InSingletonScope();
+            // 注册配置
+
+            // 使用 ToFactory 方法
+            //Bind<IMonitorService>().ToFactory(container =>
+            //{
+            //    return new XmlMonitorService(@"E:\IgniteDatas\", true);
+            //}).InSingletonScope();
+
+            //  Bind<IMonitorService>().To<XmlMonitorService>().InSingletonScope();
+            // Bind<IMonitorService>().To<XmlFileMonitorService>().InSingletonScope();
             // 如果需要，可以注册其他服务
             // builder.Bind<IFileWatcherService>().To<FileWatcherService>().InSingletonScope();
             Bind<IAutoMapperProvider>().To<AutoMapperProvider>().InSingletonScope();

@@ -1,0 +1,22 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:view="clr-namespace:IgniteApp.Shell.ProcessParame.Views"
+    xmlns:viewModel="clr-namespace:IgniteApp.Shell.ProcessParame.ViewModels">
+    <DataTemplate DataType="{x:Type viewModel:RobotTeachViewModel}">
+        <view:RobotTeachView />
+    </DataTemplate>
+
+    <!--  如果使用Type.GetType的时候建议使用viewModelType.Assembly.GetType，不然需要配置数据模板  -->
+    <DataTemplate DataType="{x:Type viewModel:CO2TeachViewModel}">
+        <view:CO2TeachView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewModel:UVTeachViewModel}">
+        <view:UVTeachView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewModel:IRTeachViewModel}">
+        <view:IRTeachView />
+    </DataTemplate>
+</ResourceDictionary>

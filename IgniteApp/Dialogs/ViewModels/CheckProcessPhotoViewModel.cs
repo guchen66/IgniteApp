@@ -1,5 +1,9 @@
 ﻿using IgniteApp.Common;
 using IgniteApp.Dialogs.Manage;
+using IgniteApp.Interfaces;
+using IgniteApp.Tests;
+using IT.Tangdao.Framework.DaoAdmin.Navigates;
+using IT.Tangdao.Framework.DaoAttributes;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -9,16 +13,17 @@ using System.Threading.Tasks;
 
 namespace IgniteApp.Dialogs.ViewModels
 {
-    public class CheckProcessPhotoViewModel : Screen, IPhotoView
+    [SingleNavigateScan("相机")]
+    public class CheckProcessPhotoViewModel : Screen, ISingleNavigateView
     {
         public string ViewName => "检测流程";
         public int DisplayOrder => 3;
+
+        public string GroupKey => "相机";
 
         public CheckProcessPhotoViewModel()
         {
             DisplayName = ViewName;
         }
-
-        // 业务逻辑...
     }
 }

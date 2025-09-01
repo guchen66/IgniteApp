@@ -27,6 +27,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -108,6 +109,7 @@
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite, Version=1.0.119.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
@@ -210,7 +212,7 @@
     <Compile Include="Converters\SingleStateToBoolConverter.cs" />
     <Compile Include="Converters\StringArrayTypeConverter.cs" />
     <Compile Include="Converters\StringToImageConverter.cs" />
-    <Compile Include="Dialogs\Manage\IPhotoView.cs" />
+    <Compile Include="Dialogs\Manage\INagateScope.cs" />
     <Compile Include="Dialogs\ViewModels\AddRecipeViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\AlarmPopupViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\CheckProcessPhotoViewModel.cs" />
@@ -326,12 +328,21 @@
     <Compile Include="Shell\Maintion\Models\IElectService.cs" />
     <Compile Include="Shell\Maintion\Services\DeviceMediator.cs" />
     <Compile Include="Shell\Maintion\Services\IDeviceObserver.cs" />
+    <Compile Include="Shell\Maintion\ViewModels\DifferentialGaugeViewModel.cs" />
+    <Compile Include="Shell\Maintion\ViewModels\DigitalSmartGaugeViewModel.cs" />
     <Compile Include="Shell\Maintion\ViewModels\ElectViewModel.cs" />
     <Compile Include="Shell\Maintion\ViewModels\LightViewModel.cs" />
     <Compile Include="Shell\Maintion\ViewModels\MaintainViewModel.cs" />
     <Compile Include="Shell\Maintion\ViewModels\PressureViewModel.cs" />
     <Compile Include="Shell\Maintion\ViewModels\ResistiveViewModel.cs" />
     <Compile Include="Shell\Maintion\ViewModels\TempAndHumViewModel.cs" />
+    <Compile Include="Shell\Maintion\ViewModels\VacuumGaugeViewModel.cs" />
+    <Compile Include="Shell\Maintion\Views\DifferentialGaugeView.xaml.cs">
+      <DependentUpon>DifferentialGaugeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\Maintion\Views\DigitalSmartGaugeView.xaml.cs">
+      <DependentUpon>DigitalSmartGaugeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Shell\Maintion\Views\ElectView.xaml.cs">
       <DependentUpon>ElectView.xaml</DependentUpon>
     </Compile>
@@ -349,6 +360,9 @@
     </Compile>
     <Compile Include="Shell\Maintion\Views\TempAndHumView.xaml.cs">
       <DependentUpon>TempAndHumView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\Maintion\Views\VacuumGaugeView.xaml.cs">
+      <DependentUpon>VacuumGaugeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Shell\Monitor\Models\AxisMonItem.cs" />
     <Compile Include="Shell\Monitor\Models\IOMonItem.cs" />
@@ -386,12 +400,22 @@
     <Compile Include="Shell\ProcessParame\Services\TaskController.cs" />
     <Compile Include="Shell\ProcessParame\Services\TaskService.cs" />
     <Compile Include="Shell\ProcessParame\ViewModels\AccuracyOffsetViewModel.cs" />
+    <Compile Include="Shell\ProcessParame\ViewModels\CO2TeachViewModel.cs" />
+    <Compile Include="Shell\ProcessParame\ViewModels\IRTeachViewModel.cs" />
     <Compile Include="Shell\ProcessParame\ViewModels\LoadCalibrationViewModel.cs" />
     <Compile Include="Shell\ProcessParame\ViewModels\ParameBaseViewModel.cs" />
+    <Compile Include="Shell\ProcessParame\ViewModels\RobotTeachViewModel.cs" />
     <Compile Include="Shell\ProcessParame\ViewModels\TeachingViewModel.cs" />
     <Compile Include="Shell\ProcessParame\ViewModels\UnLoadCalibrationViewModel.cs" />
+    <Compile Include="Shell\ProcessParame\ViewModels\UVTeachViewModel.cs" />
     <Compile Include="Shell\ProcessParame\Views\AccuracyOffsetView.xaml.cs">
       <DependentUpon>AccuracyOffsetView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\ProcessParame\Views\CO2TeachView.xaml.cs">
+      <DependentUpon>CO2TeachView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\ProcessParame\Views\IRTeachView.xaml.cs">
+      <DependentUpon>IRTeachView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Shell\ProcessParame\Views\LoadCalibrationView.xaml.cs">
       <DependentUpon>LoadCalibrationView.xaml</DependentUpon>
@@ -399,11 +423,17 @@
     <Compile Include="Shell\ProcessParame\Views\ParameBaseView.xaml.cs">
       <DependentUpon>ParameBaseView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Shell\ProcessParame\Views\RobotTeachView.xaml.cs">
+      <DependentUpon>RobotTeachView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Shell\ProcessParame\Views\TeachingView.xaml.cs">
       <DependentUpon>TeachingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Shell\ProcessParame\Views\UnLoadCalibrationView.xaml.cs">
       <DependentUpon>UnLoadCalibrationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\ProcessParame\Views\UVTeachView.xaml.cs">
+      <DependentUpon>UVTeachView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Shell\Recipe\Models\RecipeMenuItem.cs" />
     <Compile Include="Shell\Recipe\ViewModels\RecipeViewModel.cs" />
@@ -447,9 +477,8 @@
     <Compile Include="Shell\Set\Views\SystemSetView.xaml.cs">
       <DependentUpon>SystemSetView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tests\MonitorService.cs" />
-    <Compile Include="Tests\XmlFileChangedEventArgs.cs" />
-    <Compile Include="Tests\XmlFileMonitorService.cs" />
+    <Compile Include="Tests\ISingleRouter.cs" />
+    <Compile Include="Tests\IRouteFactory.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
@@ -502,6 +531,18 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Assets\DataTemplates\DataTemplateBase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Assets\DataTemplates\PressureDataTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Assets\DataTemplates\TeachingTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Assets\DataTemplates\ToggleButtonTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -610,6 +651,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Shell\Maintion\Views\DifferentialGaugeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shell\Maintion\Views\DigitalSmartGaugeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Shell\Maintion\Views\ElectView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -631,6 +680,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Shell\Maintion\Views\TempAndHumView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shell\Maintion\Views\VacuumGaugeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -658,6 +711,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Shell\ProcessParame\Views\CO2TeachView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shell\ProcessParame\Views\IRTeachView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Shell\ProcessParame\Views\LoadCalibrationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -666,11 +727,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Shell\ProcessParame\Views\RobotTeachView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Shell\ProcessParame\Views\TeachingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Shell\ProcessParame\Views\UnLoadCalibrationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Shell\ProcessParame\Views\UVTeachView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -765,6 +834,7 @@
     <Resource Include="Assets\Images\2.png" />
     <Resource Include="Assets\Images\3.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

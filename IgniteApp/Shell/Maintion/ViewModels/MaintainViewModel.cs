@@ -6,7 +6,7 @@ using IgniteApp.Shell.Home.Models;
 using IgniteApp.Shell.Set.ViewModels;
 using IT.Tangdao.Framework.DaoAdmin.IServices;
 using IT.Tangdao.Framework.DaoAdmin.Services;
-using IT.Tangdao.Framework.DaoDtos.Items;
+using IT.Tangdao.Framework.DaoParameters.Infrastructure;
 using IT.Tangdao.Framework.Extensions;
 using Stylet;
 using System;
@@ -20,9 +20,9 @@ namespace IgniteApp.Shell.Maintion.ViewModels
     public class MaintainViewModel : NavigatViewModel, IAppConfigProvider
     {
         public string HandlerName { get; set; } = "MaintainMenu";
-        private IReadOnlyCollection<IMenuItem> _maintainMenuList;
+        private IReadOnlyCollection<ITangdaoMenuItem> _maintainMenuList;
 
-        public IReadOnlyCollection<IMenuItem> MaintainMenuList
+        public IReadOnlyCollection<ITangdaoMenuItem> MaintainMenuList
         {
             get => _maintainMenuList;
             set => SetAndNotify(ref _maintainMenuList, value);

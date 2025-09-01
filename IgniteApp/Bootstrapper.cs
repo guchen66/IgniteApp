@@ -24,6 +24,10 @@ using IgniteApp.Common;
 using IgniteDevices.PLC;
 using IgniteApp.Shell.Footer.ViewModels;
 using IgniteApp.Tests;
+using IT.Tangdao.Framework.DaoEvents;
+using IT.Tangdao.Framework;
+using System.Windows.Documents;
+using System.Collections.Generic;
 
 namespace IgniteApp
 {
@@ -40,8 +44,9 @@ namespace IgniteApp
             // 只有真正需要全局唯一的对象才注册为单例
             builder.Bind<AlarmPublisher>().ToSelf().InSingletonScope();
             builder.Bind<AlarmPopupViewModel>().ToSelf().InSingletonScope();
-
             builder.Bind<AlarmPopupNotifier>().ToSelf();
+            //  var serviceRegistrar = new StyletServiceRegistrar(builder);
+            //  serviceRegistrar.RegisterFrameworkServices();
             Logger.WriteLocal($"注册成功");
         }
 
@@ -54,6 +59,10 @@ namespace IgniteApp
                 WorkerId = 1,// 取值范围0~63,默认1
                              // DataCenterId=1,//数据中心Id
             });
+
+            // 5. 容器构建完成后，进行后期配置
+            // var serviceRegistrar = Container.Get<ITangdaoServiceRegistrar>();
+            // var tangdaoProvider = Container.Get<ITangdaoProvider>();
         }
 
         protected override void OnLaunch()
@@ -61,15 +70,14 @@ namespace IgniteApp
             base.OnLaunch();
             // 启动监控服务
             var monitorService = Container.Get<IMonitorService>();
-            monitorService.XmlFileChanged += OnXmlFileChanged;
+            monitorService.FileChanged += OnFileChanged;
             monitorService.StartMonitoring();
+            //   ViewModelFirst.InitSingleView(Container);
         }
 
-        private void OnXmlFileChanged(object sender, XmlFileChangedEventArgs e)
+        private void OnFileChanged(object sender, DaoFileChangedEventArgs e)
         {
-            Logger.WriteLocal($"XML 文件变化: {e.FilePath}, 变化类型: {e.ChangeType}，变化详情：{e.ChangeDetails}，old:{e.OldContent},new:{e.NewContent}");
-            // 在这里处理文件变化逻辑
-            // 可以使用 Messenger 发送消息到 ViewModel
+            Logger.WriteLocal($"文件变化: {e.FilePath}, 变化类型: {e.ChangeType},{Environment.NewLine}变化详情：{e.ChangeDetails}，{Environment.NewLine}old:{e.OldContent},{Environment.NewLine}new:{e.NewContent}");
         }
 
         protected override void OnStart()

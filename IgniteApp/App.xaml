@@ -16,6 +16,8 @@
                 <ResourceDictionary Source="Assets/Styles/ImageRelativePath.xaml" />
                 <ResourceDictionary Source="Assets/Styles/IgniteListStyleBase.xaml" />
                 <ResourceDictionary Source="Assets/Styles/CustomDeviceStatusBarStyle.xaml" />
+
+                <ResourceDictionary Source="Assets/DataTemplates/DataTemplateBase.xaml" />
             </s:ApplicationLoader.MergedDictionaries>
         </s:ApplicationLoader>
     </Application.Resources>

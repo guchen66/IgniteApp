@@ -1,7 +1,12 @@
 ﻿using IgniteApp.Dialogs.Manage;
+using IgniteApp.Interfaces;
+using IgniteApp.Tests;
+using IT.Tangdao.Framework.DaoAdmin.Navigates;
 using Stylet;
+using StyletIoC;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,120 +15,64 @@ using System.Windows.Threading;
 
 namespace IgniteApp.Dialogs.ViewModels
 {
-    public class GlobalPhotoViewModel : Screen//, IHaveDisplayName
+    public class GlobalPhotoViewModel : Screen
     {
-        private readonly BindableCollection<IPhotoView> _photoViews = new BindableCollection<IPhotoView>();
-        private IPhotoView _currentView;
-        private int _currentIndex;
-        private readonly DispatcherTimer _autoCarouselTimer;
+        private readonly ISingleRouter _router;
 
-        public IReadOnlyList<IPhotoView> PhotoViews => _photoViews;
+        public ISingleNavigateView CurrentView => _router.CurrentView;
+        public bool CanPrevious => _router.CanPrevious;
+        public bool CanNext => _router.CanNext;
+        public bool IsAutoRotating => _router.IsAutoRotating;
+        public string AutoRotateStatusText => _router.IsAutoRotating ? "自动轮播开启中" : "自动轮播已禁用";
 
-        public IPhotoView CurrentView
+        public GlobalPhotoViewModel(ISingleRouter router)
         {
-            get => _currentView;
-            private set => SetAndNotify(ref _currentView, value);
-        }
+            _router = router;
 
-        public bool CanPrevious => _currentIndex > 0;
-        public bool CanNext => _currentIndex < _photoViews.Count - 1;
-
-        public bool IsAutoRotating
-        {
-            get => _autoCarouselTimer.IsEnabled;
-            set
-            {
-                if (value) _autoCarouselTimer.Start();
-                else _autoCarouselTimer.Stop();
-                NotifyOfPropertyChange();
-            }
-        }
-
-        public string AutoRotateStatusText => IsAutoRotating ? "自动轮播开启中" : "自动轮播已禁用";
-
-        public GlobalPhotoViewModel(
-            LoadPrePhotoViewModel loadPreVm,
-            TakePhotoViewModel takePhotoVm,
-            CheckProcessPhotoViewModel checkProcessVm)
-        {
-            // 初始化视图集合（按显示顺序排序）
-            _photoViews.AddRange(new IPhotoView[]
-            {
-            loadPreVm,
-            takePhotoVm,
-            checkProcessVm
-            }.OrderBy(v => v.DisplayOrder));
-
-            CurrentView = _photoViews.FirstOrDefault();
-
-            // 配置自动轮播定时器（可选功能）
-            _autoCarouselTimer = new DispatcherTimer
-            {
-                Interval = TimeSpan.FromSeconds(3)
-            };
-            _autoCarouselTimer.Tick += (s, e) => AutoRotateNext();
+            _router.PropertyChanged += OnRouterPropertyChanged;
+            _router.NavigationChanged += OnRouterNavigationChanged;
         }
 
         public void Previous()
         {
-            if (!CanPrevious) return;
-
-            CurrentView = _photoViews[--_currentIndex];
-            RefreshNavigationState();
+            _router.Previous();
         }
 
         public void Next()
         {
-            if (!CanNext) return;
-
-            CurrentView = _photoViews[++_currentIndex];
-            RefreshNavigationState();
+            _router.Next();
         }
 
-        public void ToggleAutoCarousel()
+        public void ToggleAutoCarousel() => _router.ToggleAutoCarousel();
+
+        private void OnRouterPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            IsAutoRotating = !IsAutoRotating;
-            NotifyOfPropertyChange(nameof(IsAutoRotating));
-            NotifyOfPropertyChange(nameof(AutoRotateStatusText));
+            // 将路由器的属性变化转发到视图模型
+            NotifyOfPropertyChange(e.PropertyName);
+
+            if (e.PropertyName == nameof(ISingleRouter.IsAutoRotating))
+            {
+                NotifyOfPropertyChange(nameof(AutoRotateStatusText));
+            }
         }
 
-        private void RefreshNavigationState()
+        private void OnRouterNavigationChanged(object sender, EventArgs e)
         {
-            NotifyOfPropertyChange(() => CanPrevious);
-            NotifyOfPropertyChange(() => CanNext);
+            NotifyOfPropertyChange(nameof(CurrentView));
+            NotifyOfPropertyChange(nameof(CanPrevious));
+            NotifyOfPropertyChange(nameof(CanNext));
         }
 
-        private void AutoRotateNext()
+        protected override void OnDeactivate()
         {
-            // 计算下一个索引（循环模式）
-            _currentIndex = (_currentIndex + 1) % _photoViews.Count;
-            CurrentView = _photoViews[_currentIndex];
-            RefreshNavigationState();
+            _router.IsAutoRotating = false;
+            base.OnDeactivate();
         }
 
         protected override void OnViewLoaded()
         {
             base.OnViewLoaded();
-            var win = View;
-            DisplayName = "全局图片显示";
-        }
-
-        protected override void OnInitialActivate()
-        {
-            base.OnInitialActivate();
-            var win = View;
-        }
-
-        protected override void OnActivate()
-        {
-            base.OnActivate();
-            var win = View;
-        }
-
-        protected override void OnDeactivate()
-        {
-            _autoCarouselTimer.Stop(); // 确保窗口关闭时停止定时器
-            base.OnDeactivate();
+            NavigationContext.CurrentGroup = "相机";
         }
     }
 }

@@ -2,7 +2,7 @@
 using IT.Tangdao.Framework.DaoAdmin.IServices;
 using IT.Tangdao.Framework.DaoAdmin.Results;
 using IT.Tangdao.Framework.DaoAdmin.Services;
-using IT.Tangdao.Framework.DaoDtos.Items;
+using IT.Tangdao.Framework.DaoParameters.Infrastructure;
 using IT.Tangdao.Framework.Extensions;
 using Stylet;
 using System;
@@ -18,7 +18,7 @@ namespace IgniteApp.Common
 {
     public class ReadOnlyMenuItemManager
     {
-        public static ReadOnlyCollection<IMenuItem> Create(IReadService readService, string readTitle)
+        public static ReadOnlyCollection<ITangdaoMenuItem> Create(IReadService readService, string readTitle)
         {
             //字典转列表
             var result = readService.Current.SelectConfig(readTitle).ToReadResult<Dictionary<string, string>>().Data;
@@ -30,15 +30,15 @@ namespace IgniteApp.Common
                     Id = index + 1,
                     MenuName = kvp.Value,
                 }).ToList();
-                return new ReadOnlyCollection<IMenuItem>(lists.Cast<IMenuItem>().ToList());
+                return new ReadOnlyCollection<ITangdaoMenuItem>(lists.Cast<ITangdaoMenuItem>().ToList());
             }
             else
             {
-                return new ReadOnlyCollection<IMenuItem>(new List<IMenuItem>());
+                return new ReadOnlyCollection<ITangdaoMenuItem>(new List<ITangdaoMenuItem>());
             }
         }
 
-        public static IReadOnlyCollection<IMenuItem> Create2<T>(IReadService readService, string readTitle)
+        public static IReadOnlyCollection<ITangdaoMenuItem> Create2<T>(IReadService readService, string readTitle)
         {
             var result = readService.Current.SelectConfig(readTitle).ToReadResult<Dictionary<string, string>>().Data;
 
@@ -50,7 +50,7 @@ namespace IgniteApp.Common
             }
             else
             {
-                return Array.Empty<IMenuItem>(); // 或 new List<IMenuItem>()
+                return Array.Empty<ITangdaoMenuItem>(); // 或 new List<ITangdaoMenuItem>()
             }
         }
 
@@ -73,7 +73,7 @@ namespace IgniteApp.Common
             }
             else
             {
-                return Array.Empty<HomeMenuItem>(); // 或 new List<IMenuItem>()
+                return Array.Empty<HomeMenuItem>(); // 或 new List<ITangdaoMenuItem>()
             }
         }
     }

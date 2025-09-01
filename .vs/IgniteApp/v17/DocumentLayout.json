@@ -1,36 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|e:\\csharp project\\applyclient\\igniteapp\\igniteapp\\tests\\xmlfilemonitorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|solutionrelative:igniteapp\\tests\\xmlfilemonitorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|e:\\csharp project\\applyclient\\igniteapp\\igniteapp\\modules\\automodules.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|solutionrelative:igniteapp\\modules\\automodules.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|e:\\csharp project\\applyclient\\igniteapp\\igniteapp\\bootstrapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|solutionrelative:igniteapp\\bootstrapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|e:\\csharp project\\applyclient\\igniteapp\\igniteapp\\tests\\xmlfilechangedeventargs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|solutionrelative:igniteapp\\tests\\xmlfilechangedeventargs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|e:\\csharp project\\applyclient\\igniteapp\\igniteapp\\tests\\monitorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|solutionrelative:igniteapp\\tests\\monitorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|e:\\csharp project\\applyclient\\igniteapp\\igniteapp\\shell\\set\\viewmodels\\processviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|solutionrelative:igniteapp\\shell\\set\\viewmodels\\processviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|e:\\csharp project\\applyclient\\igniteapp\\igniteapp\\shell\\set\\views\\processview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{98E17501-8617-49A9-B8FC-273991551787}|IgniteApp\\IgniteApp.csproj|solutionrelative:igniteapp\\shell\\set\\views\\processview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -38,7 +9,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 13,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -67,96 +38,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AutoModules.cs",
-              "DocumentMoniker": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Modules\\AutoModules.cs",
-              "RelativeDocumentMoniker": "IgniteApp\\Modules\\AutoModules.cs",
-              "ToolTip": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Modules\\AutoModules.cs",
-              "RelativeToolTip": "IgniteApp\\Modules\\AutoModules.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAADwvxUAAAAOAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-23T13:52:19.359Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ProcessViewModel.cs",
-              "DocumentMoniker": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Shell\\Set\\ViewModels\\ProcessViewModel.cs",
-              "RelativeDocumentMoniker": "IgniteApp\\Shell\\Set\\ViewModels\\ProcessViewModel.cs",
-              "ToolTip": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Shell\\Set\\ViewModels\\ProcessViewModel.cs",
-              "RelativeToolTip": "IgniteApp\\Shell\\Set\\ViewModels\\ProcessViewModel.cs",
-              "ViewState": "AQIAACsAAAAAAAAAAAApwEQAAAAEAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-23T13:00:16.118Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ProcessView.xaml",
-              "DocumentMoniker": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Shell\\Set\\Views\\ProcessView.xaml",
-              "RelativeDocumentMoniker": "IgniteApp\\Shell\\Set\\Views\\ProcessView.xaml",
-              "ToolTip": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Shell\\Set\\Views\\ProcessView.xaml",
-              "RelativeToolTip": "IgniteApp\\Shell\\Set\\Views\\ProcessView.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-08-23T12:59:19.663Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MonitorService.cs",
-              "DocumentMoniker": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Tests\\MonitorService.cs",
-              "RelativeDocumentMoniker": "IgniteApp\\Tests\\MonitorService.cs",
-              "ToolTip": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Tests\\MonitorService.cs",
-              "RelativeToolTip": "IgniteApp\\Tests\\MonitorService.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAowBAAAABLAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-23T12:40:20.108Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "XmlFileChangedEventArgs.cs",
-              "DocumentMoniker": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Tests\\XmlFileChangedEventArgs.cs",
-              "RelativeDocumentMoniker": "IgniteApp\\Tests\\XmlFileChangedEventArgs.cs",
-              "ToolTip": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Tests\\XmlFileChangedEventArgs.cs",
-              "RelativeToolTip": "IgniteApp\\Tests\\XmlFileChangedEventArgs.cs",
-              "ViewState": "AQIAAA4AAAAAAAAAAAD4vxoAAAApAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-23T12:39:43.702Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Bootstrapper.cs",
-              "DocumentMoniker": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Bootstrapper.cs",
-              "RelativeDocumentMoniker": "IgniteApp\\Bootstrapper.cs",
-              "ToolTip": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Bootstrapper.cs",
-              "RelativeToolTip": "IgniteApp\\Bootstrapper.cs",
-              "ViewState": "AQIAAC4AAAAAAAAAAAAowEEAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-23T12:36:32.48Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "XmlFileMonitorService.cs",
-              "DocumentMoniker": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Tests\\XmlFileMonitorService.cs",
-              "RelativeDocumentMoniker": "IgniteApp\\Tests\\XmlFileMonitorService.cs",
-              "ToolTip": "E:\\CSharp Project\\ApplyClient\\IgniteApp\\IgniteApp\\Tests\\XmlFileMonitorService.cs",
-              "RelativeToolTip": "IgniteApp\\Tests\\XmlFileMonitorService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAmAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-23T12:36:16.474Z",
-              "EditorCaption": ""
             }
           ]
         }
