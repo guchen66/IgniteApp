@@ -57,9 +57,9 @@ namespace IgniteShared.Extensions
                 {
                     message = message + e.Message + Environment.NewLine + e.StackTrace + Environment.NewLine;
                 }
-
+                var s = Environment.CurrentManagedThreadId;
                 message = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff} " +
-                         $"[{Thread.CurrentThread.ManagedThreadId}] " +
+                         $"[{Environment.CurrentManagedThreadId}] " +
                          category.ToUpper() + " " +
                          logger.GetType().FullName +
                          Environment.NewLine + message + Environment.NewLine;

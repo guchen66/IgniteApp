@@ -30,7 +30,6 @@ namespace IgniteDevices.PLC.Services
         /// 默认从 从站1开始读取
         /// </summary>
         /// <param name="startAddress"></param>
-        /// <param name="numberOfPoints"></param>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"></exception>
         public DeviceResult<PlcData> ReadRegisterRange(ushort startAddress, ushort length)

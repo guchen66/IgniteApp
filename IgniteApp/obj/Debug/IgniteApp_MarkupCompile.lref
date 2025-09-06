@@ -2,6 +2,7 @@
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\App.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Assets\DataTemplates\PressureDataTemplate.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Assets\DataTemplates\TeachingTemplate.xaml;;
+FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Assets\Styles\CustomStatusLightStyle.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Dialogs\Views\AddRecipeView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Dialogs\Views\AlarmPopupView.xaml;;
 FE:\CSharp Project\ApplyClient\IgniteApp\IgniteApp\Dialogs\Views\CheckProcessPhotoView.xaml;;

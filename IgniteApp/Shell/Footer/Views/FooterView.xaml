@@ -2,13 +2,13 @@
     x:Class="IgniteApp.Shell.Footer.Views.FooterView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:be="clr-namespace:IgniteApp.Behaviors"
     xmlns:conver="clr-namespace:IT.Tangdao.Framework.DaoConverters;assembly=IT.Tangdao.Framework"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:hc="https://handyorg.github.io/handycontrol"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:IgniteApp.Shell.Footer.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-    xmlns:be="clr-namespace:IgniteApp.Behaviors"
     xmlns:s="https://github.com/canton7/Stylet"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -32,10 +32,10 @@
             <StatusBarItem>
                 <StackPanel Orientation="Horizontal">
                     <Ellipse
-                      Width="10"
-                      Height="10"
-                      Margin="0,0,5,0"
-                      Fill="{Binding IsConn, Converter={StaticResource deviceState}}" />
+                        Width="10"
+                        Height="10"
+                        Margin="0,0,5,0"
+                        Fill="{Binding IsConn, Converter={StaticResource deviceState}}" />
                     <TextBlock Text="PLC" />
                 </StackPanel>
             </StatusBarItem>
@@ -43,35 +43,47 @@
             <StatusBarItem>
                 <StackPanel Orientation="Horizontal">
                     <Ellipse
-                      Width="10"
-                      Height="10"
-                      Margin="0,0,5,0"
-                      Fill="{Binding IsConn, Converter={StaticResource deviceState}}" />
+                        Width="10"
+                        Height="10"
+                        Margin="0,0,5,0"
+                        Fill="{Binding IsConn, Converter={StaticResource deviceState}}" />
                     <TextBlock Text="CCD" />
                 </StackPanel>
             </StatusBarItem>
             <Separator />
             <StatusBarItem>
                 <StackPanel Orientation="Horizontal">
-                    <!--<Ellipse
-                      Width="10"
-                      Height="10"
-                      Margin="0,0,5,0">
-                        <i:Interaction.Behaviors>
-                            <be:ShapeBehavior IsConnected="{Binding ElementName=btn,Path=IsEnabled}" />
-                        </i:Interaction.Behaviors>
-                    </Ellipse>-->
-                    <TextBlock Text="其他" />
+                    <Ellipse
+                        Width="10"
+                        Height="10"
+                        Margin="0,0,5,0"
+                        Fill="{Binding IsConnServer, Converter={StaticResource deviceState}}" />
+                    <TextBlock Text="服务端" />
                 </StackPanel>
             </StatusBarItem>
         </StatusBar>
 
-        <StackPanel Orientation="Horizontal" Grid.Column="1">
-            <Button Command="{s:Action Test}" Content="测试" Margin="5" />
-            <Button Command="{s:Action Test2}" Content="测试2" Margin="5" />
-            <Button Command="{s:Action OpenEQP}" Content="账料" Margin="5" />
-            <Button Command="{s:Action OpenTTView}" Content="TT" Margin="5" />
-            <Button Command="{s:Action OpenPhotoView}" Content="拍照" Margin="5" />
+        <StackPanel Grid.Column="1" Orientation="Horizontal">
+            <Button
+                Margin="5"
+                Command="{s:Action Test}"
+                Content="测试" />
+            <Button
+                Margin="5"
+                Command="{s:Action Test2}"
+                Content="测试2" />
+            <Button
+                Margin="5"
+                Command="{s:Action OpenEQP}"
+                Content="账料" />
+            <Button
+                Margin="5"
+                Command="{s:Action OpenTTView}"
+                Content="TT" />
+            <Button
+                Margin="5"
+                Command="{s:Action OpenPhotoView}"
+                Content="拍照" />
         </StackPanel>
     </Grid>
 </UserControl>

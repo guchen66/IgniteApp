@@ -57,6 +57,9 @@ namespace IgniteApp.Modules
             //GlobalPhotoViewModel
             //注册导航，有拦截器功能
             Bind<ITangdaoRouter>().To<TangdaoRouter>().InSingletonScope();
+
+            //注册转换器
+            Bind<ITypeConvertService>().To<TypeConvertService>().InSingletonScope();
             Bind<FileMonitorConfig>().ToFactory(container =>
             {
                 return new FileMonitorConfig

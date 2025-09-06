@@ -47,12 +47,12 @@ namespace IgniteApp.Shell.Aside.ViewModels
 
         #region--方法--
 
-        public void ExecuteManual()
+        public static void ExecuteManual()
         {
             PlcManager.GetPlcSignal<int>(1);
         }
 
-        public void ExecuteAuto()
+        public static void ExecuteAuto()
         {
             SysProcessInfo.IsAuto = true;
             SysProcessInfo.IsCannel = false;
@@ -98,7 +98,7 @@ namespace IgniteApp.Shell.Aside.ViewModels
             Logger.WriteLocal("初始化完成");
         }
 
-        public void SendDataToPlc()
+        public static void SendDataToPlc()
         {
         }
 

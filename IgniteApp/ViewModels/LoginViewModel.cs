@@ -44,6 +44,9 @@ using MessageBox = HandyControl.Controls.MessageBox;
 using Window = System.Windows.Window;
 using IgniteShared.Delegates;
 using System.Windows.Markup;
+using IT.Tangdao.Framework.DaoException;
+using IT.Tangdao.Framework.Extensions;
+using System.Collections.ObjectModel;
 
 namespace IgniteApp.ViewModels
 {
@@ -59,6 +62,7 @@ namespace IgniteApp.ViewModels
         private readonly IReadService _readService;
         private readonly IWindowManager _windowManager;
         private readonly IEventAggregator _eventAggregator;
+        private readonly ITypeConvertService _typeConvertService;
         private static readonly IDaoLogger Logger = DaoLogger.Get(typeof(LoginViewModel));
         public ICommand RegisterCommand { get; set; }
         #endregion
@@ -77,7 +81,7 @@ namespace IgniteApp.ViewModels
 
         #region--ctor--
 
-        public LoginViewModel(IWriteService writeService, INavigationService navigationService, IEventAggregator eventAggregator, MainViewModel mainViewModel)
+        public LoginViewModel(IWriteService writeService, INavigationService navigationService, IEventAggregator eventAggregator, MainViewModel mainViewModel, ITypeConvertService typeConvertService)
         {
             _mainViewModel = mainViewModel;
             _writeService = writeService;
@@ -88,6 +92,7 @@ namespace IgniteApp.ViewModels
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
             RegisterCommand = MinidaoCommand.Create(ExecuteRegister);
+            _typeConvertService = typeConvertService;
         }
 
         #endregion
@@ -99,6 +104,9 @@ namespace IgniteApp.ViewModels
         /// </summary>
         public void ExecuteLogin()
         {
+            TestStudent testStudent = new TestStudent();
+            testStudent.Id = 10;
+            List<TestStudent> lists = testStudent.ConvertList();
             //查找本地是否有登录过的账号
             var cacheData = UserManager.SearchCache(LoginDto);
             if (cacheData)
@@ -112,6 +120,21 @@ namespace IgniteApp.ViewModels
             {
                 MessageBox.Error("账号未注册");
             }
+        }
+
+        public T Converter<T>(string name) where T : class, new()
+        {
+            T type = new T();
+
+            if (!typeof(T).IsHasConstructor())
+            {
+                throw new MissingParameterlyConstructorException("缺少无参构造器");
+            }
+            if (name != type.GetType().Name)
+            {
+                throw new ImproperNamingException($"{name}命名不规范");
+            }
+            return type;
         }
 
         /// <summary>
@@ -189,5 +212,18 @@ namespace IgniteApp.ViewModels
         }
 
         #endregion
+    }
+
+    public class TestStudent
+    {
+        public int Id { get; set; }
+
+        internal List<TestStudent> ConvertList()
+        {
+            List<TestStudent> testStudents = new List<TestStudent>();
+
+            testStudents.Add(this);
+            return testStudents;
+        }
     }
 }

@@ -18,6 +18,7 @@ using IgniteShared.Models;
 using IT.Tangdao.Framework.DaoAdmin;
 using IT.Tangdao.Framework.DaoAdmin.IServices;
 using IT.Tangdao.Framework.DaoAdmin.Services;
+using IT.Tangdao.Framework.DaoAdmin.Sockets;
 using IT.Tangdao.Framework.DaoCommands;
 using IT.Tangdao.Framework.Helpers;
 using Newtonsoft.Json;
@@ -31,6 +32,7 @@ using System.Configuration;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -60,6 +62,14 @@ namespace IgniteApp.Shell.Footer.ViewModels
             set => SetAndNotify(ref _isConn, value);
         }
 
+        private bool _isConnServer;
+
+        public bool IsConnServer
+        {
+            get => _isConnServer;
+            set => SetAndNotify(ref _isConnServer, value);
+        }
+
         private readonly IPlcProvider _plcProvider;
         private static readonly IDaoLogger Logger = DaoLogger.Get(typeof(FooterViewModel));
         #endregion
@@ -69,22 +79,32 @@ namespace IgniteApp.Shell.Footer.ViewModels
         private readonly System.Timers.Timer _statusTimer;
         private IDialogService _dialogService;
         private IReadService _readService;
+        private readonly ITangdaoChannel _channel;
 
-        public FooterViewModel(IPlcProvider plcProvider, IWindowManager windowManager, IDialogService dialogService, Func<TTForgeViewModel> viewModelFactory, IReadService readService)
+        public FooterViewModel(IPlcProvider plcProvider, IWindowManager windowManager, IDialogService dialogService, Func<TTForgeViewModel> viewModelFactory, IReadService readService, ITangdaoChannel channel)
         {
             _plcProvider = plcProvider;
             _windowManager = windowManager;
             _dialogService = dialogService;
+            _viewModelFactory = viewModelFactory;
+            _readService = readService;
+            _channel = channel;
             // TTForgeViewModel = tTForgeViewModel;
             // 初始化定时器（间隔1秒，自动重置）
             _statusTimer = new System.Timers.Timer(1000) { AutoReset = true };
             _statusTimer.Elapsed += async (s, e) => await CheckPlcStatusAsync();
             // _statusTimer.Start();
 
-            // 立即执行首次检查
+            // 立即执行PLC连接首次检查
             QueryPlcStatus();
-            _viewModelFactory = viewModelFactory;
-            _readService = readService;
+
+            //_tangdaoChannel.Messages.ObserveOnDispatcher()
+            //    .Subscribe(msg => ReceivedText += msg + Environment.NewLine);
+
+            //// 错误
+            //_tangdaoChannel.Errors.ObserveOnDispatcher()
+            //         .Subscribe(ex => MessageBox.Show(ex.Message));
+            QueryServerStatus();
         }
 
         #endregion
@@ -99,6 +119,16 @@ namespace IgniteApp.Shell.Footer.ViewModels
         {
             _statusTimer?.Stop();
             _statusTimer?.Dispose();
+        }
+
+        public async void QueryServerStatus()
+        {
+            //防止界面构建完成，异步连接未建立，所以应该等待异步连接成功，界面bool值在变化
+            var result = await _channel.WaitConnectedAsync();
+            if (result)
+            {
+                IsConnServer = true;
+            }
         }
 
         public void QueryPlcStatus()

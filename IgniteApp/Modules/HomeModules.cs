@@ -44,11 +44,9 @@ namespace IgniteApp.Modules
         {
             Bind<IViewFactory>().ToAbstractFactory();
 
-            //  Bind<INagateController>().To<StyletNagateController>();
             Bind<INavigateRoute>().To<NavigateRoute>().InSingletonScope();
             Bind<INavigationService>().To<NavigationService<IContainer>>().InSingletonScope();
             Bind<IEventAggregator>().To<EventAggregator>().InSingletonScope();
-            //Bind<IWindowManager>().To<WindowManager>().InSingletonScope();
             Bind<IAutoRun>().To<AutoRun>().InSingletonScope();
             Bind<IElectService>().To<ElectService>().InSingletonScope();
             Bind<LoginViewModel>().ToSelf().InSingletonScope();
@@ -57,10 +55,9 @@ namespace IgniteApp.Modules
             Bind<TempAndHumClient>().ToSelf().InSingletonScope();
             Bind<ITaskController>().To<TaskController>().InSingletonScope();
             Bind<ITaskService>().To<TaskService>().InSingletonScope();
-            Bind<TTForgeViewModel>().ToSelf().InSingletonScope();// (new TTForgeViewModel());//.ToSelf().InSingletonScope();
+            Bind<TTForgeViewModel>().ToSelf().InSingletonScope();
 
             Bind<ConnectionContext>().ToSelf().InSingletonScope();
-            // Bind<ConnectionContext>().ToConnectedInstance<ConnectionContext>();
             Bind<IConnectionState>().ToFactory(GetConnectionObject).InSingletonScope();
             // 注册通信器
             Bind<IPlcCommunicator>().To<PlcModbusCommunicator>().InSingletonScope();
@@ -72,13 +69,10 @@ namespace IgniteApp.Modules
             if (context.ConnectionResult.Message.Contains("串口"))
             {
                 return context.ConnectionStates.OfType<SerialState>().First();
-                // return context.ConnectionStates.FirstOrDefault(s => s.IsConnected);
-                ////  return new SerialState(config.ComPort, config.BaudRate);
             }
             else
             {
                 return context.ConnectionStates.OfType<TcpState>().First();
-                // return new TcpState(config.IP, config.Port.ToInt());
             }
         }
     }

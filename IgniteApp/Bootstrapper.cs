@@ -28,12 +28,21 @@ using IT.Tangdao.Framework.DaoEvents;
 using IT.Tangdao.Framework;
 using System.Windows.Documents;
 using System.Collections.Generic;
+using IT.Tangdao.Framework.DaoDtos.Globals;
+using HandyControl.Data.Enum;
+using IT.Tangdao.Framework.DaoAdmin.Sockets;
+using IT.Tangdao.Framework.DaoEnums;
+using IT.Tangdao.Framework.DaoParameters.Infrastructure;
+using System.Security.Policy;
+using System.Runtime.Remoting.Contexts;
 
 namespace IgniteApp
 {
     public class Bootstrapper : Bootstrapper<LoginViewModel>
     {
         private static readonly IDaoLogger Logger = DaoLogger.Get(typeof(Bootstrapper));
+
+        private TangdaoChannelContext Context;
 
         protected override void ConfigureIoC(IStyletIoCBuilder builder)
         {
@@ -45,8 +54,14 @@ namespace IgniteApp
             builder.Bind<AlarmPublisher>().ToSelf().InSingletonScope();
             builder.Bind<AlarmPopupViewModel>().ToSelf().InSingletonScope();
             builder.Bind<AlarmPopupNotifier>().ToSelf();
-            //  var serviceRegistrar = new StyletServiceRegistrar(builder);
-            //  serviceRegistrar.RegisterFrameworkServices();
+
+            string connUri = "tcp://127.0.0.1:502";
+            var uri = new TangdaoUri(connUri);
+
+            Context = TangdaoChannelBuilder.Build(NetMode.Client, connUri);
+            builder.Bind<ITangdaoChannel>().ToInstance(Context.Channel);
+            builder.Bind<ITangdaoRequest>().ToInstance(Context.Request);
+            builder.Bind<ITangdaoResponse>().ToInstance(Context.Response);
             Logger.WriteLocal($"注册成功");
         }
 
@@ -59,20 +74,16 @@ namespace IgniteApp
                 WorkerId = 1,// 取值范围0~63,默认1
                              // DataCenterId=1,//数据中心Id
             });
-
-            // 5. 容器构建完成后，进行后期配置
-            // var serviceRegistrar = Container.Get<ITangdaoServiceRegistrar>();
-            // var tangdaoProvider = Container.Get<ITangdaoProvider>();
         }
 
-        protected override void OnLaunch()
+        protected override async void OnLaunch()
         {
             base.OnLaunch();
             // 启动监控服务
             var monitorService = Container.Get<IMonitorService>();
             monitorService.FileChanged += OnFileChanged;
             monitorService.StartMonitoring();
-            //   ViewModelFirst.InitSingleView(Container);
+            await Context.ConnectAsync();
         }
 
         private void OnFileChanged(object sender, DaoFileChangedEventArgs e)
@@ -119,7 +130,7 @@ namespace IgniteApp
     /// <summary>
     /// 自定义服务定位器
     /// </summary>
-    public class ServiceLocator
+    public static class ServiceLocator
     {
         public static IContainer Container { get; set; }
 

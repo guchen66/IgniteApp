@@ -4,5 +4,6 @@
     <ResourceDictionary.MergedDictionaries>
         <!--<ResourceDictionary Source="/IgniteApp;component/Assets/Styles/UserInfoListViewStyle.xaml" />-->
         <ResourceDictionary Source="/IgniteApp;component/Assets/Styles/RecipeListViewStyle.xaml" />
+        <ResourceDictionary Source="/IgniteApp;component/Assets/Styles/CustomStatusLightStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

@@ -163,7 +163,17 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Analyzer Include="..\..\..\..\nuget\StartDll\Roslynator.Analyzers.4.14.0\analyzers\dotnet\roslyn4.7\cs\Roslynator.CSharp.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\..\..\..\nuget\StartDll\Roslynator.Analyzers.4.14.0\analyzers\dotnet\roslyn4.7\cs\Roslynator_Analyzers_Roslynator.Common.dll" />
+    <Analyzer Include="..\..\..\..\nuget\StartDll\Roslynator.Analyzers.4.14.0\analyzers\dotnet\roslyn4.7\cs\Roslynator_Analyzers_Roslynator.Core.dll" />
+    <Analyzer Include="..\..\..\..\nuget\StartDll\Roslynator.Analyzers.4.14.0\analyzers\dotnet\roslyn4.7\cs\Roslynator_Analyzers_Roslynator.CSharp.dll" />
+    <Analyzer Include="..\..\..\..\nuget\StartDll\Roslynator.Analyzers.4.14.0\analyzers\dotnet\roslyn4.7\cs\Roslynator_Analyzers_Roslynator.CSharp.Workspaces.dll" />
+    <Analyzer Include="..\..\..\..\nuget\StartDll\Roslynator.Analyzers.4.14.0\analyzers\dotnet\roslyn4.7\cs\Roslynator_Analyzers_Roslynator.Workspaces.Common.dll" />
+    <Analyzer Include="..\..\..\..\nuget\StartDll\Roslynator.Analyzers.4.14.0\analyzers\dotnet\roslyn4.7\cs\Roslynator_Analyzers_Roslynator.Workspaces.Core.dll" />
+    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.NetAnalyzers.9.0.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.NetAnalyzers.dll" />
+    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.NetAnalyzers.9.0.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.NetAnalyzers.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
