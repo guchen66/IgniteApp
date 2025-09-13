@@ -1,15 +1,14 @@
-# 忽略所有的dll文件
-*.dll
+# >>> 强制递归忽略所有 DLL（放最前，防止被后面 ! 复活） <<<
+**/*.dll
 
 # 忽略 Cargo.SqlSugar 类库中的 Db 文件夹及其内容
 Cargo.SqlSugar/Db/
 
 # 自定义规则
-# 例如忽略特定文件或文件夹：
 # filename.ext
 # path/to/directory/
 
-# >>> 新增部分（直接粘贴即可使用） <<<
+# >>> 以下新增，粘贴即可使用 <<<
 # Visual Studio / Rider / VSCode 用户级配置
 .vs/
 .vscode/
@@ -19,54 +18,45 @@ Cargo.SqlSugar/Db/
 *.userprefs
 *.sln.docstates
 
-# 构建输出
-bin/
-obj/
-out/
-[Bb]uild/
-x64/
-x86/
-[Aa][Rr][Mm]/
-[Aa][Rr][Mm]64/
-bld/
-[Bb]in/
-[Oo]bj/
-[Ll]og/
-[Ll]ogs/
+# 构建输出（递归匹配，任意层级）
+**/bin/
+**/obj/
+**/out/
+**/[Bb]uild/
+**/x64/
+**/x86/
+**/[Aa][Rr][Mm]/
+**/[Aa][Rr][Mm]64/
+**/bld/
+**/Log/
+**/Logs/
 
-# .NET / ASP.NET
-*.pidb
-*.svclog
-*.scc
-*.bak
-*.cache
-*.ilk
-*.meta
-*.pdb
-*.pgc
-*.pgd
-*.rsp
-*.sbr
-*.tlb
-*.tli
-*.tlh
-*.tmp
-*.tmp_proj
-*_p.c
-*_h.h
-*.vspscc
-*.vssscc
-*.psess
-*.vsp
-*.vspx
-*.sap
-*.e2e
+# .NET / ASP.NET 杂项
+**/*.pdb
+**/*.ilk
+**/*.meta
+**/*.pgc
+**/*.pgd
+**/*.sbr
+**/*.tlb
+**/*.tli
+**/*.tlh
+**/*.tmp
+**/*.tmp_proj
+**/*_p.c
+**/*_h.h
+**/*.vspscc
+**/*.vssscc
+**/*.psess
+**/*.vsp
+**/*.vspx
+**/*.sap
 TestResults/
 *.VisualState.xml
 
-# NuGet
-*.nupkg
-*.snupkg
+# NuGet & 包缓存
+**/*.nupkg
+**/*.snupkg
 **/packages/*
 !**/packages/build/
 project.lock.json
@@ -101,6 +91,3 @@ _ReSharper.*
 
 # Azure Functions
 local.settings.json
-
-# Docker
-*.pid
