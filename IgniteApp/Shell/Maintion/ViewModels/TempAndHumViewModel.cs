@@ -4,7 +4,7 @@ using IgniteApp.Extensions;
 using IgniteDevices;
 using IgniteDevices.TempAndHum;
 using IgniteShared.Globals.System;
-using IT.Tangdao.Framework.DaoAdmin.IServices;
+using IT.Tangdao.Framework.Abstractions.IServices;
 using IT.Tangdao.Framework.DaoDevices;
 using Stylet;
 using System;
@@ -78,7 +78,7 @@ namespace IgniteApp.Shell.Maintion.ViewModels
         {
             Task.Run(() =>
             {
-                _readService.Device.Read();
+                // _readService.Device.Read();
                 while (!_manual.IsSet)
                 {
                     _tempAndHumClient.Initinalized(_manual);

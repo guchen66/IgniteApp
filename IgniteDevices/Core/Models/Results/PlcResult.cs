@@ -1,4 +1,4 @@
-﻿using IT.Tangdao.Framework.DaoAdmin.Results;
+﻿using IT.Tangdao.Framework.Abstractions.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;

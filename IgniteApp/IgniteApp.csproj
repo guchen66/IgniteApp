@@ -71,9 +71,9 @@
     <Reference Include="HandyControl, Version=3.5.1.0, Culture=neutral, PublicKeyToken=45be8712787a1e5b, processorArchitecture=MSIL">
       <HintPath>..\packages\HandyControl.3.5.1\lib\net48\HandyControl.dll</HintPath>
     </Reference>
-    <Reference Include="IT.Tangdao.Framework, Version=3.0.13.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="IT.Tangdao.Framework, Version=3.0.14.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\nuget\MyPackages\IT.Tangdao.Framework.dll</HintPath>
+      <HintPath>..\..\..\..\nuget\MyPackages\.Netframework\IT.Tangdao.Framework.dll</HintPath>
     </Reference>
     <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
@@ -202,7 +202,6 @@
     <Compile Include="Common\ReadOnlyMenuItemManager.cs" />
     <Compile Include="Common\SplitScreenManager.cs" />
     <Compile Include="Controls\CustomStatusLight.cs" />
-    <Compile Include="Converters\BoolToColorConverter.cs" />
     <Compile Include="Converters\ContentToColorConverter.cs" />
     <Compile Include="Converters\DeviceStatusConverter.cs" />
     <Compile Include="Converters\GetWindowExtension.cs" />
@@ -261,7 +260,6 @@
     <Compile Include="Events\NavigateToRegisterEvent.cs" />
     <Compile Include="ExceptionHandler.cs" />
     <Compile Include="Extensions\BoolExtensions.cs" />
-    <Compile Include="Extensions\BoolToStringModeExtension.cs" />
     <Compile Include="Extensions\IDialogProvider.cs" />
     <Compile Include="Extensions\SelectModeExtension.cs" />
     <Compile Include="Extensions\StyleIocExtensions.cs" />

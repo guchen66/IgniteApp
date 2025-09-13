@@ -3,7 +3,7 @@ using IgniteDevices.PLC.Services;
 using IgniteShared.Enums;
 using IgniteShared.Extensions;
 using IgniteShared.Models;
-using IT.Tangdao.Framework.DaoAdmin;
+using IT.Tangdao.Framework.Abstractions;
 using IT.Tangdao.Framework.Extensions;
 using Modbus.Device;
 using System;

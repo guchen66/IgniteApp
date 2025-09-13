@@ -1,5 +1,5 @@
 ﻿using IgniteShared.Globals.Local;
-using IT.Tangdao.Framework.DaoAdmin;
+using IT.Tangdao.Framework.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.IO;

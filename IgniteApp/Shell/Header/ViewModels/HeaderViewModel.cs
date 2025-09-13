@@ -1,5 +1,5 @@
 ﻿using IgniteApp.ViewModels;
-using IT.Tangdao.Framework.DaoCommands;
+using IT.Tangdao.Framework.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +19,7 @@ namespace IgniteApp.Shell.Header.ViewModels
         #endregion
 
         #region--ctor
+
         public HeaderViewModel()
         {
             DragmoveCommand = MinidaoCommand.Create(ExecuteDragmove);
@@ -47,7 +48,6 @@ namespace IgniteApp.Shell.Header.ViewModels
 
         private void ExecuteDragmove()
         {
-
             CurrentWindow.DragMove();
         }
 
@@ -72,6 +72,4 @@ namespace IgniteApp.Shell.Header.ViewModels
 
         #endregion
     }
-
-    
 }

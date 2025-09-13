@@ -1,6 +1,6 @@
 ﻿using IgniteDevices.Core.Models.Results;
-using IT.Tangdao.Framework.DaoAdmin.IServices;
-using IT.Tangdao.Framework.DaoAdmin.Results;
+using IT.Tangdao.Framework.Abstractions.IServices;
+using IT.Tangdao.Framework.Abstractions.Results;
 using System;
 using System.Collections.Generic;
 using System.IO;

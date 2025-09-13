@@ -1,7 +1,7 @@
 ﻿using IgniteApp.Bases;
 using IgniteApp.Shell.Maintion.Args;
 using IgniteApp.Shell.Maintion.Models;
-using IT.Tangdao.Framework.DaoCommands;
+using IT.Tangdao.Framework.Commands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

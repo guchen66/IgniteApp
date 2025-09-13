@@ -14,18 +14,16 @@ using IgniteShared.Dtos;
 using IgniteShared.Entitys;
 using IgniteShared.Globals.Local;
 using IgniteShared.Globals.System;
-using IT.Tangdao.Framework.DaoAdmin;
-using IT.Tangdao.Framework.DaoAdmin.IServices;
-using IT.Tangdao.Framework.DaoAdmin.Services;
-using IT.Tangdao.Framework.DaoDtos.Globals;
-using IT.Tangdao.Framework.DaoEnums;
+using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.IServices;
+using IT.Tangdao.Framework.Enums;
 using IT.Tangdao.Framework.Helpers;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using Stylet;
 using StyletIoC;
 using System.IO;
-using IT.Tangdao.Framework.DaoCommands;
+using IT.Tangdao.Framework.Commands;
 using IgniteApp.Views;
 using IgniteApp.Interfaces;
 using System.Windows.Navigation;
@@ -47,6 +45,8 @@ using System.Windows.Markup;
 using IT.Tangdao.Framework.DaoException;
 using IT.Tangdao.Framework.Extensions;
 using System.Collections.ObjectModel;
+using IT.Tangdao.Framework.Utilys;
+using IT.Tangdao.Framework.Messaging;
 
 namespace IgniteApp.ViewModels
 {
@@ -104,9 +104,8 @@ namespace IgniteApp.ViewModels
         /// </summary>
         public void ExecuteLogin()
         {
-            TestStudent testStudent = new TestStudent();
-            testStudent.Id = 10;
-            List<TestStudent> lists = testStudent.ConvertList();
+            // testStudent.Id = 10;
+            //  List<TestStudent> lists = testStudent.ConvertList();
             //查找本地是否有登录过的账号
             var cacheData = UserManager.SearchCache(LoginDto);
             if (cacheData)
@@ -122,26 +121,13 @@ namespace IgniteApp.ViewModels
             }
         }
 
-        public T Converter<T>(string name) where T : class, new()
-        {
-            T type = new T();
-
-            if (!typeof(T).IsHasConstructor())
-            {
-                throw new MissingParameterlyConstructorException("缺少无参构造器");
-            }
-            if (name != type.GetType().Name)
-            {
-                throw new ImproperNamingException($"{name}命名不规范");
-            }
-            return type;
-        }
-
         /// <summary>
         /// 退出
         /// </summary>
         public void ExecuteCancel()
         {
+            List<string> strings = new List<string>();
+            strings.FirstOrDefault();
             Application.Current.Shutdown();
         }
 
@@ -164,6 +150,7 @@ namespace IgniteApp.ViewModels
             base.OnActivate();
             try
             {
+                var s3 = bool.TrueString;
                 var foldPath = Path.Combine(IgniteInfoLocation.Cache, "LoginInfo.xml");
                 var xmlData = _readService.Read(foldPath);
                 if (xmlData == null)
@@ -173,18 +160,12 @@ namespace IgniteApp.ViewModels
                 }
                 _readService.Current.Load(xmlData);
                 var isRememberValue = _readService.Current.SelectNode("IsRemember").Result;// 获取元素的值
-                // 将字符串转换为bool类型
-                if (bool.TryParse(isRememberValue, out bool isRemember))
-                {
-                    if (isRemember)
-                    {
-                        LoginDto = XmlFolderHelper.Deserialize<LoginDto>(xmlData);
-                    }
-                    else
-                    {
-                        LoginDto = null;
-                    }
-                }
+
+                if (isRememberValue.TryToBool(out var value))
+
+                    LoginDto = XmlFolderHelper.Deserialize<LoginDto>(xmlData);
+                else
+                    LoginDto = null;
             }
             catch (Exception ex)
             {
@@ -224,6 +205,13 @@ namespace IgniteApp.ViewModels
 
             testStudents.Add(this);
             return testStudents;
+        }
+
+        public static Func<TSource, TTarget> CreateMap<TSource, TTarget>()
+        {
+            var p = System.Linq.Expressions.Expression.Parameter(typeof(TSource), "instance");
+            var body = System.Linq.Expressions.Expression.MemberInit(System.Linq.Expressions.Expression.New(typeof(TTarget)), typeof(TTarget).GetProperties().Select(d => System.Linq.Expressions.Expression.Bind(d, System.Linq.Expressions.Expression.Property(p, d.Name))));
+            return System.Linq.Expressions.Expression.Lambda<Func<TSource, TTarget>>(body, p).Compile();
         }
     }
 }

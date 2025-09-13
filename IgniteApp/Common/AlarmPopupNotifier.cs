@@ -2,8 +2,7 @@
 using IgniteApp.Dialogs.Views;
 using IgniteDevices.PLC;
 using IgniteShared.Extensions;
-using IT.Tangdao.Framework.DaoAdmin;
-using IT.Tangdao.Framework.DaoEnums;
+using IT.Tangdao.Framework.Abstractions;
 using Stylet;
 using StyletIoC;
 using System;

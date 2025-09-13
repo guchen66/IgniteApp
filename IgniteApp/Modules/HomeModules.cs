@@ -34,7 +34,7 @@ using System.ComponentModel;
 using IContainer = StyletIoC.IContainer;
 using IgniteApp.Dialogs.Manage;
 using IgniteApp.Tests;
-using IT.Tangdao.Framework.DaoAdmin.Navigates;
+using IT.Tangdao.Framework.Abstractions.Navigates;
 
 namespace IgniteApp.Modules
 {
@@ -42,6 +42,14 @@ namespace IgniteApp.Modules
     {
         protected override void Load()
         {
+            #region--View-ViewModel--
+            //  Bind<HomeViewModel>().ToSelf().InSingletonScope();
+            Bind<DefaultViewModel>().ToSelf().InSingletonScope();
+            #endregion
+
+            #region--服务接口--
+
+            #endregion
             Bind<IViewFactory>().ToAbstractFactory();
 
             Bind<INavigateRoute>().To<NavigateRoute>().InSingletonScope();

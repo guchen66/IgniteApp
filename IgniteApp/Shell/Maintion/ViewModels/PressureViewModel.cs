@@ -1,9 +1,9 @@
 ﻿using IgniteApp.Bases;
 using IgniteApp.Interfaces;
-using IT.Tangdao.Framework.DaoAdmin;
-using IT.Tangdao.Framework.DaoAdmin.Navigates;
-using IT.Tangdao.Framework.DaoCommands;
-using IT.Tangdao.Framework.DaoIoc;
+using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.Navigates;
+using IT.Tangdao.Framework.Commands;
+using IT.Tangdao.Framework.Ioc;
 using StyletIoC;
 using System;
 using System.Linq;

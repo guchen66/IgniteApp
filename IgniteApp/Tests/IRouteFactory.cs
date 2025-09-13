@@ -1,8 +1,8 @@
 ﻿using IgniteApp.Shell.Maintion.ViewModels;
-using IT.Tangdao.Framework.DaoAdmin;
-using IT.Tangdao.Framework.DaoAdmin.Navigates;
-using IT.Tangdao.Framework.DaoAttributes;
-using IT.Tangdao.Framework.DaoIoc;
+using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.Navigates;
+using IT.Tangdao.Framework.Attributes;
+using IT.Tangdao.Framework.Ioc;
 using StyletIoC;
 using System;
 using System.Collections;

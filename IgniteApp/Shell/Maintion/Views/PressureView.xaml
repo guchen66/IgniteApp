@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:IgniteApp.Shell.Maintion.Views"
-    xmlns:marup="clr-namespace:IgniteApp.Extensions"
+    xmlns:marup="clr-namespace:IT.Tangdao.Framework.Markup;assembly=IT.Tangdao.Framework"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="https://github.com/canton7/Stylet"
     xmlns:textStatus="clr-namespace:IgniteShared.Globals.Common;assembly=IgniteShared"

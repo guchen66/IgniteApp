@@ -1,7 +1,7 @@
 ﻿using IgniteAdmin.Providers;
 using IgniteApp.Shell.ProcessParame.Models;
-using IT.Tangdao.Framework.DaoAdmin;
-using IT.Tangdao.Framework.DaoEnums;
+using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Enums;
 using Stylet;
 using System;
 using System.Collections.Generic;

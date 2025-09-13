@@ -1,7 +1,7 @@
 ﻿using IgniteApp.Events;
 using IgniteDevices.PLC;
 using IgniteShared.Extensions;
-using IT.Tangdao.Framework.DaoAdmin;
+using IT.Tangdao.Framework.Abstractions;
 using IT.Tangdao.Framework.DaoEvents;
 using Stylet;
 using System;

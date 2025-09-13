@@ -1,7 +1,7 @@
 ﻿using IgniteDevices.Connections.Interfaces;
 using IgniteShared.Enums;
 using IgniteShared.Extensions;
-using IT.Tangdao.Framework.DaoAdmin;
+using IT.Tangdao.Framework.Abstractions;
 using Modbus.Device;
 using System;
 using System.Collections.Generic;

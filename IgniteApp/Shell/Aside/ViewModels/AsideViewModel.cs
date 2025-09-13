@@ -4,7 +4,7 @@ using IgniteApp.Bases;
 using IgniteApp.Extensions;
 using IgniteShared.Globals.Local;
 using IgniteShared.Globals.System;
-using IT.Tangdao.Framework.DaoAdmin;
+using IT.Tangdao.Framework.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.IO;

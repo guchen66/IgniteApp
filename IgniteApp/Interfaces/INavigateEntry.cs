@@ -1,6 +1,6 @@
 ﻿using IgniteApp.ViewModels;
 using IT.Tangdao.Framework;
-using IT.Tangdao.Framework.DaoAdmin;
+using IT.Tangdao.Framework.Abstractions;
 using Stylet;
 using StyletIoC;
 using System;

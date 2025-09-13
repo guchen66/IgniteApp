@@ -4,9 +4,9 @@ using IgniteApp.Extensions;
 using IgniteApp.Interfaces;
 using IgniteApp.Shell.Home.Models;
 using IgniteApp.Shell.Set.ViewModels;
-using IT.Tangdao.Framework.DaoAdmin.IServices;
-using IT.Tangdao.Framework.DaoAdmin.Services;
-using IT.Tangdao.Framework.DaoParameters.Infrastructure;
+using IT.Tangdao.Framework.Abstractions.IServices;
+using IT.Tangdao.Framework.Abstractions.Services;
+using IT.Tangdao.Framework.Parameters.Infrastructure;
 using IT.Tangdao.Framework.Extensions;
 using Stylet;
 using System;
@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IT.Tangdao.Framework.Parameters.EventArg;
 
 namespace IgniteApp.Shell.Maintion.ViewModels
 {

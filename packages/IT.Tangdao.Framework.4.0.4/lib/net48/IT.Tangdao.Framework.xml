@@ -1,0 +1,1925 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>IT.Tangdao.Framework</name>
+    </assembly>
+    <members>
+        <member name="T:IT.Tangdao.Framework.Abstractions.DaoLogger">
+            <summary>
+            日志记录器
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Abstractions.IHardwaredevice.Id">
+            <summary>
+            从站Id
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Abstractions.IHardwaredevice.DeviceName">
+            <summary>
+            设备名称
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Abstractions.IHardwaredevice.IsConn">
+            <summary>
+            设备是否连接
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Abstractions.IHardwaredevice.Open">
+            <summary>
+            硬件打开
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Abstractions.IHardwaredevice.Close">
+            <summary>
+            硬件关闭
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Abstractions.IRead">
+            <summary>
+            高级的读取接口，可以读取xml json config文件类型
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Abstractions.IRead.SelectValue(System.String)">
+            <summary>
+            跟据Key读取Value
+            用于数组读取
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Abstractions.IRead.SelectConfig(System.String)">
+            <summary>
+            读取Json对象
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="Result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Abstractions.IServices.IFileReadService.ReadLocalFile(System.String)">
+            <summary>
+            读取本地文件
+            </summary>
+            <param name="filePath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Abstractions.IServices.IFileReadService.ReadNetFile(System.String)">
+            <summary>
+            读取网络文件
+            </summary>
+            <param name="filePath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Abstractions.IServices.IMonitorService.StartMonitoring">
+            <summary>
+            开始监控（使用默认配置）
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Abstractions.IServices.IMonitorService.StartMonitoring(IT.Tangdao.Framework.Configurations.FileMonitorConfig)">
+            <summary>
+            开始监控（使用自定义配置）
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Abstractions.IServices.IMonitorService.StopMonitoring">
+            <summary>
+            停止监控
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Abstractions.IServices.IMonitorService.GetStatus">
+            <summary>
+            获取当前监控状态
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Abstractions.IServices.IQueryControlService.QueryableLayoutControl(System.Windows.DependencyObject)">
+            <summary>
+            查询一个面板的布局容器
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Abstractions.IServices.IReadService">
+            <summary>
+            定义读取文本的服务
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Abstractions.Navigates.ISingleNavigateView.DisplayOrder">
+            <summary>
+            用于排序
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Abstractions.Navigates.ISingleNavigateView.GroupKey">
+            <summary>
+            用于分组
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Abstractions.Navigates.ISingleRouter">
+            <summary>
+            只有简单的翻页功能，使用拦截器和传输数据请使用ITangdaoRouter
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Abstractions.Read.SelectNodes(System.String)">
+            <summary>
+            </summary>
+            <param name="path">这里的path是uri地址，不是XML具体数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Abstractions.Read.SelectValue(System.String)">
+            <summary>
+            跟据key读取指定value
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Abstractions.Read.SelectConfig(System.String)">
+            <summary>
+            读取WPF自带的App.config
+            这两个引用没有传递值，是读取config的值，所以不需要使用ref，
+            使用了struct后，如果传递数据的扩展方法，需要加上ref
+            </summary>
+            <param name="menuList"></param>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Abstractions.Read.SelectCustomConfig(System.String,System.String)">
+            <summary>
+            读取自定义的config文件
+            </summary>
+            <param name="menuList"></param>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Abstractions.Results.DeviceResult">
+            <summary>
+            设备操作结果（专为硬件设备设计）
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Abstractions.Results.DeviceResult.StatusCode">
+            <summary>
+            设备状态码
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Abstractions.Results.DeviceResult.ExecutionTimeMs">
+            <summary>
+            命令执行时间（毫秒）
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Abstractions.Results.DeviceResult.DeviceId">
+            <summary>
+            设备ID
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Abstractions.Results.DeviceResult`1">
+            <summary>
+            设备查询结果
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Abstractions.Results.IQueryableResult">
+            <summary>
+            基础结果接口
+            </summary>
+            <summary>
+            基础查询结果接口（适用于所有查询操作）
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Abstractions.Results.IQueryableResult.IsSuccess">
+            <summary>
+            操作是否成功
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Abstractions.Results.IQueryableResult.Message">
+            <summary>
+            结果消息
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Abstractions.Results.IQueryableResult.Timestamp">
+            <summary>
+            操作时间戳
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Abstractions.Results.IQueryableResult.Exception">
+            <summary>
+            异常信息（如果有）
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Abstractions.Results.IQueryableResult`1">
+            <summary>
+            泛型查询结果接口
+            </summary>
+            <typeparam name="T">数据类型</typeparam>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Abstractions.Results.IQueryableResult`1.Data">
+            <summary>
+            查询到的数据
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Abstractions.Results.QueryableResult">
+            <summary>
+            非泛型查询结果
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Abstractions.Results.QueryableResult`1">
+            <summary>
+            通用查询结果基类
+            </summary>
+            <typeparam name="T">数据类型</typeparam>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Abstractions.Results.ReadResult">
+            <summary>
+            非泛型读取结果
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:IT.Tangdao.Framework.Abstractions.Results.ReadResult.ToReadResult``1" -->
+        <member name="T:IT.Tangdao.Framework.Abstractions.Results.ReadResult`1">
+            <summary>
+            泛型读取结果
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Abstractions.Results.WriteResult">
+            <summary>
+            非泛型写入结果
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:IT.Tangdao.Framework.Abstractions.Results.WriteResult.ToWriteResult``1" -->
+        <member name="T:IT.Tangdao.Framework.Abstractions.Results.WriteResult`1">
+            <summary>
+            泛型写入结果
+            </summary>
+        </member>
+        <member name="F:IT.Tangdao.Framework.Abstractions.Services.FileMonitorService._watchers">
+            <summary>
+            线程安全的字典，存储目录路径和对应的文件监控器
+            </summary>
+        </member>
+        <member name="F:IT.Tangdao.Framework.Abstractions.Services.FileMonitorService._fileStates">
+            <summary>
+            存储文件状态（内容、哈希、修改时间）
+            </summary>
+        </member>
+        <member name="F:IT.Tangdao.Framework.Abstractions.Services.FileMonitorService._lastEventTimes">
+            <summary>
+            存储每个文件最后处理事件的时间（用于防抖）
+            </summary>
+        </member>
+        <member name="E:IT.Tangdao.Framework.Abstractions.Services.FileMonitorService.FileChanged">
+            <summary>
+            当XML文件发生变化时触发的事件
+            </summary>
+        </member>
+        <member name="F:IT.Tangdao.Framework.Abstractions.Services.FileMonitorService._config">
+            <summary>
+            文件监控配置
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Abstractions.Services.FileMonitorService.StartMonitoring(IT.Tangdao.Framework.Configurations.FileMonitorConfig)">
+            <summary>
+            查找指定配置下的所文件的目录，并开始监控
+            </summary>
+            <param name="config"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Abstractions.Services.FileMonitorService.InitializeFileStates(System.String,IT.Tangdao.Framework.Enums.DaoFileType)">
+            <summary>
+            初始化目录中所有文件的状态
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Abstractions.Services.FileMonitorService.StartMonitoringDirectory(System.String,IT.Tangdao.Framework.Enums.DaoFileType)">
+            <summary>
+            监控文件的创建、修改、删除、重命名事件
+            </summary>
+            <param name="directoryPath"></param>
+            <param name="fileType"></param>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Abstractions.Services.FileMonitorService.ProcessFileChange(System.String,IT.Tangdao.Framework.Enums.DaoFileType,System.IO.WatcherChangeTypes,System.String)">
+            <summary>
+            处理文件变化的核心逻辑，比较文件内容哈希值，只有真正的内容变化才触发事件
+            </summary>
+            <param name="filePath"></param>
+            <param name="fileType"></param>
+            <param name="changeType"></param>
+            <param name="changeDescription"></param>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Abstractions.Services.FileMonitorService.FileState">
+            <summary>
+            用于存储文件的最后状态，包括内容、哈希值和修改时间
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Abstractions.Services.FileReadService.ReadLocalFile(System.String)">
+            <summary>
+            读取本地的TXT文件，以后在扩展
+            </summary>
+            <param name="filePath"></param>
+            <returns></returns>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Abstractions.Sockets.ITangdaoChannel">
+            <summary>
+            建立连接通道
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Abstractions.Sockets.ITangdaoChannel.WaitConnectedAsync(System.Threading.CancellationToken)">
+            <summary>
+            防止异步连接未完成的时候，界面却已经构建成功
+            所以，一定要等待连接在建立界面构造
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="F:IT.Tangdao.Framework.Attributes.FakeDataInfoAttribute._datatype">
+            <summary>
+            用于指定数据类型
+            </summary>
+        </member>
+        <member name="F:IT.Tangdao.Framework.Attributes.FakeDataInfoAttribute._length">
+            <summary>
+            用来指定输出长度
+            </summary>
+        </member>
+        <member name="F:IT.Tangdao.Framework.Attributes.FakeDataInfoAttribute._defaultValue">
+            <summary>
+            默认值
+            </summary>
+        </member>
+        <member name="F:IT.Tangdao.Framework.Attributes.FakeDataInfoAttribute._random">
+            <summary>
+            用于指定bool值是否随机
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Attributes.FixedArgsAttribute">
+            <summary>
+            要求参数必须固定开头或结尾
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Attributes.NotEmptyAttribute">
+            <summary>
+            自己造轮子，写一个属性不能为空的特性
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Attributes.RoleRemarkAttribute">
+            <summary>
+            Remark特性
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Commands.IApplicationCommands`1">
+            <summary>
+            在接口中定义一些应用程序级别的命令，如保存日志、退出应用程序
+            将应用程序级别的命令统一放置到 IApplicationCommands 接口中，
+            可以将这些命令从具体的业务逻辑中解耦出来，
+            从而提高代码的可维护性和可测试性。
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:IT.Tangdao.Framework.DaoCommon.AutoGenerator.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.DaoCommon.AutoGenerator.IsAuto">
+            <summary>
+            是否自动生成
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.DaoCommon.AutoGenerator.IsSeedData">
+            <summary>
+            是否生成种子数据
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.DaoCommon.DaoTempDirectory">
+            <summary>
+            临时文件的创建与移除
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.DaoCommon.RegisterContext.RegisterType">
+            <summary>
+            注册的类
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.DaoCommon.RegisterContext.ParameterInfos">
+            <summary>
+            注册类构造器的参数
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.DaoCommon.RegisterContext.InterfaceToImplementationMapping">
+            <summary>
+            存储接口和实现类的映射
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.DaoCommon.RegisterContext.FactoryMapping">
+            <summary>
+            存储接口和实现类的工厂
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.DaoCommon.RegisterContext.IsResolving">
+            <summary>
+            标记是否正在解析该服务
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.DaoCommon.RegisterContext.Lifecycle">
+            <summary>
+            生命周期
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.DaoCommon.TangdaoContext">
+            <summary>
+            同步数据传输，进行两个类之间简单的数据交互
+            </summary>
+        </member>
+        <member name="F:IT.Tangdao.Framework.DaoCommon.TangdaoContext._localValues">
+            <summary>
+            存储字符串
+            </summary>
+        </member>
+        <member name="F:IT.Tangdao.Framework.DaoCommon.TangdaoContext._actions">
+            <summary>
+            存储方法
+            </summary>
+        </member>
+        <member name="F:IT.Tangdao.Framework.DaoCommon.TangdaoContext._contexts">
+            <summary>
+            存储数据上下文
+            </summary>
+        </member>
+        <member name="F:IT.Tangdao.Framework.DaoCommon.TangdaoContext._instanceFactories">
+            <summary>
+            存储工厂
+            </summary>
+        </member>
+        <member name="F:IT.Tangdao.Framework.DaoCommon.TangdaoContext._instances">
+            <summary>
+            存储实例
+            </summary>
+        </member>
+        <member name="F:IT.Tangdao.Framework.DaoCommon.TangdaoContext._providers">
+            <summary>
+            存储解析容器
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.DaoCommon.TangdaoContext.SetInstance``1(System.Func{IT.Tangdao.Framework.ITangdaoProvider,System.Object})">
+            <summary>
+            注册一个类型的实例工厂方法。
+            </summary>
+            <typeparam name="TService">服务类型。</typeparam>
+            <param name="factory">工厂方法，接受 ITangdaoProvider 并返回 TService 实例。</param>
+        </member>
+        <member name="M:IT.Tangdao.Framework.DaoCommon.TangdaoContext.GetInstance``1(IT.Tangdao.Framework.ITangdaoProvider)">
+            <summary>
+            获取指定类型的单例实例。如果尚未创建，则使用注册的工厂方法创建。
+            </summary>
+            <typeparam name="TService">服务类型。</typeparam>
+            <returns>TService 的单例实例。</returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.DaoCommon.TangdaoContext.GetInstance(System.Type,IT.Tangdao.Framework.ITangdaoProvider)">
+            <summary>
+            获取指定类型的单例实例。如果尚未创建，则使用注册的工厂方法创建。
+            </summary>
+            <param name="type">服务类型。</param>
+            <param name="provider">ITangdaoProvider 实例。</param>
+            <returns>指定类型的单例实例。</returns>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Component.DaoComponentContext.ComponentType">
+            <summary>
+            组件类型
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Component.DaoComponentContext.CalledContext">
+            <summary>
+            上级组件上下文
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Component.DaoComponentContext.RootContext">
+            <summary>
+            根组件上下文
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Component.DaoComponentContext.DependComponents">
+            <summary>
+            依赖组件列表
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Component.DaoComponentContext.LinkComponents">
+            <summary>
+            链接组件列表
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Component.DaoComponentContext.Properties">
+            <summary>
+            上下文数据
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Component.DaoComponentContext.IsRoot">
+            <summary>
+            是否是根组件
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Component.DaoComponentContext.SetProperty``1(System.Object)">
+            <summary>
+            设置组件属性参数
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Component.DaoComponentContext.SetProperty(System.Type,System.Object)">
+            <summary>
+            设置组件属性参数
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Component.DaoComponentContext.SetProperty(System.String,System.Object)">
+            <summary>
+            设置组件属性参数
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Component.DaoComponentContext.GetProperty``2">
+            <summary>
+            获取组件属性参数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Component.DaoComponentContext.GetProperty``1(System.Type)">
+            <summary>
+            获取组件属性参数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Component.DaoComponentContext.GetProperty``1(System.String)">
+            <summary>
+            获取组件属性参数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Component.DaoComponentContext.GetProperties">
+            <summary>
+            获取组件所有依赖参数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Component.IComponentBase">
+            <summary>
+            自定义组件的基类接口
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Component.IPrismComponent">
+            <summary>
+            使用Prism框架时可以实现这个接口
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Component.IStyletComponent">
+            <summary>
+            使用Stylet框架时，可以实现这个接口
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Configurations.FileMonitorConfig">
+            <summary>
+            文件监控配置类
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Configurations.FileMonitorConfig.MonitorRootPath">
+            <summary>
+            要监控的根目录路径
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Configurations.FileMonitorConfig.IncludeSubdirectories">
+            <summary>
+            是否搜索子目录
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Configurations.FileMonitorConfig.MonitorFileTypes">
+            <summary>
+            要监控的文件类型列表
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Configurations.FileMonitorConfig.DebounceMilliseconds">
+            <summary>
+            文件变化防抖时间（毫秒）
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Configurations.FileMonitorConfig.FileReadRetryCount">
+            <summary>
+            文件读取重试次数
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Configurations.FileMonitorConfig.FileReadRetryDelay">
+            <summary>
+            文件读取重试间隔（毫秒）
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Configurations.FileMonitorConfig.IgnoreTemporaryFiles">
+            <summary>
+            是否忽略临时文件
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Configurations.FileMonitorConfig.TemporaryFilePatterns">
+            <summary>
+            临时文件模式（用于过滤）
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Converters.Wpf.EnumDescriptionToValueConverter">
+            <summary>
+            获得枚举的描述
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.DaoDevices.Camera">
+            <summary>
+            相机
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.DaoDevices.ControlCard">
+            <summary>
+            运动控制卡
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.DaoDevices.Temperature">
+            <summary>
+            温度计
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.DaoDtos.Entitys.AlarmNotice">
+            <summary>
+            报警通知
+            </summary>
+        </member>
+        <member name="F:IT.Tangdao.Framework.DaoEvents.DaoEventAggregator._emptyEvents">
+            <summary>
+            用于缓存空事件的静态字典，避免重复创建空事件对象浪费资源
+            Key: 事件类型 Type
+            Value: 对应类型的空事件对象
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.DaoEvents.DaoEventAggregator.PublishAsync``1(``0)">
+            <summary>
+            异步发布事件
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.DaoEvents.DaoEventAggregator.UnSubscribe``1(IT.Tangdao.Framework.DaoEvents.Delegates.DaoEventHandler{``0})">
+            <summary>
+            取消订阅同步事件
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.DaoEvents.DaoEventAggregator.UnSubscribeAsync``1(IT.Tangdao.Framework.DaoEvents.Delegates.DaoAsyncEventHandler{``0})">
+            <summary>
+            取消订阅异步事件
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.DaoEvents.DaoEventAggregator.GetEmptyEvent``1">
+            <summary>
+            获取指定类型的空事件对象
+            使用缓存避免重复创建
+            </summary>
+            <typeparam name="T">事件类型，必须继承自DaoEventBase并有无参构造函数</typeparam>
+            <returns>对应类型的空事件对象</returns>
+        </member>
+        <member name="T:IT.Tangdao.Framework.DaoEvents.Handlers.IDaoEventHandler`1">
+            <summary>
+            异步事件处理程序接口
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.DaoEvents.Handlers.IDaoSyncEventHandler`1">
+            <summary>
+            同步事件处理程序接口
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.DaoException.ConfigurationMissingException">
+            <summary>
+            必需的配置项未提供或为空。
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.DaoException.ContainerErrorException">
+            <summary>
+            唐刀容器（IoC）阶段错误：注册失败、解析失败、生命周期冲突等。
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.DaoException.ContainerErrorException.Phase">
+            <summary>
+            出错阶段
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.DaoException.ContainerErrorException.ServiceType">
+            <summary>
+            涉及的服务类型
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.DaoException.ContainerErrorException.OnRegister(System.Type,System.String,System.Exception)">
+            <summary>
+            注册阶段出错
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.DaoException.ContainerErrorException.OnResolve(System.Type,System.String,System.Exception)">
+            <summary>
+            解析阶段出错
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.DaoException.DuplicateRegistrationException">
+            <summary>
+            试图重复注册同一服务。
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.DaoException.ImproperNamingException">
+            <summary>
+            命名不符合框架规范。
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.DaoException.InvalidPathException">
+            <summary>
+            给定路径既不是文件也不是目录。
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.DaoException.NotLengthException">
+            <summary>
+            当属性/字段/参数要求指定长度，而实际长度不符时抛出。
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.DaoException.NotLengthException.ExpectedLength">
+            <summary>
+            期望长度
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.DaoException.NotLengthException.ActualLength">
+            <summary>
+            实际长度
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.DaoException.NotLengthException.ThrowIfMismatch(System.Int32,System.Int32,System.String)">
+            <summary>
+            长度不符时抛出
+            </summary>
+            <param name="expected">期望长度</param>
+            <param name="actual">实际长度</param>
+            <param name="paramName">参数名（可选）</param>
+        </member>
+        <member name="M:IT.Tangdao.Framework.DaoException.NotLengthException.ThrowIfMismatch(System.String,System.Int32,System.String)">
+            <summary>
+            字符串长度不符时抛出
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.DaoException.PropertyValidationException">
+            <summary>
+            属性值未通过框架校验规则。
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.DaoException.ServiceNotRegisteredException">
+            <summary>
+            请求的服务尚未在容器注册。
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.DaoException.TangdaoException">
+            <summary>
+            唐刀框架异常基类。
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.DaoException.TypeErrorException">
+            <summary>
+            框架级“类型错误”异常，用于替代 ArgumentException 中所有“类型不匹配”场景。
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.DaoException.TypeErrorException.ExpectedType">
+            <summary>
+            预期类型
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.DaoException.TypeErrorException.ActualType">
+            <summary>
+            实际类型
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.DaoException.TypeErrorException.#ctor">
+            <summary>
+            初始化 <see cref="T:IT.Tangdao.Framework.DaoException.TypeErrorException"/> 类的新实例。
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.DaoException.TypeErrorException.#ctor(System.String)">
+            <summary>
+            使用指定错误消息初始化 <see cref="T:IT.Tangdao.Framework.DaoException.TypeErrorException"/> 类的新实例。
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.DaoException.TypeErrorException.#ctor(System.String,System.Exception)">
+            <summary>
+            使用指定错误消息和内部异常初始化 <see cref="T:IT.Tangdao.Framework.DaoException.TypeErrorException"/> 类的新实例。
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.DaoException.TypeErrorException.ThrowIfMismatch(System.Type,System.Type,System.String)">
+            <summary>
+            当实际类型与预期类型不符时抛出异常。
+            </summary>
+            <param name="expectedType">预期类型</param>
+            <param name="actualType">实际类型</param>
+            <param name="paramName">参数名（可选）</param>
+        </member>
+        <member name="M:IT.Tangdao.Framework.DaoException.TypeErrorException.ThrowIfNotAssignableFrom(System.Type,System.Object,System.String)">
+            <summary>
+            当对象不是预期类型或其派生类型时抛出异常。
+            </summary>
+            <param name="expectedType">预期类型</param>
+            <param name="instance">待检测实例</param>
+            <param name="paramName">参数名（可选）</param>
+        </member>
+        <member name="M:IT.Tangdao.Framework.DaoException.TypeErrorException.#ctor(System.String,System.Type,System.Type)">
+            <summary>
+            使用预期类型、实际类型和自定义消息初始化异常。
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.DaoException.TypeErrorException.#ctor(System.String,System.Type,System.Type,System.Exception)">
+            <summary>
+            使用预期类型、实际类型、自定义消息和内部异常初始化异常。
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.DaoMvvm.DaoViewModelBase`1">
+            <summary>
+            带 Model 的 ViewModel 基类。
+            T 为业务实体（Model），默认实现深拷贝/验证/异步初始化/撤销/繁忙标记。
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.DaoMvvm.DaoViewModelBase`1.OnModelChanged(`0,`0)">
+            <summary>
+            模型变更时触发，提供旧值和新值
+            </summary>
+            <param name="oldModel">旧的模型值</param>
+            <param name="newModel">新的模型值</param>
+        </member>
+        <member name="M:IT.Tangdao.Framework.DaoMvvm.DaoViewModelBase`1.OnModelChangedCore(`0,`0)">
+            <summary>
+            供派生类重写的模型变更处理方法
+            </summary>
+        </member>
+        <member name="E:IT.Tangdao.Framework.DaoMvvm.DaoViewModelBase`1.ModelChanged">
+            <summary>
+            模型变更事件（带参数）
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.DaoMvvm.ViewToViewModelLocator">
+            <summary>
+            视图定位器
+            用来全局定位MVVM模式
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.DaoTasks.TangdaoTaskScheduler.Execute(System.Action{IT.Tangdao.Framework.DaoTasks.TangdaoTask})">
+            <summary>
+            UI 线程同步执行（无 token，不可取消）
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.DaoTasks.TangdaoTaskScheduler.ExecuteAsync(System.Action{IT.Tangdao.Framework.DaoTasks.TangdaoTask})">
+            <summary>
+            UI 线程异步执行（不可取消）
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.DaoTasks.TangdaoTaskScheduler.Execute(System.Action{IT.Tangdao.Framework.DaoTasks.TangdaoTaskAsync},System.Threading.CancellationToken)">
+            <summary>
+            后台线程执行（可取消）
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.DaoTasks.TangdaoTaskScheduler.Execute(System.Action{IT.Tangdao.Framework.DaoTasks.TangdaoTaskAsync},System.Action{IT.Tangdao.Framework.DaoTasks.TangdaoTask},System.Threading.CancellationToken)">
+            <summary>
+            先后台再 UI（可取消后台阶段）
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Enums.DaoMonitorStatus">
+            <summary>
+            监控状态枚举
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Enums.DeviceStatus">
+            <summary>
+            设备状态码
+            </summary>
+        </member>
+        <member name="F:IT.Tangdao.Framework.Enums.DeviceStatus.Success">
+            <summary>
+            操作成功
+            </summary>
+        </member>
+        <member name="F:IT.Tangdao.Framework.Enums.DeviceStatus.Error">
+            <summary>
+            一般错误
+            </summary>
+        </member>
+        <member name="F:IT.Tangdao.Framework.Enums.DeviceStatus.CommunicationError">
+            <summary>
+            通信错误
+            </summary>
+        </member>
+        <member name="F:IT.Tangdao.Framework.Enums.DeviceStatus.Timeout">
+            <summary>
+            超时
+            </summary>
+        </member>
+        <member name="F:IT.Tangdao.Framework.Enums.DeviceStatus.Busy">
+            <summary>
+            设备忙
+            </summary>
+        </member>
+        <member name="F:IT.Tangdao.Framework.Enums.DeviceStatus.Offline">
+            <summary>
+            设备离线
+            </summary>
+        </member>
+        <member name="F:IT.Tangdao.Framework.Enums.DeviceStatus.InvalidParameter">
+            <summary>
+            参数错误
+            </summary>
+        </member>
+        <member name="F:IT.Tangdao.Framework.Enums.DeviceStatus.NotInitialized">
+            <summary>
+            设备未初始化
+            </summary>
+        </member>
+        <member name="F:IT.Tangdao.Framework.Enums.DeviceStatus.HardwareFault">
+            <summary>
+            硬件故障
+            </summary>
+        </member>
+        <member name="F:IT.Tangdao.Framework.Enums.NetConnectionType.Note">
+            <summary>
+            未知模式
+            </summary>
+        </member>
+        <member name="F:IT.Tangdao.Framework.Enums.NetConnectionType.Tcp">
+            <summary>
+            Tcp通讯
+            </summary>
+        </member>
+        <member name="F:IT.Tangdao.Framework.Enums.NetConnectionType.Udp">
+            <summary>
+            Udp通讯
+            </summary>
+        </member>
+        <member name="F:IT.Tangdao.Framework.Enums.NetConnectionType.Serial">
+            <summary>
+            串口通讯
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Enums.RoleEnum">
+            <summary>
+            这里的RoleRemark和数据库Role表的主键相对应
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.ConfigItemExtension.ReadAppConfig``1(``0,System.String)">
+            <summary>
+            读取WPF自带的App.config
+            这两个引用没有传递值，是读取config的值，所以不需要使用ref，
+            使用了struct后，如果传递数据的扩展方法，需要加上ref
+            </summary>
+            <param name="source"></param>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.ConfigItemExtension.ReadUnityConfig``1(``0,System.String)">
+            <summary>
+            读取自定义的config文件
+            </summary>
+            <param name="source"></param>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.DictionaryExtension.Get``2(System.Collections.Generic.IDictionary{``0,``1},``0)">
+            <summary>
+            此方法用于从字典中获取指定键的值，如果键不存在，则创建一个新的值并将其添加到字典中。
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="this"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.DictionaryExtension.GetValueOrDefault``2(System.Collections.Generic.IDictionary{``0,``1},``0)">
+            <summary>
+            此方法用于从字典中获取指定键的值，如果键不存在，则返回默认值
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="this"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.DictionaryExtension.TryAdd``2(System.Collections.Generic.Dictionary{``0,``1},``0,``1)">
+            <summary>
+            尝试将键和值添加到字典中：如果不存在，才添加；存在，不添加也不抛导常
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.DictionaryExtension.AddOrReplace``2(System.Collections.Generic.Dictionary{``0,``1},``0,``1)">
+            <summary>
+            将键和值添加或替换到字典中：如果不存在，则添加；存在，则替换
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.DictionaryExtension.TryOrderBy``2(System.Collections.Generic.Dictionary{``0,``1})">
+            <summary>
+            对字典的值重新进行排序
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="dict"></param>
+            <param name="key"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.EnumerableExtension.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0},System.Boolean)">
+            <summary>
+            增加一个参数，询问它是否需要转换成Array
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="this"></param>
+            <param name="callback"></param>
+            <param name="immutable"></param>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.EnumerableExtension.TryForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
+            <summary>
+            原本的ForEach没有返回值，新增的扩展带有返回值
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="this"></param>
+            <param name="callback"></param>
+            <returns></returns>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Extensions.FunctionalExtensions">
+            <summary>
+            柯里化编程，增加函数式编程的可实用性
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:IT.Tangdao.Framework.Extensions.LinqExtension.WithIndex``1(System.Collections.Generic.IEnumerable{``0})" -->
+        <member name="M:IT.Tangdao.Framework.Extensions.LinqExtension.OnlyAdd(System.Collections.Generic.IEnumerable{System.String},System.String)">
+            <summary>
+            确保字符串集合不包含重复项（大小写敏感）
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.LinqExtension.OnlyAdd``1(System.Collections.Generic.IEnumerable{``0},``0)">
+            <summary>
+            确保实现IAddParent接口的对象集合不包含重复ID
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.ObjectInfoExtension.TryGetInstanceObject``1">
+            <summary>
+            假如对象构造函数没有参数，可以直接调用生成
+            </summary>
+            <typeparam name="TType"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.ObjectInfoExtension.TryGetInstanceObject``1(System.Object[])">
+            <summary>
+            假如对象构造函数存在参数，可以直接调用生成
+            </summary>
+            <typeparam name="TType"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.ObjectInfoExtension.TryGetInstanceObject``1(System.String)">
+            <summary>
+            根据Name取调用
+            </summary>
+            <typeparam name="TType"></typeparam>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.ReadResultExtensions.ToObject``1(IT.Tangdao.Framework.Abstractions.Results.ReadResult)">
+            <summary>
+            从泛型字典结果→POCO
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.StringExtension.ContainsIgnoreCase(System.String,System.String)">
+            <summary>
+            检查字符串是否包含指定的子字符串（不区分大小写）
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.StringExtension.CreateFolder(System.String)">
+            <summary>
+            通过路径直接创建文件夹
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.StringExtension.ToStreamReader(System.String,System.Text.Encoding)">
+            <summary>
+            继续创建流
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.StringExtension.UseStreamReadToEnd(System.String,System.Text.Encoding)">
+            <summary>
+            继续创建流做一个简单的读取
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.StringExtension.SafeReadAllBytes(System.String)">
+            <summary>
+            安全读取文件（避免文件不存在的异常）
+            </summary>
+            <returns>返回文件内容，如果文件不存在返回null</returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.StringExtension.SafeReadAllText(System.String,System.Text.Encoding)">
+            <summary>
+            安全读取文本（自动处理编码）
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.StringExtension.ToFileStream(System.String)">
+            <summary>
+            继续创建文件
+            并且设置缓冲区
+            </summary>
+            <param name="localPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.StringExtension.TryToRandomString(System.Int32)">
+            <summary>
+            生成一个指定长度的随机字符串，RNGCryptoServiceProvider确保安全性
+            使用场景，生成随机密码，会话标识
+            </summary>
+            <param name="length"></param>
+            <returns></returns>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Extensions.StringExtension.LogId">
+            <summary>
+            这个字段可以作为日志标识符使用
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.StringExtension.GetMatch(System.String,System.String,System.String)">
+            <summary>
+            在一个段落中，获取两个指定字符串之间的文本
+            </summary>
+            <param name="text"></param>
+            <param name="p1"></param>
+            <param name="p2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.StringExtension.TrimMiddle(System.String,System.Int32,System.String)">
+            <summary>
+            这个方法将一个字符串截断到指定的长度，并在中间添加省略占位符（默认为 "..."）
+            使用场景：在用户界面中显示过长的文本时进行截断显示，例如聊天应用的消息预览
+            </summary>
+            <param name="this"></param>
+            <param name="limitLength"></param>
+            <param name="omitPlaceholder"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.StringExtension.UpperCamelCaseToDelimiterSeparated(System.String)">
+            <summary>
+            常用于java或者Mysql数据库
+            将GetName改为get_name
+            </summary>
+            <param name="upperCamelCase"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.TangdaoContainerBuilderExtension.Singleton(IT.Tangdao.Framework.ITangdaoContainerBuilder)">
+            <summary>
+            单例模式
+            </summary>
+            <param name="container"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.TangdaoContainerBuilderExtension.Transient(IT.Tangdao.Framework.ITangdaoContainerBuilder)">
+            <summary>
+            瞬态模式
+            </summary>
+            <param name="container"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.TangdaoContainerBuilderExtension.Scoped(IT.Tangdao.Framework.ITangdaoContainerBuilder)">
+            <summary>
+            作用域模式
+            </summary>
+            <param name="container"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.TangdaoTypeExtension.IsHasConstructor(System.Type)">
+            <summary>
+             一个类是否具有无参构造器
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.TangdaoTypeExtension.IsHasInterface(System.Type,System.Type)">
+            <summary>
+            一个类是否实现接口T
+            </summary>
+            <param name="type"></param>
+            <param name="interfaceType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.TangdaoTypeExtension.IsHasAttribute(System.Type,System.Type)">
+            <summary>
+            一个类是否有特性
+            </summary>
+            <param name="type"></param>
+            <param name="attributeType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.TangdaoTypeExtension.IsHasSon(System.Type,System.Type)">
+            <summary>
+            一个类是否是另一个类的子类
+            </summary>
+            <param name="type"></param>
+            <param name="baseType"></param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:IT.Tangdao.Framework.Extensions.TangdaoTypeExtension.IsNullableType(System.Type)" -->
+        <member name="M:IT.Tangdao.Framework.Extensions.TangdaoTypeExtension.IsNullable(System.Type)">
+            <summary>
+            判断类型是不是可以为null
+            </summary>
+            <param name="t"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.TangdaoTypeExtension.GetFriendlyName(System.Type)">
+            <summary>
+            获取类型的友好名称（处理泛型、可空类型等）
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.TangdaoTypeExtension.IsNumericType(System.Type)">
+            <summary>
+            判断类型是否为数字类型
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.TangdaoTypeExtension.GetAllProperties(System.Type,System.Reflection.BindingFlags)">
+            <summary>
+            获取类型的所有属性，包括继承链中的属性
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:IT.Tangdao.Framework.Extensions.TangdaoTypeExtension.IsCollectionType(System.Type)" -->
+        <member name="M:IT.Tangdao.Framework.Extensions.TangdaoTypeExtension.GetCollectionElementType(System.Type)">
+            <summary>
+            获取集合类型的元素类型（如果是集合的话）
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.TangdaoTypeExtension.IsAnonymousType(System.Type)">
+            <summary>
+            判断类型是否为匿名类型
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.TangdaoTypeExtension.GetDefaultValue(System.Type)">
+            <summary>
+            获取类型的默认值（支持值类型和引用类型）
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.TangdaoTypeExtension.IsSerializable(System.Type)">
+            <summary>
+            判断类型是否可以被序列化（标记了[Serializable]特性）
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.TangdaoTypeExtension.GetDisplayName(System.Type)">
+            <summary>
+            获取类型的DisplayName（来自DisplayNameAttribute）
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.TangdaoTypeExtension.IsDelegateType(System.Type)">
+            <summary>
+            判断类型是否为委托类型
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.TangdaoTypeExtension.GetGenericConstraintsDescription(System.Type)">
+            <summary>
+            获取类型的所有泛型约束的友好描述
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.TangdaoTypeExtension.HasMethodWithSignature(System.Type,System.String,System.Type,System.Type[])">
+            <summary>
+            判断类型是否具有指定的方法签名
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.TangdaoTypeExtension.GetStaticMethods(System.Type)">
+            <summary>
+            获取类型的所有静态方法
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.TangdaoTypeExtension.IsTupleType(System.Type)">
+            <summary>
+            判断类型是否为元组类型
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.TangdaoTypeExtension.GetInheritanceDepth(System.Type)">
+            <summary>
+            获取类型的深度继承层级
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.TangdaoTypeExtension.ToReadableName(System.Type)">
+            <summary>
+            一键把类型转成“人类可读”的完整名字，包含泛型参数
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.TangdaoViewExtension.RunSameLevelWindowAsync``1(IT.Tangdao.Framework.DaoMvvm.DaoViewModelBase,IT.Tangdao.Framework.ITangdaoParameter)">
+            <summary>
+            从ViewModel直接打开窗体
+            并且传递参数或者委托到一个平级的窗体
+            </summary>
+            <typeparam name="TView"></typeparam>
+            <param name="viewModel"></param>
+            <param name="tangdaoParameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.TangdaoViewExtension.RunChildWindowCallBackListAsync``1(IT.Tangdao.Framework.DaoMvvm.DaoViewModelBase,System.String,System.Action{``0})">
+            <summary>
+            从ViewModel打开一个子窗体
+            并且将数据传递过去，这次不借助ITangdaoWindow
+            子类不需要实现ITangdaoWindow，通过owner传递
+            name是子窗体数据的名称
+            </summary>
+            <typeparam name="TWindow"></typeparam>
+            <param name="viewModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.TangdaoViewExtension.RunChildWindowAsync``1(System.Windows.Controls.Button)">
+            <summary>
+            使用时，可以使用Wait等待，仅此打开一个窗体，也可以使用await异步打开
+            </summary>
+            <typeparam name="TView"></typeparam>
+            <param name="button"></param>
+            <param name="owner"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.TangdaoViewExtension.View_Closed(System.Object,System.EventArgs)">
+            <summary>
+            当窗体关闭后结束消息循环
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Extensions.TimeAwaitExtension">
+            <summary>
+            创建一个异步等待
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Extensions.TypeSelectConverterExtension.ToReadOnlyList``1(``0)">
+            <summary>
+            将单个对象转换为只读列表
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.CryptoHelper.Encrypt(System.String)">
+            <summary>
+            使用AES算法加密字符串
+            </summary>
+            <param name="plainText">要加密的明文字符串</param>
+            <returns>加密后的Base64编码字符串</returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.CryptoHelper.Decrypt(System.String)">
+            <summary>
+            使用AES算法解密字符串
+            </summary>
+            <param name="cipherText">要解密的Base64编码字符串</param>
+            <returns>解密后的明文字符串</returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.DateTimeHelper.GetTimeStamp">
+            <summary>
+            1970到现在的毫秒
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.DateTimeHelper.GetTimeStamp(System.DateTime)">
+            <summary>
+            1970到指定日期的毫秒
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Helpers.DirectoryHelper">
+            <summary>
+            目录文件帮助类
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.DirectoryHelper.SelectRootDirectory">
+            <summary>
+            获取根目录
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.DirectoryHelper.SelectDirectoryByName(System.String,System.String)">
+            <summary>
+            递归搜索指定文件，优先当前目录，其次子目录（广度优先）
+            </summary>
+            <param name="fileName">目标文件名（如：appsettings.json）</param>
+            <param name="rootDir">起始搜索目录（默认当前目录）</param>
+            <returns>找到的第一个文件完整路径，未找到时返回null</returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.DirectoryHelper.GetClassSelf(System.String,System.String,System.Type)">
+            <summary>
+            获取指定类库，指定某个文件夹下，并且应用了某个特性的所有类
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.DirectoryHelper.GetSolutionPath">
+            <summary>
+            获取解决方案目录
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.DirectoryHelper.GetSolutionName">
+            <summary>
+            获取解决方案Name
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.DirectoryHelper.GetMainProgramPath">
+            <summary>
+            获取主程序所在目录
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Helpers.ExcelHelper">
+            <summary>
+            Excel操作帮助类
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.FakeDataHelper.GenerateChineseMobileNumber">
+            <summary>
+            生成符合中国规则的11位手机号
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.FakeDataHelper.IsMobilePhoneDescription(System.String)">
+            <summary>
+            检查字符串是否包含"手机"或"电话"
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.FakeDataHelper.GenerateUniqueNumber(System.Nullable{System.Int32})">
+            <summary>
+            生成唯一数字（根据Length特性决定位数）
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.FakeDataHelper.GenerateRandomString(System.Nullable{System.Int32})">
+            <summary>
+            生成随机字符串（根据Length特性决定长度）
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.FakeDataHelper.GenerateRandomDateTime(System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            生成随机日期（包含随机时分秒）
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Helpers.FileHelper">
+            <summary>
+            判断文件的后缀
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Helpers.IniHelper">
+            <summary>
+            轻量级 INI 文件帮助类（基于 Win32 API，无依赖）
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.IniHelper.#ctor(System.String)">
+            <summary>
+            初始化并指定 INI 文件路径（若不存在会自动创建）
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.IniHelper.WriteString(System.String,System.String,System.String)">
+            <summary>
+            写入字符串（若 section/key 为 null 则写入空值）
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.IniHelper.ReadString(System.String,System.String,System.String)">
+            <summary>
+            读取字符串，缺失时返回 <paramref name="defaultValue"/>
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.IniHelper.WriteInt(System.String,System.String,System.Int32)">
+            <summary>
+            写入 32 位有符号整数
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.IniHelper.ReadInt(System.String,System.String,System.Int32)">
+            <summary>
+            读取 32 位有符号整数，缺失返回 <paramref name="defaultValue"/>
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.IniHelper.WriteBool(System.String,System.String,System.Boolean)">
+            <summary>
+            写入布尔（true/false）
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.IniHelper.ReadBool(System.String,System.String,System.Boolean)">
+            <summary>
+            读取布尔，缺失返回 <paramref name="defaultValue"/>
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.IniHelper.GetSectionNames">
+            <summary>
+            获取 INI 中所有段落名
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.IniHelper.GetSection(System.String)">
+            <summary>
+            获取指定段落下所有键值对（格式 key=value）
+            </summary>
+        </member>
+        <member name="F:IT.Tangdao.Framework.Helpers.IniHelper.NullTerminator">
+            <summary>
+            把原生双 '\0' 结束的缓冲拆成 C# 字符串列表
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.IPHelper.GetLocalIPByDns">
+            <summary>
+            打印本地所有IP，包括回路
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.IPHelper.GetLocalIP2">
+            <summary>
+            不包括主机，返回IP4
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.IPHelper.GetLocalIPByLinq">
+            <summary>
+            打印以太网IP4
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.IPHelper.GetLocalIP(System.Net.NetworkInformation.NetworkInterfaceType)">
+            <summary>
+            打印本地所有IP，包括回路
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.IPHelper.GetLocalIPBySocket">
+            <summary>
+            打印本地所有IP，包括回路
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.IPHelper.UriToIPAddress(System.Uri)">
+            <summary>
+            Uri转换未IP
+            </summary>
+            <param name="uri"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.IPHelper.IPAddressToUri(System.Net.IPAddress,System.Int32,System.String)">
+            <summary>
+            IP转Uri
+            </summary>
+            <param name="ip"></param>
+            <param name="port"></param>
+            <param name="scheme"></param>
+            <returns></returns>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Helpers.JsonConverHelper">
+            <summary>
+            Json帮助类
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.JsonConverHelper.GetJsonFileNamesAsync">
+            <summary>
+            获取根目录下的所有json文件
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.JsonConverHelper.GetJsonFilesContainNameAsync(System.String)">
+            <summary>
+            条件宽松
+            获取根目录下包含Name的所有json文件
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.JsonConverHelper.GetJsonFileByNameAsync(System.String)">
+            <summary>
+            条件不宽松
+            获取根目录下指定Name的唯一json文件
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.JsonConverHelper.GetDecisionJsonAsync(System.String,System.String)">
+            <summary>
+            获取根目录下的指定json文件并打开查看内容
+            </summary>
+            <param name="resourceName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.JsonConverHelper.GetDecisionJson(System.String,System.String)">
+            <summary>
+            获取根目录下的指定json文件并打开查看内容
+            </summary>
+            <param name="resourceName">资源名称</param>
+            <param name="key">JSON对象中的键</param>
+            <returns>JSON对象中对应键的值</returns>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Helpers.MemoryCacheHelper">
+            <summary>
+            缓存帮助类
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Helpers.RegexHelper">
+            <summary>
+            正则表达式帮助类
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.RegexHelper.IsChinese(System.String)">
+            <summary>
+            判断是否汉字
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.RegexHelper.IsNumber(System.String)">
+            <summary>
+            判断是否数字
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.RegexHelper.IsWord(System.String)">
+            <summary>
+            判断是否字母
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.RegexHelper.IsChineseOrNumberOrWord(System.String)">
+            <summary>
+            判断是否汉字或数字或英文单词
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.XmlFolderHelper.SerializeXML``1(``0,System.Text.Encoding)">
+            <summary>
+            将对象序列化为 XML 字符串，并指定编码格式（默认 UTF-8）
+            </summary>
+            <typeparam name="T">对象类型</typeparam>
+            <param name="obj">要序列化的对象</param>
+            <param name="encoding">指定的编码格式，默认为 UTF-8</param>
+            <returns>XML 字符串</returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.XmlFolderHelper.SerializeXMLToFile``1(``0,System.String,System.Text.Encoding)">
+            <summary>
+            将对象序列化为 XML 文件，并指定编码格式（默认 UTF-8）
+            </summary>
+            <typeparam name="T">对象类型</typeparam>
+            <param name="obj">要序列化的对象</param>
+            <param name="filePath">保存的文件路径</param>
+            <param name="encoding">指定的编码格式，默认为 UTF-8</param>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Helpers.XmlFolderHelper.Deserialize``1(System.String)">
+            <summary>
+            将 XML 字符串反序列化为对象
+            </summary>
+            <typeparam name="T">对象类型</typeparam>
+            <param name="xml">XML 字符串</param>
+            <returns>反序列化后的对象</returns>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Helpers.StringWriterWithEncoding">
+            <summary>
+            自定义 StringWriter，支持指定编码
+            </summary>
+        </member>
+        <member name="F:IT.Tangdao.Framework.Ioc.TangdaoProviderOptions.Default">
+            <summary>
+            为解析接口提供默认值
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Ioc.TangdaoProviderOptions.IsFromContainer">
+            <summary>
+            解析接口是否由容器构建
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Ioc.TangdaoProviderOptions.IsFromInstance">
+            <summary>
+            解析接口是否来自子类的实例化
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.ITangdaoAdapter">
+            <summary>
+            容器适配器，当存在第三方容器作为主容器的时候，Tangdao内部的部分接口可以使用
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Markup.GetWindowExtension">
+            <summary>
+            获取当前控件所在的Window实例
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Parameters.EventArg.ModelChangedEventArgs`1">
+            <summary>
+            模型变更事件参数
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Parameters.Infrastructure.ITangdaoMenuItem">
+            <summary>
+            用于配置菜单
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Parameters.Infrastructure.ITangdaoMenuItem.Id">
+            <summary>
+            配置Id
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Parameters.Infrastructure.ITangdaoMenuItem.MenuName">
+            <summary>
+            配置名称
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Parameters.Infrastructure.ITangdaoMenuItem.Value">
+            <summary>
+            配置值
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Parameters.Infrastructure.ITangdaoMenuItem.Childs">
+            <summary>
+            子级
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Parameters.Infrastructure.ITangdaoMenuItem.Item(System.String)">
+            <summary>
+            获取或设置配置值
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Parameters.Infrastructure.ITangdaoValue">
+            <summary>
+            减少拆箱，装箱接口
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Parameters.Infrastructure.TangdaoMenuItem">
+            <summary>
+            ITangdaoMenuItem 的默认实现。
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Parameters.Infrastructure.TangdaoMenuItem.Id">
+            <summary>配置 Id</summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Parameters.Infrastructure.TangdaoMenuItem.MenuName">
+            <summary>配置名称</summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Parameters.Infrastructure.TangdaoMenuItem.Value">
+            <summary>配置值</summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Parameters.Infrastructure.TangdaoMenuItem.Childs">
+            <summary>子级菜单集合，默认空列表</summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Parameters.Infrastructure.TangdaoMenuItem.Item(System.String)">
+            <summary>
+            简易字典索引器，用于按需存储/读取额外配置。
+            实际存储在 <see cref="F:IT.Tangdao.Framework.Parameters.Infrastructure.TangdaoMenuItem._extended"/> 中。
+            </summary>
+        </member>
+        <member name="F:IT.Tangdao.Framework.Parameters.Infrastructure.TangdaoMenuItem._extended">
+            <summary>扩展字段字典</summary>
+        </member>
+        <member name="F:IT.Tangdao.Framework.Selectors.FileSelector._read">
+            <summary>
+            文件查询
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Selectors.FileSelector.DetectFromContent(System.String)">
+            <summary>
+            解析当前类型属于指定枚举
+            </summary>
+            <param name="content"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Selectors.FileSelector.Import">
+            <summary>
+            文件导入
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Selectors.FileSelector.Export">
+            <summary>
+            文件导出
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.TangdaoAppBase.CreateWindow">
+            <summary>
+            启动主窗体
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.TangdaoAppBase.ConfigureIOC(IT.Tangdao.Framework.ITangdaoContainer)">
+            <summary>
+            使用IOC容器进行注册
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.TangdaoAppBase.InitServerLocator">
+            <summary>
+            初始化界面资源
+            </summary>
+            <param name="resourceDictionary"></param>
+        </member>
+        <member name="M:IT.Tangdao.Framework.TangdaoContainer.Register``1">
+            <summary>
+            注册一个类
+            </summary>
+            <typeparam name="TService"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.TangdaoContainerBuilder.Builder">
+            <summary>
+            获取或创建一个 ITangdaoProvider 的单例实例。
+            </summary>
+            <returns>ITangdaoProvider 实例。</returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Utilys.DictToObject.Convert``1(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            字典→POCO  主入口
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Utilys.DictToObject.ConvertSingleValue(System.String,System.Type)">
+            <summary>
+            单个 string → 目标类型（利用已注册的 Parsers.Table）
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Utilys.ObjectCreator">
+            <summary>
+            对象创建工具类
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Utilys.ObjectCreator.CreateInstance``1">
+            <summary>
+            创建无参构造函数的对象实例
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Utilys.ObjectCreator.CreateInstance``1(System.Object[])">
+            <summary>
+            创建带参数构造函数的对象实例
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Utilys.ObjectCreator.CreateInstanceFromName``1(System.String)">
+            <summary>
+            通过类型名称创建对象实例（适用于延迟加载）
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Utilys.ObjectCreator.CreateMap``2">
+            <summary>
+            运行时拷贝对象属性
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <typeparam name="TTarget"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Utilys.ObjectCreator.TryCreateInstance``1">
+            <summary>
+            尝试创建对象实例，失败返回null而不是抛出异常
+            </summary>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Utilys.TangdaoGuards">
+            <summary>
+            Guard一个辅助类，将所有报错写在一起
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Utilys.TangdaoGuards.ThrowIfNull(System.Object[])">
+            <summary>
+            ThrowIfNull传入的params参数是可变的，全部传入object[]
+            </summary>
+            <param name="parameters"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Utilys.TangdaoGuards.ThrowIfNull``1(``0,System.String)">
+            <summary>
+            检查对象是否为 null，如果是，则抛出 ArgumentNullException。
+            </summary>
+            <typeparam name="T">对象的类型</typeparam>
+            <param name="parameter">要检查的对象</param>
+            <param name="name">参数名称（可选）</param>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Utilys.TangdaoGuards.ThrowIfEmpty``1(System.Collections.Generic.IEnumerable{``0},System.String)">
+            <summary>
+            检查集合是否为空，如果是，则抛出 ArgumentException。
+            </summary>
+            <typeparam name="T">集合中元素的类型</typeparam>
+            <param name="collection">要检查的集合</param>
+            <param name="message">异常消息（可选）</param>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Utilys.TangdaoGuards.ThrowIfOutOfRange(System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            检查数字是否在指定范围内，如果不在，则抛出 ArgumentOutOfRangeException。
+            </summary>
+            <param name="value">要检查的数值</param>
+            <param name="min">最小值（包含）</param>
+            <param name="max">最大值（包含）</param>
+            <param name="paramName">参数名称（可选）</param>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Utilys.TangdaoGuards.ThrowIfDateOutOfRange(System.DateTime,System.DateTime,System.DateTime)">
+            <summary>
+            检查日期是否在指定范围内，如果不在，则抛出 ArgumentOutOfRangeException。
+            </summary>
+            <param name="date">要检查的日期</param>
+            <param name="startDate">开始日期（包含）</param>
+            <param name="endDate">结束日期（包含）</param>
+        </member>
+        <member name="T:IT.Tangdao.Framework.Utilys.TangdaoOptional`1">
+            <summary>
+            当判空 → 映射 → 过滤 → 默认值
+            或者想把“可能缺失”作为一等概念在 API 里传递时候使用
+            否则不建议使用
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Utilys.TangdaoOptional`1.#ctor(`0,System.Boolean)">
+            <summary>
+            内部构造函数；由静态工厂调用。
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Utilys.TangdaoOptional`1.Some(`0)">
+            <summary>
+            创建一个包含值的实例。
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Utilys.TangdaoOptional`1.None">
+            <summary>
+            创建一个空实例（None）。
+            </summary>
+        </member>
+        <member name="P:IT.Tangdao.Framework.Utilys.TangdaoOptional`1.HasValue">
+            <summary>
+            是否包含值（true=Some，false=None）。
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:IT.Tangdao.Framework.Utilys.TangdaoOptional`1.Value" -->
+        <!-- Badly formed XML comment ignored for member "M:IT.Tangdao.Framework.Utilys.TangdaoOptional`1.ValueOrDefault(`0)" -->
+        <member name="M:IT.Tangdao.Framework.Utilys.TangdaoOptional`1.ValueOrElse(System.Func{`0})">
+            <summary>
+            有值返回自己的值，否则通过工厂委托现场生成默认值。
+            延迟计算，避免无谓开销。
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Utilys.TangdaoOptional`1.Where(System.Func{`0,System.Boolean})">
+            <summary>
+            如果满足条件则保持 Some，否则变成 None。
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Utilys.TangdaoOptional`1.Select``1(System.Func{`0,``0})">
+            <summary>
+            映射/投影：把当前值转换成另一种类型。
+            如果当前是 None，则直接返回目标类型的 None。
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Utilys.TangdaoOptional`1.SelectMany``1(System.Func{`0,IT.Tangdao.Framework.Utilys.TangdaoOptional{``0}})">
+            <summary>
+            扁平映射：selector 本身也返回 Optional，避免嵌套。
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Utilys.TangdaoOptional`1.Invoke(System.Action{`0})">
+            <summary>
+            存在值时才执行委托；常用于触发副作用（日志、UI 更新等）。
+            </summary>
+        </member>
+        <member name="M:IT.Tangdao.Framework.Utilys.TangdaoOptional`1.Match(System.Action{`0},System.Action)">
+            <summary>
+            无论有没有值都执行对应委托；比 Invoke 更完整的模式匹配。
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -9,8 +9,8 @@ using IgniteApp.Shell.ProcessParame.Models;
 using IgniteApp.Shell.ProcessParame.ViewModels;
 using IgniteShared.Extensions;
 using IgniteShared.Globals.Local;
-using IT.Tangdao.Framework.DaoAdmin;
-using IT.Tangdao.Framework.DaoEnums;
+using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Enums;
 using MiniExcelLibs;
 using Stylet.Xaml;
 

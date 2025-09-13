@@ -2,9 +2,9 @@
 using IgniteAdmin.Providers;
 using IgniteApp.Interfaces;
 using IgniteShared.Models;
-using IT.Tangdao.Framework.DaoAdmin;
-using IT.Tangdao.Framework.DaoAdmin.IServices;
-using IT.Tangdao.Framework.DaoAdmin.Services;
+using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.IServices;
+using IT.Tangdao.Framework.Abstractions.Services;
 using IT.Tangdao.Framework.Helpers;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
@@ -19,8 +19,7 @@ using System.IO;
 using IgniteShared.Globals.System;
 using IT.Tangdao.Framework.Extensions;
 using IgniteApp.Extensions;
-using IT.Tangdao.Framework.DaoEnums;
-using IT.Tangdao.Framework.DaoDtos.Options;
+using IT.Tangdao.Framework.Enums;
 using IT.Tangdao.Framework.DaoDevices;
 using System.IO.Ports;
 using IgniteApp.ViewModels;
@@ -31,11 +30,12 @@ using StyletIoC.Creation;
 using IgniteShared.Dtos;
 using IgniteShared.Globals.Local;
 using IgniteApp.Tests;
-using IT.Tangdao.Framework.DaoIoc;
+using IT.Tangdao.Framework.Ioc;
 using IgniteAdmin.Interfaces;
-using IT.Tangdao.Framework.DaoAdmin.Navigates;
+using IT.Tangdao.Framework.Abstractions.Navigates;
 using IgniteApp.Dialogs.ViewModels;
 using IgniteApp.Shell.ProcessParame.ViewModels;
+using IT.Tangdao.Framework.Configurations;
 
 namespace IgniteApp.Modules
 {

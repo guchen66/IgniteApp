@@ -1,16 +1,6 @@
 ﻿using AutoMapper;
 using IgniteAdmin.Providers;
-using IgniteApp.Interfaces;
-using IgniteApp.Tests;
-using IgniteDb;
-using IgniteDb.IRepositorys;
-using IgniteDb.Repositorys;
-using IgniteShared.Delegates;
-using IgniteShared.Globals.Local;
-using IT.Tangdao.Framework.DaoAdmin.IServices;
-using IT.Tangdao.Framework.DaoAdmin.Services;
-using IT.Tangdao.Framework.DaoDtos.Options;
-using IT.Tangdao.Framework.DaoEnums;
+using IT.Tangdao.Framework.Enums;
 using StyletIoC;
 using System;
 using System.Collections.Generic;

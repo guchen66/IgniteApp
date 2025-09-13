@@ -1,10 +1,10 @@
 ﻿using HandyControl.Controls;
 using IgniteApp.Shell.ProcessParame.Services;
 using IT.Tangdao.Framework;
-using IT.Tangdao.Framework.DaoAdmin.IServices;
-using IT.Tangdao.Framework.DaoAdmin.Navigates;
-using IT.Tangdao.Framework.DaoAdmin.Sockets;
-using IT.Tangdao.Framework.DaoCommands;
+using IT.Tangdao.Framework.Abstractions.IServices;
+using IT.Tangdao.Framework.Abstractions.Navigates;
+using IT.Tangdao.Framework.Abstractions.Sockets;
+using IT.Tangdao.Framework.Commands;
 using Stylet;
 using System;
 using System.Collections.Generic;

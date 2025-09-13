@@ -2,7 +2,7 @@
 using IgniteApp.Dialogs.ViewModels;
 using IgniteApp.Interfaces;
 using IT.Tangdao.Framework;
-using IT.Tangdao.Framework.DaoAdmin.Navigates;
+using IT.Tangdao.Framework.Abstractions.Navigates;
 using IT.Tangdao.Framework.Extensions;
 using Stylet;
 using StyletIoC;

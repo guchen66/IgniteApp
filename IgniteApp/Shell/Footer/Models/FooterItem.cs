@@ -1,4 +1,4 @@
-﻿using IT.Tangdao.Framework.DaoAdmin;
+﻿using IT.Tangdao.Framework.Abstractions;
 using IT.Tangdao.Framework.DaoMvvm;
 using Stylet;
 using System;

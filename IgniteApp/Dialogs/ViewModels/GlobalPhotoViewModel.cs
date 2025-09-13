@@ -1,7 +1,7 @@
 ﻿using IgniteApp.Dialogs.Manage;
 using IgniteApp.Interfaces;
 using IgniteApp.Tests;
-using IT.Tangdao.Framework.DaoAdmin.Navigates;
+using IT.Tangdao.Framework.Abstractions.Navigates;
 using Stylet;
 using StyletIoC;
 using System;

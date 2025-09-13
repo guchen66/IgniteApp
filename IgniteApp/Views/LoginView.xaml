@@ -9,7 +9,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="https://github.com/canton7/Stylet"
     xmlns:shared="clr-namespace:IgniteShared.Entitys.Common;assembly=IgniteShared"
-    xmlns:conver="clr-namespace:IT.Tangdao.Framework.DaoConverters;assembly=IT.Tangdao.Framework"
+    xmlns:conver="clr-namespace:IT.Tangdao.Framework.Converters.Wpf;assembly=IT.Tangdao.Framework"
     x:Name="LoginWin"
     Title="LoginView"
     Width="600"

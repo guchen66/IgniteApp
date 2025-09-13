@@ -2,12 +2,12 @@
 using Stylet;
 using StyletIoC;
 using IgniteApp.ViewModels;
-using IT.Tangdao.Framework.DaoAdmin.IServices;
-using IT.Tangdao.Framework.DaoAdmin.Services;
+using IT.Tangdao.Framework.Abstractions.IServices;
+using IT.Tangdao.Framework.Abstractions.Services;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Threading;
-using IT.Tangdao.Framework.DaoAdmin;
+using IT.Tangdao.Framework.Abstractions;
 using IgniteApp.Modules;
 using Yitter.IdGenerator;
 using IgniteAdmin.Managers.Transmit;
@@ -28,13 +28,13 @@ using IT.Tangdao.Framework.DaoEvents;
 using IT.Tangdao.Framework;
 using System.Windows.Documents;
 using System.Collections.Generic;
-using IT.Tangdao.Framework.DaoDtos.Globals;
 using HandyControl.Data.Enum;
-using IT.Tangdao.Framework.DaoAdmin.Sockets;
-using IT.Tangdao.Framework.DaoEnums;
-using IT.Tangdao.Framework.DaoParameters.Infrastructure;
+using IT.Tangdao.Framework.Abstractions.Sockets;
+using IT.Tangdao.Framework.Enums;
 using System.Security.Policy;
 using System.Runtime.Remoting.Contexts;
+using IT.Tangdao.Framework.Parameters.EventArg;
+using IT.Tangdao.Framework.Parameters.Infrastructure;
 
 namespace IgniteApp
 {
@@ -122,8 +122,9 @@ namespace IgniteApp
             }
         }
 
-        private void RegisterAutoMapper()
+        private async void RegisterAutoMapper()
         {
+            await Task.Delay(1000).ConfigureAwait(true);
         }
     }
 

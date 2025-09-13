@@ -1,7 +1,6 @@
 ﻿using IgniteShared.Extensions;
 using IgniteShared.Globals.System;
-using IT.Tangdao.Framework.DaoAdmin;
-using IT.Tangdao.Framework.DaoEnums;
+using IT.Tangdao.Framework.Abstractions;
 using Stylet;
 using System;
 using System.Collections.Generic;

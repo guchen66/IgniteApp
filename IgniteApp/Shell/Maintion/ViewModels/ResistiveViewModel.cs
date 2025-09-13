@@ -2,7 +2,8 @@
 using IgniteApp.Bases;
 using IgniteShared.Extensions;
 using IT.Tangdao.Framework;
-using IT.Tangdao.Framework.DaoAdmin;
+using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.DaoTasks;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

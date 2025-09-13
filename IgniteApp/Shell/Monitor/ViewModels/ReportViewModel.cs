@@ -1,7 +1,7 @@
 ﻿using HandyControl.Controls;
 using IgniteApp.Bases;
 using IgniteApp.Common;
-using IT.Tangdao.Framework.DaoCommands;
+using IT.Tangdao.Framework.Commands;
 using MiniExcelLibs;
 using Stylet;
 using System;

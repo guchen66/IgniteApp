@@ -2,9 +2,9 @@
 using IgniteApp.Dialogs.ViewModels;
 using IgniteApp.Tests;
 using IT.Tangdao.Framework;
-using IT.Tangdao.Framework.DaoAdmin;
-using IT.Tangdao.Framework.DaoAdmin.Navigates;
-using IT.Tangdao.Framework.DaoIoc;
+using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.Navigates;
+using IT.Tangdao.Framework.Ioc;
 using Stylet;
 using System;
 using System.Collections.Generic;

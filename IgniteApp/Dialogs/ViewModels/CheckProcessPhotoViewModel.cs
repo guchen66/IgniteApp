@@ -2,8 +2,8 @@
 using IgniteApp.Dialogs.Manage;
 using IgniteApp.Interfaces;
 using IgniteApp.Tests;
-using IT.Tangdao.Framework.DaoAdmin.Navigates;
-using IT.Tangdao.Framework.DaoAttributes;
+using IT.Tangdao.Framework.Abstractions.Navigates;
+using IT.Tangdao.Framework.Attributes;
 using Stylet;
 using System;
 using System.Collections.Generic;

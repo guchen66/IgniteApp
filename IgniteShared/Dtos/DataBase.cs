@@ -10,7 +10,7 @@ namespace IgniteShared.Dtos
     /// <summary>
     /// Dto基类
     /// </summary>
-    public class DataBase:DaoViewModelBase
+    public class DataBase : DaoViewModelBase
     {
         private long _id;
 

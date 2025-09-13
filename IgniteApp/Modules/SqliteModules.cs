@@ -2,8 +2,8 @@
 using IgniteDb;
 using IgniteDb.IRepositorys;
 using IgniteDb.Repositorys;
-using IT.Tangdao.Framework.DaoAdmin.IServices;
-using IT.Tangdao.Framework.DaoAdmin.Services;
+using IT.Tangdao.Framework.Abstractions.IServices;
+using IT.Tangdao.Framework.Abstractions.Services;
 using StyletIoC;
 using System;
 using System.Collections.Generic;

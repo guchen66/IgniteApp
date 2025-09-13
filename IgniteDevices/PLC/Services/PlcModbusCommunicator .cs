@@ -2,8 +2,8 @@
 using IgniteDevices.Connections.Interfaces;
 using IgniteDevices.Core.Models;
 using IgniteDevices.Core.Models.Results;
-using IT.Tangdao.Framework.DaoAdmin;
-using IT.Tangdao.Framework.DaoAdmin.Results;
+using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.Results;
 using Modbus.Device;
 using System;
 using System.Collections.Generic;

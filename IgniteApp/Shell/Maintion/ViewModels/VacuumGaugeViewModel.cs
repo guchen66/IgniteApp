@@ -1,7 +1,7 @@
 ﻿using HandyControl.Controls;
 using IT.Tangdao.Framework;
-using IT.Tangdao.Framework.DaoAdmin.Navigates;
-using IT.Tangdao.Framework.DaoIoc;
+using IT.Tangdao.Framework.Abstractions.Navigates;
+using IT.Tangdao.Framework.Ioc;
 using Stylet;
 using System;
 using System.Collections.Generic;

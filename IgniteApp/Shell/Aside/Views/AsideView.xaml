@@ -9,7 +9,7 @@
     xmlns:manager="clr-namespace:IgniteAdmin.Managers.Home;assembly=IgniteAdmin"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="https://github.com/canton7/Stylet"
-    xmlns:selector="clr-namespace:IT.Tangdao.Framework.DaoSelectors;assembly=IT.Tangdao.Framework"
+    xmlns:selector="clr-namespace:IT.Tangdao.Framework.Selectors;assembly=IT.Tangdao.Framework"
     xmlns:user="clr-namespace:IgniteShared.Globals.System;assembly=IgniteShared"
     d:DesignHeight="850"
     d:DesignWidth="300"
