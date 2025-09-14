@@ -35,6 +35,7 @@ using System.Security.Policy;
 using System.Runtime.Remoting.Contexts;
 using IT.Tangdao.Framework.Parameters.EventArg;
 using IT.Tangdao.Framework.Parameters.Infrastructure;
+using IgniteApp.Assets.Themes;
 
 namespace IgniteApp
 {
@@ -97,6 +98,7 @@ namespace IgniteApp
             RegisterExceptionEvents();            //注册全局异常捕获
             RegisterWCFEvent();                   //注册WCF事件
             RegisterAutoMapper();
+            ComboboxOptions.SetTheme();
         }
 
         private void RegisterExceptionEvents()

@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:IgniteApp.Shell.Monitor.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="https://github.com/canton7/Stylet"
-    xmlns:markup="clr-namespace:IgniteApp.Extensions"
+     xmlns:markup="clr-namespace:IT.Tangdao.Framework.Markup;assembly=IT.Tangdao.Framework"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -24,7 +24,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <TextBlock Text="筛选" Margin="10 10" />
-            <ComboBox x:Name="com" Grid.Column="1" ItemsSource="{markup:SelectMode}" SelectedIndex="0" />
+            <ComboBox x:Name="com" Grid.Column="1" ItemsSource="{markup:OptionList}" SelectedIndex="0" />
             <TextBlock Text="" />
         </Grid>
         <DataGrid

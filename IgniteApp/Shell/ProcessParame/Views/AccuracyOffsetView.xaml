@@ -8,12 +8,20 @@
     xmlns:local="clr-namespace:IgniteApp.Shell.ProcessParame.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
-    xmlns:markup="clr-namespace:IgniteApp.Extensions"
+    xmlns:markup="clr-namespace:IT.Tangdao.Framework.Markup;assembly=IT.Tangdao.Framework"
+    xmlns:bo="clr-namespace:IgniteApp.Extensions"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:s="https://github.com/canton7/Stylet"
     d:DesignWidth="800"
     mc:Ignorable="d">
     <UserControl.Resources>
         <conver:BoolToColorConverter x:Key="BoolToColorConverter" FalseValue="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" TrueValue="Red" />
+        <!-- 定义一个字符串数组 -->
+        <x:Array x:Key="MyStringArray" Type="sys:String">
+            <sys:String>全部</sys:String>
+            <sys:String>Load</sys:String>
+            <sys:String>UpLoad</sys:String>
+        </x:Array>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -50,7 +58,8 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10">
-                <ComboBox x:Name="com" ItemsSource="{markup:SelectMode CustomItems='X1,X2,Y1,Y2'}" SelectedIndex="0" Width="100" Height="30" Margin="5" />
+                <ComboBox x:Name="com" ItemsSource="{markup:OptionList Key=Accuracy}"  Width="100" Height="30" Margin="5" />
+                <!--<TextBox Text="{bo:Custom Binding={Binding Offset}}" Width="100" Height="30" Margin="5" />-->
                 <TextBox Text="{Binding Offset}" Width="100" Height="30" Margin="5" />
                 <Button Command="{s:Action OneKeyAdd}" CommandParameter="{Binding SelectedItem,ElementName=com}" Width="80" Height="30" Content="增加" Margin="5" />
                 <Button Command="{s:Action OneKeyDecrease}" CommandParameter="{Binding SelectedItem,ElementName=com}" Width="80" Height="30" Content="减少" Margin="5" />

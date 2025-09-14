@@ -181,6 +181,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Assets\Themes\ComboboxOptions.cs" />
     <Compile Include="Bases\BaseDeviceViewModel.cs" />
     <Compile Include="Bases\BindViewMide.cs" />
     <Compile Include="Bases\NavigatViewModel.cs" />
@@ -220,6 +221,7 @@
     <Compile Include="Dialogs\ViewModels\ImageInfoCardViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\LoadPrePhotoViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\SafePopupViewModel.cs" />
+    <Compile Include="Dialogs\ViewModels\SaveFormatViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\SetCalibrationParameterViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\TakePhotoViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\TestViewModel.cs" />
@@ -244,6 +246,9 @@
     <Compile Include="Dialogs\Views\SafePopupView.xaml.cs">
       <DependentUpon>SafePopupView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\Views\SaveFormatView.xaml.cs">
+      <DependentUpon>SaveFormatView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\Views\SetCalibrationParameterView.xaml.cs">
       <DependentUpon>SetCalibrationParameterView.xaml</DependentUpon>
     </Compile>
@@ -261,7 +266,6 @@
     <Compile Include="ExceptionHandler.cs" />
     <Compile Include="Extensions\BoolExtensions.cs" />
     <Compile Include="Extensions\IDialogProvider.cs" />
-    <Compile Include="Extensions\SelectModeExtension.cs" />
     <Compile Include="Extensions\StyleIocExtensions.cs" />
     <Compile Include="Extensions\WindowManagerExtensions.cs" />
     <Compile Include="Interfaces\IAppConfigProvider.cs" />
@@ -603,6 +607,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialogs\Views\SafePopupView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\Views\SaveFormatView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

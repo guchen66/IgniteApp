@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:IgniteApp.Shell.Monitor.Views"
                xmlns:s="https://github.com/canton7/Stylet"
-              xmlns:markup="clr-namespace:IgniteApp.Extensions"
+              xmlns:markup="clr-namespace:IT.Tangdao.Framework.Markup;assembly=IT.Tangdao.Framework"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -21,7 +21,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <TextBlock Text="筛选" Margin="10 10" />
-            <ComboBox Grid.Column="1" ItemsSource="{markup:SelectMode}" SelectedItem="0" />
+            <ComboBox Grid.Column="1" ItemsSource="{markup:OptionList}" SelectedItem="0" />
             <TextBlock Text="" />
         </Grid>
         <DataGrid

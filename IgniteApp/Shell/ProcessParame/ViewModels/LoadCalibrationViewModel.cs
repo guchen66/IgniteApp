@@ -16,6 +16,9 @@ using MiniExcelLibs;
 using System.IO;
 using IgniteShared.Globals.Local;
 using HandyControl.Controls;
+using IgniteApp.Extensions;
+using IgniteApp.Dialogs.ViewModels;
+using StyletIoC;
 
 namespace IgniteApp.Shell.ProcessParame.ViewModels
 {
@@ -30,13 +33,18 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
             set => SetAndNotify(ref _loadCalibrationDataList, value);
         }
 
+        [Inject]
+        private SaveFormatViewModel _saveFormatViewModel { get; set; }
+
         public ITaskController _taskController;
         public ITaskService _taskService;
+        private IWindowManager _windowManager;
 
-        public LoadCalibrationViewModel(ITaskController taskController, ITaskService taskService)
+        public LoadCalibrationViewModel(ITaskController taskController, ITaskService taskService, IWindowManager windowManager)
         {
             _taskController = taskController;
             _taskService = taskService;
+            _windowManager = windowManager;
         }
 
         private CancellationTokenSource _cts = new CancellationTokenSource();
@@ -45,6 +53,8 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
         {
             try
             {
+                var back = _windowManager.ShowDialogEx(_saveFormatViewModel);
+
                 Logger.WriteLocal("开始上料标定");
                 var progress = new Progress<CalibrationProgress>(p =>
                 {
@@ -78,7 +88,7 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
             _taskService.Stop();
             //  _cts.Cancel();
             // _taskController.Stop();
-            LoadCalibrationDataList?.Clear();
+            // LoadCalibrationDataList?.Clear();
         }
 
         public void SaveCalibrationData()

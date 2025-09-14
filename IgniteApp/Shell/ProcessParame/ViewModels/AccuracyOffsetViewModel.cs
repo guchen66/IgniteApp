@@ -65,7 +65,7 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
             _recipeManager.CompensationData = AccuracyOffsetList;
         }
 
-        private double _offset;
+        private double _offset = 988.09;
 
         public double Offset
         {

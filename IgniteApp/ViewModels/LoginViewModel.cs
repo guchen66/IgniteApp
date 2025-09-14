@@ -104,9 +104,6 @@ namespace IgniteApp.ViewModels
         /// </summary>
         public void ExecuteLogin()
         {
-            // testStudent.Id = 10;
-            //  List<TestStudent> lists = testStudent.ConvertList();
-            //查找本地是否有登录过的账号
             var cacheData = UserManager.SearchCache(LoginDto);
             if (cacheData)
             {
