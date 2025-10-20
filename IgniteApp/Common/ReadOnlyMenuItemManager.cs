@@ -1,10 +1,10 @@
 ﻿using IgniteApp.Shell.Home.Models;
-using IT.Tangdao.Framework.Abstractions.IServices;
 using IT.Tangdao.Framework.Abstractions.Results;
-using IT.Tangdao.Framework.Abstractions.Services;
+using IT.Tangdao.Framework.Abstractions;
 using IT.Tangdao.Framework.Extensions;
-using IT.Tangdao.Framework.Parameters.EventArg;
-using IT.Tangdao.Framework.Parameters.Infrastructure;
+using IT.Tangdao.Framework.EventArg;
+using IT.Tangdao.Framework.Infrastructure;
+using IT.Tangdao.Framework.Helpers;
 using Stylet;
 using System;
 using System.Collections;
@@ -14,29 +14,17 @@ using System.Data.Entity.Infrastructure.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 
 namespace IgniteApp.Common
 {
     public class ReadOnlyMenuItemManager
     {
-        public static ReadOnlyCollection<ITangdaoMenuItem> Create(IReadService readService, string readTitle)
+        public static ReadOnlyCollection<TangdaoMenuItem> Create(IReadService readService, string readTitle)
         {
-            //字典转列表
-            var result = readService.Current.SelectConfig(readTitle).ToReadResult<Dictionary<string, string>>().Data;
-
-            if (result is Dictionary<string, string> d1)
-            {
-                var lists = d1.TryOrderBy().Select((kvp, index) => new TangdaoMenuItem
-                {
-                    Id = index + 1,
-                    MenuName = kvp.Value,
-                }).ToList();
-                return new ReadOnlyCollection<ITangdaoMenuItem>(lists.Cast<ITangdaoMenuItem>().ToList());
-            }
-            else
-            {
-                return new ReadOnlyCollection<ITangdaoMenuItem>(new List<ITangdaoMenuItem>());
-            }
+            var dict = readService.Current.SelectConfig(readTitle).ToReadResult<TangdaoSortedDictionary<string, string>>().Data;
+            var list = dict.Values.Select(v => new TangdaoMenuItem { MenuName = v }).ToList();
+            return new ReadOnlyCollection<TangdaoMenuItem>(list);
         }
 
         public static IReadOnlyCollection<ITangdaoMenuItem> Create2<T>(IReadService readService, string readTitle)

@@ -1,6 +1,7 @@
 ﻿using IgniteApp.Dialogs.ViewModels;
 using IgniteApp.Events;
-using IT.Tangdao.Framework.DaoEvents;
+using IgniteDevices.PLC;
+using IT.Tangdao.Framework.Events;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,11 @@ namespace IgniteApp.Common
         public void OpenAlarmPopup()
         {
             _eventAggregator.Publish(new OpenAlarmPopupEvent());
+        }
+
+        public void OpenAlarmPopup(AlarmMessage alarmMessage)
+        {
+            _eventAggregator.Publish(new OpenAlarmPopupEvent() { AlarmMessage = alarmMessage });
         }
 
         public void CloseAlarmPopup()

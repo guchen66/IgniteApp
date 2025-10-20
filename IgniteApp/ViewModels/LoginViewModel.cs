@@ -14,8 +14,8 @@ using IgniteShared.Dtos;
 using IgniteShared.Entitys;
 using IgniteShared.Globals.Local;
 using IgniteShared.Globals.System;
+using IT.Tangdao.Framework.Abstractions.Loggers;
 using IT.Tangdao.Framework.Abstractions;
-using IT.Tangdao.Framework.Abstractions.IServices;
 using IT.Tangdao.Framework.Enums;
 using IT.Tangdao.Framework.Helpers;
 using Newtonsoft.Json.Linq;
@@ -28,7 +28,7 @@ using IgniteApp.Views;
 using IgniteApp.Interfaces;
 using System.Windows.Navigation;
 using IT.Tangdao.Framework;
-using IT.Tangdao.Framework.DaoEvents;
+using IT.Tangdao.Framework.Events;
 using System.Threading;
 using IgniteApp.Extensions;
 using IgniteShared.Extensions;
@@ -45,8 +45,14 @@ using System.Windows.Markup;
 using IT.Tangdao.Framework.DaoException;
 using IT.Tangdao.Framework.Extensions;
 using System.Collections.ObjectModel;
-using IT.Tangdao.Framework.Utilys;
-using IT.Tangdao.Framework.Messaging;
+using IgniteApp.Modules;
+using System.Drawing;
+using System.Windows.Media;
+using IT.Tangdao.Framework.Common;
+using System.Collections.Concurrent;
+using System.Reflection;
+using System.Runtime.Serialization;
+using IT.Tangdao.Framework.Threading;
 
 namespace IgniteApp.ViewModels
 {
@@ -63,7 +69,7 @@ namespace IgniteApp.ViewModels
         private readonly IWindowManager _windowManager;
         private readonly IEventAggregator _eventAggregator;
         private readonly ITypeConvertService _typeConvertService;
-        private static readonly IDaoLogger Logger = DaoLogger.Get(typeof(LoginViewModel));
+        private static readonly ITangdaoLogger Logger = TangdaoLogger.Get(typeof(LoginViewModel));
         public ICommand RegisterCommand { get; set; }
         #endregion
 
@@ -80,6 +86,7 @@ namespace IgniteApp.ViewModels
         #endregion
 
         #region--ctor--
+        public IDaoEventAggregator _daoEventAggregator;
 
         public LoginViewModel(IWriteService writeService, INavigationService navigationService, IEventAggregator eventAggregator, MainViewModel mainViewModel, ITypeConvertService typeConvertService)
         {
@@ -104,7 +111,9 @@ namespace IgniteApp.ViewModels
         /// </summary>
         public void ExecuteLogin()
         {
+            var test = Test.Print();
             var cacheData = UserManager.SearchCache(LoginDto);
+            AmbientContext.SetCurrent(LoginDto);          //线程上下文传输数据
             if (cacheData)
             {
                 var foldPath = Path.Combine(IgniteInfoLocation.Cache, "LoginInfo.xml");
@@ -210,5 +219,44 @@ namespace IgniteApp.ViewModels
             var body = System.Linq.Expressions.Expression.MemberInit(System.Linq.Expressions.Expression.New(typeof(TTarget)), typeof(TTarget).GetProperties().Select(d => System.Linq.Expressions.Expression.Bind(d, System.Linq.Expressions.Expression.Property(p, d.Name))));
             return System.Linq.Expressions.Expression.Lambda<Func<TSource, TTarget>>(body, p).Compile();
         }
+    }
+
+    public class HighPerfObjectPool<T> where T : class
+    {
+        private readonly ConcurrentBag<T> _pool = new ConcurrentBag<T>();
+        private readonly Func<T> _creator;
+
+        public HighPerfObjectPool()
+        {
+            _creator = () => (T)FormatterServices.GetUninitializedObject(typeof(T));
+        }
+
+        public T Rent()
+        {
+            if (_pool.TryTake(out T item))
+                return item;
+
+            return _creator();
+        }
+
+        public void Return(T item)
+        {
+            // 重置对象状态而不是销毁
+            if (FormatterServices.GetSerializableMembers(typeof(T)) is var fields && fields.Length > 0)
+            {
+                foreach (var field in fields)
+                {
+                    if (field is FieldInfo fi)
+                    {
+                        // 将字段重置为默认值
+                        fi.SetValue(item, GetDefaultValue(fi.FieldType));
+                    }
+                }
+            }
+            _pool.Add(item);
+        }
+
+        private object GetDefaultValue(Type type) =>
+            type.IsValueType ? Activator.CreateInstance(type) : null;
     }
 }

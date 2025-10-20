@@ -1,4 +1,5 @@
 ﻿using IgniteApp.Bases;
+using IgniteApp.Interfaces;
 using IgniteApp.Shell.Set.Models;
 using IgniteApp.Shell.Set.Views;
 using Stylet;
@@ -41,10 +42,11 @@ namespace IgniteApp.Shell.Set.ViewModels
         {
             SystemLists = new ObservableCollection<SystemMenuItem>()
             {
-                new SystemMenuItem(){ Id=1,Name="通用设置",CurrentView=new CommonSetView() },
-                new SystemMenuItem(){ Id=2,Name="账户设置",CurrentView=new AccountSetView()},
-                new SystemMenuItem(){ Id=3,Name="网络设置",CurrentView=new NetSetView()},
-                new SystemMenuItem(){ Id=4,Name="辅助设置", CurrentView=new AssistSetView()},
+                new SystemMenuItem(){ Id=1,Name="通用设置",CurrentView=SystemSetViewFactory.CreateView(1) },
+                new SystemMenuItem(){ Id=2,Name="账户设置",CurrentView=SystemSetViewFactory.CreateView(2)},
+                new SystemMenuItem(){ Id=3,Name="网络设置",CurrentView=SystemSetViewFactory.CreateView(3)},
+                new SystemMenuItem(){ Id=4,Name="硬件设置", CurrentView=SystemSetViewFactory.CreateView(4)},
+                new SystemMenuItem(){ Id=5,Name="辅助设置", CurrentView=SystemSetViewFactory.CreateView(5)},
             };
         }
 

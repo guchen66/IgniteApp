@@ -1,5 +1,7 @@
-﻿using IT.Tangdao.Framework;
+﻿using IgniteApp.ViewModels;
+using IT.Tangdao.Framework;
 using IT.Tangdao.Framework.Abstractions.Navigates;
+using IT.Tangdao.Framework.Abstractions.Sockets;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -12,6 +14,21 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
     public class UVTeachViewModel : Screen, ITangdaoPage
     {
         public string PageTitle => "";
+        private ITangdaoResponse _tangdaoResponse;
+
+        public UVTeachViewModel(ITangdaoResponse tangdaoResponse)
+        {
+            _tangdaoResponse = tangdaoResponse;
+            //  _tangdaoResponse.Received += _tangdaoResponse_Received;
+        }
+
+        private string _responseData;
+
+        public string ResponseData
+        {
+            get => _responseData;
+            set => SetAndNotify(ref _responseData, value);
+        }
 
         public bool CanNavigateAway()
         {
@@ -24,6 +41,18 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
 
         public void OnNavigatedTo(ITangdaoParameter parameter = null)
         {
+            ResponseData = parameter.Get<string>("Name");
+        }
+
+        [ScannerSubscribe("Hello")]
+        public void Reponse()
+        {
+            Console.WriteLine("接收Hello——UVTeach");
+        }
+
+        private void _tangdaoResponse_Received(object sender, string e)
+        {
+            // ResponseData
         }
     }
 }

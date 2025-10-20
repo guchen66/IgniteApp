@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace IgniteApp.Dialogs.ViewModels
 {
-    [SingleNavigateScan("相机2")]
+    [SingleNavigateScan("相机")]
     public class TakePhotoViewModel : Screen, ISingleNavigateView
     {
         public string ViewName => "拍照前";

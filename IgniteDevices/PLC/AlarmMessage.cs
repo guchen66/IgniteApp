@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IgniteShared.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +10,10 @@ namespace IgniteDevices.PLC
 {
     public class AlarmMessage
     {
-        public string Name { get; set; }      // 报警名称（对应PLC的name参数）
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Solution { get; set; }
         public DateTime TriggerTime { get; } = DateTime.Now;
-        public bool IsCritical { get; set; } // 可扩展其他属性
+        public AlarmLevel AlarmLevel { get; set; }
     }
 }

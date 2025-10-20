@@ -1,7 +1,8 @@
 ﻿using IgniteDevices.Connections.Interfaces;
 using IgniteShared.Enums;
 using IgniteShared.Extensions;
-using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.Loggers;
+using IT.Tangdao.Framework.Extensions;
 using Modbus.Device;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace IgniteDevices.Connections
         private readonly int _baudRate;
         private SerialPort _serialPort;
         public bool IsConnected => _serialPort?.IsOpen ?? false;
-        private static readonly IDaoLogger Logger = DaoLogger.Get(typeof(SerialState));
+        private static readonly ITangdaoLogger Logger = TangdaoLogger.Get(typeof(SerialState));
 
         public int Timeout { get; } = 500; // 串口超时更短
         public ConnectionType Type => ConnectionType.SerialPort;

@@ -11,6 +11,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
             <RowDefinition />
+            <RowDefinition Height="40" />
         </Grid.RowDefinitions>
 
         <WrapPanel>
@@ -50,7 +51,15 @@
                 <DataGridTextColumn Binding="{Binding CaliType}" Header="标定类型" />
                 <DataGridTextColumn Binding="{Binding StartValue}" Header="X" />
                 <DataGridTextColumn Binding="{Binding EndValue}" Header="Y" />
+                <DataGridTextColumn Binding="{Binding CaliTime}" Header="标定时间" />
+                <DataGridTextColumn Binding="{Binding Result}" Header="标定结果" />
             </DataGrid.Columns>
         </DataGrid>
+
+        <WrapPanel Grid.Row="2">
+            <Button Command="{s:Action SaveCalibrationData}" Content="保存" Width="100" Margin="5" />
+            <Button Command="{s:Action Undo}" Width="100" Height="30" Content="撤销" Margin="5" />
+            <Button Command="{s:Action ReviceDataFromLoad}" Width="100" Height="30" Content="接收数据" Margin="5" />
+        </WrapPanel>
     </Grid>
 </UserControl>

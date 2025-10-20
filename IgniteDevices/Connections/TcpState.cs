@@ -1,7 +1,8 @@
 ﻿using IgniteDevices.Connections.Interfaces;
 using IgniteShared.Enums;
 using IgniteShared.Extensions;
-using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.Loggers;
+using IT.Tangdao.Framework.Extensions;
 using Modbus.Device;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace IgniteDevices.Connections
         private readonly int _port;
         private TcpClient _tcpClient;
         public bool IsConnected => _tcpClient?.Connected ?? false;
-        private static readonly IDaoLogger Logger = DaoLogger.Get(typeof(TcpState));
+        private static readonly ITangdaoLogger Logger = TangdaoLogger.Get(typeof(TcpState));
 
         public int Timeout { get; } = 1000; // 默认1秒超时
         public ConnectionType Type => ConnectionType.TCP;

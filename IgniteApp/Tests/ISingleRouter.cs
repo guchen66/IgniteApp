@@ -237,7 +237,7 @@ namespace IgniteApp.Tests
 
         public static ISingleNavigateView InitSingleViewByTangdao(ITangdaoProvider tangdaoProvider)
         {
-            var s1 = tangdaoProvider.Resolve<ISingleNavigateView>();
+            var s1 = tangdaoProvider.GetService<ISingleNavigateView>();
             // var allViews = Container.GetAll<ISingleNavigateView>();
             return s1;
         }

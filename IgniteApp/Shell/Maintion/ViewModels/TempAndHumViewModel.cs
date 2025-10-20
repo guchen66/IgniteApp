@@ -4,7 +4,7 @@ using IgniteApp.Extensions;
 using IgniteDevices;
 using IgniteDevices.TempAndHum;
 using IgniteShared.Globals.System;
-using IT.Tangdao.Framework.Abstractions.IServices;
+using IT.Tangdao.Framework.Abstractions;
 using IT.Tangdao.Framework.DaoDevices;
 using Stylet;
 using System;

@@ -62,14 +62,6 @@ namespace IgniteApp.Dialogs.ViewModels
 
         public void Open()
         {
-            // 获取当前是否全部连接（假设默认false）
-            bool currentState = IsChecked;
-
-            // 切换状态（true → 全部连接，false → 全部断开）
-            bool newState = !currentState;
-            IsChecked = newState;
-            // 通过中介者通知所有设备
-            DeviceMediator.Instance.NotifyAllDevices(newState);
         }
 
         private void TimerCallback(object sender, EventArgs e)

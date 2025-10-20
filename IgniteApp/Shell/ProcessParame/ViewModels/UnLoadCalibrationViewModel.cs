@@ -1,6 +1,7 @@
 ﻿using IgniteApp.Bases;
 using IgniteApp.Dialogs.ViewModels;
 using IgniteApp.Shell.ProcessParame.Models;
+using IT.Tangdao.Framework.Common;
 using IT.Tangdao.Framework.Extensions;
 using Stylet;
 using StyletIoC;
@@ -142,6 +143,12 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
                 // setCalibrationParameterViewModel.ScreenState=
                 // setCalibrationParameterViewModel.OnSaved += name => this.Name = name;
             }
+        }
+
+        public void ReviceDataFromLoad()
+        {
+            var parameter = TangdaoContext.GetTangdaoParameter("上料");
+            UnLoadCalibrationDataList = parameter.Get<ObservableCollection<MotionCalibrationModel>>("上料数据");
         }
 
         protected override void OnDeactivate()

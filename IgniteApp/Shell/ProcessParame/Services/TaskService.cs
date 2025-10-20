@@ -42,7 +42,7 @@ namespace IgniteApp.Shell.ProcessParame.Services
                     {
                         NewItem = new MotionCalibrationModel()
                         {
-                            Id = i + 1,
+                            Id = 0,
                             CaliType = "X",
                             StartValue = i,
                             EndValue = i + 100,

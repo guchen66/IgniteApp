@@ -6,7 +6,7 @@ using IgniteApp.Interfaces;
 using IgniteApp.Shell.Home.Models;
 using IgniteApp.ViewModels;
 using IT.Tangdao.Framework;
-using IT.Tangdao.Framework.Abstractions.IServices;
+using IT.Tangdao.Framework.Abstractions;
 using IT.Tangdao.Framework.Commands;
 using IT.Tangdao.Framework.Extensions;
 using Stylet;

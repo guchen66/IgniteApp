@@ -1,15 +1,20 @@
-﻿using IgniteApp.Bases;
+﻿using HandyControl.Controls;
+using IgniteApp.Bases;
 using IgniteApp.Shell.Monitor.Models;
+using IT.Tangdao.Framework.Commands;
+using IT.Tangdao.Framework;
 using Stylet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using IT.Tangdao.Framework.Abstractions;
 
 namespace IgniteApp.Shell.Monitor.ViewModels
 {
-    public class AxisMonViewModel : ViewModelBase
+    public class AxisMonViewModel : ViewModelBase, IAddParent
     {
         private string _selectItem;
 
@@ -29,12 +34,32 @@ namespace IgniteApp.Shell.Monitor.ViewModels
 
         public AxisMonViewModel()
         {
+            AxisMonItems = new BindableCollection<AxisMonItem>()
+            {
+                new AxisMonItem(){Id=1,Name="123",Status=string.Empty,CreateTime=DateTime.Now,Remark="备注"},
+            };
             this.Bind(viewModel => viewModel.SelectItem, (obj, sender) => DoExecute());
+
+            UpdateUserCommand = new TangdaoCommand(ExecuteUpdate);
+            DeleteUserCommand = new TangdaoCommand(ExecuteDelete);
+        }
+
+        private void ExecuteDelete()
+        {
+            MessageBox.Show("删除");
+        }
+
+        private void ExecuteUpdate()
+        {
+            MessageBox.Show("更新");
         }
 
         private void DoExecute()
         {
             var s1 = SelectItem;
         }
+
+        public ICommand UpdateUserCommand { get; set; }
+        public ICommand DeleteUserCommand { get; set; }
     }
 }

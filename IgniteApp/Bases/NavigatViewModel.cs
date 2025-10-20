@@ -1,5 +1,5 @@
 ﻿using IgniteApp.Interfaces;
-using IT.Tangdao.Framework.Abstractions.IServices;
+using IT.Tangdao.Framework.Abstractions;
 using Stylet;
 using System;
 using System.Collections.Generic;

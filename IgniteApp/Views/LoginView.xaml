@@ -2,14 +2,16 @@
     x:Class="IgniteApp.Views.LoginView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:attach="clr-namespace:IT.Tangdao.Xaml.Attached;assembly=IT.Tangdao.Xaml"
+    xmlns:conver="clr-namespace:IT.Tangdao.Framework.Converters.Wpf;assembly=IT.Tangdao.Framework"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:hc="https://handyorg.github.io/handycontrol"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:IgniteApp.Views"
+    xmlns:markup="clr-namespace:IT.Tangdao.Framework.Markup;assembly=IT.Tangdao.Framework"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="https://github.com/canton7/Stylet"
     xmlns:shared="clr-namespace:IgniteShared.Entitys.Common;assembly=IgniteShared"
-    xmlns:conver="clr-namespace:IT.Tangdao.Framework.Converters.Wpf;assembly=IT.Tangdao.Framework"
     x:Name="LoginWin"
     Title="LoginView"
     Width="600"
@@ -60,12 +62,21 @@
                         Width="250"
                         Margin="10,0"
                         hc:InfoElement.Placeholder="请输入密码"
-                        hc:UnsafePassword="{Binding LoginDto.Password,UpdateSourceTrigger=PropertyChanged}"
+                        hc:UnsafePassword="{Binding LoginDto.Password, UpdateSourceTrigger=PropertyChanged}"
                         CaretBrush="{StaticResource PeonyBrush}"
                         FontSize="16"
                         IsSafeEnabled="False"
                         SelectionBrush="{StaticResource PeonyBrush}"
                         ShowEyeButton="True" />
+
+                    <!--<PasswordBox
+                        x:Name="pass"
+                        Width="250"
+                        Height="30"
+                        Margin="10 0"
+                        attach:PasswordBoxAttach.Attach="True"
+                        attach:PasswordBoxAttach.Password="{Binding LoginDto.Password, UpdateSourceTrigger=PropertyChanged}"
+                        PasswordChar="*" />-->
                 </StackPanel>
 
                 <StackPanel Margin="20,15,0,0" Orientation="Horizontal">
@@ -103,7 +114,6 @@
                         HorizontalAlignment="Center"
                         Background="{StaticResource OceanBlueBrush}"
                         Command="{s:Action ExecuteCancel}"
-                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
                         Content="取消"
                         IsCancel="True" />
                 </StackPanel>

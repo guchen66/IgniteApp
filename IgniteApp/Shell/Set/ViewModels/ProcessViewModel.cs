@@ -6,8 +6,6 @@ using IgniteApp.Shell.Set.Models;
 using IgniteShared.Dtos;
 using IgniteShared.Globals.Local;
 using IT.Tangdao.Framework.Abstractions;
-using IT.Tangdao.Framework.Abstractions.IServices;
-using IT.Tangdao.Framework.Abstractions.Services;
 using IT.Tangdao.Framework.Enums;
 using IT.Tangdao.Framework.Helpers;
 using Stylet;

@@ -54,7 +54,8 @@
       <HintPath>..\packages\AutoMapper.10.0.0\lib\net461\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="IT.Tangdao.Framework, Version=3.0.14.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\IT.Tangdao.Framework.4.0.3\lib\net48\IT.Tangdao.Framework.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\nuget\MyPackages\.Netframework\IT.Tangdao.Framework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -101,7 +102,6 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\ITangdaoContainerAdapter.cs" />
     <Compile Include="Interfaces\IWorkstation.cs" />
     <Compile Include="Managers\Home\TimeManager.cs" />
     <Compile Include="Managers\Login\UserManager.cs" />

@@ -1,6 +1,6 @@
 ﻿using IgniteAdmin.Providers;
 using IgniteApp.Shell.ProcessParame.Models;
-using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.Loggers;
 using IT.Tangdao.Framework.Enums;
 using Stylet;
 using System;
@@ -19,12 +19,15 @@ using HandyControl.Controls;
 using IgniteApp.Extensions;
 using IgniteApp.Dialogs.ViewModels;
 using StyletIoC;
+using IT.Tangdao.Framework.Extensions;
+using IT.Tangdao.Framework.Common;
+using IT.Tangdao.Framework;
 
 namespace IgniteApp.Shell.ProcessParame.ViewModels
 {
     public class LoadCalibrationViewModel : Screen
     {
-        private static readonly IDaoLogger Logger = DaoLogger.Get(typeof(LoadCalibrationViewModel));
+        private static readonly ITangdaoLogger Logger = TangdaoLogger.Get(typeof(LoadCalibrationViewModel));
         private ObservableCollection<MotionCalibrationModel> _loadCalibrationDataList;
 
         public ObservableCollection<MotionCalibrationModel> LoadCalibrationDataList
@@ -53,7 +56,7 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
         {
             try
             {
-                var back = _windowManager.ShowDialogEx(_saveFormatViewModel);
+                //var back = _windowManager.ShowDialogEx(_saveFormatViewModel);
 
                 Logger.WriteLocal("开始上料标定");
                 var progress = new Progress<CalibrationProgress>(p =>
@@ -104,6 +107,15 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
             }
         }
 
+        public void SendDataToUnLoad()
+        {
+            //TangdaoContext.SetLocalValue();
+            TangdaoParameter tangdaoParameter = new TangdaoParameter();
+            tangdaoParameter.Add("上料数据", LoadCalibrationDataList);
+            TangdaoContext.SetTangdaoParameter("上料", tangdaoParameter);
+            //  TangdaoContext
+        }
+
         public void WriteDataReport()
         {
             string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory);
@@ -122,6 +134,63 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
         private class TemplateData
         {
             public List<MotionCalibrationModel> Data { get; set; } = new List<MotionCalibrationModel>();
+        }
+    }
+
+    public interface IProgress2<in T>
+    {
+        void Report(T value);
+    }
+
+    public class Progress2<T> : IProgress2<T>
+    {
+        private readonly SynchronizationContext m_synchronizationContext;
+
+        private readonly Action<T> m_handler;
+
+        private readonly SendOrPostCallback m_invokeHandlers;
+
+        public event EventHandler<T> ProgressChanged;
+
+        public Progress2()
+        {
+            // m_synchronizationContext = SynchronizationContext.CurrentNoFlow ?? ProgressStatics.DefaultContext;
+            //m_invokeHandlers = InvokeHandlers;
+        }
+
+        public Progress2(Action<T> handler)
+            : this()
+        {
+            if (handler == null)
+            {
+                throw new ArgumentNullException("handler");
+            }
+
+            m_handler = handler;
+        }
+
+        protected virtual void OnReport(T value)
+        {
+            Action<T> handler = m_handler;
+            EventHandler<T> progressChanged = this.ProgressChanged;
+            if (handler != null || progressChanged != null)
+            {
+                m_synchronizationContext.Post(m_invokeHandlers, value);
+            }
+        }
+
+        void IProgress2<T>.Report(T value)
+        {
+            OnReport(value);
+        }
+
+        private void InvokeHandlers(object state)
+        {
+            T val = (T)state;
+            Action<T> handler = m_handler;
+            EventHandler<T> progressChanged = this.ProgressChanged;
+            handler?.Invoke(val);
+            progressChanged?.Invoke(this, val);
         }
     }
 }

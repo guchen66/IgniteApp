@@ -3,8 +3,6 @@ using IgniteAdmin.Providers;
 using IgniteApp.Interfaces;
 using IgniteShared.Models;
 using IT.Tangdao.Framework.Abstractions;
-using IT.Tangdao.Framework.Abstractions.IServices;
-using IT.Tangdao.Framework.Abstractions.Services;
 using IT.Tangdao.Framework.Helpers;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
@@ -25,7 +23,7 @@ using System.IO.Ports;
 using IgniteApp.ViewModels;
 using IgniteApp.Shell.Maintion.ViewModels;
 using IT.Tangdao.Framework;
-using IT.Tangdao.Framework.DaoEvents;
+using IT.Tangdao.Framework.Events;
 using StyletIoC.Creation;
 using IgniteShared.Dtos;
 using IgniteShared.Globals.Local;
@@ -36,6 +34,7 @@ using IT.Tangdao.Framework.Abstractions.Navigates;
 using IgniteApp.Dialogs.ViewModels;
 using IgniteApp.Shell.ProcessParame.ViewModels;
 using IT.Tangdao.Framework.Configurations;
+using IT.Tangdao.Framework.Paths;
 
 namespace IgniteApp.Modules
 {
@@ -43,17 +42,11 @@ namespace IgniteApp.Modules
     {
         protected override void Load()
         {
-            // 1. 注册基于Stylet的Provider适配器
-            Bind<ITangdaoProvider>().To<StyletTangdaoProvider>().InSingletonScope();
-
-            // 2. 注册基于Stylet的Container适配器
-            Bind<ITangdaoContainer>().To<StyletTangdaoContainer>().InSingletonScope();
-
             //简单的翻页导航，只用于翻页，没有提供拦截器
             Bind<ISingleNavigateView>().ToAllImplementations();
             //简单导航的路由功能
             Bind<ISingleRouter>().To<SingleRouter>();
-
+            Bind<ISingleRouterDemo>().To<SingleRouterDemo>();
             //GlobalPhotoViewModel
             //注册导航，有拦截器功能
             Bind<ITangdaoRouter>().To<TangdaoRouter>().InSingletonScope();
@@ -88,16 +81,6 @@ namespace IgniteApp.Modules
             Bind<ITangdaoPage>().To<CO2TeachViewModel>().WithKey("CO2Teach");
             Bind<ITangdaoPage>().To<UVTeachViewModel>().WithKey("UVTeach");
             Bind<ITangdaoPage>().To<IRTeachViewModel>().WithKey("IRTeach");
-            // 获取指定实例
-            // var digitalGauge = _container.Get<ITangdaoPage>("DigitalSmartGauge");
-            //配置Tangdao路由
-            //Bind<RouteConfig>().ToFactory(container =>
-            //{
-            //    return new RouteConfig
-            //    {
-            //    };
-            //}).InSingletonScope();
-            //Bind<IRoute>().To<Route>().InSingletonScope();
 
             Bind<IPlcProvider>().To<PlcProvider>();
             Bind<IDeviceProvider>().To<DeviceProvider>().InSingletonScope();
@@ -116,13 +99,9 @@ namespace IgniteApp.Modules
                                                                        // var dispatcher = ServerLocator.Current.Resolve<TangdaoEventDispatcher>();
                                                                        // var handlers = ServerLocator.Current.Resolve<ITangdaoHandler>();
 
-            // 订阅所有事件处理器
-            /*  foreach (var handler in handlers)
-              {
-                  dispatcher.Subscribe(handler);
-              }*/
-
             Bind(typeof(IReadProvider<>)).To(typeof(XmlReadProvider<>));
+
+            //Fluent
         }
 
         private ITangdaoMessage Builder(IRegistrationContext context)
@@ -130,19 +109,19 @@ namespace IgniteApp.Modules
             var s1 = context.GetAll<ITangdaoMessage>();
             return default;
         }
+    }
 
-        /*  private object Builder(reg container)
-          {
-              //var message = container.Get<ITangdaoMessage>();
-              //TangdaoEventDispatcher dispatcher = container.Get<TangdaoEventDispatcher>();
-              var handlers = container.Get<ITangdaoMessage>();
-              //dispatcher.Subscribe(handlers);
-              // ITangdaoParameter parameter = new TangdaoParameter();
-              // parameter.Add("userName", "Hello");
-              //  message.Response(parameter);
+    public class Test
+    {
+        public static MultiKeyDictionary<string> keyValuePairs = new MultiKeyDictionary<string>();
 
-              return default;
-          }
-  */
+        public static MultiKeyDictionary<string> Print()
+        {
+            //keyValuePairs["Sample"] = "Test";
+            keyValuePairs["SampleView"] = "Test";
+            // keyValuePairs["SampleViewModel"] = "Test";
+
+            return keyValuePairs;
+        }
     }
 }

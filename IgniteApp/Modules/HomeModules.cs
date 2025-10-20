@@ -35,6 +35,10 @@ using IContainer = StyletIoC.IContainer;
 using IgniteApp.Dialogs.Manage;
 using IgniteApp.Tests;
 using IT.Tangdao.Framework.Abstractions.Navigates;
+using IgniteApp.Bases;
+using IgniteApp.Shell.Maintion.ViewModels;
+using IgniteApp.Shell.Set.ViewModels;
+using IgniteApp.Shell.Maintion.Services;
 
 namespace IgniteApp.Modules
 {
@@ -43,8 +47,12 @@ namespace IgniteApp.Modules
         protected override void Load()
         {
             #region--View-ViewModel--
-            //  Bind<HomeViewModel>().ToSelf().InSingletonScope();
+            Bind<ElectViewModel>().ToSelf().InSingletonScope();
+            Bind<LightViewModel>().ToSelf().InSingletonScope();
+            Bind<ResistiveViewModel>().ToSelf().InSingletonScope();
+            Bind<HardawreSetViewModel>().ToSelf().InSingletonScope();
             Bind<DefaultViewModel>().ToSelf().InSingletonScope();
+            //HardawreSetViewModel
             #endregion
 
             #region--服务接口--

@@ -5,33 +5,40 @@ using IgniteApp.Shell.Monitor.Models;
 using IgniteDevices.PLC;
 using IgniteDevices.PLC.Services;
 using IgniteShared.Enums;
+using IgniteShared.Globals.Local;
+using IT.Tangdao.Framework.Extensions;
+using IT.Tangdao.Framework.Paths;
 using Newtonsoft.Json.Linq;
 using Stylet;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Ink;
+using System.Windows.Media.Imaging;
 
 namespace IgniteApp.Shell.Monitor.ViewModels
 {
     public class PlcMonViewModel : ViewModelBase
     {
-        private SelectModes _selectedMode;
+        private string _selectedItem;
 
-        public SelectModes SelectedMode
+        public string SelectedItem
         {
-            get => _selectedMode = SelectModes.Load;
-            set => SetAndNotify(ref _selectedMode, value);
+            get => _selectedItem;
+            set => SetAndNotify(ref _selectedItem, value);
         }
 
-        private string _selectItem;
+        private int _selectedIndex;
 
-        public string SelectItem
+        public int SelectedIndex
         {
-            get => _selectItem;
-            set => SetAndNotify(ref _selectItem, value);
+            get => _selectedIndex;
+            set => SetAndNotify(ref _selectedIndex, value);
         }
 
         private string _receiveData;
@@ -42,11 +49,19 @@ namespace IgniteApp.Shell.Monitor.ViewModels
             set => SetAndNotify(ref _receiveData, value);
         }
 
+        private BitmapImage _image;
+
+        public BitmapImage Image
+        {
+            get => _image;
+            set => SetAndNotify(ref _image, value);
+        }
+
         private BindableCollection<PlcMonItem> _plcMonItems;
 
         public BindableCollection<PlcMonItem> PlcMonItems
         {
-            get => _plcMonItems;
+            get => _plcMonItems ?? (_plcMonItems = new BindableCollection<PlcMonItem>());
             set => SetAndNotify(ref _plcMonItems, value);
         }
 
@@ -60,12 +75,65 @@ namespace IgniteApp.Shell.Monitor.ViewModels
             _plcCommunicator = plcCommunicator;
             _eventAggregator = eventAggregator;
             _alarmPopupManager = alarmPopupManager;
-            this.Bind(viewModel => viewModel.SelectItem, (obj, sender) => DoExecute());
+            this.BindAndInvoke(viewModel => viewModel.SelectedIndex, (obj, sender) => SelectOpenPlcList());
+            var imagePath = TangdaoPath.Instance.Solution().Combine("Assets", "Images", "Light.png").Build();
+            var allImagePath = TangdaoPath.Instance.Solution().Combine("Assets", "Images").Build().EnumerateFiles("*.png");
+            Image = new BitmapImage(new Uri(imagePath.Value));
         }
 
-        private void DoExecute()
+        public void Export()
         {
-            var s1 = SelectItem;
+            try
+            {
+                var template = PathTemplate.Create("{Solution}/Exports/{Date}/report.txt");
+                var exportPath = template.Resolve(new
+                {
+                    Solution = IgniteInfoLocation.Cache,
+                    Date = DateTime.Now.ToString("yyyy-MM-dd")
+                });
+
+                Directory.CreateDirectory(exportPath.Parent().Value);
+                File.WriteAllText(exportPath.Value, $"Hello Stylet! Exported at {DateTime.Now}");
+                var backup = exportPath.Backup(".bak");
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        private void SelectOpenPlcList()
+        {
+            // GetPlcData(SelectedItem);
+            GetPlcDataIndex(SelectedIndex);
+        }
+
+        private BindableCollection<PlcMonItem> GetPlcDataIndex(int plcUnit)
+        {
+            PlcMonItems.Clear();
+            if (plcUnit == 1)
+            {
+                PlcMonItems = new BindableCollection<PlcMonItem>()
+                {
+                    new PlcMonItem(){ Id=1,Name="西门子",Status="连接",Remark="未备注"},
+                    new PlcMonItem(){ Id=2,Name="西门子2",Status="连接",Remark="未备注"},
+                };
+            }
+            else if (plcUnit == 2)
+            {
+                PlcMonItems = new BindableCollection<PlcMonItem>()
+                {
+                    new PlcMonItem(){ Id=1,Name="三菱1",Status="连接",Remark="未备注"},
+                    new PlcMonItem(){ Id=2,Name="三菱2",Status="连接",Remark="未备注"},
+                };
+            }
+            else if (plcUnit == 0)
+            {
+                PlcMonItems = new BindableCollection<PlcMonItem>()
+                {
+                    new PlcMonItem(){ Id=1,Name="未知",Status="未连接",Remark="未备注"},
+                };
+            }
+            return PlcMonItems;
         }
 
         public void AutoTriggerAlarm()
@@ -75,7 +143,13 @@ namespace IgniteApp.Shell.Monitor.ViewModels
 
         public void AutoTriggerAlarm2()
         {
-            OmronManager.AlarmChenged?.Invoke("模拟报警_采集数据过大");
+            OmronManager.AlarmErrorChenged?.Invoke(new AlarmMessage()
+            {
+                Id = 1,
+                Name = "西门子",
+                Solution = "关闭程序",
+                AlarmLevel = AlarmLevel.Info,
+            });
         }
 
         public void AutoTriggerAlarm3()

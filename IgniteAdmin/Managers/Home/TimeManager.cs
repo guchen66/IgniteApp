@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IT.Tangdao.Framework.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,8 @@ namespace IgniteAdmin.Managers.Home
     {
         public string ShowCurrentTime()
         {
+            string sss = "";
+
             return DateTime.Now.ToString(@"hh\:mm\:ss");
         }
     }

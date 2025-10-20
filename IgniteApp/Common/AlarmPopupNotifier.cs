@@ -2,7 +2,8 @@
 using IgniteApp.Dialogs.Views;
 using IgniteDevices.PLC;
 using IgniteShared.Extensions;
-using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.Loggers;
+using IT.Tangdao.Framework.Extensions;
 using Stylet;
 using StyletIoC;
 using System;
@@ -18,7 +19,7 @@ namespace IgniteApp.Common
     {
         private readonly IWindowManager _windowManager;
         private AlarmPopupViewModel _alarmPopupViewModel;
-        private static readonly IDaoLogger Logger = DaoLogger.Get(typeof(AlarmPopupNotifier));
+        private static readonly ITangdaoLogger Logger = TangdaoLogger.Get(typeof(AlarmPopupNotifier));
 
         public AlarmPopupNotifier(IWindowManager windowManager, AlarmPopupViewModel alarmPopupViewModel)
         {

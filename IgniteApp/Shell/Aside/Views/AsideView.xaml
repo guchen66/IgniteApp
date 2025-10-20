@@ -43,19 +43,14 @@
                             RadiusY="25" />
                     </Image.Clip>
                 </Image>
-                <!--  TODO改为非静态不能这样写  -->
-                <!--<TextBlock
-                    Margin="0,10"
-                    HorizontalAlignment="Center"
-                    Text="{x:Static user:SysLoginInfo.UserName}" />-->
                 <TextBlock
                     Margin="0,10"
                     HorizontalAlignment="Center"
-                    Text="{Binding Source={StaticResource Login}, Path=UserName}" />
+                    Text="{Binding LoginDto.UserName}" />
                 <TextBlock
                     Margin="0,10"
                     HorizontalAlignment="Center"
-                    Text="{Binding Converter={StaticResource RoleConverter}, Path=Role, Source={StaticResource Login}}" />
+                    Text="{Binding LoginDto.Role}" />
             </StackPanel>
         </DockPanel>
 

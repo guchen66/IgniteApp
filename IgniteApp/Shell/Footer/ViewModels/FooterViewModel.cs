@@ -15,11 +15,11 @@ using IgniteShared.Entitys;
 using IgniteShared.Extensions;
 using IgniteShared.Globals.Local;
 using IgniteShared.Models;
+using IT.Tangdao.Framework.Abstractions.Loggers;
 using IT.Tangdao.Framework.Abstractions;
-using IT.Tangdao.Framework.Abstractions.IServices;
-using IT.Tangdao.Framework.Abstractions.Services;
 using IT.Tangdao.Framework.Abstractions.Sockets;
 using IT.Tangdao.Framework.Commands;
+using IT.Tangdao.Framework.Extensions;
 using IT.Tangdao.Framework.Helpers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -71,7 +71,7 @@ namespace IgniteApp.Shell.Footer.ViewModels
         }
 
         private readonly IPlcProvider _plcProvider;
-        private static readonly IDaoLogger Logger = DaoLogger.Get(typeof(FooterViewModel));
+        private static readonly ITangdaoLogger Logger = TangdaoLogger.Get(typeof(FooterViewModel));
         #endregion
 
         #region--ctor--

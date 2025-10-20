@@ -16,18 +16,6 @@ namespace IgniteApp.Modules
     {
         protected override void Load()
         {
-            // 注册配置
-
-            // 使用 ToFactory 方法
-            //Bind<IMonitorService>().ToFactory(container =>
-            //{
-            //    return new XmlMonitorService(@"E:\IgniteDatas\", true);
-            //}).InSingletonScope();
-
-            //  Bind<IMonitorService>().To<XmlMonitorService>().InSingletonScope();
-            // Bind<IMonitorService>().To<XmlFileMonitorService>().InSingletonScope();
-            // 如果需要，可以注册其他服务
-            // builder.Bind<IFileWatcherService>().To<FileWatcherService>().InSingletonScope();
             Bind<IAutoMapperProvider>().To<AutoMapperProvider>().InSingletonScope();
             Bind<IMapper>().ToFactory(GetMapper);
         }

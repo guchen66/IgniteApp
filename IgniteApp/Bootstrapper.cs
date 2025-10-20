@@ -2,12 +2,11 @@
 using Stylet;
 using StyletIoC;
 using IgniteApp.ViewModels;
-using IT.Tangdao.Framework.Abstractions.IServices;
-using IT.Tangdao.Framework.Abstractions.Services;
+using IT.Tangdao.Framework.Abstractions;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Threading;
-using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.Loggers;
 using IgniteApp.Modules;
 using Yitter.IdGenerator;
 using IgniteAdmin.Managers.Transmit;
@@ -24,7 +23,7 @@ using IgniteApp.Common;
 using IgniteDevices.PLC;
 using IgniteApp.Shell.Footer.ViewModels;
 using IgniteApp.Tests;
-using IT.Tangdao.Framework.DaoEvents;
+using IT.Tangdao.Framework.Events;
 using IT.Tangdao.Framework;
 using System.Windows.Documents;
 using System.Collections.Generic;
@@ -33,17 +32,37 @@ using IT.Tangdao.Framework.Abstractions.Sockets;
 using IT.Tangdao.Framework.Enums;
 using System.Security.Policy;
 using System.Runtime.Remoting.Contexts;
-using IT.Tangdao.Framework.Parameters.EventArg;
-using IT.Tangdao.Framework.Parameters.Infrastructure;
+using IT.Tangdao.Framework.EventArg;
+using IT.Tangdao.Framework.Infrastructure;
 using IgniteApp.Assets.Themes;
+using IT.Tangdao.Framework.Extensions;
+using IgniteShared.Globals.Local;
+using System.Windows.Media.Media3D;
+using System.IO;
+using System.Configuration;
+using IgniteApp.Interfaces;
+using IgniteApp.Shell.Maintion.Services;
+using IT.Tangdao.Framework.Abstractions.Notices;
 
 namespace IgniteApp
 {
     public class Bootstrapper : Bootstrapper<LoginViewModel>
     {
-        private static readonly IDaoLogger Logger = DaoLogger.Get(typeof(Bootstrapper));
+        private static readonly ITangdaoLogger Logger = TangdaoLogger.Get(typeof(Bootstrapper));
 
         private TangdaoChannelContext Context;
+        private static IDeviceRegistry _deviceRegistry;
+
+        /// <summary>
+        /// 使用自定义设备提供者配置
+        /// </summary>
+        public static void Configure(IDeviceProvider deviceProvider)
+        {
+            _deviceRegistry = new DeviceRegistry(deviceProvider);
+            _deviceRegistry.RegisterAll();
+        }
+
+        public static IDeviceRegistry DeviceRegistry => _deviceRegistry;
 
         protected override void ConfigureIoC(IStyletIoCBuilder builder)
         {
@@ -58,11 +77,13 @@ namespace IgniteApp
 
             string connUri = "tcp://127.0.0.1:502";
             var uri = new TangdaoUri(connUri);
-
+            Console.WriteLine();
             Context = TangdaoChannelBuilder.Build(NetMode.Client, connUri);
             builder.Bind<ITangdaoChannel>().ToInstance(Context.Channel);
             builder.Bind<ITangdaoRequest>().ToInstance(Context.Request);
             builder.Bind<ITangdaoResponse>().ToInstance(Context.Response);
+            LogPathConfig.SetRoot($@"{IgniteInfoLocation.Logger}");
+
             Logger.WriteLocal($"注册成功");
         }
 
@@ -80,6 +101,21 @@ namespace IgniteApp
         protected override async void OnLaunch()
         {
             base.OnLaunch();
+
+            // 创建设备工厂
+            IDeviceFactory deviceFactory = new DefaultDeviceFactory(Container);
+
+            // 创建设备提供者
+            IDeviceProvider deviceProvider = new DefaultDeviceProvider(deviceFactory);
+
+            // 创建设备注册表
+            _deviceRegistry = new DeviceRegistry(deviceProvider);
+
+            // 注册所有设备
+            _deviceRegistry.RegisterAll();
+
+            NoticeMediator.Instance.UseNoticeKit().Add("Badge").Add("Alert");
+
             // 启动监控服务
             var monitorService = Container.Get<IMonitorService>();
             monitorService.FileChanged += OnFileChanged;
@@ -99,11 +135,12 @@ namespace IgniteApp
             RegisterWCFEvent();                   //注册WCF事件
             RegisterAutoMapper();
             ComboboxOptions.SetTheme();
+            // throw new NotImplementedException();
         }
 
         private void RegisterExceptionEvents()
         {
-            ExceptionHandler handler = new ExceptionHandler();
+            TangdaoExceptionHandler handler = new TangdaoExceptionHandler();
             //Task线程内未捕获异常处理事件
             TaskScheduler.UnobservedTaskException += handler.TaskScheduler_UnobservedTaskException;
             //UI线程未捕获异常处理事件（UI主线程）

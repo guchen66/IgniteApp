@@ -1,6 +1,7 @@
 ﻿using IgniteShared.Extensions;
 using IgniteShared.Globals.System;
-using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.Loggers;
+using IT.Tangdao.Framework.Extensions;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace IgniteAdmin.Providers
 {
     public class AutoRun : IAutoRun
     {
-        private static readonly IDaoLogger Logger = DaoLogger.Get(typeof(AutoRun));
+        private static readonly ITangdaoLogger Logger = TangdaoLogger.Get(typeof(AutoRun));
         private TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
         private CancellationTokenSource cts = new CancellationTokenSource();
 
@@ -148,7 +149,7 @@ namespace IgniteAdmin.Providers
     /*
         public class AutoRun : IAutoRun
         {
-            private static readonly IDaoLogger Logger = DaoLogger.Get(typeof(AutoRun));
+            private static readonly ITangdaoLogger Logger = TangdaoLogger.Get(typeof(AutoRun));
             private TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
             private CancellationTokenSource cts = new CancellationTokenSource();
 

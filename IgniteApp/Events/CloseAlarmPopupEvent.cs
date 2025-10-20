@@ -1,5 +1,5 @@
 ﻿using IgniteDevices.PLC;
-using IT.Tangdao.Framework.DaoEvents;
+using IT.Tangdao.Framework.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +15,6 @@ namespace IgniteApp.Events
 
     public class OpenAlarmPopupEvent
     {
+        public AlarmMessage AlarmMessage { get; set; }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using IgniteShared.Dtos;
 using IgniteShared.Globals.Local;
 using IT.Tangdao.Framework;
-using IT.Tangdao.Framework.Abstractions.IServices;
-using IT.Tangdao.Framework.Abstractions.Services;
+using IT.Tangdao.Framework.Abstractions.Loggers;
+using IT.Tangdao.Framework.Abstractions;
 using IT.Tangdao.Framework.DaoMvvm;
 using IT.Tangdao.Framework.Extensions;
 using IT.Tangdao.Framework.Helpers;
@@ -59,6 +59,7 @@ namespace IgniteApp.Shell.Set.Models
     public class AxisProvider : ObservableCollection<AxisItem>
     {
         private List<AxisItem> AxisItems = new List<AxisItem>();
+        private static readonly ITangdaoLogger Logger = TangdaoLogger.Get(typeof(AxisProvider));
 
         public AxisProvider()
         {
@@ -117,6 +118,7 @@ namespace IgniteApp.Shell.Set.Models
             }
             catch (Exception ex)
             {
+                Logger.Error(ex.ToString());
             }
         }
     }

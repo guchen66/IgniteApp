@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:be="clr-namespace:IgniteApp.Behaviors"
     xmlns:conver="clr-namespace:IgniteApp.Converters"
+    xmlns:markup="clr-namespace:IT.Tangdao.Framework.Markup;assembly=IT.Tangdao.Framework"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:IgniteApp.Views"
@@ -19,6 +20,7 @@
     <i:Interaction.Behaviors>
         <be:DragBehavior />
     </i:Interaction.Behaviors>
+    <!--<local:VerifyView />-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -70,22 +72,25 @@
                 <TextBox Text="{Binding Password}" />
             </StackPanel>
             <StackPanel>
-                <Button Content="确认" Command="{s:Action Confirm}" />
+                <Button Command="{s:Action Confirm}" Content="确认" />
             </StackPanel>
         </UniformGrid>
         <DockPanel
             Grid.Row="2"
             Margin="5"
             VerticalAlignment="Bottom">
+
             <!--  左按钮（靠左）  -->
+
             <Button
                 Width="100"
                 Command="{Binding CloseCommand}"
-                CommandParameter="{conver:GetWindow}"
+                CommandParameter="{markup:GetWindow}"
                 Content="取消"
                 DockPanel.Dock="Left" />
 
             <!--  右按钮（靠右）  -->
+
             <Button
                 Width="100"
                 Margin="4"
@@ -94,6 +99,7 @@
                 DockPanel.Dock="Right" />
 
             <!--  占位空间（确保左右按钮不挤在中间）  -->
+
             <TextBlock Height="0" />
         </DockPanel>
     </Grid>

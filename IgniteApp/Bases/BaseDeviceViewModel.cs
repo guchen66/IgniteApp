@@ -16,7 +16,7 @@ namespace IgniteApp.Bases
         protected BaseDeviceViewModel(string deviceType)
         {
             DeviceType = deviceType;
-            DeviceMediator.Instance.Register(this);
+            //DeviceMediator.Instance.Register(this);
         }
 
         public string DeviceType { get; }

@@ -1,16 +1,22 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using HandyControl.Tools.Extension;
 using IgniteApp.Extensions;
 using IgniteApp.Shell.ProcessParame.Models;
 using IgniteApp.Shell.ProcessParame.ViewModels;
 using IgniteShared.Extensions;
 using IgniteShared.Globals.Local;
-using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.Loggers;
 using IT.Tangdao.Framework.Enums;
+using IT.Tangdao.Framework.Extensions;
+using IT.Tangdao.Framework.Paths;
 using MiniExcelLibs;
 using Stylet.Xaml;
 
@@ -18,7 +24,7 @@ namespace IgniteApp.Shell.ProcessParame.Services
 {
     public class LocalCalibrationService
     {
-        private static readonly IDaoLogger Logger = DaoLogger.Get(typeof(LoadCalibrationViewModel));
+        private static readonly ITangdaoLogger Logger = TangdaoLogger.Get(typeof(LoadCalibrationViewModel));
 
         public static bool CreateExcel(IEnumerable<MotionCalibrationModel> reportDatas)
         {
@@ -29,20 +35,9 @@ namespace IgniteApp.Shell.ProcessParame.Services
             {
                 // 1. 动态生成路径（使用Path.Combine确保跨平台兼容性）
                 string date = DateTime.Now.ToString("yyMMdd");
-                string year = DateTime.Now.Year.ToString();
-                string month = DateTime.Now.Month.ToString("00"); // 补零，如"01"
-                string day = DateTime.Now.Day.ToString("00");    // 补零，如"01"
 
-                string directoryPath = Path.Combine(
-                    IgniteInfoLocation.Framework,
-                    year,
-                    month,
-                    day
-                );
-                string filePath = Path.Combine(directoryPath, $"{date}.xlsx");
-
-                // 2. 确保目录存在（无竞争条件）
-                Directory.CreateDirectory(directoryPath); // 如果目录已存在，不会报错
+                var directoryPath = TangdaoPath.Instance.DateFrom(IgniteInfoLocation.Framework).BuildDirectory();
+                string filePath = Path.Combine(directoryPath.Value, $"{date}.xlsx");
 
                 // 3. 分Sheet处理逻辑
                 if (File.Exists(filePath))
@@ -53,7 +48,7 @@ namespace IgniteApp.Shell.ProcessParame.Services
                 else
                 {
                     Logger.WriteLocal($"{methodName}: 首次创建文件...");
-                    CreateNewFile(filePath, reportDatas);
+                    CreateNotTemplateFile(filePath, reportDatas);
                 }
 
                 Logger.WriteLocal($"{methodName}: 操作成功完成，文件路径: {filePath}");
@@ -100,6 +95,10 @@ namespace IgniteApp.Shell.ProcessParame.Services
                                 item.Id = index;
                                 return newData;
                             });
+
+            var withIdData2 = newData.Select((item, index) => { item.Id = index; return item; });
+            var sss = newData.WithIndex();
+            var withIdData3 = newData.SelectWithIndex(item => item.Id);
             var initialSheets = new Dictionary<string, object>
             {
                 ["质量数据"] = withIdData,
@@ -107,13 +106,32 @@ namespace IgniteApp.Shell.ProcessParame.Services
                 ["Ng报表"] = withIdData.Where(x => x.Result.ToYAndN() == "N").ToList(),
                 ["统计"] = CalculateStatistics(withIdData)
             };
-            string templatePath = Path.Combine(IgniteInfoLocation.Framework, "tempframework.xlsx");
+            string templatePath = Path.Combine(IgniteInfoLocation.Framework, "templatePath.xlsx");
 
             var TemplateData = new TemplateData() { Data = newData.ToList() };
             //var TemplateData = new TemplateData() { Data = initialSheets };
             MiniExcel.SaveAsByTemplate(filePath, templatePath, TemplateData);
             //   MiniExcel.SaveAs(filePath, initialSheets);
-            Logger.WriteLocal("保存文件成功");
+            Logger.WriteLocal($"{filePath}:保存文件成功");
+        }
+
+        /// <summary>
+        /// 创建没有模板的文件
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="newData"></param>
+        private static void CreateNotTemplateFile(string filePath, IEnumerable<MotionCalibrationModel> newData)
+        {
+            var withIdData = newData.SelectWithIndex(item => item.Id);
+            var initialSheets = new Dictionary<string, object>
+            {
+                ["质量数据"] = withIdData,
+                ["Ok报表"] = withIdData.Where(x => x.Result.ToYAndN() == "Y").ToList(),
+                ["Ng报表"] = withIdData.Where(x => x.Result.ToYAndN() == "N").ToList(),
+                ["统计"] = CalculateStatistics(withIdData)
+            };
+            MiniExcel.SaveAs(filePath, initialSheets);
+            Logger.WriteLocal($"{filePath}:保存文件成功");
         }
 
         private static void AppendToExistingFile(string filePath, IEnumerable<MotionCalibrationModel> newData)
@@ -138,7 +156,7 @@ namespace IgniteApp.Shell.ProcessParame.Services
                 //    .ToList();
                 var localData = MiniExcel.Query<MotionCalibrationModel>(filePath);
                 //// 2. 计算新数据的起始ID（现有最大ID + 1）
-                int nextId = localData.Count() > 0 ? localData.Max(x => x.Id) + 1 : 0;
+                int nextId = localData.Any() ? localData.Max(x => x.Id) + 1 : 0;
                 nextId = localData.Count();
                 //// 3. 为新数据分配自增ID
                 for (int i = 0; i < realData.Count; i++)
@@ -162,7 +180,7 @@ namespace IgniteApp.Shell.ProcessParame.Services
                 // MiniExcel.SaveAs(tempFile, updatedSheets);
 
                 var updateData = localData.Concat(realData);
-                string templatePath = Path.Combine(IgniteInfoLocation.Framework, "tempframework.xlsx");
+                string templatePath = Path.Combine(IgniteInfoLocation.Framework, "templatePath.xlsx");
 
                 var TemplateData = new TemplateData() { Data = updateData.ToList() };
                 //var TemplateData = new TemplateData() { Data = updatedSheets };
@@ -182,6 +200,7 @@ namespace IgniteApp.Shell.ProcessParame.Services
         private static object CalculateStatistics(IEnumerable<MotionCalibrationModel> data)
         {
             var list = data.ToList();
+            list.Select((item, index) => { item.Id = index; return item; });
             return new[]
             {
                 new
@@ -198,6 +217,54 @@ namespace IgniteApp.Shell.ProcessParame.Services
         {
             public List<MotionCalibrationModel> Data { get; set; } = new List<MotionCalibrationModel>();
             //public Dictionary<string, object> Data { get; set; } = new Dictionary<string, object>();
+        }
+    }
+
+    public static class APPExtension
+    {
+        // 缓存：T -> Action<T,int>  setter
+        //private static readonly Dictionary<Type, Delegate> _cache = new Dictionary<Type, Delegate>();
+
+        /// <summary>
+        /// 对序列按索引赋值，指定成员表达式 item => item.Id
+        /// </summary>
+        public static IEnumerable<T> SelectWithIndex<T>(this IEnumerable<T> source, Expression<Func<T, int>> memberSelector)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (memberSelector == null) throw new ArgumentNullException(nameof(memberSelector));
+
+            // 编译一次 setter
+            var setter = GetOrCreateSetter(memberSelector);
+
+            return source.Select((item, idx) =>
+            {
+                setter(item, idx);
+                return item;
+            });
+        }
+
+        // 内部：把 Expression<item.Id> 编译成 Action<item,index>
+        private static readonly ConcurrentDictionary<(Type, string), Delegate> _cache = new ConcurrentDictionary<(Type, string), Delegate>();
+
+        private static Action<T, int> GetOrCreateSetter<T>(Expression<Func<T, int>> selector)
+        {
+            var type = typeof(T);
+            var key = (type, selector.Body.ToString());
+
+            return (Action<T, int>)_cache.GetOrAdd(key, _ =>
+            {
+                // 下面是原逻辑
+                if (!(selector.Body is MemberExpression mem) ||
+                    !(mem.Member is PropertyInfo prop) ||
+                    !prop.CanWrite ||
+                    prop.PropertyType != typeof(int))
+                    throw new ArgumentException("Lambda 必须返回一个可写的 int 属性，如 item => item.Id");
+
+                var paramItem = Expression.Parameter(type, "item");
+                var paramIndex = Expression.Parameter(typeof(int), "index");
+                var assign = Expression.Assign(Expression.Property(paramItem, prop), paramIndex);
+                return Expression.Lambda<Action<T, int>>(assign, paramItem, paramIndex).Compile();
+            });
         }
     }
 }

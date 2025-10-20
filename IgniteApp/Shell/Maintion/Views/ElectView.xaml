@@ -70,13 +70,13 @@
                                     Width="100"
                                     Command="{s:Action EditValue}"
                                     CommandParameter="{Binding}"
-                                    Content="测试"
+                                    Content="测试+"
                                     IsEnabled="{Binding IsSelected}" />
                                 <Button
                                     Width="100"
                                     Command="{s:Action EditValue2}"
                                     CommandParameter="{Binding}"
-                                    Content="测试2"
+                                    Content="测试-"
                                     IsEnabled="{Binding IsSelected}" />
                             </StackPanel>
                         </DataTemplate>

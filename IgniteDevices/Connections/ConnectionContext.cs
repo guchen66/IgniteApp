@@ -4,6 +4,7 @@ using IgniteShared.Enums;
 using IgniteShared.Extensions;
 using IgniteShared.Models;
 using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.Loggers;
 using IT.Tangdao.Framework.Extensions;
 using Modbus.Device;
 using System;
@@ -18,7 +19,7 @@ namespace IgniteDevices.Connections
 {
     public class ConnectionContext : IDisposable
     {
-        private static readonly IDaoLogger Logger = DaoLogger.Get(typeof(ConnectionContext));
+        private static readonly ITangdaoLogger Logger = TangdaoLogger.Get(typeof(ConnectionContext));
         private readonly List<IConnectionState> _connectionStates;
         private const int MaxRetriesPerState = 5;  //最大重试次数
         private int _currentRetryCount = 0;  //重试次数

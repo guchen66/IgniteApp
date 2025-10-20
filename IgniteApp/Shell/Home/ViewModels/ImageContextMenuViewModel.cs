@@ -18,6 +18,7 @@ using Stylet;
 using IgniteApp.Events;
 using IgniteApp.Dialogs.ViewModels;
 using StyletIoC;
+using IT.Tangdao.Framework.Extensions;
 
 namespace IgniteApp.Shell.Home.ViewModels
 {
@@ -91,6 +92,8 @@ namespace IgniteApp.Shell.Home.ViewModels
                     FilePath = filePath,
                     FileName = "Memory Image",
                     FileSize = fileSize.ToString(),
+                    CreateTime = creationTime.Value,
+                    UpdateTime = lastWriteTime.Value,
                 };
                 // 组装信息对象
                 //var imageInfo = new
@@ -140,13 +143,14 @@ namespace IgniteApp.Shell.Home.ViewModels
                     // 获取文件完整路径
                     string filename = saveFileDialog.FileName;
 
+                    StringComparer comparer = StringComparer.OrdinalIgnoreCase;
                     // 根据文件扩展名选择编码器
                     BitmapEncoder encoder;
-                    if (Path.GetExtension(filename).ToLower() == ".jpg")
+                    if (Path.GetExtension(filename).EqualsIgnoreCase(".jpg"))
                     {
                         encoder = new JpegBitmapEncoder();
                     }
-                    else if (Path.GetExtension(filename).ToLower() == ".png")
+                    else if (Path.GetExtension(filename).EqualsIgnoreCase(".png"))
                     {
                         encoder = new PngBitmapEncoder();
                     }

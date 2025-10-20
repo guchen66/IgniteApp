@@ -24,6 +24,13 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
 
         public IContainer _container;
         public string RouteName { get; set; }
+        private bool _switching;
+
+        public bool Switching
+        {
+            get => _switching;
+            set => SetAndNotify(ref _switching, value);
+        }
 
         public TeachingViewModel(ITangdaoRouter router, IContainer container)
         {
@@ -37,10 +44,12 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
 
         public void OpenTeachView(string navigateName)
         {
+            Switching = true;
             ITangdaoParameter tangdaoParameter = new TangdaoParameter();
             tangdaoParameter.Add("Name", "张三");
             Router.NavigateTo(navigateName, tangdaoParameter);
             //  Router.NavigateTo<CO2TeachViewModel>();
+            Switching = false;
         }
 
         public ITangdaoPage ResolvePage(string route)

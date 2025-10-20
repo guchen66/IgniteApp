@@ -1,5 +1,5 @@
 ﻿using IgniteDevices.Core.Models.Results;
-using IT.Tangdao.Framework.Abstractions.IServices;
+using IT.Tangdao.Framework.Abstractions;
 using IT.Tangdao.Framework.Abstractions.Results;
 using System;
 using System.Collections.Generic;
@@ -50,7 +50,7 @@ namespace IgniteApp.Interfaces
                 _readService.Current.Load(xmlData);
                 var result = _readService.Current.SelectNodes<T>();
 
-                if (result.IsSuccess && result.Result != null && result.Result.Any())
+                if (result.IsSuccess && result.Result != null && result.Result.Length > 0)
                     return QueryableResult<T>.Success(result.Data.First());
                 else
                     return QueryableResult<T>.Failure("未找到数据或读取失败");

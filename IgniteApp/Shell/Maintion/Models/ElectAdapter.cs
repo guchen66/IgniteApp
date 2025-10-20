@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace IgniteApp.Shell.Maintion.Models
 {
     /// <summary>
+    /// 适配器模式
     /// 当状态改变不能跟据某个属性改变的时候，自己去创造对象
     /// </summary>
     public class ElectAdapter : INotifyPropertyChanged, IDisposable

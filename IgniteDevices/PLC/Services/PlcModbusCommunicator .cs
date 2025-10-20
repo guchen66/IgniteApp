@@ -2,7 +2,7 @@
 using IgniteDevices.Connections.Interfaces;
 using IgniteDevices.Core.Models;
 using IgniteDevices.Core.Models.Results;
-using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.Loggers;
 using IT.Tangdao.Framework.Abstractions.Results;
 using Modbus.Device;
 using System;
@@ -19,7 +19,7 @@ namespace IgniteDevices.PLC.Services
         private readonly IConnectionState _connectionStrategy;
 
         private IModbusMaster _master;
-        private readonly IDaoLogger _logger = DaoLogger.Get(typeof(PlcModbusCommunicator));
+        private readonly ITangdaoLogger _logger = TangdaoLogger.Get(typeof(PlcModbusCommunicator));
 
         public PlcModbusCommunicator(ConnectionContext context)
         {

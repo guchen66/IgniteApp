@@ -7,7 +7,7 @@ using IgniteShared.Dtos;
 using IgniteShared.Entitys;
 using IgniteShared.Globals.Local;
 using IgniteShared.Models;
-using IT.Tangdao.Framework.Abstractions.IServices;
+using IT.Tangdao.Framework.Abstractions;
 using IT.Tangdao.Framework.Commands;
 using IT.Tangdao.Framework.Helpers;
 using Newtonsoft.Json.Linq;

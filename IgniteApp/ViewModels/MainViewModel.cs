@@ -7,14 +7,16 @@ using IgniteApp.Shell.Header.ViewModels;
 using IgniteApp.Shell.Home.ViewModels;
 using IgniteDevices.PLC;
 using IT.Tangdao.Framework;
-using IT.Tangdao.Framework.Abstractions.Services;
+using IT.Tangdao.Framework.Abstractions;
 using IT.Tangdao.Framework.Abstractions.Sockets;
+using IT.Tangdao.Framework.Helpers;
 using Stylet;
 using StyletIoC;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -64,7 +66,13 @@ namespace IgniteApp.ViewModels
             _alarmPopupManager = alarmPopupManager;
             // OmronManager.AlarmChenged += OnAlarmChanged;
             OmronManager.AlarmChenged += OnAlarmChangedPublish;
+            OmronManager.AlarmErrorChenged += OnAlarmErrorChanged;
             _alarmPublisher.Subscribe(_alarmPopupNotifier);
+        }
+
+        private void OnAlarmErrorChanged(AlarmMessage message)
+        {
+            _alarmPopupManager.OpenAlarmPopup(message);
         }
 
         /// <summary>

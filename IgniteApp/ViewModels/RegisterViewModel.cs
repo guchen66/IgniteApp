@@ -12,7 +12,7 @@ using IgniteShared.Globals.System;
 using IT.Tangdao.Framework;
 using IT.Tangdao.Framework.Commands;
 using IT.Tangdao.Framework.Enums;
-using IT.Tangdao.Framework.DaoEvents;
+using IT.Tangdao.Framework.Events;
 using IT.Tangdao.Framework.DaoMvvm;
 using IT.Tangdao.Framework.Helpers;
 using Stylet;
@@ -27,6 +27,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using IContainer = StyletIoC.IContainer;
+using System.Collections.Concurrent;
+using System.Diagnostics;
+using System.Reflection;
 
 namespace IgniteApp.ViewModels
 {
@@ -146,4 +149,88 @@ namespace IgniteApp.ViewModels
             maintainView.Show();
         }
     }
+
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
+    public sealed class ScannerSubscribeAttribute : Attribute
+    {
+        public string Key { get; }
+
+        public ScannerSubscribeAttribute(string key) => Key = key;
+    }
+
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
+    public sealed class ScannerPublishAttribute : Attribute
+    {
+        public string Key { get; }
+
+        public ScannerPublishAttribute(string key) => Key = key;
+    }
+
+    public static class ScannerBus
+    {
+        // key -> 所有订阅的方法委托
+        private static readonly ConcurrentDictionary<string, List<Delegate>> _map = new ConcurrentDictionary<string, List<Delegate>>();
+
+        /// <summary>
+        /// 程序入口或 App.xaml.cs 里调用一次即可
+        /// </summary>
+        public static void Scan()
+        {
+            var q = from t in Assembly.GetExecutingAssembly().GetTypes()
+                    from m in t.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance)
+                    let attr = m.GetCustomAttribute<ScannerSubscribeAttribute>()
+                    where attr != null
+                    select new { Method = m, Key = attr.Key, Type = t };
+
+            foreach (var item in q)
+            {
+                var param = item.Method.GetParameters();
+                var actionType = param.Length == 0
+                    ? typeof(Action)
+                    : System.Linq.Expressions.Expression.GetActionType(item.Method.GetParameters().Select(p => p.ParameterType).ToArray());
+
+                var del = item.Method.IsStatic
+                    ? Delegate.CreateDelegate(actionType, item.Method)
+                    : Delegate.CreateDelegate(actionType, Activator.CreateInstance(item.Type), item.Method);
+
+                _map.AddOrUpdate(item.Key, _ => new List<Delegate> { del }, (_, list) => { list.Add(del); return list; });
+            }
+        }
+
+        /// <summary>
+        /// 发布（在 [ScannerPublish] 的 AOP 里调用）
+        /// </summary>
+        public static void Publish(string key, params object[] args)
+        {
+            if (_map.TryGetValue(key, out var list))
+            {
+                foreach (var del in list.ToArray()) // ToArray 防止订阅中删订阅
+                {
+                    try { del.DynamicInvoke(args); }
+                    catch (Exception ex) { /* 写日志 */ Debug.WriteLine(ex); }
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// 给 MainViewModel 做一层代理，方法执行前检查特性并发布
+    /// </summary>
+    //public class PublisherProxy<T> : DispatchProxy where T : class
+    //{
+    //    private T _target;
+    //    protected override object Invoke(MethodInfo targetMethod, object[] args)
+    //    {
+    //        var attr = targetMethod.GetCustomAttribute<ScannerPublishAttribute>();
+    //        if (attr != null) ScannerBus.Publish(attr.Key, args);
+    //        return targetMethod.Invoke(_target, args);
+    //    }
+
+    //    public static T Create(T target)
+    //    {
+    //        var proxy = Create<T, PublisherProxy<T>>();
+    //        ((PublisherProxy<T>)proxy!)._target = target;
+    //        return (T)proxy;
+    //    }
+    //}
 }

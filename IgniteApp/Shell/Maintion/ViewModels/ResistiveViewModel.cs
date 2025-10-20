@@ -2,7 +2,7 @@
 using IgniteApp.Bases;
 using IgniteShared.Extensions;
 using IT.Tangdao.Framework;
-using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.Loggers;
 using IT.Tangdao.Framework.DaoTasks;
 using System;
 using System.Collections.Generic;
@@ -20,7 +20,7 @@ namespace IgniteApp.Shell.Maintion.ViewModels
 {
     public class ResistiveViewModel : BaseDeviceViewModel
     {
-        private static readonly IDaoLogger Logger = DaoLogger.Get(typeof(ResistiveViewModel));
+        private static readonly ITangdaoLogger Logger = TangdaoLogger.Get(typeof(ResistiveViewModel));
 
         public ResistiveViewModel() : base("Resistance")
         {

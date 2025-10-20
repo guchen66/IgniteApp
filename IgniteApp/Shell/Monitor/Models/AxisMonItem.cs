@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IgniteApp.Shell.Monitor.Models
 {
-    public class AxisMonItem:DaoViewModelBase
+    public class AxisMonItem : DaoViewModelBase
     {
         private int _id;
 
@@ -39,6 +39,14 @@ namespace IgniteApp.Shell.Monitor.Models
         {
             get => remark;
             set => SetProperty(ref remark, value);
+        }
+
+        private DateTime _createTime;
+
+        public DateTime CreateTime
+        {
+            get => _createTime;
+            set => SetProperty(ref _createTime, value);
         }
     }
 }

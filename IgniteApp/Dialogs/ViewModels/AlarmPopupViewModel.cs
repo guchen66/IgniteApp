@@ -1,11 +1,13 @@
 ﻿using IgniteApp.Events;
 using IgniteDevices.PLC;
 using IgniteShared.Extensions;
-using IT.Tangdao.Framework.Abstractions;
-using IT.Tangdao.Framework.DaoEvents;
+using IT.Tangdao.Framework.Abstractions.Loggers;
+using IT.Tangdao.Framework.Events;
+using IT.Tangdao.Framework.Extensions;
 using Stylet;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,12 +23,20 @@ namespace IgniteApp.Dialogs.ViewModels
         public DateTime TriggerTime { get; }
         public ICommand AcknowledgeCommand { get; }
         private bool _isMinimized;
-        private static readonly IDaoLogger Logger = DaoLogger.Get(typeof(AlarmPopupViewModel));
+        private static readonly ITangdaoLogger Logger = TangdaoLogger.Get(typeof(AlarmPopupViewModel));
 
         public bool IsMinimized
         {
             get => _isMinimized;
             set => SetAndNotify(ref _isMinimized, value);
+        }
+
+        private ObservableCollection<AlarmMessage> _alarmList;
+
+        public ObservableCollection<AlarmMessage> AlarmList
+        {
+            get => _alarmList ?? (_alarmList = new ObservableCollection<AlarmMessage>());
+            set => SetAndNotify(ref _alarmList, value);
         }
 
         private IEventAggregator _eventAggregator;
@@ -98,6 +108,8 @@ namespace IgniteApp.Dialogs.ViewModels
             if (this.ScreenState != ScreenState.Active)
             {
                 _windowManager.ShowWindow(this);
+                AlarmList.Clear();
+                AlarmList.Add(message.AlarmMessage);
             }
         }
 

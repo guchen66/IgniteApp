@@ -61,6 +61,8 @@
 
         <WrapPanel Grid.Row="2">
             <Button Command="{s:Action SaveCalibrationData}" Content="保存" Width="100" Margin="5" />
+            <Button Command="{s:Action Undo}" Width="100" Height="30" Content="撤销" Margin="5" />
+            <Button Command="{s:Action SendDataToUnLoad}" Width="100" Height="30" Content="发送数据" Margin="5" />
         </WrapPanel>
     </Grid>
 </UserControl>

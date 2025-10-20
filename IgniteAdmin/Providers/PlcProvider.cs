@@ -7,7 +7,7 @@ using IgniteDevices.PLC.Services;
 using IgniteShared.Extensions;
 using IgniteShared.Globals.System;
 using IgniteShared.Models;
-using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.Loggers;
 using IT.Tangdao.Framework.Abstractions.Results;
 using IT.Tangdao.Framework.Extensions;
 using Modbus.Device;
@@ -24,7 +24,7 @@ namespace IgniteAdmin.Providers
 {
     public class PlcProvider : IPlcProvider
     {
-        private static readonly IDaoLogger Logger = DaoLogger.Get(typeof(PlcProvider));
+        private static readonly ITangdaoLogger Logger = TangdaoLogger.Get(typeof(PlcProvider));
         private ConnectionContext _context;
         public ConnectionContext Context => _context;
 

@@ -1,5 +1,5 @@
 ﻿using IgniteShared.Globals.Local;
-using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.Loggers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,7 +13,7 @@ namespace IgniteShared.Extensions
 {
     public static class LoggerExtensions
     {
-        public static void WriteLocal(this IDaoLogger daoLogger, string message, string category = null)
+        public static void WriteLocal1(this ITangdaoLogger daoLogger, string message, string category = null)
         {
             try
             {
@@ -44,7 +44,7 @@ namespace IgniteShared.Extensions
         }
 
         // 可以移除这个重载方法，因为上面的方法已经处理了category为null的情况
-        public static void WriteLocal(this IDaoLogger logger, string category, string message, Exception e = null)
+        public static void WriteLocal2(this ITangdaoLogger logger, string category, string message, Exception e = null)
         {
             try
             {

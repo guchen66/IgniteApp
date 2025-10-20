@@ -78,10 +78,10 @@ namespace IgniteApp.Shell.Maintion.ViewModels
             };
             CheckCommand = MinidaoCommand.Create(ExecuteCheck);
             CheckPriceCommand = MinidaoCommand.Create(ExecuteCheckPrice);
-            _electricityMotion = new ElectricityMotion();
-            _electricityPriceTrace = new ElectPriceTrace();
-            _electricityMotion.OverLoad += OnOverLoadChanged;
-            _electricityMotion.LowLoad += OnLowLoadChanged;
+            // _electricityMotion = new ElectricityMotion();
+            // _electricityPriceTrace = new ElectPriceTrace();
+            //_electricityMotion.OverLoad += OnOverLoadChanged;
+            //_electricityMotion.LowLoad += OnLowLoadChanged;
             //_electricityPriceTrace.PriceChanged += OnPriceChanged;
         }
 
@@ -118,6 +118,10 @@ namespace IgniteApp.Shell.Maintion.ViewModels
 
         private readonly Dictionary<int, ElectAdapter> _adapters = new Dictionary<int, ElectAdapter>();
 
+        /// <summary>
+        /// 开始监控
+        /// </summary>
+        /// <param name="model"></param>
         public void StartMonitor(ElectricityModel model)
         {
             if (_adapters.ContainsKey(model.Id))
@@ -143,6 +147,10 @@ namespace IgniteApp.Shell.Maintion.ViewModels
             }
         }
 
+        /// <summary>
+        /// 停止监控
+        /// </summary>
+        /// <param name="model"></param>
         public void StopMonitor(ElectricityModel model)
         {
             if (_adapters.TryGetValue(model.Id, out var adapter))
@@ -153,16 +161,22 @@ namespace IgniteApp.Shell.Maintion.ViewModels
             }
         }
 
+        /// <summary>
+        /// 测试Add
+        /// </summary>
+        /// <param name="model"></param>
         public void EditValue(ElectricityModel model)
         {
             model.IElectService.CurrentValue++;
-            //  model.CurrentValue = 11;
         }
 
+        /// <summary>
+        /// 测试Delete
+        /// </summary>
+        /// <param name="model"></param>
         public void EditValue2(ElectricityModel model)
         {
             model.IElectService.CurrentValue = -1;
-            //  model.CurrentValue = 11;
         }
     }
 }

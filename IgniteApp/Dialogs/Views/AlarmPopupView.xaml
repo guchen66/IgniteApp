@@ -6,11 +6,28 @@
         xmlns:local="clr-namespace:IgniteApp.Dialogs.Views"
         mc:Ignorable="d"
         Title="AlarmPopupView" Height="450" Width="800">
-    <StackPanel VerticalAlignment="Center">
-        <TextBlock Text="{Binding CurrentAlarm}" FontSize="16" HorizontalAlignment="Center" />
-        <TextBlock Text="{Binding TriggerTime,StringFormat='触发时间: {0:HH:mm:ss}'}"
-                   Margin="0,10" />
-        <Button Content="确认" Command="{Binding AcknowledgeCommand}"
-                Width="80" Margin="0,20" />
-    </StackPanel>
+    <Window.Resources>
+        <DataTemplate x:Key="Alarm">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Id}" />
+                <TextBlock Text="{Binding Name}" />
+                <TextBlock Text="{Binding Solution}" />
+                <TextBlock Text="{Binding TriggerTime,StringFormat='触发时间: {0:yyyy/MM/dd:HH:mm:ss}'}" />
+                <TextBlock Text="{Binding AlarmLevel}" />
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <ListBox ItemsSource="{Binding AlarmList}" ItemTemplate="{StaticResource Alarm}">
+        </ListBox>
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal">
+
+            <Button Content="确认" Command="{Binding AcknowledgeCommand}"
+            Width="80" Margin="0,20" />
+        </StackPanel>
+    </Grid>
 </Window>
