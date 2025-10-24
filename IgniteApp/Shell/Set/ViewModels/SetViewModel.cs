@@ -3,7 +3,7 @@ using IgniteApp.Common;
 using IgniteApp.Extensions;
 using IgniteApp.Interfaces;
 using IgniteApp.Shell.Home.Models;
-using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.FileAccessor;
 using IT.Tangdao.Framework.Infrastructure;
 using IT.Tangdao.Framework.Extensions;
 using Stylet;
@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IT.Tangdao.Framework.EventArg;
+using System.Collections.ObjectModel;
 
 namespace IgniteApp.Shell.Set.ViewModels
 {
@@ -20,9 +21,9 @@ namespace IgniteApp.Shell.Set.ViewModels
     {
         public string HandlerName { get; set; } = "Setting";
 
-        private IReadOnlyCollection<ITangdaoMenuItem> _setMenuList;
+        private ObservableCollection<TangdaoMenuItem> _setMenuList;
 
-        public IReadOnlyCollection<ITangdaoMenuItem> SetMenuList
+        public ObservableCollection<TangdaoMenuItem> SetMenuList
         {
             get => _setMenuList;
             set => SetAndNotify(ref _setMenuList, value);
@@ -43,7 +44,9 @@ namespace IgniteApp.Shell.Set.ViewModels
         {
             this._viewFactory = viewFactory;
             this._readService = readService;
-            SetMenuList = ReadOnlyMenuItemManager.Create(readService, HandlerName);
+            // SetMenuList = ReadOnlyMenuItemManager.Create(readService, HandlerName);
+
+            SetMenuList = readService.Default.AsConfig().SelectAppConfig(HandlerName).ToList(v => new TangdaoMenuItem { MenuName = v }).ToObservableCollection();
             this.BindAndInvoke(viewModel => viewModel.SelectedIndex, (obj, args) => DoNavigateToView());
         }
 

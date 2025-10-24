@@ -15,10 +15,10 @@ namespace IgniteDevices.PLC.Services
     public interface IPlcCommunicator
     {
         // 精准读取单个寄存器
-        DeviceResult<ushort> ReadSingleRegister(ushort address);
+        ResponseResult<ushort> ReadSingleRegister(ushort address);
 
         // 范围读取（起始地址 + 寄存器数量）
-        DeviceResult<PlcData> ReadRegisterRange(ushort startAddress, ushort numberOfPoints);
+        ResponseResult<PlcData> ReadRegisterRange(ushort startAddress, ushort numberOfPoints);
 
         // 批量写入（优化后）
         void WriteRegisters(ushort registerAddress, ushort value);

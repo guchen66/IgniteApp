@@ -13,7 +13,7 @@ using IT.Tangdao.Framework;
 using IT.Tangdao.Framework.Commands;
 using IT.Tangdao.Framework.Enums;
 using IT.Tangdao.Framework.Events;
-using IT.Tangdao.Framework.DaoMvvm;
+using IT.Tangdao.Framework.Mvvm;
 using IT.Tangdao.Framework.Helpers;
 using Stylet;
 using Stylet.Xaml;

@@ -1,6 +1,6 @@
 ﻿using IgniteApp.Common;
 using IgniteApp.Interfaces;
-using IT.Tangdao.Framework.DaoMvvm;
+using IT.Tangdao.Framework.Mvvm;
 using IT.Tangdao.Framework.Extensions;
 using System;
 using System.Collections;

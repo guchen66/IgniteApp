@@ -32,17 +32,17 @@ namespace IgniteDevices.PLC.Services
         /// <param name="startAddress"></param>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"></exception>
-        public DeviceResult<PlcData> ReadRegisterRange(ushort startAddress, ushort length)
+        public ResponseResult<PlcData> ReadRegisterRange(ushort startAddress, ushort length)
         {
             try
             {
                 var rawData = _master.ReadHoldingRegisters(1, startAddress, length);
                 var data = PlcData.ConvertToPlcData(rawData, startAddress, DataType.UInt16);
-                return DeviceResult<PlcData>.Success(data: data, "1");
+                return ResponseResult<PlcData>.Success(data: data, "1");
             }
             catch (Exception ex)
             {
-                return DeviceResult<PlcData>.Failure($"地址[{startAddress}-{startAddress + length}]读取失败: {ex.Message}");
+                return ResponseResult<PlcData>.Failure($"地址[{startAddress}-{startAddress + length}]读取失败: {ex.Message}");
             }
         }
 
@@ -51,16 +51,16 @@ namespace IgniteDevices.PLC.Services
         /// </summary>
         /// <param name="address"></param>
         /// <returns></returns>
-        public DeviceResult<ushort> ReadSingleRegister(ushort address)
+        public ResponseResult<ushort> ReadSingleRegister(ushort address)
         {
             try
             {
                 var value = _master.ReadHoldingRegisters(1, address, 1)[0];
-                return DeviceResult<ushort>.Success(value, "1");
+                return ResponseResult<ushort>.Success(value, "1");
             }
             catch (Exception ex)
             {
-                return DeviceResult<ushort>.Failure($"地址{address}读取失败: {ex.Message}");
+                return ResponseResult<ushort>.Failure($"地址{address}读取失败: {ex.Message}");
             }
         }
 

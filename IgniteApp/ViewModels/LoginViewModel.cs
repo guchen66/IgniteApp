@@ -44,15 +44,12 @@ using IgniteShared.Delegates;
 using System.Windows.Markup;
 using IT.Tangdao.Framework.DaoException;
 using IT.Tangdao.Framework.Extensions;
-using System.Collections.ObjectModel;
-using IgniteApp.Modules;
-using System.Drawing;
-using System.Windows.Media;
-using IT.Tangdao.Framework.Common;
 using System.Collections.Concurrent;
 using System.Reflection;
 using System.Runtime.Serialization;
 using IT.Tangdao.Framework.Threading;
+using IT.Tangdao.Framework.Abstractions.FileAccessor;
+using IT.Tangdao.Framework.Paths;
 
 namespace IgniteApp.ViewModels
 {
@@ -111,14 +108,13 @@ namespace IgniteApp.ViewModels
         /// </summary>
         public void ExecuteLogin()
         {
-            var test = Test.Print();
             var cacheData = UserManager.SearchCache(LoginDto);
             AmbientContext.SetCurrent(LoginDto);          //线程上下文传输数据
             if (cacheData)
             {
                 var foldPath = Path.Combine(IgniteInfoLocation.Cache, "LoginInfo.xml");
                 _windowManager.ShowWindow(_mainViewModel);
-                _writeService.WriteEntityToXml(LoginDto, foldPath);
+                _writeService.Default.WriteObject(foldPath, LoginDto);
                 RequestClose();
             }
             else
@@ -156,20 +152,14 @@ namespace IgniteApp.ViewModels
             base.OnActivate();
             try
             {
-                var s3 = bool.TrueString;
-                var foldPath = Path.Combine(IgniteInfoLocation.Cache, "LoginInfo.xml");
-                var xmlData = _readService.Read(foldPath);
-                if (xmlData == null)
-                {
-                    File.Create(foldPath);
-                    return;
-                }
-                _readService.Current.Load(xmlData);
-                var isRememberValue = _readService.Current.SelectNode("IsRemember").Result;// 获取元素的值
-
+                //var s3 = bool.TrueString;
+                // var foldPath = Path.Combine(IgniteInfoLocation.Cache, "LoginInfo.xml");
+                var foldPath = TangdaoPath.Instance.AsPath(IgniteInfoLocation.Cache).Combine("LoginInfo.xml").Build();
+                var isRememberValue = _readService.Default.Read(foldPath).AsXml().SelectNode("IsRemember").Value;
                 if (isRememberValue.TryToBool(out var value))
-
-                    LoginDto = XmlFolderHelper.Deserialize<LoginDto>(xmlData);
+                {
+                    LoginDto = _readService.Cache.DeserializeCache<LoginDto>(foldPath.Value, DaoFileType.Xml);
+                }
                 else
                     LoginDto = null;
             }

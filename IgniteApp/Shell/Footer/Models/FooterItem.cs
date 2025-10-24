@@ -1,5 +1,5 @@
 ﻿using IT.Tangdao.Framework.Abstractions;
-using IT.Tangdao.Framework.DaoMvvm;
+using IT.Tangdao.Framework.Mvvm;
 using Stylet;
 using System;
 using System.Collections.Generic;

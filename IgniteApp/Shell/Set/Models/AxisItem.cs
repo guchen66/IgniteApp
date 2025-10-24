@@ -2,8 +2,8 @@
 using IgniteShared.Globals.Local;
 using IT.Tangdao.Framework;
 using IT.Tangdao.Framework.Abstractions.Loggers;
-using IT.Tangdao.Framework.Abstractions;
-using IT.Tangdao.Framework.DaoMvvm;
+using IT.Tangdao.Framework.Abstractions.FileAccessor;
+using IT.Tangdao.Framework.Mvvm;
 using IT.Tangdao.Framework.Extensions;
 using IT.Tangdao.Framework.Helpers;
 using Stylet;
@@ -15,6 +15,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using IT.Tangdao.Framework.Enums;
 
 namespace IgniteApp.Shell.Set.Models
 {
@@ -74,14 +75,14 @@ namespace IgniteApp.Shell.Set.Models
         public void InitializalData()
         {
             var foldPath = Path.Combine(IgniteInfoLocation.Recipe, "AxisInfo.xml");
-            var xmlData = _readService.Read(foldPath);
+            var xmlData = _readService.Default.Read(foldPath).Content;
             if (xmlData == null)
             {
                 return;
             }
-            _readService.Current.Load(xmlData);
-
-            List<AxisItem> AxisItems = XmlFolderHelper.Deserialize<List<AxisItem>>(xmlData);
+            // _readService.Current.Load(xmlData);
+            List<AxisItem> AxisItems = _readService.Cache.DeserializeCache<List<AxisItem>>(foldPath, DaoFileType.Xml);
+            //  List<AxisItem> AxisItems = XmlFolderHelper.Deserialize<List<AxisItem>>(xmlData);
             foreach (var item in AxisItems)
             {
                 Add(item);
@@ -107,8 +108,8 @@ namespace IgniteApp.Shell.Set.Models
 
                 var info = XmlFolderHelper.SerializeXML<List<AxisItem>>(AxisItems);
                 var foldPath = Path.Combine(IgniteInfoLocation.Recipe, "AxisInfo.xml");
-                _writeService.WriteString(foldPath, info);
-                var xmlData = _readService.Read(foldPath);
+                _writeService.Default.Write(info, foldPath);
+                var xmlData = _readService.Default.Read(foldPath).Content;
 
                 if (xmlData == null)
                 {

@@ -2,7 +2,7 @@
 using Stylet;
 using StyletIoC;
 using IgniteApp.ViewModels;
-using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.FileAccessor;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Threading;

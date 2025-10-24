@@ -16,6 +16,6 @@ namespace IgniteAdmin.Providers
     {
         ConnectionContext Context { get; }
 
-        DeviceResult ConnectionSiglePLC();
+        ResponseResult ConnectionSiglePLC();
     }
 }

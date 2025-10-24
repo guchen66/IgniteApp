@@ -5,7 +5,7 @@ using IgniteApp.Interfaces;
 using IgniteApp.Shell.Set.Models;
 using IgniteShared.Dtos;
 using IgniteShared.Globals.Local;
-using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.FileAccessor;
 using IT.Tangdao.Framework.Enums;
 using IT.Tangdao.Framework.Helpers;
 using Stylet;
@@ -92,7 +92,7 @@ namespace IgniteApp.Shell.Set.ViewModels
         {
             var foldPath = Path.Combine(IgniteInfoLocation.Recipe, "ProcessItem.xml");
             //将数据写成XML格式保存在本地
-            _writeService.WriteEntityToXml(ProcessItems, foldPath);
+            _writeService.Default.WriteObject(foldPath, ProcessItems);
             MessageBox.Success("流程保存成功");
         }
 

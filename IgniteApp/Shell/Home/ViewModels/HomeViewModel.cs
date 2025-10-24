@@ -6,9 +6,10 @@ using IgniteApp.Interfaces;
 using IgniteApp.Shell.Home.Models;
 using IgniteApp.ViewModels;
 using IT.Tangdao.Framework;
-using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.FileAccessor;
 using IT.Tangdao.Framework.Commands;
 using IT.Tangdao.Framework.Extensions;
+using IT.Tangdao.Framework.Infrastructure;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -51,6 +52,8 @@ namespace IgniteApp.Shell.Home.ViewModels
             _viewFactory = viewFactory;
             _readService = readService;
             HomeMenuItems.AddRange(ReadOnlyMenuItemManager.Create(readService, "unity.config", "Tangdao"));
+
+            //  readService.Default.AsConfig().SelectAppConfig(readTitle).ToList(v => new TangdaoMenuItem { MenuName = v }).ToObservableCollection();
             //InitMenuData();
         }
 

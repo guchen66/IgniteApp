@@ -40,6 +40,14 @@ namespace IgniteApp.Shell.Monitor.ViewModels
             set => SetAndNotify(ref _showHistoryPopup, value);
         }
 
+        private string _selectedItem;
+
+        public string SelectedItem
+        {
+            get => _selectedItem;
+            set => SetAndNotify(ref _selectedItem, value);
+        }
+
         public ICommand SelectHistoryItemCommand { get; set; }
 
         public ReportViewModel()

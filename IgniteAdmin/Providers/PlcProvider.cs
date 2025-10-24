@@ -10,6 +10,7 @@ using IgniteShared.Models;
 using IT.Tangdao.Framework.Abstractions.Loggers;
 using IT.Tangdao.Framework.Abstractions.Results;
 using IT.Tangdao.Framework.Extensions;
+using IT.Tangdao.Framework.Helpers;
 using Modbus.Device;
 using Stylet;
 using StyletIoC;
@@ -33,14 +34,14 @@ namespace IgniteAdmin.Providers
             _context = context;
         }
 
-        public DeviceResult ConnectionSiglePLC()
+        public ResponseResult ConnectionSiglePLC()
         {
             var plcResult = new PlcResult();
             try
             {
                 Logger.WriteLocal("开始PLC连接流程");
                 var result = Context.Connect();
-                DeviceResult.Success(result.Message);
+                ResponseResult.Success(value: result.Message);
 
                 Logger.WriteLocal(result.IsSuccess
                     ? "PLC连接成功"
@@ -48,11 +49,11 @@ namespace IgniteAdmin.Providers
             }
             catch (Exception ex)
             {
-                DeviceResult.FromException(ex, "连接异常");
+                ResponseResult.FromException(ex, "连接异常");
                 Logger.WriteLocal($"PLC连接异常: {ex.Message}");
             }
-
-            return plcResult;
+            throw new Exception();
+            //return plcResult;
         }
     }
 }

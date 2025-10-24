@@ -16,7 +16,7 @@ using IgniteShared.Extensions;
 using IgniteShared.Globals.Local;
 using IgniteShared.Models;
 using IT.Tangdao.Framework.Abstractions.Loggers;
-using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.FileAccessor;
 using IT.Tangdao.Framework.Abstractions.Sockets;
 using IT.Tangdao.Framework.Commands;
 using IT.Tangdao.Framework.Extensions;
@@ -164,14 +164,14 @@ namespace IgniteApp.Shell.Footer.ViewModels
         public void Test2()
         {
             var foldPath = Path.Combine(IgniteInfoLocation.Recipe, "ProcessItem.xml");
-            var xmlData = _readService.Read(foldPath);
+            var xmlData = _readService.Default.Read(foldPath).Content;
 
             if (xmlData == null)
             {
                 return;
             }
-            _readService.Current.Load(xmlData);
-            var readResult = _readService.Current.SelectNodes<ProcessItem>();
+            //_readService.Current.Load(xmlData);
+            var readResult = _readService.Default.AsXml().SelectNodes<ProcessItem>();
             if (readResult.IsSuccess)
             {
                 var ProcessItems = new ObservableCollection<ProcessItem>(readResult.Data);

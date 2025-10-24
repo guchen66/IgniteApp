@@ -1,5 +1,5 @@
 ﻿using IgniteApp.Interfaces;
-using IT.Tangdao.Framework.DaoMvvm;
+using IT.Tangdao.Framework.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Linq;

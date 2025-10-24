@@ -1,7 +1,7 @@
 ﻿using IgniteApp.Bases;
 using IgniteApp.Common;
 using IgniteApp.Interfaces;
-using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.FileAccessor;
 using IT.Tangdao.Framework.Infrastructure;
 using IT.Tangdao.Framework.Extensions;
 using Stylet;
@@ -42,7 +42,9 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
         {
             _viewFactory = viewFactory;
             _readService = readService;
-            ParameMenuList = ReadOnlyMenuItemManager.Create(readService, HandlerName);
+            //   ParameMenuList = ReadOnlyMenuItemManager.Create(readService, HandlerName);
+
+            ParameMenuList = readService.Default.AsConfig().SelectAppConfig(HandlerName).ToList(v => new TangdaoMenuItem { MenuName = v }).ToObservableCollection();
             this.BindAndInvoke(viewModel => viewModel.SelectedIndex, (obj, args) => DoNavigateToView());
         }
 
@@ -59,12 +61,21 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
                 default:
                     break;
             }
+            Get(s1: "s", s2: "ss");
         }
 
         public LoadCalibrationViewModel LoadCalibrationViewModel;
         public UnLoadCalibrationViewModel UnLoadCalibrationViewModel;
         public AccuracyOffsetViewModel AccuracyOffsetViewModel;
         public TeachingViewModel TeachingViewModel;
+
+        public void Get(string s1, string s2)
+        {
+        }
+
+        public void Get(string s1, object s2)
+        {
+        }
     }
 
     public delegate void ActivateItemDelegate<T>(T item);

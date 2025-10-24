@@ -6,7 +6,7 @@ using IgniteShared.Dtos;
 using IgniteShared.Entitys;
 using IgniteShared.Globals.Local;
 using IgniteShared.Globals.System;
-using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.FileAccessor;
 using IT.Tangdao.Framework.Commands;
 using IT.Tangdao.Framework.Helpers;
 using IT.Tangdao.Xaml.Controls;
@@ -72,7 +72,7 @@ namespace IgniteApp.Shell.Home.ViewModels
         public void ShowUserInfo()
         {
             ObservableCollection<int> sss = new ObservableCollection<int>();
-            var xmlData = readService.Read(Path.Combine(IgniteInfoLocation.User, "UserInfo.xml"));
+            var xmlData = readService.Default.Read(Path.Combine(IgniteInfoLocation.User, "UserInfo.xml")).Content;
             XDocument doc = XDocument.Parse(xmlData);
             List<LoginDto> loginList = doc.Descendants("Login")
            .Select(login => new LoginDto

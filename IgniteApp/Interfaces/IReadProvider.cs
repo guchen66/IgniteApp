@@ -1,5 +1,5 @@
 ﻿using IgniteDevices.Core.Models.Results;
-using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.FileAccessor;
 using IT.Tangdao.Framework.Abstractions.Results;
 using System;
 using System.Collections.Generic;
@@ -16,13 +16,13 @@ namespace IgniteApp.Interfaces
     /// <typeparam name="T"></typeparam>
     public interface IReadProvider<T> where T : new()
     {
-        QueryableResult<T> SelectSingle(string recipe);
+        ResponseResult<T> SelectSingle(string recipe);
 
-        QueryableResult<List<T>> SelectList(string recipe);
+        ResponseResult<List<T>> SelectList(string recipe);
 
-        IQueryableResult Save(T entity);
+        IResponseResult Save(T entity);
 
-        IQueryableResult SaveList(List<T> entities);
+        IResponseResult SaveList(List<T> entities);
     }
 
     public class XmlReadProvider<T> : IReadProvider<T> where T : new()
@@ -37,61 +37,60 @@ namespace IgniteApp.Interfaces
             _fileName = fileName ?? $"{typeof(T).Name}.xml";
         }
 
-        public QueryableResult<T> SelectSingle(string recipe)
+        public ResponseResult<T> SelectSingle(string recipe)
         {
             try
             {
                 var filePath = Path.Combine(recipe, _fileName);
-                var xmlData = _readService.Read(filePath);
+                var xmlData = _readService.Default.Read(filePath).Content;
 
                 if (xmlData == null)
-                    return QueryableResult<T>.Failure("XML数据为空或文件不存在");
+                    return ResponseResult<T>.Failure("XML数据为空或文件不存在");
 
-                _readService.Current.Load(xmlData);
-                var result = _readService.Current.SelectNodes<T>();
+                // _readService.Current.Load(xmlData);
+                var result = _readService.Default.AsXml().SelectNodes<T>();
 
-                if (result.IsSuccess && result.Result != null && result.Result.Length > 0)
-                    return QueryableResult<T>.Success(result.Data.First());
+                if (result.IsSuccess && result.Data != null)
+                    return ResponseResult<T>.Success(result.Data.First());
                 else
-                    return QueryableResult<T>.Failure("未找到数据或读取失败");
+                    return ResponseResult<T>.Failure("未找到数据或读取失败");
             }
             catch (Exception ex)
             {
-                return QueryableResult<T>.Failure($"读取单条数据失败: {ex.Message}", ex);
+                return ResponseResult<T>.Failure($"读取单条数据失败: {ex.Message}", ex);
             }
         }
 
-        public QueryableResult<List<T>> SelectList(string recipe)
+        public ResponseResult<List<T>> SelectList(string recipe)
         {
             try
             {
                 var filePath = Path.Combine(recipe, _fileName);
-                var xmlData = _readService.Read(filePath);
+                var xmlData = _readService.Default.Read(filePath).Content;
 
                 if (xmlData == null)
-                    return QueryableResult<List<T>>.Failure("XML数据为空或文件不存在");
+                    return ResponseResult<List<T>>.Failure("XML数据为空或文件不存在");
 
-                _readService.Current.Load(xmlData);
-                var result = _readService.Current.SelectNodes<T>();
+                var result = _readService.Default.Read(filePath).AsXml().SelectNodes<T>();
 
                 if (result.IsSuccess)
-                    return QueryableResult<List<T>>.Success(result.Data ?? new List<T>());
+                    return ResponseResult<List<T>>.Success(result.Data ?? new List<T>());
                 else
-                    return QueryableResult<List<T>>.Failure("读取列表数据失败");
+                    return ResponseResult<List<T>>.Failure("读取列表数据失败");
             }
             catch (Exception ex)
             {
-                return QueryableResult<List<T>>.Failure($"读取列表数据失败: {ex.Message}", ex);
+                return ResponseResult<List<T>>.Failure($"读取列表数据失败: {ex.Message}", ex);
             }
         }
 
-        public IQueryableResult Save(T entity)
+        public IResponseResult Save(T entity)
         {
             // 实现保存单条数据的逻辑
             throw new NotImplementedException();
         }
 
-        public IQueryableResult SaveList(List<T> entities)
+        public IResponseResult SaveList(List<T> entities)
         {
             // 实现保存列表数据的逻辑
             throw new NotImplementedException();

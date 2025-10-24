@@ -1,6 +1,6 @@
 ﻿using HandyControl.Controls;
 using IT.Tangdao.Framework;
-using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.FileAccessor;
 using IT.Tangdao.Framework.Abstractions.Navigates;
 using IT.Tangdao.Framework.Ioc;
 using Stylet;
