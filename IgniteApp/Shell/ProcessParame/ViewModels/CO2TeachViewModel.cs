@@ -76,7 +76,7 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
             _channel = channel;
             SetCommand = MinidaoCommand.Create(ExecuteSet);
             UnlockCommand = MinidaoCommand.Create<string>(ExecuteUnlock);
-            StartCommand = MinidaoCommand.CreateFromTask(ExecuteStart);
+            // StartCommand = MinidaoCommand.CreateFromTask(ExecuteStart);
             _request = request;
 
             TeachList = new BindableCollection<TeachItem>()

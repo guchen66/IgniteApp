@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IgniteShared.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace IgniteShared.Globals.System
     public class SysLoginInfo
     {
         public static long Id { get; set; }
+
         //用户名
         public static string UserName { get; set; }
 
@@ -21,10 +23,5 @@ namespace IgniteShared.Globals.System
         public static string Password { get; set; }
 
         public static string IP { get; set; }
-    }
-
-    public enum RoleType
-    {
-        管理员, 普通用户
     }
 }

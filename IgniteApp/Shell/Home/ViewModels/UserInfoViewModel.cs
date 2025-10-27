@@ -4,6 +4,7 @@ using IgniteApp.Bases;
 using IgniteApp.ViewModels;
 using IgniteShared.Dtos;
 using IgniteShared.Entitys;
+using IgniteShared.Enums;
 using IgniteShared.Globals.Local;
 using IgniteShared.Globals.System;
 using IT.Tangdao.Framework.Abstractions.FileAccessor;

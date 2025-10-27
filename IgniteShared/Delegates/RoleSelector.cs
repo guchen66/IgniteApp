@@ -1,4 +1,5 @@
-﻿using IgniteShared.Globals.System;
+﻿using IgniteShared.Enums;
+using IgniteShared.Globals.System;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -41,19 +41,18 @@ namespace IgniteAdmin.Providers
             {
                 Logger.WriteLocal("开始PLC连接流程");
                 var result = Context.Connect();
-                ResponseResult.Success(value: result.Message);
 
                 Logger.WriteLocal(result.IsSuccess
                     ? "PLC连接成功"
                     : $"PLC连接失败: {result.Message}");
+                return ResponseResult.Success(value: result.Message);
             }
             catch (Exception ex)
             {
-                ResponseResult.FromException(ex, "连接异常");
                 Logger.WriteLocal($"PLC连接异常: {ex.Message}");
+
+                return ResponseResult.FromException(ex, "连接异常");
             }
-            throw new Exception();
-            //return plcResult;
         }
     }
 }

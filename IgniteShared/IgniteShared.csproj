@@ -117,6 +117,7 @@
     <Compile Include="Dtos\StaticticDto.cs" />
     <Compile Include="Entitys\Common\ColorInfo.cs" />
     <Compile Include="Entitys\EntityBase.cs" />
+    <Compile Include="Entitys\LoginInfo.cs" />
     <Compile Include="Entitys\MaterialInfo.cs" />
     <Compile Include="Entitys\ProductInfo.cs" />
     <Compile Include="Entitys\RecipeInfo.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="Enums\AlarmLevel.cs" />
     <Compile Include="Enums\ConnectionType.cs" />
     <Compile Include="Enums\PlcType.cs" />
+    <Compile Include="Enums\RoleType.cs" />
     <Compile Include="Enums\SelectModes.cs" />
     <Compile Include="Extensions\LoggerExtensions.cs" />
     <Compile Include="Globals\Common\TextStatus.cs" />

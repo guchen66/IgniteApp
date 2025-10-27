@@ -50,6 +50,10 @@ using System.Runtime.Serialization;
 using IT.Tangdao.Framework.Threading;
 using IT.Tangdao.Framework.Abstractions.FileAccessor;
 using IT.Tangdao.Framework.Paths;
+using IT.Tangdao.Framework.Infrastructure;
+using IT.Tangdao.Framework.Abstractions.Results;
+using IT.Tangdao.Framework.Infrastructure.Configurations;
+using IgniteShared.Enums;
 
 namespace IgniteApp.ViewModels
 {
@@ -108,6 +112,7 @@ namespace IgniteApp.ViewModels
         /// </summary>
         public void ExecuteLogin()
         {
+            //1、Cache目录有缓存，使用缓存登录，2、Cache无缓存，使用新的账号登录3、缓存的账号一定是我登录过的，4、UserInfo一定包含我登录的信息
             var cacheData = UserManager.SearchCache(LoginDto);
             AmbientContext.SetCurrent(LoginDto);          //线程上下文传输数据
             if (cacheData)
@@ -138,10 +143,10 @@ namespace IgniteApp.ViewModels
         /// </summary>
         public void ExecuteRememberPwd()
         {
-            bool isAdmin = RoleSelectors.DetermineIfAdmin(LoginDto.UserName);
-            var roleSelector = RoleSelectors.GetRoleSelector(isAdmin).Invoke(RoleType.管理员, RoleType.普通用户);
-            LoginDto.Role = roleSelector;
-            LoginDto.IsAdmin = isAdmin;
+            //bool isAdmin = RoleSelectors.DetermineIfAdmin(LoginDto.UserName);
+            //var roleSelector = RoleSelectors.GetRoleSelector(isAdmin).Invoke(RoleType.管理员, RoleType.普通用户);
+            //LoginDto.Role = roleSelector;
+            //LoginDto.IsAdmin = isAdmin;
         }
 
         /// <summary>
@@ -152,13 +157,13 @@ namespace IgniteApp.ViewModels
             base.OnActivate();
             try
             {
-                //var s3 = bool.TrueString;
-                // var foldPath = Path.Combine(IgniteInfoLocation.Cache, "LoginInfo.xml");
-                var foldPath = TangdaoPath.Instance.AsPath(IgniteInfoLocation.Cache).Combine("LoginInfo.xml").Build();
-                var isRememberValue = _readService.Default.Read(foldPath).AsXml().SelectNode("IsRemember").Value;
-                if (isRememberValue.TryToBool(out var value))
+                var s1 = TangdaoPath.Instance.GetThisFilePath();
+                var foldPath = Path.Combine(IgniteInfoLocation.Cache, "LoginInfo.xml");
+                string isRememberValue = _readService.Default.Read(foldPath).AsXml().SelectNode("IsRemember").Value;
+                _ = isRememberValue.TryToBool(out var value);
+                if (value)
                 {
-                    LoginDto = _readService.Cache.DeserializeCache<LoginDto>(foldPath.Value, DaoFileType.Xml);
+                    LoginDto = _readService.Cache.DeserializeCache<LoginDto>(foldPath, DaoFileType.Xml);
                 }
                 else
                     LoginDto = null;
@@ -167,11 +172,6 @@ namespace IgniteApp.ViewModels
             {
                 Logger.WriteLocal(ex.ToString());
             }
-        }
-
-        public void DragMove()
-        {
-            Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive).DragMove();
         }
 
         private void ExecuteRegister()
@@ -209,44 +209,5 @@ namespace IgniteApp.ViewModels
             var body = System.Linq.Expressions.Expression.MemberInit(System.Linq.Expressions.Expression.New(typeof(TTarget)), typeof(TTarget).GetProperties().Select(d => System.Linq.Expressions.Expression.Bind(d, System.Linq.Expressions.Expression.Property(p, d.Name))));
             return System.Linq.Expressions.Expression.Lambda<Func<TSource, TTarget>>(body, p).Compile();
         }
-    }
-
-    public class HighPerfObjectPool<T> where T : class
-    {
-        private readonly ConcurrentBag<T> _pool = new ConcurrentBag<T>();
-        private readonly Func<T> _creator;
-
-        public HighPerfObjectPool()
-        {
-            _creator = () => (T)FormatterServices.GetUninitializedObject(typeof(T));
-        }
-
-        public T Rent()
-        {
-            if (_pool.TryTake(out T item))
-                return item;
-
-            return _creator();
-        }
-
-        public void Return(T item)
-        {
-            // 重置对象状态而不是销毁
-            if (FormatterServices.GetSerializableMembers(typeof(T)) is var fields && fields.Length > 0)
-            {
-                foreach (var field in fields)
-                {
-                    if (field is FieldInfo fi)
-                    {
-                        // 将字段重置为默认值
-                        fi.SetValue(item, GetDefaultValue(fi.FieldType));
-                    }
-                }
-            }
-            _pool.Add(item);
-        }
-
-        private object GetDefaultValue(Type type) =>
-            type.IsValueType ? Activator.CreateInstance(type) : null;
     }
 }

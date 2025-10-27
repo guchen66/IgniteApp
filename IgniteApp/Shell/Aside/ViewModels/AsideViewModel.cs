@@ -62,8 +62,8 @@ namespace IgniteApp.Shell.Aside.ViewModels
             string projectDirectory = Directory.GetCurrentDirectory();
             _autoRun = ServiceLocator.GetService<IAutoRun>();
 
-            var path = TangdaoPath.Instance.GetThisFilePath();
-            var sss = path.FileExists;
+            // var path = TangdaoPath.Instance.GetThisFilePath();
+            //var sss = path.FileExists;
 
             //var s1 = imagePath.IsRooted;
             //var s2 = imagePath.FileExists;

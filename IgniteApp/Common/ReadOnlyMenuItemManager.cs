@@ -15,6 +15,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Documents;
+using System.IO;
 
 namespace IgniteApp.Common
 {
@@ -46,13 +47,14 @@ namespace IgniteApp.Common
 
         public static IReadOnlyCollection<HomeMenuItem> Create(IReadService readService, string readTitle, string section)
         {
-            var responseResult = readService.Default.AsConfig().SelectCustomConfig(readTitle, section);
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + readTitle);
+            var responseResult = readService.Default.Read(path).AsConfig().SelectCustomConfig(readTitle, section);
             //var s2 = s1.ToGenericResult<Dictionary<string, string>>();
-            var dicts = readService.Default.AsConfig().SelectCustomConfig(readTitle, section).ToGenericResult<Dictionary<string, string>>().Data;
+            //var dicts = readService.Default.AsConfig().SelectCustomConfig(readTitle, section).ToGenericResult<Dictionary<string, string>>().Data;
 
             //   var model = readService.Default.SelectCustomConfig(readTitle, section).ToGenericResult<Dictionary<string, string>>().Data;
 
-            if (responseResult.Payload is Dictionary<string, string> data)
+            if (responseResult.Data is Dictionary<string, string> data)
             {
                 List<HomeMenuItem> menuItems = data.Select(kvp => new HomeMenuItem
                 {
@@ -61,20 +63,24 @@ namespace IgniteApp.Common
                 }).ToList();
                 return new ReadOnlyCollection<HomeMenuItem>(menuItems);
             }
-            if (dicts != null)
-            {
-                List<HomeMenuItem> menuItems = dicts.Select(kvp => new HomeMenuItem
-                {
-                    Title = kvp.Key,
-                    ViewModelName = kvp.Value
-                }).ToList();
-                return new ReadOnlyCollection<HomeMenuItem>(menuItems);
-                // HomeMenuItems.AddRange(menuItems);
-            }
             else
             {
-                return Array.Empty<HomeMenuItem>(); // 或 new List<ITangdaoMenuItem>()
+                return Array.Empty<HomeMenuItem>();
             }
+            //if (dicts != null)
+            //{
+            //    List<HomeMenuItem> menuItems = dicts.Select(kvp => new HomeMenuItem
+            //    {
+            //        Title = kvp.Key,
+            //        ViewModelName = kvp.Value
+            //    }).ToList();
+            //    return new ReadOnlyCollection<HomeMenuItem>(menuItems);
+            //    // HomeMenuItems.AddRange(menuItems);
+            //}
+            //else
+            //{
+            //    return Array.Empty<HomeMenuItem>(); // 或 new List<ITangdaoMenuItem>()
+            //}
         }
     }
 }

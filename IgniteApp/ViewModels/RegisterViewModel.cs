@@ -30,6 +30,7 @@ using IContainer = StyletIoC.IContainer;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Reflection;
+using IgniteShared.Enums;
 
 namespace IgniteApp.ViewModels
 {
