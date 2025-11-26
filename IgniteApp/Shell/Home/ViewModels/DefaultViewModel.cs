@@ -27,6 +27,7 @@ using System.IO;
 using IgniteApp.Common;
 using IgniteApp.Dialogs.ViewModels;
 using StyletIoC;
+using IT.Tangdao.Framework.Paths;
 
 namespace IgniteApp.Shell.Home.ViewModels
 {
@@ -78,12 +79,12 @@ namespace IgniteApp.Shell.Home.ViewModels
 
         private readonly IMaterialRepository _materialRepository;
         private readonly IProductRepository _productRepository;
-        private readonly IReadService _readService;
+        private readonly IContentReader _readService;
         #endregion
 
         #region--ctor--
 
-        public DefaultViewModel(IMaterialRepository materialRepository, IReadService readService, IProductRepository productRepository)
+        public DefaultViewModel(IMaterialRepository materialRepository, IContentReader readService, IProductRepository productRepository)
         {
             _materialRepository = materialRepository;
             _readService = readService;

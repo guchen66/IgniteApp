@@ -1,6 +1,7 @@
 ﻿using IgniteShared.Entitys;
 using IgniteShared.Enums;
 using IgniteShared.Globals.System;
+using IT.Tangdao.Framework.Attributes;
 using IT.Tangdao.Framework.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace IgniteShared.Dtos
             get => _userName;
             set
             {
+                SetProperty(ref _userName, value);
                 if (_userName != null && _userName == "Admin")
                 {
                     Role = RoleType.管理员;
@@ -30,8 +32,6 @@ namespace IgniteShared.Dtos
                     Role = RoleType.普通用户;
                     IsAdmin = false;
                 }
-
-                SetProperty(ref _userName, value);
             }
         }
 

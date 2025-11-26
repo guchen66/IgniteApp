@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IT.Tangdao.Framework.EventArg;
+using IT.Tangdao.Framework.Abstractions;
 
 namespace IgniteApp.Shell.ProcessParame.ViewModels
 {
@@ -36,9 +37,9 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
         }
 
         public IViewFactory _viewFactory;
-        public IReadService _readService;
+        public IContentReader _readService;
 
-        public ParameBaseViewModel(IViewFactory viewFactory, IReadService readService)
+        public ParameBaseViewModel(IViewFactory viewFactory, IContentReader readService)
         {
             _viewFactory = viewFactory;
             _readService = readService;

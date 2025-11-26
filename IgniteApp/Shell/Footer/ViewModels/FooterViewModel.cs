@@ -12,12 +12,11 @@ using IgniteDb;
 using IgniteDb.IRepositorys;
 using IgniteShared.Dtos;
 using IgniteShared.Entitys;
-using IgniteShared.Extensions;
+
 using IgniteShared.Globals.Local;
 using IgniteShared.Models;
 using IT.Tangdao.Framework.Abstractions.Loggers;
 using IT.Tangdao.Framework.Abstractions.FileAccessor;
-using IT.Tangdao.Framework.Abstractions.Sockets;
 using IT.Tangdao.Framework.Commands;
 using IT.Tangdao.Framework.Extensions;
 using IT.Tangdao.Framework.Helpers;
@@ -39,6 +38,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Xml.Linq;
 using Unity;
+using IT.Tangdao.Bridge.Sockets;
 
 namespace IgniteApp.Shell.Footer.ViewModels
 {
@@ -70,33 +70,36 @@ namespace IgniteApp.Shell.Footer.ViewModels
             set => SetAndNotify(ref _isConnServer, value);
         }
 
-        private readonly IPlcProvider _plcProvider;
+        // private readonly IPlcProvider _plcProvider;
         private static readonly ITangdaoLogger Logger = TangdaoLogger.Get(typeof(FooterViewModel));
+
         #endregion
 
         #region--ctor--
         private IWindowManager _windowManager;
         private readonly System.Timers.Timer _statusTimer;
         private IDialogService _dialogService;
-        private IReadService _readService;
-        private readonly ITangdaoChannel _channel;
+        private IContentReader _readService;
 
-        public FooterViewModel(IPlcProvider plcProvider, IWindowManager windowManager, IDialogService dialogService, Func<TTForgeViewModel> viewModelFactory, IReadService readService, ITangdaoChannel channel)
+        // private readonly ITangdaoChannel _channel;
+        private readonly ITangdaoSocket _tangdaoSocket;
+
+        public FooterViewModel(IWindowManager windowManager, IDialogService dialogService, Func<TTForgeViewModel> viewModelFactory, IContentReader readService, ITangdaoSocket tangdaoSocket)
         {
-            _plcProvider = plcProvider;
+            // _plcProvider = plcProvider;
             _windowManager = windowManager;
             _dialogService = dialogService;
             _viewModelFactory = viewModelFactory;
             _readService = readService;
-            _channel = channel;
+            _tangdaoSocket = tangdaoSocket;
             // TTForgeViewModel = tTForgeViewModel;
             // 初始化定时器（间隔1秒，自动重置）
-            _statusTimer = new System.Timers.Timer(1000) { AutoReset = true };
-            _statusTimer.Elapsed += async (s, e) => await CheckPlcStatusAsync();
+            // _statusTimer = new System.Timers.Timer(1000) { AutoReset = true };
+            // _statusTimer.Elapsed += async (s, e) => await CheckPlcStatusAsync();
             // _statusTimer.Start();
 
             // 立即执行PLC连接首次检查
-            QueryPlcStatus();
+            // QueryPlcStatus();
 
             //_tangdaoChannel.Messages.ObserveOnDispatcher()
             //    .Subscribe(msg => ReceivedText += msg + Environment.NewLine);
@@ -109,11 +112,11 @@ namespace IgniteApp.Shell.Footer.ViewModels
 
         #endregion
 
-        private async Task CheckPlcStatusAsync()
-        {
-            var isConnected = _plcProvider.ConnectionSiglePLC().IsSuccess;
-            await Execute.OnUIThreadAsync(() => IsConn = isConnected);
-        }
+        //private async Task CheckPlcStatusAsync()
+        //{
+        //    var isConnected = _plcProvider.ConnectionSiglePLC().IsSuccess;
+        //    await Execute.OnUIThreadAsync(() => IsConn = isConnected);
+        //}
 
         public void Dispose()
         {
@@ -123,30 +126,37 @@ namespace IgniteApp.Shell.Footer.ViewModels
 
         public async void QueryServerStatus()
         {
-            //防止界面构建完成，异步连接未建立，所以应该等待异步连接成功，界面bool值在变化
-            var result = await _channel.WaitConnectedAsync();
-            if (result)
+            await _tangdaoSocket.ConnectAsync();
+            IsConnServer = _tangdaoSocket.IsConnected;
+            if (IsConnServer)
             {
-                IsConnServer = true;
+                //await _tangdaoSocket.SendAsync("Hello");
+                //Logger.WriteLocal($"客户端发送Hello");
+                var rely = await _tangdaoSocket.ReceiveAsync();
+                Logger.WriteLocal($"打印：{rely}");
+            }
+            else
+            {
+                Logger.WriteLocal($"通信失败");
             }
         }
 
-        public void QueryPlcStatus()
-        {
-            // 先订阅事件，再执行连接检查
-            _plcProvider.Context.ConnectionStateChanged += Context_ConnectionStateChanged;
+        //public void QueryPlcStatus()
+        //{
+        //    // 先订阅事件，再执行连接检查
+        //    _plcProvider.Context.ConnectionStateChanged += Context_ConnectionStateChanged;
 
-            Task.Run(() =>
-            {
-                IsConn = _plcProvider.ConnectionSiglePLC().IsSuccess;
-            });
-        }
+        //    Task.Run(() =>
+        //    {
+        //        IsConn = _plcProvider.ConnectionSiglePLC().IsSuccess;
+        //    });
+        //}
 
-        private void Context_ConnectionStateChanged(object sender, IgniteDevices.Connections.ConnectionStateEventArgs e)
-        {
-            IsConn = _plcProvider.ConnectionSiglePLC().IsSuccess;
-            // Execute.OnUIThreadAsync(() => _plcProvider.Context.IsConnected = e.IsConnected);
-        }
+        //private void Context_ConnectionStateChanged(object sender, IgniteDevices.Connections.ConnectionStateEventArgs e)
+        //{
+        //    IsConn = _plcProvider.ConnectionSiglePLC().IsSuccess;
+        //    // Execute.OnUIThreadAsync(() => _plcProvider.Context.IsConnected = e.IsConnected);
+        //}
 
         public void Test()
         {

@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using IgniteShared.Extensions;
+
 using IgniteApp.Shell.ProcessParame.Services;
 using MiniExcelLibs;
 using System.IO;
@@ -22,6 +22,7 @@ using StyletIoC;
 using IT.Tangdao.Framework.Extensions;
 using IT.Tangdao.Framework.Common;
 using IT.Tangdao.Framework;
+using IT.Tangdao.Framework.Abstractions;
 
 namespace IgniteApp.Shell.ProcessParame.ViewModels
 {

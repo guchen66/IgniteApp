@@ -1,7 +1,7 @@
 ﻿using IgniteDevices.Connections.Interfaces;
 using IgniteDevices.PLC.Services;
 using IgniteShared.Enums;
-using IgniteShared.Extensions;
+
 using IgniteShared.Models;
 using IT.Tangdao.Framework.Abstractions;
 using IT.Tangdao.Framework.Abstractions.Loggers;

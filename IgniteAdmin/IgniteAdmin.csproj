@@ -75,6 +75,9 @@
     <Reference Include="Stylet, Version=1.3.7.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Stylet.1.3.7\lib\net452\Stylet.dll</HintPath>
     </Reference>
+	<Reference Include="System.Threading.Channels, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Channels.6.0.0\lib\net461\System.Threading.Channels.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
@@ -130,6 +133,7 @@
     <Compile Include="Providers\PlcProvider.cs" />
     <Compile Include="Workers\CutWorkstation.cs" />
     <Compile Include="Workers\LoadWorkstation.cs" />
+    <Compile Include="Workers\PreWorkstation.cs" />
     <Compile Include="Workers\SegmentWorkstation.cs" />
     <Compile Include="Workers\UnLoadWorkstation.cs" />
     <Compile Include="Workers\WorkstationBase.cs" />

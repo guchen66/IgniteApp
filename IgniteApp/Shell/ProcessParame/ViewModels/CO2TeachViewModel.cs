@@ -3,9 +3,9 @@ using IgniteApp.Shell.ProcessParame.Models;
 using IgniteApp.Shell.ProcessParame.Services;
 using IgniteApp.ViewModels;
 using IT.Tangdao.Framework;
+using IT.Tangdao.Framework.Abstractions;
 using IT.Tangdao.Framework.Abstractions.FileAccessor;
 using IT.Tangdao.Framework.Abstractions.Navigates;
-using IT.Tangdao.Framework.Abstractions.Sockets;
 using IT.Tangdao.Framework.Commands;
 using IT.Tangdao.Framework.Extensions;
 using IT.Tangdao.Framework.Helpers;
@@ -19,6 +19,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace IgniteApp.Shell.ProcessParame.ViewModels
 {
@@ -48,6 +49,14 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
             set => SetAndNotify(ref _text, value);
         }
 
+        private Brush _textColor = Brushes.Red;
+
+        public Brush TextColor
+        {
+            get => _textColor;
+            set => SetAndNotify(ref _textColor, value);
+        }
+
         private BindableCollection<TeachItem> _teachList;
 
         public BindableCollection<TeachItem> TeachList
@@ -57,8 +66,8 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
         }
 
         private bool _isStatusActive;
-        private readonly ITangdaoChannel _channel;
-        private readonly ITangdaoRequest _request;
+        // private readonly ITangdaoChannel _channel;
+        //  private readonly ITangdaoRequest _request;
 
         [DefaultValue(true)]
         public bool IsStatusActive
@@ -68,24 +77,21 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
         }
 
         public string PageTitle => "";
-        private readonly IReadService _readService;
+        private readonly IContentReader _readService;
 
-        public CO2TeachViewModel(IReadService readService, ITangdaoChannel channel, ITangdaoRequest request)
+        public CO2TeachViewModel(IContentReader readService)
         {
             _readService = readService;
-            _channel = channel;
+            // _channel = channel;
             SetCommand = MinidaoCommand.Create(ExecuteSet);
             UnlockCommand = MinidaoCommand.Create<string>(ExecuteUnlock);
             // StartCommand = MinidaoCommand.CreateFromTask(ExecuteStart);
-            _request = request;
+            //  _request = request;
 
-            TeachList = new BindableCollection<TeachItem>()
-            {
-                new TeachItem(1,2,3,4),
-                new TeachItem(11,22,33,44),
-                new TeachItem(5,6,7,8),
-                new TeachItem(55,66,77,88),
-            };
+            //CO2示教模拟200组数据
+            var tangdaoDataFaker = new TangdaoDataFaker<TeachItem>();
+            var lists = tangdaoDataFaker.Build(200);
+            TeachList = new BindableCollection<TeachItem>(lists);
         }
 
         private string _loadText;
@@ -157,11 +163,11 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
 
         public void OnNavigatedTo(ITangdaoParameter parameter = null)
         {
-            if (_channel == null) return;
-            if (_channel.IsConnected)
-            {
-                _isStatusActive = true;
-            }
+            //if (_channel == null) return;
+            //if (_channel.IsConnected)
+            //{
+            //    _isStatusActive = true;
+            //}
         }
 
         public void ExecuteSet()

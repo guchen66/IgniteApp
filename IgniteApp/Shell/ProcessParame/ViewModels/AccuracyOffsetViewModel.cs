@@ -1,4 +1,6 @@
 ﻿using IgniteApp.Shell.ProcessParame.Models;
+using IT.Tangdao.Framework.Extensions;
+using IT.Tangdao.Framework.Helpers;
 using IT.Tangdao.Framework.Mvvm;
 using Stylet;
 using System;
@@ -104,21 +106,6 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
                 default:
                     return string.Empty;
             }
-            //switch (content)
-            //{
-            //    case (cell.Item as OffsetModel).EndValue: return;
-            //    case TextBlock tb:
-            //        return tb.Text;
-
-            //    case TextBox tb:
-            //        return tb.Text;
-
-            //    case CheckBox cb:
-            //        return cb.IsChecked?.ToString() ?? string.Empty;
-            //    // 可以继续加 ComboBox、ToggleButton 等
-            //    default:
-            //        return string.Empty;
-            //}
         }
 
         private string _statusText;
@@ -129,25 +116,9 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
 
         public AccuracyOffsetViewModel()
         {
-            AccuracyOffsetList = new ObservableCollection<OffsetModel>()
-            {
-                new OffsetModel() {Id=1,StartValue=1,EndValue=10,IsXDirty=false,IsYDirty=false, CutType="X1"},
-                new OffsetModel() {Id=2,StartValue=1,EndValue=10,IsXDirty=false,IsYDirty=false,CutType="X1"},
-                new OffsetModel() {Id=3,StartValue=1,EndValue=10, IsXDirty=false,IsYDirty=false, CutType = "X1"},
-                new OffsetModel() {Id=4,StartValue=1,EndValue=10, IsXDirty=false,IsYDirty=false, CutType = "X1"},
-                new OffsetModel() {Id=5,StartValue=1,EndValue=10,IsXDirty=false,IsYDirty=false,CutType="X2"},
-                new OffsetModel() {Id=6,StartValue=1,EndValue=10,IsXDirty=false,IsYDirty=false,CutType="X2"},
-                new OffsetModel() {Id=7,StartValue=1,EndValue=10, IsXDirty=false,IsYDirty=false, CutType = "X2"},
-                new OffsetModel() {Id=8,StartValue=1,EndValue=10, IsXDirty=false,IsYDirty=false, CutType = "X2"},
-                new OffsetModel() {Id=9,StartValue=1,EndValue=10,IsXDirty=false,IsYDirty=false,CutType="Y1"},
-                new OffsetModel() {Id=10,StartValue=1,EndValue=10,IsXDirty=false,IsYDirty=false,CutType="Y1"},
-                new OffsetModel() {Id=11,StartValue=1,EndValue=10, IsXDirty=false,IsYDirty=false, CutType = "Y1"},
-                new OffsetModel() {Id=12,StartValue=1,EndValue=10, IsXDirty=false,IsYDirty=false, CutType = "Y1"},
-                new OffsetModel() {Id=13,StartValue=1,EndValue=10,IsXDirty=false,IsYDirty=false,CutType="Y2"},
-                new OffsetModel() {Id=14,StartValue=1,EndValue=10,IsXDirty=false,IsYDirty=false,CutType="Y2"},
-                new OffsetModel() {Id=15,StartValue=1,EndValue=10, IsXDirty=false,IsYDirty=false,CutType = "Y2"},
-                new OffsetModel() {Id=16,StartValue=1,EndValue=10, IsXDirty=false,IsYDirty=false, CutType = "Y2"},
-            };
+            TangdaoDataFaker<OffsetModel> tangdaoDataFaker = new TangdaoDataFaker<OffsetModel>();
+            var lists = tangdaoDataFaker.Build(200);
+            AccuracyOffsetList = lists.ToObservableCollection();
             listCaretaker = new Caretaker<List<OffsetModel>>(listOriginator);
             _recipeManager.CompensationData = AccuracyOffsetList;
         }

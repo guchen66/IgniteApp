@@ -21,7 +21,7 @@ namespace IgniteApp.Common
 {
     public class ReadOnlyMenuItemManager
     {
-        //public static ReadOnlyCollection<TangdaoMenuItem> Create(IReadService readService, string readTitle)
+        //public static ReadOnlyCollection<TangdaoMenuItem> Create(IContentReader readService, string readTitle)
         //{
         //   return readService.Default.AsConfig().SelectAppConfig(readTitle).ToList(v => new TangdaoMenuItem { MenuName = v }).ToObservableCollection();
         //   // var dict = readService.Default.AsConfig().SelectAppConfig(readTitle).ToReadResult<TangdaoSortedDictionary<string, string>>().Data;
@@ -29,7 +29,7 @@ namespace IgniteApp.Common
         //   // return new ReadOnlyCollection<TangdaoMenuItem>(list);
         //}
 
-        //public static IReadOnlyCollection<ITangdaoMenuItem> Create2<T>(IReadService readService, string readTitle)
+        //public static IReadOnlyCollection<ITangdaoMenuItem> Create2<T>(IContentReader readService, string readTitle)
         //{
         //    var result = readService.Default.AsConfig().SelectAppConfig(readTitle).ToReadResult<Dictionary<string, string>>().Data;
 
@@ -45,14 +45,10 @@ namespace IgniteApp.Common
         //    }
         //}
 
-        public static IReadOnlyCollection<HomeMenuItem> Create(IReadService readService, string readTitle, string section)
+        public static IReadOnlyCollection<HomeMenuItem> Create(IContentReader readService, string readTitle, string section)
         {
             var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + readTitle);
             var responseResult = readService.Default.Read(path).AsConfig().SelectCustomConfig(readTitle, section);
-            //var s2 = s1.ToGenericResult<Dictionary<string, string>>();
-            //var dicts = readService.Default.AsConfig().SelectCustomConfig(readTitle, section).ToGenericResult<Dictionary<string, string>>().Data;
-
-            //   var model = readService.Default.SelectCustomConfig(readTitle, section).ToGenericResult<Dictionary<string, string>>().Data;
 
             if (responseResult.Data is Dictionary<string, string> data)
             {
@@ -67,20 +63,6 @@ namespace IgniteApp.Common
             {
                 return Array.Empty<HomeMenuItem>();
             }
-            //if (dicts != null)
-            //{
-            //    List<HomeMenuItem> menuItems = dicts.Select(kvp => new HomeMenuItem
-            //    {
-            //        Title = kvp.Key,
-            //        ViewModelName = kvp.Value
-            //    }).ToList();
-            //    return new ReadOnlyCollection<HomeMenuItem>(menuItems);
-            //    // HomeMenuItems.AddRange(menuItems);
-            //}
-            //else
-            //{
-            //    return Array.Empty<HomeMenuItem>(); // 或 new List<ITangdaoMenuItem>()
-            //}
         }
     }
 }

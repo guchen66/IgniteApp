@@ -38,9 +38,9 @@ namespace IgniteApp.Shell.Set.ViewModels
         }
 
         public IViewFactory _viewFactory;
-        public IReadService _readService;
+        public IContentReader _readService;
 
-        public SetViewModel(IViewFactory viewFactory, IReadService readService)
+        public SetViewModel(IViewFactory viewFactory, IContentReader readService)
         {
             this._viewFactory = viewFactory;
             this._readService = readService;

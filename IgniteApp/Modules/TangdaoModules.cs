@@ -11,7 +11,6 @@ using System;
 using System.Collections.Generic;
 using IT.Tangdao.Framework.Abstractions.FileAccessor;
 using IT.Tangdao.Framework.Enums;
-using IT.Tangdao.Framework.Devices;
 using System.IO.Ports;
 using IgniteApp.ViewModels;
 using IgniteApp.Shell.Maintion.ViewModels;
@@ -26,8 +25,8 @@ using IgniteAdmin.Interfaces;
 using IT.Tangdao.Framework.Abstractions.Navigates;
 using IgniteApp.Dialogs.ViewModels;
 using IgniteApp.Shell.ProcessParame.ViewModels;
-using IT.Tangdao.Framework.Configurations;
 using IT.Tangdao.Framework.Paths;
+using IT.Tangdao.Framework.Configurations;
 
 namespace IgniteApp.Modules
 {
@@ -45,7 +44,7 @@ namespace IgniteApp.Modules
             Bind<ITangdaoRouter>().To<TangdaoRouter>().InSingletonScope();
 
             //注册转换器
-            Bind<ITypeConvertService>().To<TypeConvertService>().InSingletonScope();
+            //  Bind<ITypeConvertService>().To<TypeConvertService>().InSingletonScope();
             Bind<FileMonitorConfig>().ToFactory(container =>
             {
                 return new FileMonitorConfig
@@ -63,10 +62,12 @@ namespace IgniteApp.Modules
             // 2. 注册服务注册器本身
             //  Bind<ITangdaoServiceRegistrar>().To<StyletServiceRegistrar>().InSingletonScope();
             // 注册Tangdao监控服务
-            Bind<IMonitorService>().To<FileMonitorService>().InSingletonScope();
+            Bind<IFileMonitor>().To<FileMonitor>().InSingletonScope();
+
+            Bind<IFileLocator>().To<FileLocator>().InSingletonScope();
             //注册Tangdao读写服务
-            Bind<IWriteService>().To<WriteService>();
-            Bind<IReadService>().To<ReadService>();
+            Bind<IContentReader>().To<ContentReader>();
+            Bind<IContentWriter>().To<ContentWriter>();
             // 正确的方式：为每个实现单独注册并指定Key
             Bind<ITangdaoPage>().To<DigitalSmartGaugeViewModel>().WithKey("DigitalSmartGauge");
             Bind<ITangdaoPage>().To<DifferentialGaugeViewModel>().WithKey("DifferentialGauge");
@@ -76,7 +77,7 @@ namespace IgniteApp.Modules
             Bind<ITangdaoPage>().To<IRTeachViewModel>().WithKey("IRTeach");
 
             Bind<IPlcProvider>().To<PlcProvider>();
-            Bind<IDeviceProvider>().To<DeviceProvider>().InSingletonScope();
+            //  Bind<IDeviceProvider>().To<DeviceProvider>().InSingletonScope();
             Bind<IDialogService>().To<DialogService>().InSingletonScope();
             //注册Tangdao事件聚合器
             Bind<IDaoEventAggregator>().To<DaoEventAggregator>().InSingletonScope();

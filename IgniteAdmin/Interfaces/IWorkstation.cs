@@ -10,7 +10,7 @@ namespace IgniteAdmin.Interfaces
     // 工位基础接口
     public interface IWorkstation
     {
-        string Name { get; }
+        string WorkName { get; }
 
         Task StartAsync(CancellationToken cancellationToken);
 
@@ -20,5 +20,10 @@ namespace IgniteAdmin.Interfaces
     }
 
     public enum WorkstationStatus
-    { Idle, Running, Paused, Faulted }
+    {
+        Idle,
+        Running,
+        Paused,
+        Faulted
+    }
 }

@@ -18,7 +18,6 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary />
             </ResourceDictionary.MergedDictionaries>
-
             <conver:BoolToColorConverter x:Key="deviceState" />
         </ResourceDictionary>
     </UserControl.Resources>

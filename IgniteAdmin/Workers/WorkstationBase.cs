@@ -1,4 +1,7 @@
 ﻿using IgniteAdmin.Interfaces;
+using IgniteShared.Globals.Common.Works;
+using IT.Tangdao.Framework.Abstractions.Loggers;
+using IT.Tangdao.Framework.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,9 +16,10 @@ namespace IgniteAdmin.Workers
     // 工位基类
     public abstract class WorkstationBase : IWorkstation, INotifyPropertyChanged
     {
-        public string Name { get; }
+        public virtual string WorkName { get; }
         private WorkstationStatus _status;
         private CancellationTokenSource _cts;
+        private static readonly ITangdaoLogger Logger = TangdaoLogger.Get(typeof(WorkstationBase));
 
         public WorkstationStatus Status
         {
@@ -29,10 +33,22 @@ namespace IgniteAdmin.Workers
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected WorkstationBase(string name)
+        public async Task StartAsync1(CancellationToken token)
         {
-            Name = name;
-            Status = WorkstationStatus.Idle;
+            while (!token.IsCancellationRequested)
+            {
+                var wafer = await Conveyor.TakeAsync(token);
+                await ProcessAsync(wafer, token);
+                Conveyor.Post(wafer);               // 传给下游
+            }
+        }
+
+        private async Task ProcessAsync(WaferMessage wafer, CancellationToken token)
+        {
+            await Task.Delay(500, token);   // 模拟节拍
+            _cts = CancellationTokenSource.CreateLinkedTokenSource(token);
+            await ExecuteWorkAsync(_cts.Token);
+            Logger.WriteLocal($"{WorkName} 处理完成 {wafer.CellId}");
         }
 
         public async Task StartAsync(CancellationToken parentToken)

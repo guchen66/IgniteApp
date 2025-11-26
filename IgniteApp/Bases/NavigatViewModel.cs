@@ -14,7 +14,7 @@ namespace IgniteApp.Bases
         // public virtual string Name { get; set; }
         public IViewFactory ViewFactoryService;
 
-        // private readonly IReadService Read;
+        // private readonly IContentReader Read;
         public readonly INavigateRoute NavigatRouteService;
 
         //public string HandlerName { get; set; }

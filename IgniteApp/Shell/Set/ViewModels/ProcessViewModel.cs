@@ -26,8 +26,8 @@ namespace IgniteApp.Shell.Set.ViewModels
     public class ProcessViewModel : ViewModelBase
     {
         #region--字段--
-        private readonly IReadService _readService;
-        private readonly IWriteService _writeService;
+        private readonly IContentReader _readService;
+        private readonly IContentWriter _writeService;
         #endregion
 
         #region--属性--
@@ -44,7 +44,7 @@ namespace IgniteApp.Shell.Set.ViewModels
 
         #region--.ctor--
 
-        public ProcessViewModel(IReadService readService, IWriteService writeService, IReadProvider<ProcessItem> readProvider)
+        public ProcessViewModel(IContentReader readService, IContentWriter writeService, IReadProvider<ProcessItem> readProvider)
         {
             _readService = readService;
             _writeService = writeService;

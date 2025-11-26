@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using IgniteAdmin.Providers;
+using IgniteAdmin.Workers;
 using IT.Tangdao.Framework.Enums;
 using StyletIoC;
 using System;
@@ -18,6 +19,8 @@ namespace IgniteApp.Modules
         {
             Bind<IAutoMapperProvider>().To<AutoMapperProvider>().InSingletonScope();
             Bind<IMapper>().ToFactory(GetMapper);
+
+            Bind<WorkstationManager>().ToSelf().InSingletonScope();
         }
 
         private IMapper GetMapper(IContainer container)

@@ -3,7 +3,9 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:attach="clr-namespace:IT.Tangdao.Xaml.Attached;assembly=IT.Tangdao.Xaml"
+    x:Name="CO2View"
     xmlns:command="clr-namespace:IT.Tangdao.Xaml.Behaviors;assembly=IT.Tangdao.Xaml"
+    xmlns:daoMarkup="clr-namespace:IT.Tangdao.Framework.Markup;assembly=IT.Tangdao.Framework"
     xmlns:control="clr-namespace:IgniteApp.Controls"
     xmlns:convert="clr-namespace:IT.Tangdao.Framework.Converters.Wpf;assembly=IT.Tangdao.Framework"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -38,7 +40,7 @@
                         <RowDefinition Height="30" />
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Horizontal">
-                        <Label
+                        <Label Foreground="{Binding TextColor}"
                             Margin="5"
                             command:CommandBehavior.Command="{Binding SetCommand}"
                             Content="是否连接" />

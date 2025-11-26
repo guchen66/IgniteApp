@@ -31,6 +31,7 @@ using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Reflection;
 using IgniteShared.Enums;
+using IT.Tangdao.Framework.Abstractions;
 
 namespace IgniteApp.ViewModels
 {

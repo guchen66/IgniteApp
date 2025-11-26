@@ -1,7 +1,7 @@
 ﻿using IgniteApp.Dialogs.ViewModels;
 using IgniteApp.Dialogs.Views;
 using IgniteDevices.PLC;
-using IgniteShared.Extensions;
+
 using IT.Tangdao.Framework.Abstractions.Loggers;
 using IT.Tangdao.Framework.Extensions;
 using Stylet;

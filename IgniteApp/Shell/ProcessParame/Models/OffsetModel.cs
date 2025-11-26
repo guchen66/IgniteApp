@@ -1,4 +1,6 @@
-﻿using IT.Tangdao.Framework.Mvvm;
+﻿using IT.Tangdao.Framework.Attributes;
+using IT.Tangdao.Framework.Faker;
+using IT.Tangdao.Framework.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,6 +61,7 @@ namespace IgniteApp.Shell.ProcessParame.Models
 
         private string _cutTYpe;
 
+        [TangdaoFake(Template = MockTemplate.City)]
         public string CutType
         {
             get => _cutTYpe;

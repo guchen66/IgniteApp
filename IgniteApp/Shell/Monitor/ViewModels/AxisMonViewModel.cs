@@ -11,10 +11,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.Contracts;
 
 namespace IgniteApp.Shell.Monitor.ViewModels
 {
-    public class AxisMonViewModel : ViewModelBase, IAddParent
+    public class AxisMonViewModel : ViewModelBase
     {
         private string _selectItem;
 

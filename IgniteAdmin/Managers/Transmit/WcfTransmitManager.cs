@@ -15,7 +15,7 @@ namespace IgniteAdmin.Managers.Transmit
     {
         public static async Task<bool> StartWcfAsync()
         {
-            var json = await JsonConverHelper.GetDecisionJsonAsync("appsetting.json", "WCF");
+            var json = await TangdaoJsonFileHelper.GetDecisionJsonAsync("appsetting.json", "WCF");
 
             var model = JsonConvert.DeserializeObject<WCFTransmitData>(json);
             return model.Startup;

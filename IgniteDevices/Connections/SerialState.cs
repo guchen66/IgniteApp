@@ -1,6 +1,6 @@
 ﻿using IgniteDevices.Connections.Interfaces;
 using IgniteShared.Enums;
-using IgniteShared.Extensions;
+
 using IT.Tangdao.Framework.Abstractions.Loggers;
 using IT.Tangdao.Framework.Extensions;
 using Modbus.Device;

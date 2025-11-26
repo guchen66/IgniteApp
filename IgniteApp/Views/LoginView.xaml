@@ -9,16 +9,17 @@
     xmlns:hc="https://handyorg.github.io/handycontrol"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:IgniteApp.Views"
-    xmlns:markup="clr-namespace:IT.Tangdao.Framework.Markup;assembly=IT.Tangdao.Framework"
+    xmlns:markup="clr-namespace:IgniteApp.Converters.Test"
+    xmlns:daoMarkup="clr-namespace:IT.Tangdao.Framework.Markup;assembly=IT.Tangdao.Framework"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="https://github.com/canton7/Stylet"
     xmlns:shared="clr-namespace:IgniteShared.Entitys.Common;assembly=IgniteShared"
     x:Name="LoginWin"
-    Title="LoginView"
     Width="600"
     Height="380"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
+    Tag="{daoMarkup:AppPackUri}"
     WindowStyle="None"
     mc:Ignorable="d">
     <Window.Resources>
@@ -26,13 +27,14 @@
         <ResourceDictionary>
             <ObjectDataProvider x:Key="drag"  MethodName="CreateDragMoveCommand" ObjectType="{x:Type local:DragMoveHelper}" />
             <local:DragMoveHelper x:Key="DragHelper" />
+            <markup:TypeOf x:Key="TypeOf" />
             <ResourceDictionary.MergedDictionaries>
-
                 <ResourceDictionary Source="../Assets/Styles/LoginBackgroundStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid Background="Transparent" behavior:CommandBehavior.Command="{Binding Source={StaticResource drag}}">
+    <Grid Background="Transparent" MouseLeftButtonDown="{s:Action DragMove}">
+
         <DockPanel LastChildFill="False">
             <StackPanel
                 Width="260"
@@ -59,7 +61,7 @@
                         CaretBrush="{StaticResource PeonyBrush}"
                         FontSize="16"
                         SelectionBrush="{StaticResource PeonyBrush}"
-                        Text="{Binding LoginDto.UserName}" />
+                        Text="{Binding LoginDto.UserName, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
                 </StackPanel>
                 <StackPanel Margin="20,10,0,0" Orientation="Horizontal">
                     <hc:PasswordBox
@@ -73,15 +75,6 @@
                         IsSafeEnabled="False"
                         SelectionBrush="{StaticResource PeonyBrush}"
                         ShowEyeButton="True" />
-
-                    <!--<PasswordBox
-                        x:Name="pass"
-                        Width="250"
-                        Height="30"
-                        Margin="10 0"
-                        attach:PasswordBoxAttach.Attach="True"
-                        attach:PasswordBoxAttach.Password="{Binding LoginDto.Password, UpdateSourceTrigger=PropertyChanged}"
-                        PasswordChar="*" />-->
                 </StackPanel>
 
                 <StackPanel Margin="20,15,0,0" Orientation="Horizontal">

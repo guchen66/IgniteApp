@@ -4,7 +4,7 @@ using IgniteDevices.Connections;
 using IgniteDevices.Core.Models.Results;
 using IgniteDevices.PLC;
 using IgniteDevices.PLC.Services;
-using IgniteShared.Extensions;
+
 using IgniteShared.Globals.System;
 using IgniteShared.Models;
 using IT.Tangdao.Framework.Abstractions.Loggers;

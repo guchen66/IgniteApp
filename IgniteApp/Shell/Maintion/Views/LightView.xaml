@@ -39,7 +39,8 @@
                 Content="0%"
                 Style="{StaticResource ProgressButtonPrimary}" />
 
-            <Button Command="{s:Action Execute}" Width="200" Background="{Binding Content,Converter={StaticResource bg}}" />
+            <TextBlock Text="{Binding Mark}" Width="100" Height="30" />
+            <Button Command="{s:Action Execute}" Content="{Binding Mark}" Width="200" Background="{Binding Content,Converter={StaticResource bg}}" />
         </StackPanel>
     </Grid>
 </UserControl>

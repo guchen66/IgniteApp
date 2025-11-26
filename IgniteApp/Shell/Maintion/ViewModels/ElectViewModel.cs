@@ -1,6 +1,7 @@
 ﻿using IgniteApp.Bases;
 using IgniteApp.Shell.Maintion.Args;
 using IgniteApp.Shell.Maintion.Models;
+using IT.Tangdao.Framework.Abstractions.FileAccessor;
 using IT.Tangdao.Framework.Commands;
 using System;
 using System.Collections.Generic;
@@ -69,7 +70,7 @@ namespace IgniteApp.Shell.Maintion.ViewModels
         public ICommand CheckCommand { get; set; }
         public ICommand CheckPriceCommand { get; set; }
 
-        public ElectViewModel() : base("Elect")
+        public ElectViewModel(IContentReader readService) : base("Elect")
         {
             ELectModelList = new ObservableCollection<ElectricityModel>()
             {

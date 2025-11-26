@@ -1,6 +1,6 @@
 ﻿using IgniteApp.Events;
 using IgniteDevices.PLC;
-using IgniteShared.Extensions;
+
 using IT.Tangdao.Framework.Abstractions.Loggers;
 using IT.Tangdao.Framework.Events;
 using IT.Tangdao.Framework.Extensions;

@@ -42,12 +42,12 @@ namespace IgniteApp.Shell.Home.ViewModels
         }
 
         private readonly IViewFactory _viewFactory;
-        private readonly IReadService _readService;
+        private readonly IContentReader _readService;
         #endregion
 
         #region--.ctor--
 
-        public HomeViewModel(IViewFactory viewFactory, IReadService readService)
+        public HomeViewModel(IViewFactory viewFactory, IContentReader readService)
         {
             _viewFactory = viewFactory;
             _readService = readService;

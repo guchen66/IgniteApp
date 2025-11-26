@@ -18,17 +18,21 @@ namespace IgniteApp.Shell.Maintion.ViewModels
         public ITangdaoRouter Router { get; set; }
         public IContainer _container;
 
-        public PressureViewModel(ITangdaoRouter router, IContainer container) : base("Pressure")
+        public PressureViewModel() : base("Pressure")
         {
-            Router = router;
-            _container = container;
-            Router.RouteComponent = this;
-            Router.RegisterPage<DigitalSmartGaugeViewModel>();
-            Router.RegisterPage<DifferentialGaugeViewModel>();
-            Router.RegisterPage<VacuumGaugeViewModel>();
-            GoBackCommand = MinidaoCommand.Create(ExecuteGoBack);
-            GoForwardCommand = MinidaoCommand.Create(ExecuteGoForward);
         }
+
+        //public PressureViewModel(ITangdaoRouter router, IContainer container) : base("Pressure")
+        //{
+        //    Router = router;
+        //    _container = container;
+        //    Router.RouteComponent = this;
+        //    Router.RegisterPage<DigitalSmartGaugeViewModel>();
+        //    Router.RegisterPage<DifferentialGaugeViewModel>();
+        //    Router.RegisterPage<VacuumGaugeViewModel>();
+        //    GoBackCommand = MinidaoCommand.Create(ExecuteGoBack);
+        //    GoForwardCommand = MinidaoCommand.Create(ExecuteGoForward);
+        //}
 
         private void ExecuteGoForward()
         {

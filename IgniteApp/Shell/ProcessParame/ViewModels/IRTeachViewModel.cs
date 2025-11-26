@@ -1,6 +1,7 @@
 ﻿using HandyControl.Controls;
 using IgniteShared.Globals.Local;
 using IT.Tangdao.Framework;
+using IT.Tangdao.Framework.Abstractions;
 using IT.Tangdao.Framework.Abstractions.Navigates;
 using IT.Tangdao.Framework.Commands;
 using IT.Tangdao.Framework.Extensions;

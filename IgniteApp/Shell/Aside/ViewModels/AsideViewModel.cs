@@ -12,7 +12,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
-using IgniteShared.Extensions;
 using IgniteApp.Common.Enums;
 using IgniteAdmin.Workers;
 using IT.Tangdao.Framework.Extensions;
@@ -22,6 +21,9 @@ using IgniteApp.Shell.Monitor.ViewModels;
 using IgniteShared.Dtos;
 using IT.Tangdao.Framework.Common;
 using IT.Tangdao.Framework.Threading;
+using IgniteAdmin.Interfaces;
+using StyletIoC;
+using System.Threading;
 
 namespace IgniteApp.Shell.Aside.ViewModels
 {
@@ -55,12 +57,15 @@ namespace IgniteApp.Shell.Aside.ViewModels
         private static readonly ITangdaoLogger Logger = TangdaoLogger.Get(typeof(AsideViewModel));
         private DispatcherTimer timer;
         private IAutoRun _autoRun;
+        private readonly IContainer _container;
+        private readonly WorkstationManager _workstationManager;
 
-        public AsideViewModel()
+        public AsideViewModel(WorkstationManager workstationManager)
         {
             //_tangdaoPath = tangdaoPath;
             string projectDirectory = Directory.GetCurrentDirectory();
             _autoRun = ServiceLocator.GetService<IAutoRun>();
+            _workstationManager = workstationManager;
 
             // var path = TangdaoPath.Instance.GetThisFilePath();
             //var sss = path.FileExists;
@@ -85,21 +90,22 @@ namespace IgniteApp.Shell.Aside.ViewModels
         /// <summary>
         /// 开始
         /// </summary>
-        public void ExecuteStart()
+        public async void ExecuteStart()
         {
-            // await new WorkstationManager().StartAllAsync();
-            // await _autoRun.Run();
             CurrentStatus = RunStatus.Running;
+            await _workstationManager.StartAllAsync();
         }
+
+        private CancellationTokenSource _runCts;
 
         /// <summary>
         /// 停止
         /// </summary>
-        public void ExecuteStop()
+        public async void ExecuteStop()
         {
             //SysProcessInfo.IsCannel = true;
             CurrentStatus = RunStatus.Stop;
-            _autoRun.Stop();
+            await _workstationManager.StopAllAsync();
         }
 
         /// <summary>
@@ -129,7 +135,7 @@ namespace IgniteApp.Shell.Aside.ViewModels
         protected override void OnViewLoaded()
         {
             base.OnViewLoaded();
-            LoginDto = AmbientContext.GetCurrent<LoginDto>();
+            LoginDto = AmbientContext.GetObject<LoginDto>();
         }
 
         #endregion

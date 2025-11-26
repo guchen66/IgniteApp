@@ -5,15 +5,21 @@
     xmlns:attach="clr-namespace:IT.Tangdao.Xaml.Attached;assembly=IT.Tangdao.Xaml"
     xmlns:conver="clr-namespace:IgniteApp.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:daoMarkup="clr-namespace:IT.Tangdao.Framework.Markup;assembly=IT.Tangdao.Framework"
     xmlns:hc="https://handyorg.github.io/handycontrol"
     xmlns:local="clr-namespace:IgniteApp.Shell.Home.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="https://github.com/canton7/Stylet"
+    xmlns:text="clr-namespace:IgniteApp.Converters.Test"
+    xmlns:vm="clr-namespace:IgniteApp.Shell.Home.ViewModels"
+    x:Name="UserView"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
     <UserControl.Resources>
+        <text:BindingProxy x:Key="proxy" Data="{Binding}" />
         <conver:IdConverter x:Key="id" />
+
         <!--  1. 定义 ListViewItemBaseStyle  -->
         <Style x:Key="ListViewItemBaseStyle" TargetType="ListViewItem">
             <Setter Property="Height" Value="40" />
@@ -113,21 +119,64 @@
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
 
-        <ListView
-            IsEnabled="{Binding IsEnabled}"
-            ItemsSource="{Binding LoginInfos}"
-            Style="{DynamicResource UserInfoEntryStyle}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
 
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding ., Converter={StaticResource id}}" Header="Id" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=UserName}" Header="用户名" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Password}" Header="密码" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=IsAdmin}" Header="是否管理员" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=IP}" Header="登录IP" />
-                </GridView>
-            </ListView.View>
-        </ListView>
+            <ListView
+                IsEnabled="{Binding IsEnabled}"
+                ItemsSource="{Binding LoginInfos}"
+                Style="{DynamicResource UserInfoEntryStyle}">
+
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding ., Converter={StaticResource id}}" Header="Id" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=UserName}" Header="用户名" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Password}" Header="密码" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=IsAdmin}" Header="是否管理员" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=IP}" Header="登录IP" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <DataGrid
+                x:Name="dataGrid"
+                Grid.Column="1"
+                AutoGenerateColumns="False"
+                ItemsSource="{Binding FakeLoginInfos}"
+                SelectionMode="Single"
+                SelectionUnit="Cell">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding UserName}" Header="UserName" />
+                    <DataGridTextColumn Binding="{Binding Password}" Header="Password" />
+                    <DataGridTextColumn Binding="{Binding IsAdmin}" Header="IsAdmin" />
+
+                    <DataGridTemplateColumn Header="IP">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Foreground="{Binding Path=DataContext.TextColor, RelativeSource={RelativeSource AncestorType=DataGrid}}" Text="{Binding IP}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+
+                        <!--  双击后临时变成 TextBox，失焦即提交  -->
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding IP, UpdateSourceTrigger=LostFocus}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="电话">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Foreground="{daoMarkup:RelativeBinding Path=DataContext.TextColor, AncestorTypeName=DataGrid}" Text="{Binding UserName}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal">
 
@@ -141,15 +190,27 @@
                 Width="100"
                 Height="30"
                 Margin="5"
-                attach:PasswordBoxAttach.RevealButton="False"
                 attach:PasswordBoxAttach.Attach="True"
-                attach:PasswordBoxAttach.Password="{Binding Password, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                attach:PasswordBoxAttach.Password="{Binding Password, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                attach:PasswordBoxAttach.RevealButton="False" />
             <Button
                 Width="80"
                 Margin="5"
                 Command="{Binding UnlockCommand}"
                 CommandParameter="{Binding ElementName=pass, Path=(attach:PasswordBoxAttach.Password)}"
                 Content="解锁" />
+            <Button
+                Width="180"
+                Margin="5"
+                Command="{Binding GetIlistCellInfoCommand}"
+                CommandParameter="{Binding ElementName=dataGrid, Path=SelectedCells}"
+                Content="获取选定单元格列表信息" />
+            <Button
+                Width="180"
+                Margin="5"
+                Command="{Binding GetCellInfoCommand}"
+                CommandParameter="{Binding ElementName=dataGrid, Path=CurrentCell}"
+                Content="获取具有焦点单元格信息" />
         </StackPanel>
     </Grid>
 </UserControl>

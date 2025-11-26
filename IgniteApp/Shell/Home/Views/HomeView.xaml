@@ -8,7 +8,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="https://github.com/canton7/Stylet"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-   xmlns:conver="clr-namespace:IgniteApp.Converters"
+     xmlns:daoMarkup="clr-namespace:IT.Tangdao.Framework.Markup;assembly=IT.Tangdao.Framework"
+      xmlns:conver="clr-namespace:IgniteApp.Converters"
+      Tag="{daoMarkup:AppPackUri}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">

@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 
 namespace IgniteApp.Shell.Home.ViewModels
 {
-    public class _404ViewModel:ViewModelBase
+    public class _404ViewModel : ViewModelBase
     {
+        public void Loading()
+        {
+        }
     }
 }

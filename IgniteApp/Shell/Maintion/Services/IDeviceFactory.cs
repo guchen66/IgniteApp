@@ -1,5 +1,6 @@
 ﻿using IgniteApp.Shell.Maintion.ViewModels;
 using IgniteApp.Shell.Set.Views;
+using IT.Tangdao.Framework.Abstractions.Loggers;
 using IT.Tangdao.Framework.Ioc;
 using StyletIoC;
 using System;
@@ -58,6 +59,7 @@ namespace IgniteApp.Shell.Maintion.Services
     public class DefaultDeviceFactory : IDeviceFactory
     {
         private readonly IContainer Container;
+        private static readonly ITangdaoLogger Logger = TangdaoLogger.Get(typeof(DefaultDeviceFactory));
 
         public DefaultDeviceFactory(IContainer container = null)
         {
@@ -79,6 +81,11 @@ namespace IgniteApp.Shell.Maintion.Services
             return CreateViewModel<ResistiveViewModel>();
         }
 
+        public IDeviceObserver CreatePressureViewModel()
+        {
+            return CreateViewModel<PressureViewModel>();
+        }
+
         public IDeviceObserver CreateDeviceViewModel(string deviceType)
         {
             switch (deviceType)
@@ -94,6 +101,8 @@ namespace IgniteApp.Shell.Maintion.Services
                 case "Resistance":
                     return CreateResistanceViewModel();
                 // break;
+                case "Pressure":
+                    return CreatePressureViewModel();
 
                 default:
                     throw new ArgumentException($"未知的: {deviceType}");
@@ -125,11 +134,12 @@ namespace IgniteApp.Shell.Maintion.Services
         {
             _deviceFactory = deviceFactory;
             _supportedDevices = new List<string>
-        {
-            "Light",
-            "Current",
-            "Resistance"
-        };
+            {
+                "Light",
+                "Current",
+                "Resistance",
+                "Pressure"
+            };
         }
 
         public IEnumerable<IDeviceObserver> GetDeviceObservers()

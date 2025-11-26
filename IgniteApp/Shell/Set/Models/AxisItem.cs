@@ -64,13 +64,13 @@ namespace IgniteApp.Shell.Set.Models
 
         public AxisProvider()
         {
-            _readService = ServiceLocator.GetService<IReadService>();
-            _writeService = ServiceLocator.GetService<IWriteService>();
+            _readService = ServiceLocator.GetService<IContentReader>();
+            _writeService = ServiceLocator.GetService<IContentWriter>();
             InitializalData();
         }
 
-        private readonly IReadService _readService;
-        private readonly IWriteService _writeService;
+        private readonly IContentReader _readService;
+        private readonly IContentWriter _writeService;
 
         public void InitializalData()
         {
@@ -106,7 +106,7 @@ namespace IgniteApp.Shell.Set.Models
                 var s = this as ObservableCollection<AxisItem>;
                 AxisItems = new List<AxisItem>(s);
 
-                var info = XmlFolderHelper.SerializeXML<List<AxisItem>>(AxisItems);
+                var info = TangdaoXmlSerializer.SerializeXML<List<AxisItem>>(AxisItems);
                 var foldPath = Path.Combine(IgniteInfoLocation.Recipe, "AxisInfo.xml");
                 _writeService.Default.Write(info, foldPath);
                 var xmlData = _readService.Default.Read(foldPath).Content;

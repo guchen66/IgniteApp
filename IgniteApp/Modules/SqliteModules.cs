@@ -33,7 +33,7 @@ namespace IgniteApp.Modules
 
     public class Person : IPerson
     {
-        private readonly IWriteService _writeService;
+        private readonly IContentWriter _writeService;
 
         public Person(string name)
         {

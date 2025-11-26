@@ -27,10 +27,10 @@ namespace IgniteApp.Interfaces
 
     public class XmlReadProvider<T> : IReadProvider<T> where T : new()
     {
-        private readonly IReadService _readService;
+        private readonly IContentReader _readService;
         private readonly string _fileName;
 
-        public XmlReadProvider(IReadService readService, string fileName = null)
+        public XmlReadProvider(IContentReader readService, string fileName = null)
         {
             _readService = readService;
 

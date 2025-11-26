@@ -17,7 +17,6 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using IgniteDevices.TempAndHum;
 using IgniteApp.Extensions;
-using IgniteShared.Extensions;
 using IgniteApp.Dialogs.ViewModels;
 using IgniteApp.Common;
 using IgniteDevices.PLC;
@@ -28,7 +27,6 @@ using IT.Tangdao.Framework;
 using System.Windows.Documents;
 using System.Collections.Generic;
 using HandyControl.Data.Enum;
-using IT.Tangdao.Framework.Abstractions.Sockets;
 using IT.Tangdao.Framework.Enums;
 using System.Security.Policy;
 using System.Runtime.Remoting.Contexts;
@@ -43,6 +41,11 @@ using System.Configuration;
 using IgniteApp.Interfaces;
 using IgniteApp.Shell.Maintion.Services;
 using IT.Tangdao.Framework.Abstractions.Notices;
+using System.Linq;
+using IT.Tangdao.Bridge.Infrastructure;
+using IT.Tangdao.Bridge.Sockets;
+using IT.Tangdao.Bridge.Enums;
+using IT.Tangdao.Framework.Configurations;
 
 namespace IgniteApp
 {
@@ -50,7 +53,7 @@ namespace IgniteApp
     {
         private static readonly ITangdaoLogger Logger = TangdaoLogger.Get(typeof(Bootstrapper));
 
-        private TangdaoChannelContext Context;
+        private TcpTangdaoSocket TCP;
         private static IDeviceRegistry _deviceRegistry;
 
         /// <summary>
@@ -66,6 +69,8 @@ namespace IgniteApp
 
         protected override void ConfigureIoC(IStyletIoCBuilder builder)
         {
+            LogPathConfig.SetRoot($@"{IgniteInfoLocation.Logger}");
+            //  builder.Assemblies = builder.Assemblies.Distinct().ToList();
             builder.AddModule(new TangdaoModules());
             builder.AddModule(new HomeModules());
             builder.AddModule(new SqliteModules());
@@ -75,14 +80,11 @@ namespace IgniteApp
             builder.Bind<AlarmPopupViewModel>().ToSelf().InSingletonScope();
             builder.Bind<AlarmPopupNotifier>().ToSelf();
 
-            string connUri = "tcp://127.0.0.1:502";
+            string connUri = "tcp://127.0.0.1:8970";
             var uri = new TangdaoUri(connUri);
-            Console.WriteLine();
-            Context = TangdaoChannelBuilder.Build(NetMode.Client, connUri);
-            builder.Bind<ITangdaoChannel>().ToInstance(Context.Channel);
-            builder.Bind<ITangdaoRequest>().ToInstance(Context.Request);
-            builder.Bind<ITangdaoResponse>().ToInstance(Context.Response);
-            LogPathConfig.SetRoot($@"{IgniteInfoLocation.Logger}");
+            TCP = new TcpTangdaoSocket(NetMode.Client, uri);//我是客户端，我要连接的服务端是connUri
+
+            builder.Bind<ITangdaoSocket>().ToInstance(TCP);
 
             Logger.WriteLocal($"注册成功");
         }
@@ -94,7 +96,7 @@ namespace IgniteApp
             YitIdHelper.SetIdGenerator(new IdGeneratorOptions
             {
                 WorkerId = 1,// 取值范围0~63,默认1
-                             // DataCenterId=1,//数据中心Id
+                // DataCenterId=1,//数据中心Id
             });
         }
 
@@ -114,13 +116,12 @@ namespace IgniteApp
             // 注册所有设备
             _deviceRegistry.RegisterAll();
 
-            NoticeMediator.Instance.UseNoticeKit().Add("Badge").Add("Alert");
+            //NoticeMediator.Instance.UseNoticeKit().Add("Badge").Add("Alert");
 
             // 启动监控服务
-            var monitorService = Container.Get<IMonitorService>();
+            var monitorService = Container.Get<IFileMonitor>();
             monitorService.FileChanged += OnFileChanged;
             monitorService.StartMonitoring();
-            await Context.ConnectAsync();
         }
 
         private void OnFileChanged(object sender, DaoFileChangedEventArgs e)

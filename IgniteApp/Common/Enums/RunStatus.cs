@@ -11,6 +11,6 @@ namespace IgniteApp.Common.Enums
         Running,
         Stop,
         Init,
-        Pause
+        Pause, Failt
     }
 }

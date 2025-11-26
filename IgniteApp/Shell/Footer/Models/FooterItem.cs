@@ -14,31 +14,31 @@ namespace IgniteApp.Shell.Footer.Models
         public string Title { get; set; }
     }
 
-    public class FooterList: DaoViewModelBase,IDaoCloneable<FooterList>
-    {
-        private BindableCollection<FooterItem> _items;
+    //public class FooterList: DaoViewModelBase,IDaoCloneable<FooterList>
+    //{
+    //    private BindableCollection<FooterItem> _items;
 
-        public BindableCollection<FooterItem> Items
-        {
-            get => _items;
-            set => SetProperty(ref _items, value);
-        }
+    //    public BindableCollection<FooterItem> Items
+    //    {
+    //        get => _items;
+    //        set => SetProperty(ref _items, value);
+    //    }
 
-        public FooterList Clone()
-        {
-            // 创建一个新的 FooterList 对象
-            var clonedList = new FooterList();
+    //    public FooterList Clone()
+    //    {
+    //        // 创建一个新的 FooterList 对象
+    //        var clonedList = new FooterList();
 
-            // 创建一个新的 BindableCollection<FooterItem> 实例
-            clonedList.Items = new BindableCollection<FooterItem>();
+    //        // 创建一个新的 BindableCollection<FooterItem> 实例
+    //        clonedList.Items = new BindableCollection<FooterItem>();
 
-            // 为新的集合添加原始集合中每个元素的副本
-            foreach (var item in this.Items)
-            {
-                clonedList.Items.Add(new FooterItem { Title = item.Title });
-            }
+    //        // 为新的集合添加原始集合中每个元素的副本
+    //        foreach (var item in this.Items)
+    //        {
+    //            clonedList.Items.Add(new FooterItem { Title = item.Title });
+    //        }
 
-            return clonedList;
-        }
-    }
+    //        return clonedList;
+    //    }
+    //}
 }

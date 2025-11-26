@@ -5,7 +5,6 @@ using IgniteDevices;
 using IgniteDevices.TempAndHum;
 using IgniteShared.Globals.System;
 using IT.Tangdao.Framework.Abstractions.FileAccessor;
-using IT.Tangdao.Framework.Devices;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -60,8 +59,8 @@ namespace IgniteApp.Shell.Maintion.ViewModels
 
         private TempAndHumClient _tempAndHumClient;
 
-        public IReadService _readService;
-        public IDeviceProvider _deviceProvider;
+        public IContentReader _readService;
+        // public IDeviceProvider _deviceProvider;
 
         public TempAndHumViewModel()
         {

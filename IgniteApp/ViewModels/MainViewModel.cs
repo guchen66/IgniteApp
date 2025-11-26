@@ -8,7 +8,6 @@ using IgniteApp.Shell.Home.ViewModels;
 using IgniteDevices.PLC;
 using IT.Tangdao.Framework;
 using IT.Tangdao.Framework.Abstractions;
-using IT.Tangdao.Framework.Abstractions.Sockets;
 using IT.Tangdao.Framework.Helpers;
 using Stylet;
 using StyletIoC;
@@ -120,6 +119,11 @@ namespace IgniteApp.ViewModels
         protected override void OnInitialActivate()
         {
             base.OnInitialActivate();
+        }
+
+        protected override void OnViewLoaded()
+        {
+            base.OnViewLoaded();
         }
 
         #endregion

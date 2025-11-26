@@ -48,9 +48,14 @@
                 <DataGridTemplateColumn Header="Start">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Foreground="{Binding IsXDirty, Converter={StaticResource BoolToColorConverter}}" Text="{Binding StartValue, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBlock  Text="{Binding StartValue, UpdateSourceTrigger=PropertyChanged}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding StartValue, UpdateSourceTrigger=LostFocus}" Foreground="Red" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="End">
                     <DataGridTemplateColumn.CellTemplate>

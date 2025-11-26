@@ -1,5 +1,6 @@
 ﻿using HandyControl.Controls;
 using IT.Tangdao.Framework;
+using IT.Tangdao.Framework.Abstractions;
 using IT.Tangdao.Framework.Abstractions.FileAccessor;
 using IT.Tangdao.Framework.Abstractions.Navigates;
 using IT.Tangdao.Framework.Ioc;
@@ -15,9 +16,9 @@ namespace IgniteApp.Shell.Maintion.ViewModels
     public class DigitalSmartGaugeViewModel : Screen, ITangdaoPage
     {
         public string PageTitle => "数字智能测量仪222";
-        private IReadService _readService;
+        private IContentReader _readService;
 
-        public DigitalSmartGaugeViewModel(IReadService readService)
+        public DigitalSmartGaugeViewModel(IContentReader readService)
         {
             _readService = readService;
         }

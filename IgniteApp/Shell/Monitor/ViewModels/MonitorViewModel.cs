@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IT.Tangdao.Framework.EventArg;
+using IT.Tangdao.Framework.Abstractions;
 
 namespace IgniteApp.Shell.Monitor.ViewModels
 {
@@ -38,9 +39,9 @@ namespace IgniteApp.Shell.Monitor.ViewModels
 
         public readonly IViewFactory _viewFactory;
         private readonly INavigateRoute _navigatRoute;
-        private readonly IReadService _readService;
+        private readonly IContentReader _readService;
 
-        public MonitorViewModel(IViewFactory viewFactory, INavigateRoute navigatRoute, IReadService readService)
+        public MonitorViewModel(IViewFactory viewFactory, INavigateRoute navigatRoute, IContentReader readService)
         {
             _viewFactory = viewFactory;
             _navigatRoute = navigatRoute;

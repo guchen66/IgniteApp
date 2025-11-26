@@ -1,6 +1,5 @@
 ﻿using IgniteDevices.Core.Models.Results;
 using IgniteShared.Models;
-using IT.Tangdao.Framework.Devices;
 using System;
 using System.Collections.Generic;
 using System.Linq;

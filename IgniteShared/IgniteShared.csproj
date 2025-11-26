@@ -62,7 +62,7 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="IT.Tangdao.Framework, Version=3.0.14.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="IT.Tangdao.Framework, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\nuget\MyPackages\.Netframework\IT.Tangdao.Framework.dll</HintPath>
     </Reference>
@@ -84,6 +84,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Channels, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Channels.6.0.0\lib\net461\System.Threading.Channels.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
@@ -127,8 +130,9 @@
     <Compile Include="Enums\PlcType.cs" />
     <Compile Include="Enums\RoleType.cs" />
     <Compile Include="Enums\SelectModes.cs" />
-    <Compile Include="Extensions\LoggerExtensions.cs" />
     <Compile Include="Globals\Common\TextStatus.cs" />
+    <Compile Include="Globals\Common\Works\ProductionLine.cs" />
+    <Compile Include="Globals\Common\Works\WaferMessage.cs" />
     <Compile Include="Globals\Local\IgniteInfoLocation.cs" />
     <Compile Include="Globals\System\SysLoginInfo.cs" />
     <Compile Include="Globals\System\SysPlcInfo.cs" />

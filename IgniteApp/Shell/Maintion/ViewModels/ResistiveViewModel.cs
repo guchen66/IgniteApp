@@ -1,6 +1,6 @@
 ﻿using IgniteAdmin.Interfaces;
 using IgniteApp.Bases;
-using IgniteShared.Extensions;
+
 using IT.Tangdao.Framework;
 using IT.Tangdao.Framework.Abstractions.Loggers;
 using IT.Tangdao.Framework.DaoTasks;

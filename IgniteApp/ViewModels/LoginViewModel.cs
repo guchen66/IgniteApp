@@ -31,7 +31,7 @@ using IT.Tangdao.Framework;
 using IT.Tangdao.Framework.Events;
 using System.Threading;
 using IgniteApp.Extensions;
-using IgniteShared.Extensions;
+
 using System.Security.Principal;
 using IgniteApp.Common;
 using IgniteApp.Events;
@@ -52,12 +52,12 @@ using IT.Tangdao.Framework.Abstractions.FileAccessor;
 using IT.Tangdao.Framework.Paths;
 using IT.Tangdao.Framework.Infrastructure;
 using IT.Tangdao.Framework.Abstractions.Results;
-using IT.Tangdao.Framework.Infrastructure.Configurations;
 using IgniteShared.Enums;
+using IT.Tangdao.Framework.Markup;
 
 namespace IgniteApp.ViewModels
 {
-    public class LoginViewModel : ViewModelBase, IHandle<CloseRegisterEvent>
+    public class LoginViewModel : ViewModelBase, IHandle<CloseRegisterEvent>, ITangdaoMessage
     {
         #region--字段--
 
@@ -65,11 +65,10 @@ namespace IgniteApp.ViewModels
         private MainViewModel _mainViewModel;
 
         private INavigationService _navigationService;
-        private readonly IWriteService _writeService;
-        private readonly IReadService _readService;
+        private readonly IContentWriter _writeService;
+        private readonly IContentReader _readService;
         private readonly IWindowManager _windowManager;
         private readonly IEventAggregator _eventAggregator;
-        private readonly ITypeConvertService _typeConvertService;
         private static readonly ITangdaoLogger Logger = TangdaoLogger.Get(typeof(LoginViewModel));
         public ICommand RegisterCommand { get; set; }
         #endregion
@@ -89,18 +88,17 @@ namespace IgniteApp.ViewModels
         #region--ctor--
         public IDaoEventAggregator _daoEventAggregator;
 
-        public LoginViewModel(IWriteService writeService, INavigationService navigationService, IEventAggregator eventAggregator, MainViewModel mainViewModel, ITypeConvertService typeConvertService)
+        public LoginViewModel(IContentWriter writeService, INavigationService navigationService, IEventAggregator eventAggregator, MainViewModel mainViewModel)
         {
             _mainViewModel = mainViewModel;
             _writeService = writeService;
-            _readService = ServiceLocator.GetService<IReadService>();
+            _readService = ServiceLocator.GetService<IContentReader>();
             _windowManager = ServiceLocator.GetService<IWindowManager>();
 
             _navigationService = navigationService;
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
             RegisterCommand = MinidaoCommand.Create(ExecuteRegister);
-            _typeConvertService = typeConvertService;
         }
 
         #endregion
@@ -114,7 +112,7 @@ namespace IgniteApp.ViewModels
         {
             //1、Cache目录有缓存，使用缓存登录，2、Cache无缓存，使用新的账号登录3、缓存的账号一定是我登录过的，4、UserInfo一定包含我登录的信息
             var cacheData = UserManager.SearchCache(LoginDto);
-            AmbientContext.SetCurrent(LoginDto);          //线程上下文传输数据
+            AmbientContext.SetObject(LoginDto);          //线程上下文传输数据
             if (cacheData)
             {
                 var foldPath = Path.Combine(IgniteInfoLocation.Cache, "LoginInfo.xml");
@@ -133,8 +131,6 @@ namespace IgniteApp.ViewModels
         /// </summary>
         public void ExecuteCancel()
         {
-            List<string> strings = new List<string>();
-            strings.FirstOrDefault();
             Application.Current.Shutdown();
         }
 
@@ -186,6 +182,16 @@ namespace IgniteApp.ViewModels
             LoginDto.Password = closeRegister.Pwd;
             //在这里关闭注册窗口
             // tangdaoParameter.ExecuteCommand<bool?>("Close", null);
+        }
+
+        public void DragMove()
+        {
+            Application.Current.Windows.OfType<Window>()
+                       .SingleOrDefault(w => w.IsActive)?.DragMove();
+        }
+
+        public void Response(ITangdaoRequest request)
+        {
         }
 
         #endregion

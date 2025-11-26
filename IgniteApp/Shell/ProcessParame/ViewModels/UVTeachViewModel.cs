@@ -1,7 +1,7 @@
 ﻿using IgniteApp.ViewModels;
 using IT.Tangdao.Framework;
+using IT.Tangdao.Framework.Abstractions;
 using IT.Tangdao.Framework.Abstractions.Navigates;
-using IT.Tangdao.Framework.Abstractions.Sockets;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -14,11 +14,11 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
     public class UVTeachViewModel : Screen, ITangdaoPage
     {
         public string PageTitle => "";
-        private ITangdaoResponse _tangdaoResponse;
+        //  private ITangdaoResponse _tangdaoResponse;
 
-        public UVTeachViewModel(ITangdaoResponse tangdaoResponse)
+        public UVTeachViewModel()
         {
-            _tangdaoResponse = tangdaoResponse;
+            // _tangdaoResponse = tangdaoResponse;
             //  _tangdaoResponse.Received += _tangdaoResponse_Received;
         }
 
