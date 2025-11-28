@@ -88,7 +88,7 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
             if (row == null) return string.Empty;
 
             // 2. 让列自己把可视化内容吐出来
-            var content = cell.Column.GetCellContent(row);   // 返回 FrameworkElement
+            var content = cell.Column.GetCellContent(row);   // 返回 FrameworkElement,System.Windows.Controls.ContentPresenter
             switch (cell.Column.Header.ToString())
             {
                 case "End":

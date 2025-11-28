@@ -77,8 +77,7 @@
     <Reference Include="IT.Tangdao.Bridge">
       <HintPath>..\..\..\..\nuget\MyPackages\.Netframework\IT.Tangdao.Bridge.dll</HintPath>
     </Reference>
-    <Reference Include="IT.Tangdao.Framework, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="IT.Tangdao.Framework">
       <HintPath>..\..\..\..\nuget\MyPackages\.Netframework\IT.Tangdao.Framework.dll</HintPath>
     </Reference>
     <Reference Include="IT.Tangdao.Xaml">
@@ -199,10 +198,13 @@
     <Compile Include="Bases\NavigatViewModel.cs" />
     <Compile Include="Bases\ViewModelBase.cs" />
     <Compile Include="Behaviors\AdminBehavior.cs" />
+    <Compile Include="Behaviors\CellDirtyStateBehavior.cs" />
     <Compile Include="Behaviors\DataGridCurrentCellBinding.cs" />
     <Compile Include="Behaviors\DataGridCurrentCellBehavior.cs" />
+    <Compile Include="Behaviors\DataGridDirtyStateHelper.cs" />
     <Compile Include="Behaviors\DragBehavior.cs" />
     <Compile Include="Behaviors\ImageAttach.cs" />
+    <Compile Include="Behaviors\NumboxInputBehavior.cs" />
     <Compile Include="Behaviors\PermissionAttachedProperties.cs" />
     <Compile Include="Behaviors\ProgressButtonExtension.cs" />
     <Compile Include="Behaviors\ShapeBehavior.cs" />
@@ -221,6 +223,7 @@
     <Compile Include="Controls\CustomStatusLight.cs" />
     <Compile Include="Converters\ContentToColorConverter.cs" />
     <Compile Include="Converters\DeviceStatusConverter.cs" />
+    <Compile Include="Converters\ForegroundBrushConverter.cs" />
     <Compile Include="Converters\IdConverter.cs" />
     <Compile Include="Converters\NullToBoolConverter.cs" />
     <Compile Include="Converters\PasswordConverter.cs" />
@@ -418,6 +421,7 @@
     <Compile Include="Shell\ProcessParame\Models\TaskContext.cs" />
     <Compile Include="Shell\ProcessParame\Models\TaskState.cs" />
     <Compile Include="Shell\ProcessParame\Models\TeachItem.cs" />
+    <Compile Include="Shell\ProcessParame\Models\UVTeachModel.cs" />
     <Compile Include="Shell\ProcessParame\Services\ITaskController.cs" />
     <Compile Include="Shell\ProcessParame\Services\ITaskService.cs" />
     <Compile Include="Shell\ProcessParame\Services\LocalCalibrationService.cs" />

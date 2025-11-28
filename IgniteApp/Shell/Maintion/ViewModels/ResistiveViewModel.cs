@@ -55,11 +55,11 @@ namespace IgniteApp.Shell.Maintion.ViewModels
                 Data = daoTask.Duration;
             });
 
-            TangdaoTaskScheduler.Execute(daoAsync: daoTask =>
+            TangdaoTaskScheduler.ExecuteAsyncTask(daoTask =>
             {
             });
 
-            TangdaoTaskScheduler.Execute(daoAsync => { }, dao => { });
+            TangdaoTaskScheduler.ExecuteBackgroundThenUI(daoAsync => { }, dao => { });
         }
 
         public void GetData()
