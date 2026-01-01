@@ -1,29 +1,22 @@
 ﻿using IgniteAdmin.Managers.Main;
 using IgniteAdmin.Providers;
+using IgniteAdmin.Workers;
 using IgniteApp.Bases;
-using IgniteApp.Extensions;
-using IgniteShared.Globals.Local;
+using IgniteApp.Common.Enums;
+using IgniteShared.Dtos;
+using IgniteShared.Enums;
 using IgniteShared.Globals.System;
 using IT.Tangdao.Framework.Abstractions.Loggers;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Threading;
-using IgniteApp.Common.Enums;
-using IgniteAdmin.Workers;
 using IT.Tangdao.Framework.Extensions;
 using IT.Tangdao.Framework.Paths;
-using IT.Tangdao.Framework.Helpers;
-using IgniteApp.Shell.Monitor.ViewModels;
-using IgniteShared.Dtos;
-using IT.Tangdao.Framework.Common;
 using IT.Tangdao.Framework.Threading;
-using IgniteAdmin.Interfaces;
+using Stylet;
 using StyletIoC;
+using System;
+using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Threading;
 
 namespace IgniteApp.Shell.Aside.ViewModels
 {
@@ -45,6 +38,14 @@ namespace IgniteApp.Shell.Aside.ViewModels
             set => SetAndNotify(ref _currentStatus, value);
         }
 
+        private ProcessStatus _processStatus = ProcessStatus.Manual;
+
+        public ProcessStatus ProcessStatus
+        {
+            get => _processStatus;
+            set => SetAndNotify(ref _processStatus, value);
+        }
+
         private LoginDto _loginDto;
 
         public LoginDto LoginDto
@@ -59,10 +60,12 @@ namespace IgniteApp.Shell.Aside.ViewModels
         private IAutoRun _autoRun;
         private readonly IContainer _container;
         private readonly WorkstationManager _workstationManager;
+        private readonly IEventAggregator _eventAggregator;
 
-        public AsideViewModel(WorkstationManager workstationManager)
+        public AsideViewModel(WorkstationManager workstationManager, IEventAggregator eventAggregator)
         {
-            //_tangdaoPath = tangdaoPath;
+            _eventAggregator = eventAggregator;
+
             string projectDirectory = Directory.GetCurrentDirectory();
             _autoRun = ServiceLocator.GetService<IAutoRun>();
             _workstationManager = workstationManager;
@@ -76,15 +79,22 @@ namespace IgniteApp.Shell.Aside.ViewModels
 
         #region--方法--
 
-        public static void ExecuteManual()
+        public void ExecuteManual()
         {
+            ProcessStatus = ProcessStatus.Manual;
             PlcManager.GetPlcSignal<int>(1);
         }
 
-        public static void ExecuteAuto()
+        public void ExecuteAuto()
         {
+            ProcessStatus = ProcessStatus.Auto;
             SysProcessInfo.IsAuto = true;
             SysProcessInfo.IsCannel = false;
+        }
+
+        public void ExecuteSemiAuto()
+        {
+            ProcessStatus = ProcessStatus.SemiAuto;
         }
 
         /// <summary>
@@ -94,6 +104,17 @@ namespace IgniteApp.Shell.Aside.ViewModels
         {
             CurrentStatus = RunStatus.Running;
             await _workstationManager.StartAllAsync();
+        }
+
+        public async Task Run()
+        {
+            CancellationTokenSource cts = new CancellationTokenSource();
+            await Task.Run(() =>
+            {
+                Console.WriteLine("开始");
+                Task.Delay(1000, cts.Token).Wait();
+                Console.WriteLine("结束");
+            });
         }
 
         private CancellationTokenSource _runCts;

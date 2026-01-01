@@ -1,59 +1,30 @@
-﻿using System;
+﻿using IgniteAdmin.Managers.Login;
+using IgniteApp.Bases;
+using IgniteApp.Events;
+using IgniteApp.Interfaces;
+using IgniteShared.Dtos;
+using IgniteShared.Globals.Local;
+using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.FileAccessor;
+using IT.Tangdao.Framework.Abstractions.Loggers;
+using IT.Tangdao.Framework.Commands;
+using IT.Tangdao.Framework.Enums;
+using IT.Tangdao.Framework.Events;
+using IT.Tangdao.Framework.Extensions;
+using IT.Tangdao.Framework.Helpers;
+using IT.Tangdao.Framework.Paths;
+using IT.Tangdao.Framework.Threading;
+using Stylet;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Xml.Linq;
-using IgniteAdmin.Managers.Login;
-using IgniteAdmin.Managers.Transmit;
-using IgniteApp.Bases;
-using IgniteDb;
-using IgniteShared.Dtos;
-using IgniteShared.Entitys;
-using IgniteShared.Globals.Local;
-using IgniteShared.Globals.System;
-using IT.Tangdao.Framework.Abstractions.Loggers;
-using IT.Tangdao.Framework.Abstractions;
-using IT.Tangdao.Framework.Enums;
-using IT.Tangdao.Framework.Helpers;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using Stylet;
-using StyletIoC;
-using System.IO;
-using IT.Tangdao.Framework.Commands;
-using IgniteApp.Views;
-using IgniteApp.Interfaces;
-using System.Windows.Navigation;
-using IT.Tangdao.Framework;
-using IT.Tangdao.Framework.Events;
-using System.Threading;
-using IgniteApp.Extensions;
-
-using System.Security.Principal;
-using IgniteApp.Common;
-using IgniteApp.Events;
-using System.Windows.Shapes;
-using Path = System.IO.Path;
-using HandyControl.Controls;
 using MessageBox = HandyControl.Controls.MessageBox;
+using Path = System.IO.Path;
 using Window = System.Windows.Window;
-using IgniteShared.Delegates;
-using System.Windows.Markup;
-using IT.Tangdao.Framework.DaoException;
-using IT.Tangdao.Framework.Extensions;
-using System.Collections.Concurrent;
-using System.Reflection;
-using System.Runtime.Serialization;
-using IT.Tangdao.Framework.Threading;
-using IT.Tangdao.Framework.Abstractions.FileAccessor;
-using IT.Tangdao.Framework.Paths;
-using IT.Tangdao.Framework.Infrastructure;
-using IT.Tangdao.Framework.Abstractions.Results;
-using IgniteShared.Enums;
-using IT.Tangdao.Framework.Markup;
 
 namespace IgniteApp.ViewModels
 {
@@ -65,8 +36,7 @@ namespace IgniteApp.ViewModels
         private MainViewModel _mainViewModel;
 
         private INavigationService _navigationService;
-        private readonly IContentWriter _writeService;
-        private readonly IContentReader _readService;
+        private readonly IContentAccess _contentAccess;
         private readonly IWindowManager _windowManager;
         private readonly IEventAggregator _eventAggregator;
         private static readonly ITangdaoLogger Logger = TangdaoLogger.Get(typeof(LoginViewModel));
@@ -88,11 +58,10 @@ namespace IgniteApp.ViewModels
         #region--ctor--
         public IDaoEventAggregator _daoEventAggregator;
 
-        public LoginViewModel(IContentWriter writeService, INavigationService navigationService, IEventAggregator eventAggregator, MainViewModel mainViewModel)
+        public LoginViewModel(INavigationService navigationService, IEventAggregator eventAggregator, MainViewModel mainViewModel)
         {
             _mainViewModel = mainViewModel;
-            _writeService = writeService;
-            _readService = ServiceLocator.GetService<IContentReader>();
+            _contentAccess = ServiceLocator.GetService<IContentAccess>();
             _windowManager = ServiceLocator.GetService<IWindowManager>();
 
             _navigationService = navigationService;
@@ -117,7 +86,7 @@ namespace IgniteApp.ViewModels
             {
                 var foldPath = Path.Combine(IgniteInfoLocation.Cache, "LoginInfo.xml");
                 _windowManager.ShowWindow(_mainViewModel);
-                _writeService.Default.WriteObject(foldPath, LoginDto);
+                //_contentAccess.Default.WriteObject(foldPath, LoginDto);
                 RequestClose();
             }
             else
@@ -137,7 +106,7 @@ namespace IgniteApp.ViewModels
         /// <summary>
         /// 记住密码
         /// </summary>
-        public void ExecuteRememberPwd()
+        public async void ExecuteRememberPwd()
         {
             //bool isAdmin = RoleSelectors.DetermineIfAdmin(LoginDto.UserName);
             //var roleSelector = RoleSelectors.GetRoleSelector(isAdmin).Invoke(RoleType.管理员, RoleType.普通用户);
@@ -155,11 +124,12 @@ namespace IgniteApp.ViewModels
             {
                 var s1 = TangdaoPath.Instance.GetThisFilePath();
                 var foldPath = Path.Combine(IgniteInfoLocation.Cache, "LoginInfo.xml");
-                string isRememberValue = _readService.Default.Read(foldPath).AsXml().SelectNode("IsRemember").Value;
+
+                string isRememberValue = _contentAccess.Default.Read(foldPath).AsXml().SelectNode("IsRemember").Value;
                 _ = isRememberValue.TryToBool(out var value);
                 if (value)
                 {
-                    LoginDto = _readService.Cache.DeserializeCache<LoginDto>(foldPath, DaoFileType.Xml);
+                    LoginDto = _contentAccess.Cache.DeserializeCache<LoginDto>(foldPath, DaoFileType.Xml);
                 }
                 else
                     LoginDto = null;

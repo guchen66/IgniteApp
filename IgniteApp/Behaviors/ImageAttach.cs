@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
+﻿using IT.Tangdao.Xaml.Enums;
+using System;
 using System.Windows;
-using IT.Tangdao.Xaml.Enums;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace IgniteApp.Behaviors
 {

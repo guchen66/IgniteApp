@@ -1,10 +1,5 @@
-﻿using IgniteApp.Shell.Maintion.Args;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IgniteApp.Shell.Maintion.Models
 {

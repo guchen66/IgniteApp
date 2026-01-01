@@ -1,16 +1,8 @@
-﻿using IgniteApp.Interfaces;
-using IgniteDb;
+﻿using IgniteDb;
 using IgniteDb.IRepositorys;
 using IgniteDb.Repositorys;
 using IT.Tangdao.Framework.Abstractions.FileAccessor;
 using StyletIoC;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IgniteApp.Modules
 {
@@ -33,8 +25,6 @@ namespace IgniteApp.Modules
 
     public class Person : IPerson
     {
-        private readonly IContentWriter _writeService;
-
         public Person(string name)
         {
         }

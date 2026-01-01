@@ -1,14 +1,7 @@
 ﻿using IgniteApp.Bases;
 using IgniteApp.Interfaces;
 using IgniteApp.Shell.Set.Models;
-using IgniteApp.Shell.Set.Views;
-using Stylet;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IgniteApp.Shell.Set.ViewModels
 {

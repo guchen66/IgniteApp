@@ -2,14 +2,9 @@
 using IgniteDb.IRepositorys;
 using IgniteShared.Dtos;
 using IgniteShared.Entitys;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IgniteDb.Repositorys
 {

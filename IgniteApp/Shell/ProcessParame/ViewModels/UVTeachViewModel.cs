@@ -1,27 +1,25 @@
-﻿using IgniteApp.Behaviors;
-using IgniteApp.Shell.ProcessParame.Models;
-using IgniteApp.ViewModels;
-using IT.Tangdao.Framework;
+﻿using IgniteApp.Shell.ProcessParame.Models;
+using IgniteShared.Globals.Local;
 using IT.Tangdao.Framework.Abstractions;
 using IT.Tangdao.Framework.Abstractions.Loggers;
-using IT.Tangdao.Framework.Abstractions.Navigates;
+using IT.Tangdao.Framework.Abstractions.Navigation;
 using IT.Tangdao.Framework.Commands;
 using IT.Tangdao.Framework.DaoTasks;
-using IT.Tangdao.Framework.Enums;
 using IT.Tangdao.Framework.Extensions;
 using IT.Tangdao.Framework.Helpers;
+using IT.Tangdao.Framework.Paths;
 using Stylet;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Dynamic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace IgniteApp.Shell.ProcessParame.ViewModels
 {
@@ -64,16 +62,19 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
         public int PageCount => _pageCount;
         private int _pageCount; // 总页数
         private ITangdaoLogger Logger = TangdaoLogger.Get(typeof(UVTeachViewModel));
+        private static int count = 1;
 
         public UVTeachViewModel()
         {
-            TangdaoDataFaker<UvTeachModel> tangdaoDataFaker = new TangdaoDataFaker<UvTeachModel>();
             TangdaoTaskScheduler.Execute((dao) =>
             {
-                StoreProvider = tangdaoDataFaker.Build(2000000);
-                Logger.WriteLocal($"耗时：{dao.Duration}");
-            }, TaskThreadType.UI);
-            UvTeachModelList = StoreProvider.ToObservableCollection();
+                TangdaoDataFaker<UvTeachModel> tangdaoDataFaker = new TangdaoDataFaker<UvTeachModel>();
+                StoreProvider = tangdaoDataFaker.Build(200000);
+                Logger.WriteLocal($"第{count}次耗时：{dao.Elapsed}");
+                UvTeachModelList = StoreProvider.ToObservableCollection();
+                count++;
+            });
+
             SaveDataCommand = new TangdaoCommand(SaveData);
             PrevPageCommand = new TangdaoCommand(ExecutePrevPage);
             NextPageCommand = new TangdaoCommand(ExecuteNextPage);
@@ -133,17 +134,48 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
             ResponseData = parameter.Get<string>("Name");
         }
 
-        public void SaveData()
+        private void SaveData()
         {
-            // 一行 LINQ 搞定：把列表里所有元素的 IsEdit 统一设成 false，其余属性原封不动
-            //UvTeachModelList=UvTeachModelList.ForEach(m => m.IsEdit = false);
-            // UvTeachModelList = UvTeachModelList.TryForEach(m => m.IsEdit = true).ToObservableCollection();
-            //UvTeachModelList = UvTeachModelList
-            //       .Select(m => { m.IsEdit = false; return m; })
-            //       .ToObservableCollection();
             UvTeachModelList = new ObservableCollection<UvTeachModel>(UvTeachModelList);
-            // UvTeachModelList = UvTeachModelList.ToList().ToObservableCollection();
-            // OnPropertyChanged(nameof(UvTeachModelList));
+            var sss1 = TangdaoPath.Instance.DateFrom(IgniteInfoLocation.Recipe).BuildDirectory();
+            //var directoryPath = TangdaoPath.Instance.DateFrom(IgniteInfoLocation.Recipe).BuildFile("111.xml");
+
+            var sss = TangdaoPath.Instance.AsPath(IgniteInfoLocation.Recipe);
+            var directoryPath = TangdaoPath.Instance.AsPath(IgniteInfoLocation.Recipe).BuildFile("111.xml");
+            SerializeXMLToFile(UvTeachModelList, directoryPath.Value);
+        }
+
+        public static void SerializeXMLToFile<T>(T obj, string filePath, Encoding encoding = null)
+        {
+            if (encoding == null)
+            {
+                encoding = Encoding.UTF8; // 默认使用 UTF-8 编码
+            }
+
+            XmlWriterSettings settings = new XmlWriterSettings
+            {
+                Encoding = encoding,
+                Indent = true, // 可选：使 XML 更具可读性
+                OmitXmlDeclaration = false // 确保包含 XML 声明
+            };
+
+            using (XmlWriter writer = XmlWriter.Create(filePath, settings))
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(T));
+                serializer.Serialize(writer, obj);
+            }
+        }
+
+        private class StringWriterWithEncoding : StringWriter
+        {
+            private readonly Encoding _encoding;
+
+            public StringWriterWithEncoding(Encoding encoding)
+            {
+                _encoding = encoding;
+            }
+
+            public override Encoding Encoding => _encoding;
         }
 
         public ICommand SaveDataCommand { get; set; }

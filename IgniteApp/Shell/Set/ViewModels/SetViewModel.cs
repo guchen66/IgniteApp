@@ -1,19 +1,11 @@
 ﻿using IgniteApp.Bases;
-using IgniteApp.Common;
-using IgniteApp.Extensions;
 using IgniteApp.Interfaces;
-using IgniteApp.Shell.Home.Models;
 using IT.Tangdao.Framework.Abstractions.FileAccessor;
-using IT.Tangdao.Framework.Infrastructure;
 using IT.Tangdao.Framework.Extensions;
+using IT.Tangdao.Framework.Infrastructure;
 using Stylet;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IT.Tangdao.Framework.EventArg;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace IgniteApp.Shell.Set.ViewModels
 {
@@ -38,15 +30,13 @@ namespace IgniteApp.Shell.Set.ViewModels
         }
 
         public IViewFactory _viewFactory;
-        public IContentReader _readService;
+        public IContentAccess _contentAccess;
 
-        public SetViewModel(IViewFactory viewFactory, IContentReader readService)
+        public SetViewModel(IViewFactory viewFactory, IContentAccess contentAccess)
         {
-            this._viewFactory = viewFactory;
-            this._readService = readService;
-            // SetMenuList = ReadOnlyMenuItemManager.Create(readService, HandlerName);
-
-            SetMenuList = readService.Default.AsConfig().SelectAppConfig(HandlerName).ToList(v => new TangdaoMenuItem { MenuName = v }).ToObservableCollection();
+            _viewFactory = viewFactory;
+            _contentAccess = contentAccess;
+            SetMenuList = contentAccess.Default.Empty().AsConfig().SelectAppSection(HandlerName).ToList(kv => new TangdaoMenuItem { MenuName = kv.Value }).ToObservableCollection();
             this.BindAndInvoke(viewModel => viewModel.SelectedIndex, (obj, args) => DoNavigateToView());
         }
 

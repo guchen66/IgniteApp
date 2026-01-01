@@ -1,26 +1,21 @@
 ﻿using IgniteApp.Bases;
 using IgniteApp.Common;
-using IgniteApp.Dialogs.ViewModels;
 using IgniteApp.Shell.Aside.ViewModels;
+using IgniteApp.Shell.Footer.Models;
 using IgniteApp.Shell.Footer.ViewModels;
 using IgniteApp.Shell.Header.ViewModels;
 using IgniteApp.Shell.Home.ViewModels;
 using IgniteDevices.PLC;
-using IT.Tangdao.Framework;
-using IT.Tangdao.Framework.Abstractions;
+using IgniteShared.Globals.Common;
+using IT.Tangdao.Framework.Abstractions.Notices;
+using IT.Tangdao.Framework.EventArg;
+using IT.Tangdao.Framework.Events;
 using IT.Tangdao.Framework.Helpers;
 using Stylet;
 using StyletIoC;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace IgniteApp.ViewModels
 {
@@ -45,28 +40,52 @@ namespace IgniteApp.ViewModels
         // [Inject]
         public IWindowManager _windowManager;
 
-        private AlarmPopupNotifier _alarmPopupNotifier;
+        private ITangdaoNotifier _tangdaoNotifier;
 
-        // [Inject]
-        public readonly AlarmPublisher _alarmPublisher;
+        private ITangdaoPublisher _tangdaoPublisher;
 
         public AlarmPopupManager _alarmPopupManager;
         #endregion
 
         #region--ctor--
 
-        public MainViewModel(IEventAggregator eventAggregator, IWindowManager windowManager, AlarmPublisher alarmPublisher, AlarmPopupNotifier alarmPopupNotifier, AlarmPopupManager alarmPopupManager)
+        public MainViewModel(IEventAggregator eventAggregator, IWindowManager windowManager, AlarmPopupManager alarmPopupManager, ITangdaoPublisher tangdaoPublisher, ITangdaoNotifier tangdaoNotifier)
         {
             // FooterViewModel = footerViewModel;
             _windowManager = windowManager;
             _eventAggregator = eventAggregator;
-            _alarmPublisher = alarmPublisher;
-            _alarmPopupNotifier = alarmPopupNotifier;
+
             _alarmPopupManager = alarmPopupManager;
             // OmronManager.AlarmChenged += OnAlarmChanged;
             OmronManager.AlarmChenged += OnAlarmChangedPublish;
             OmronManager.AlarmErrorChenged += OnAlarmErrorChanged;
-            _alarmPublisher.Subscribe(_alarmPopupNotifier);
+
+            TangdaoWeakEvent.Instance.OnMessageReceived += OnMessageReceived;
+            TangdaoWeakEvent.Instance.OnKeyMessageReceived += OnKeyMessageReceived;
+            _tangdaoPublisher = tangdaoPublisher;
+            _tangdaoNotifier = tangdaoNotifier;
+            _tangdaoPublisher.Subscribe(_tangdaoNotifier);
+        }
+
+        /// <summary>
+        /// 带Key的弱引用事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnKeyMessageReceived(object sender, KeyMessageEventArgs e)
+        {
+            Console.WriteLine(e.MessageEventArgs.Message);
+        }
+
+        /// <summary>
+        /// 普通的弱引用事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnMessageReceived(object sender, MessageEventArgs e)
+        {
+            Console.WriteLine(e.Message);
+            Console.WriteLine(e.NowTime);
         }
 
         private void OnAlarmErrorChanged(AlarmMessage message)
@@ -80,7 +99,6 @@ namespace IgniteApp.ViewModels
         /// <param name="name"></param>
         private void OnAlarmChanged(string name)
         {
-            _alarmPublisher.NotifyAlarm(name);
         }
 
         /// <summary>

@@ -1,51 +1,27 @@
-﻿using System;
-using Stylet;
-using StyletIoC;
-using IgniteApp.ViewModels;
-using IT.Tangdao.Framework.Abstractions.FileAccessor;
-using System.Reflection;
-using System.Threading.Tasks;
-using System.Windows.Threading;
-using IT.Tangdao.Framework.Abstractions.Loggers;
-using IgniteApp.Modules;
-using Yitter.IdGenerator;
-using IgniteAdmin.Managers.Transmit;
-using System.Threading;
-using IgniteShared.Models;
-using IT.Tangdao.Framework.Helpers;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using IgniteDevices.TempAndHum;
-using IgniteApp.Extensions;
-using IgniteApp.Dialogs.ViewModels;
-using IgniteApp.Common;
-using IgniteDevices.PLC;
-using IgniteApp.Shell.Footer.ViewModels;
-using IgniteApp.Tests;
-using IT.Tangdao.Framework.Events;
-using IT.Tangdao.Framework;
-using System.Windows.Documents;
-using System.Collections.Generic;
-using HandyControl.Data.Enum;
-using IT.Tangdao.Framework.Enums;
-using System.Security.Policy;
-using System.Runtime.Remoting.Contexts;
-using IT.Tangdao.Framework.EventArg;
-using IT.Tangdao.Framework.Infrastructure;
+﻿using IgniteAdmin.Managers.Transmit;
 using IgniteApp.Assets.Themes;
-using IT.Tangdao.Framework.Extensions;
+using IgniteApp.Common;
+using IgniteApp.Dialogs.ViewModels;
+using IgniteApp.Modules;
+using IgniteApp.Shell.Maintion.ViewModels;
+using IgniteApp.ViewModels;
 using IgniteShared.Globals.Local;
-using System.Windows.Media.Media3D;
-using System.IO;
-using System.Configuration;
-using IgniteApp.Interfaces;
-using IgniteApp.Shell.Maintion.Services;
-using IT.Tangdao.Framework.Abstractions.Notices;
-using System.Linq;
+using IT.Tangdao.Bridge.Enums;
 using IT.Tangdao.Bridge.Infrastructure;
 using IT.Tangdao.Bridge.Sockets;
-using IT.Tangdao.Bridge.Enums;
+using IT.Tangdao.Framework.Abstractions.FileAccessor;
+using IT.Tangdao.Framework.Abstractions.Loggers;
+using IT.Tangdao.Framework.Abstractions.Notices;
 using IT.Tangdao.Framework.Configurations;
+using IT.Tangdao.Framework.EventArg;
+using IT.Tangdao.Framework.Events;
+using IT.Tangdao.Framework.Extensions;
+using Stylet;
+using StyletIoC;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Yitter.IdGenerator;
 
 namespace IgniteApp
 {
@@ -54,18 +30,6 @@ namespace IgniteApp
         private static readonly ITangdaoLogger Logger = TangdaoLogger.Get(typeof(Bootstrapper));
 
         private TcpTangdaoSocket TCP;
-        private static IDeviceRegistry _deviceRegistry;
-
-        /// <summary>
-        /// 使用自定义设备提供者配置
-        /// </summary>
-        public static void Configure(IDeviceProvider deviceProvider)
-        {
-            _deviceRegistry = new DeviceRegistry(deviceProvider);
-            _deviceRegistry.RegisterAll();
-        }
-
-        public static IDeviceRegistry DeviceRegistry => _deviceRegistry;
 
         protected override void ConfigureIoC(IStyletIoCBuilder builder)
         {
@@ -76,9 +40,7 @@ namespace IgniteApp
             builder.AddModule(new SqliteModules());
             builder.AddModule(new AutoModules());
             // 只有真正需要全局唯一的对象才注册为单例
-            builder.Bind<AlarmPublisher>().ToSelf().InSingletonScope();
             builder.Bind<AlarmPopupViewModel>().ToSelf().InSingletonScope();
-            builder.Bind<AlarmPopupNotifier>().ToSelf();
 
             string connUri = "tcp://127.0.0.1:8970";
             var uri = new TangdaoUri(connUri);
@@ -104,19 +66,14 @@ namespace IgniteApp
         {
             base.OnLaunch();
 
-            // 创建设备工厂
-            IDeviceFactory deviceFactory = new DefaultDeviceFactory(Container);
+            //NoticeMediator.SetResolver(reg => Container.Get(reg.RegisterType) as INoticeObserver);
 
-            // 创建设备提供者
-            IDeviceProvider deviceProvider = new DefaultDeviceProvider(deviceFactory);
-
-            // 创建设备注册表
-            _deviceRegistry = new DeviceRegistry(deviceProvider);
-
-            // 注册所有设备
-            _deviceRegistry.RegisterAll();
-
-            //NoticeMediator.Instance.UseNoticeKit().Add("Badge").Add("Alert");
+            //NoticeMediator.Instance.ChainRegister()
+            //    .Add(typeof(LightViewModel))
+            //    .Add(typeof(ElectViewModel))
+            //    .Add(typeof(PressureViewModel))
+            //    .Add(typeof(TempAndHumViewModel))
+            //    .Add(typeof(ResistiveViewModel));
 
             // 启动监控服务
             var monitorService = Container.Get<IFileMonitor>();

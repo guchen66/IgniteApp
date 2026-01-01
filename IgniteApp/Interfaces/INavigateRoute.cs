@@ -1,13 +1,4 @@
-﻿using IgniteApp.Bases;
-using IgniteApp.Shell.Maintion.ViewModels;
-using Stylet;
-using System;
-using System.Collections.Generic;
-using System.Drawing.Text;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace IgniteApp.Interfaces
 {

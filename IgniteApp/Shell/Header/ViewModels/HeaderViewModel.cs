@@ -1,13 +1,8 @@
-﻿using IgniteApp.ViewModels;
+﻿using IgniteApp.Bases;
 using IT.Tangdao.Framework.Commands;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using System.Windows;
-using IgniteApp.Bases;
+using System.Windows.Input;
 
 namespace IgniteApp.Shell.Header.ViewModels
 {

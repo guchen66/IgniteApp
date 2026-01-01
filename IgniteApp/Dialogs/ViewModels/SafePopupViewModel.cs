@@ -1,14 +1,9 @@
 ﻿using IgniteApp.Bases;
 using IgniteShared.Globals.System;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IgniteApp.Dialogs.ViewModels
 {
-    public class SafePopupViewModel: ViewModelBase
+    public class SafePopupViewModel : ViewModelBase
     {
         public bool IsShould;
 
@@ -22,11 +17,11 @@ namespace IgniteApp.Dialogs.ViewModels
 
         public void ExecuteClose()
         {
-            if (Password== SysLoginInfo.Password)
+            if (Password == SysLoginInfo.Password)
             {
                 this.RequestClose(true);
             }
-           else 
+            else
             {
                 this.RequestClose(false);
             }

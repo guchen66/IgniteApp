@@ -1,12 +1,7 @@
 ﻿using IT.Tangdao.Framework.Helpers;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace IgniteDb
 {
@@ -14,7 +9,7 @@ namespace IgniteDb
     {
         public static void InitConnection()
         {
-           
+
             var dbPath = DirectoryHelper.SelectDirectoryByName("demo.db");
             // 创建连接字符串
             string connectionString = $"Data Source={dbPath};";
@@ -33,6 +28,6 @@ namespace IgniteDb
             }
         }
         private static string connStr = ConfigurationManager.ConnectionStrings["Sqlite"].ConnectionString;
-       
+
     }
 }

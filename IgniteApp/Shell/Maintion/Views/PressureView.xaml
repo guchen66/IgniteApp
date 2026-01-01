@@ -16,7 +16,7 @@
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="50" />
-            <RowDefinition Height="50" />
+            <RowDefinition Height="40" />
         </Grid.RowDefinitions>
 
         <!--  路由视图容器  -->
@@ -52,15 +52,18 @@
                 Margin="5"
                 Command="{s:Action GoToDifferentialGaugeView}"
                 Content="数字智能测量仪" />
+            <Button
+                Margin="5"
+
+                Content="{Binding Tag}" />
         </StackPanel>
         <StatusBar
             Grid.Row="2"
-            VerticalAlignment="Top"
+            VerticalAlignment="Top" Width="100" Height="40" HorizontalAlignment="Left"
             Style="{StaticResource CustomStatusBarStyle}">
             <StatusBarItem>
                 <TextBlock Text="{marup:BoolToStringMode Binding={Binding BoolValue}, FalseValue='{x:Static textStatus:TextStatus.Falied}', TrueValue='{x:Static textStatus:TextStatus.Sucess}'}" />
             </StatusBarItem>
-            <Separator />
         </StatusBar>
     </Grid>
 </UserControl>

@@ -1,15 +1,4 @@
-﻿using IgniteApp.Common;
-using IgniteApp.Interfaces;
-using IT.Tangdao.Framework.Mvvm;
-using IT.Tangdao.Framework.Extensions;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using IT.Tangdao.Framework.Mvvm;
 
 namespace IgniteApp.Shell.Home.Models
 {

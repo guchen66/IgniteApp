@@ -1,14 +1,15 @@
 ﻿using IgniteApp.Shell.ProcessParame.Models;
+using IgniteShared.Enums;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace IgniteApp.Shell.ProcessParame.Services
 {
     public interface ITaskService
     {
+        CaliStatus TaskStatus { get; set; }
+        int CaliCount { get; set; }
+
         Task StartAsync(IProgress<CalibrationProgress> progress);
 
         void Pause();

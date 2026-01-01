@@ -1,14 +1,11 @@
 ﻿using IgniteApp.Bases;
 using IgniteApp.Interfaces;
 using IT.Tangdao.Framework.Abstractions.Loggers;
+using IT.Tangdao.Framework.Abstractions.Notices;
 using IT.Tangdao.Framework.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace IgniteApp.Shell.Maintion.ViewModels
 {
@@ -36,6 +33,14 @@ namespace IgniteApp.Shell.Maintion.ViewModels
         {
             get => _content;
             set => SetAndNotify(ref _content, value);
+        }
+
+        private string _tag;
+
+        public string Tag
+        {
+            get => _tag;
+            set => SetAndNotify(ref _tag, value);
         }
 
         private static readonly ITangdaoLogger Logger = TangdaoLogger.Get(typeof(LightViewModel));

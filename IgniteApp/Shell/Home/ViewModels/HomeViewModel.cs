@@ -1,24 +1,22 @@
-﻿using HandyControl.Controls;
-using HandyControl.Tools.Extension;
-using IgniteApp.Bases;
+﻿using IgniteApp.Bases;
 using IgniteApp.Common;
 using IgniteApp.Interfaces;
 using IgniteApp.Shell.Home.Models;
-using IgniteApp.ViewModels;
-using IT.Tangdao.Framework;
 using IT.Tangdao.Framework.Abstractions.FileAccessor;
-using IT.Tangdao.Framework.Commands;
 using IT.Tangdao.Framework.Extensions;
-using IT.Tangdao.Framework.Infrastructure;
+using IT.Tangdao.Framework.Helpers;
 using Stylet;
+using System.Collections;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+using System.Windows.Documents;
+using IT.Tangdao.Framework.Abstractions.Loggers;
+using Stylet.Logging;
+using System.ComponentModel;
+using static System.Collections.Specialized.BitVector32;
+using System.IO;
+using IT.Tangdao.Framework.Common;
 
 namespace IgniteApp.Shell.Home.ViewModels
 {
@@ -42,19 +40,42 @@ namespace IgniteApp.Shell.Home.ViewModels
         }
 
         private readonly IViewFactory _viewFactory;
-        private readonly IContentReader _readService;
+        private readonly IContentAccess _contentAccess;
+
+        private ITangdaoLogger _logger = TangdaoLogger.Get(typeof(HomeViewModel));
         #endregion
 
         #region--.ctor--
 
-        public HomeViewModel(IViewFactory viewFactory, IContentReader readService)
+        public HomeViewModel(IViewFactory viewFactory, IContentAccess contentAccess)
         {
             _viewFactory = viewFactory;
-            _readService = readService;
-            HomeMenuItems.AddRange(ReadOnlyMenuItemManager.Create(readService, "unity.config", "Tangdao"));
+            _contentAccess = contentAccess;
 
-            //  readService.Default.AsConfig().SelectAppConfig(readTitle).ToList(v => new TangdaoMenuItem { MenuName = v }).ToObservableCollection();
-            //InitMenuData();
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "unity.config");
+            var responseResult = contentAccess.Default.Read(path).AsConfig().SelectSection("Tangdao")
+            .ToList(kv => new HomeMenuItem()
+            {
+                Title = kv.Key,
+                ViewModelName = kv.Value,
+            });
+            HomeMenuItems = new BindableCollection<HomeMenuItem>(responseResult);
+
+            DataConfig.InitializeFromExcel();
+            foreach (var item in DataConfig.SVData)
+            {
+                _logger.WriteLocal($"1:{item.Value}");
+            }
+
+            //  var ssssss = dicts.ToTangdaoSortedDictionary(x=>);
+            List<string> plcDatas = new List<string>() { "123", "432", "34.4", "32.1" };
+
+            DataConfig.UpdateSVReportValues(plcDatas);
+
+            foreach (var item in DataConfig.SVData)
+            {
+                _logger.WriteLocal($"2:{item.Value}");
+            }
         }
 
         #endregion
@@ -68,9 +89,8 @@ namespace IgniteApp.Shell.Home.ViewModels
         public void ExecuteNavigatToView(string viewModelName)
         {
             var dicts = HomeMenuItems.ToDictionary(obj => obj.ViewModelName, obj => obj.ViewModel);
-            if (dicts.ContainsKey(viewModelName))
+            if (dicts.TryGetValue(viewModelName, out IScreen screen))
             {
-                dicts.TryGetValue(viewModelName, out IScreen screen);
                 ActivateItem(screen ?? (screen = _viewFactory.CreateViewModel(viewModelName)));
             }
         }
@@ -85,5 +105,9 @@ namespace IgniteApp.Shell.Home.ViewModels
         }
 
         #endregion
+
+        public void PlcData_Changed(object sender, PropertyChangedEventArgs e)
+        {
+        }
     }
 }

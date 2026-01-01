@@ -1,10 +1,7 @@
-﻿using IgniteApp.Shell.Header.Models;
-using IT.Tangdao.Framework.Extensions;
+﻿using IT.Tangdao.Framework.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IgniteApp.Shell.Home.Models
 {
@@ -37,7 +34,7 @@ namespace IgniteApp.Shell.Home.Models
 
         public List<HomeMenuItem> GetHomeMenus()
         {
-           return Items.Select(x=>x.Value).ToList();
+            return Items.Select(x => x.Value).ToList();
         }
     }
 }

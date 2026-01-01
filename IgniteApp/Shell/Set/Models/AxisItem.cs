@@ -1,21 +1,15 @@
-﻿using IgniteShared.Dtos;
-using IgniteShared.Globals.Local;
-using IT.Tangdao.Framework;
-using IT.Tangdao.Framework.Abstractions.Loggers;
+﻿using IgniteShared.Globals.Local;
 using IT.Tangdao.Framework.Abstractions.FileAccessor;
-using IT.Tangdao.Framework.Mvvm;
+using IT.Tangdao.Framework.Abstractions.Loggers;
+using IT.Tangdao.Framework.Enums;
 using IT.Tangdao.Framework.Extensions;
 using IT.Tangdao.Framework.Helpers;
-using Stylet;
+using IT.Tangdao.Framework.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
-using IT.Tangdao.Framework.Enums;
 
 namespace IgniteApp.Shell.Set.Models
 {
@@ -64,24 +58,23 @@ namespace IgniteApp.Shell.Set.Models
 
         public AxisProvider()
         {
-            _readService = ServiceLocator.GetService<IContentReader>();
-            _writeService = ServiceLocator.GetService<IContentWriter>();
+            _contentAccess = ServiceLocator.GetService<IContentAccess>();
+
             InitializalData();
         }
 
-        private readonly IContentReader _readService;
-        private readonly IContentWriter _writeService;
+        private readonly IContentAccess _contentAccess;
 
         public void InitializalData()
         {
             var foldPath = Path.Combine(IgniteInfoLocation.Recipe, "AxisInfo.xml");
-            var xmlData = _readService.Default.Read(foldPath).Content;
+            var xmlData = _contentAccess.Default.Read(foldPath).Content;
             if (xmlData == null)
             {
                 return;
             }
-            // _readService.Current.Load(xmlData);
-            List<AxisItem> AxisItems = _readService.Cache.DeserializeCache<List<AxisItem>>(foldPath, DaoFileType.Xml);
+            // _contentAccess.Current.Load(xmlData);
+            List<AxisItem> AxisItems = _contentAccess.Cache.DeserializeCache<List<AxisItem>>(foldPath, DaoFileType.Xml);
             //  List<AxisItem> AxisItems = XmlFolderHelper.Deserialize<List<AxisItem>>(xmlData);
             foreach (var item in AxisItems)
             {
@@ -108,8 +101,8 @@ namespace IgniteApp.Shell.Set.Models
 
                 var info = TangdaoXmlSerializer.SerializeXML<List<AxisItem>>(AxisItems);
                 var foldPath = Path.Combine(IgniteInfoLocation.Recipe, "AxisInfo.xml");
-                _writeService.Default.Write(info, foldPath);
-                var xmlData = _readService.Default.Read(foldPath).Content;
+                _contentAccess.Default.Write(info, foldPath);
+                var xmlData = _contentAccess.Default.Read(foldPath).Content;
 
                 if (xmlData == null)
                 {

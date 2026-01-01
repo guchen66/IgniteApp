@@ -1,19 +1,10 @@
 ﻿using IgniteDevices.Connections.Interfaces;
 using IgniteDevices.PLC.Services;
-using IgniteShared.Enums;
-
-using IgniteShared.Models;
-using IT.Tangdao.Framework.Abstractions;
 using IT.Tangdao.Framework.Abstractions.Loggers;
 using IT.Tangdao.Framework.Extensions;
 using Modbus.Device;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace IgniteDevices.Connections
 {

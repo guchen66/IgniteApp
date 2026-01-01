@@ -1,18 +1,6 @@
-﻿using IgniteApp.Views;
-using IT.Tangdao.Framework.Extensions;
-using System;
-using System.Collections.Generic;
-using System.IO.Packaging;
-using System.Linq;
-using System.Reflection;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Markup;
-using System.Windows.Navigation;
-using System.Xaml;
 
 namespace IgniteApp.Converters.Test
 {

@@ -40,6 +40,7 @@
                 Command="{s:Action StopCalibration}"
                 Content="停止标定" />
             <Label Content="下料" />
+            <ProgressBar Margin="5" Width="150" Height="30" Value="{Binding CalibrationValue}" />
         </WrapPanel>
 
         <DataGrid

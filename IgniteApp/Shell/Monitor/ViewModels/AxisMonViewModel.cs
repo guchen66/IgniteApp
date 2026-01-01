@@ -2,16 +2,9 @@
 using IgniteApp.Bases;
 using IgniteApp.Shell.Monitor.Models;
 using IT.Tangdao.Framework.Commands;
-using IT.Tangdao.Framework;
 using Stylet;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using IT.Tangdao.Framework.Abstractions;
-using IT.Tangdao.Framework.Abstractions.Contracts;
 
 namespace IgniteApp.Shell.Monitor.ViewModels
 {

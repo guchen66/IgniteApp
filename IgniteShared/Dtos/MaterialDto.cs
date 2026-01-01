@@ -1,11 +1,4 @@
-﻿using IgniteShared.Entitys;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IgniteShared.Dtos
+﻿namespace IgniteShared.Dtos
 {
     /// <summary>
     /// 物料信息

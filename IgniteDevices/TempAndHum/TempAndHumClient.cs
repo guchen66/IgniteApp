@@ -1,12 +1,8 @@
 ﻿using IgniteShared.Globals.System;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.IO.Ports;
-using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace IgniteDevices.TempAndHum
@@ -27,15 +23,15 @@ namespace IgniteDevices.TempAndHum
         {
             try
             {
-              
+
                 serialPort.Open();
-              
+
                 if (serialPort.IsOpen)
                 {
                     serialPort.DataReceived += SerialPort_DataReceived;
-                  //  slim.WaitHandle.WaitOne();
-                  //  slim.Set();
-                    
+                    //  slim.WaitHandle.WaitOne();
+                    //  slim.Set();
+
                 }
                 else
                 {
@@ -53,7 +49,7 @@ namespace IgniteDevices.TempAndHum
             byte[] buffer = new byte[1024];
             byte[] readBuffer = new byte[serialPort.ReadBufferSize];
             serialPort.Read(readBuffer, 0, readBuffer.Length);
-            SysTempAndHum.Temp=BitConverter.ToDouble(readBuffer, 0);
+            SysTempAndHum.Temp = BitConverter.ToDouble(readBuffer, 0);
             SysTempAndHum.Content = Encoding.UTF8.GetString(readBuffer);
             SysTempAndHum.IsConnTemp = true;
         }
@@ -81,8 +77,8 @@ namespace IgniteDevices.TempAndHum
             {
                 MessageBox.Show("串口已经被打开");
             }
-           
-           
+
+
         }
     }
 

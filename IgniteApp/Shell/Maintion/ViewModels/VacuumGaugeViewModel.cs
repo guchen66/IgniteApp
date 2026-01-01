@@ -1,14 +1,6 @@
-﻿using HandyControl.Controls;
-using IT.Tangdao.Framework;
-using IT.Tangdao.Framework.Abstractions;
-using IT.Tangdao.Framework.Abstractions.Navigates;
-using IT.Tangdao.Framework.Ioc;
+﻿using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.Navigation;
 using Stylet;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IgniteApp.Shell.Maintion.ViewModels
 {

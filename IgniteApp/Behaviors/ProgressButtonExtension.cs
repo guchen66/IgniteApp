@@ -1,9 +1,4 @@
 ﻿using HandyControl.Controls;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace IgniteApp.Behaviors
@@ -30,7 +25,7 @@ namespace IgniteApp.Behaviors
         private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is ProgressButton button)
-        {
+            {
                 // 确保Content总是显示为格式化的进度百分比
                 button.Content = $"{e.NewValue:0}%";
             }

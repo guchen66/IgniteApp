@@ -1,17 +1,17 @@
-﻿using IgniteApp.Bases;
+﻿using HandyControl.Controls;
+using IgniteApp.Bases;
 using IgniteApp.Shell.Maintion.Args;
 using IgniteApp.Shell.Maintion.Models;
 using IT.Tangdao.Framework.Abstractions.FileAccessor;
+using IT.Tangdao.Framework.Abstractions.Notices;
 using IT.Tangdao.Framework.Commands;
-using System;
+using IT.Tangdao.Framework.DaoTasks;
+using IT.Tangdao.Framework.Enums;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Threading;
+using MessageBox = HandyControl.Controls.MessageBox;
 
 namespace IgniteApp.Shell.Maintion.ViewModels
 {
@@ -25,12 +25,26 @@ namespace IgniteApp.Shell.Maintion.ViewModels
             set => SetAndNotify(ref _usualArgs, value);
         }
 
-        private ElectricityModel _selectedItem;
+        /// <summary>
+        /// 单事件
+        /// </summary>
+        private ElectricityModel _singleEventElect;
 
-        public ElectricityModel SelectedItem
+        public ElectricityModel SingleEventElect
         {
-            get => _selectedItem;
-            set => SetAndNotify(ref _selectedItem, value);
+            get => _singleEventElect ?? (_singleEventElect = new ElectricityModel());
+            set => SetAndNotify(ref _singleEventElect, value);
+        }
+
+        /// <summary>
+        /// 多事件
+        /// </summary>
+        private ElectricityModel _manyEventElect;
+
+        public ElectricityModel ManyEventElect
+        {
+            get => _manyEventElect ?? (_manyEventElect = new ElectricityModel());
+            set => SetAndNotify(ref _manyEventElect, value);
         }
 
         private ElectStatus _electStatus;
@@ -65,56 +79,61 @@ namespace IgniteApp.Shell.Maintion.ViewModels
             set => SetAndNotify(ref _eLectModelList, value);
         }
 
+        private string _tag;
+
+        public string Tag
+        {
+            get => _tag;
+            set => SetAndNotify(ref _tag, value);
+        }
+
         public ElectricityMotion _electricityMotion;
         public ElectPriceTrace _electricityPriceTrace;
         public ICommand CheckCommand { get; set; }
         public ICommand CheckPriceCommand { get; set; }
 
-        public ElectViewModel(IContentReader readService) : base("Elect")
+        public ElectViewModel(IContentAccess contentAccess) : base("Elect")
         {
             ELectModelList = new ObservableCollection<ElectricityModel>()
             {
-                new ElectricityModel(){ Id=1,Name="电流表1" ,CurrentValue=10,Range=25,Status=SingleState.Disabled,IElectService=new ElectService()},
-                new ElectricityModel(){ Id=2,Name="电流表2" ,CurrentValue=10,Range=25,Status=SingleState.Disabled,IElectService=new ElectService()}
+                new ElectricityModel(){ Id=1,Name="电流表1" ,CurrentValue=10,Range=25,Status=TangdaoActive.Disabled,IElectService=new ElectService()},
+                new ElectricityModel(){ Id=2,Name="电流表2" ,CurrentValue=10,Range=25,Status=TangdaoActive.Disabled,IElectService=new ElectService()}
             };
             CheckCommand = MinidaoCommand.Create(ExecuteCheck);
             CheckPriceCommand = MinidaoCommand.Create(ExecuteCheckPrice);
-            // _electricityMotion = new ElectricityMotion();
-            // _electricityPriceTrace = new ElectPriceTrace();
-            //_electricityMotion.OverLoad += OnOverLoadChanged;
-            //_electricityMotion.LowLoad += OnLowLoadChanged;
-            //_electricityPriceTrace.PriceChanged += OnPriceChanged;
-        }
-
-        private void OnPriceChanged(object sender, string e)
-        {
-            if (ElectStatus.ElectPrice > 100)
-            {
-                e = "大了";
-            }
+            _electricityMotion = new ElectricityMotion();
+            _electricityMotion.StateChanged += OnStateChanged;
         }
 
         private void ExecuteCheck()
         {
-            IsStatusPopupVisible = false;
             //StatusMessage = string.Empty; // 先清除旧状态
-            _electricityMotion.CheckElectricity(SelectedItem);
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                ElectricityArgs electricityArgs = new ElectricityArgs(ManyEventElect);
+                _electricityMotion.CheckState(electricityArgs);
+            });
         }
 
         private void ExecuteCheckPrice()
         {
         }
 
-        private void OnOverLoadChanged(object sender, ElectricityArgs e)
+        private void OnStateChanged(object sender, ElectricityArgs e)
         {
-            StatusMessage = "温度超载";
-            IsStatusPopupVisible = true;
-        }
-
-        private void OnLowLoadChanged(object sender, ElectricityArgs e)
-        {
-            StatusMessage = "温度过低";
-            IsStatusPopupVisible = true;
+            if (e.ElectricityModel.CurrentValue > 20)
+            {
+                StatusMessage = "温度超载";
+                IsStatusPopupVisible = true;
+                //  MessageBox.Show("温度超载");
+            }
+            if (e.ElectricityModel.CurrentValue < 0)
+            {
+                MessageBox.Show("温度过低");
+                StatusMessage = "温度过低";
+                //  IsStatusPopupVisible = true;
+            }
         }
 
         private readonly Dictionary<int, ElectAdapter> _adapters = new Dictionary<int, ElectAdapter>();

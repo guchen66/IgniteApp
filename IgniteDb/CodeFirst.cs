@@ -1,12 +1,8 @@
 ﻿using IgniteShared.Entitys;
 using SQLite.CodeFirst;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.SQLite;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IgniteDb
 {
@@ -52,7 +48,7 @@ namespace IgniteDb
         protected override void Seed(AccessDbContext context)
         {
             // 在这里填充核心数据或测试数据
-            context.Set<MaterialInfo>().Add(new MaterialInfo {  Id = 30, Station="第一站",Status="已处理" });
+            context.Set<MaterialInfo>().Add(new MaterialInfo { Id = 30, Station = "第一站", Status = "已处理" });
             context.SaveChanges();
         }
     }

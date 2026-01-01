@@ -1,24 +1,13 @@
-﻿using HandyControl.Controls;
-using IgniteAdmin.Providers;
-using IgniteApp.Bases;
+﻿using IgniteApp.Bases;
 using IgniteApp.Interfaces;
 using IgniteApp.Shell.Set.Models;
-using IgniteShared.Dtos;
 using IgniteShared.Globals.Local;
 using IT.Tangdao.Framework.Abstractions.FileAccessor;
 using IT.Tangdao.Framework.Enums;
 using IT.Tangdao.Framework.Helpers;
 using Stylet;
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Threading;
-using System.Xml.Linq;
 using MessageBox = HandyControl.Controls.MessageBox;
 
 namespace IgniteApp.Shell.Set.ViewModels
@@ -26,8 +15,7 @@ namespace IgniteApp.Shell.Set.ViewModels
     public class ProcessViewModel : ViewModelBase
     {
         #region--字段--
-        private readonly IContentReader _readService;
-        private readonly IContentWriter _writeService;
+        private readonly IContentAccess _contentAccess;
         #endregion
 
         #region--属性--
@@ -39,16 +27,13 @@ namespace IgniteApp.Shell.Set.ViewModels
             set => SetAndNotify(ref _processItems, value);
         }
 
-        private IReadProvider<ProcessItem> _readProvider;
         #endregion
 
         #region--.ctor--
 
-        public ProcessViewModel(IContentReader readService, IContentWriter writeService, IReadProvider<ProcessItem> readProvider)
+        public ProcessViewModel(IContentAccess contentAccess)
         {
-            _readService = readService;
-            _writeService = writeService;
-            _readProvider = readProvider;
+            _contentAccess = contentAccess;
             InitializalData();
         }
 
@@ -58,42 +43,40 @@ namespace IgniteApp.Shell.Set.ViewModels
 
         public void InitializalData()
         {
-            var operations = _readProvider.SelectList(IgniteInfoLocation.Recipe);
-            if (operations.IsSuccess)
-            {
-                ProcessItems = new BindableCollection<ProcessItem>(operations.Data);
-            }
-            //NotifyOfPropertyChange(nameof(ProcessItems));
+            ProcessItems = GetLocalData();
         }
 
         public void RefreshProcessData()
         {
-            // InitializalData();
-            var operations = _readProvider.SelectList(IgniteInfoLocation.Recipe);
-            if (operations.IsSuccess)
-            {
-                ProcessItems.Clear();
-                foreach (var item in operations.Data)
-                    ProcessItems.Add(item);
-            }
-            MessageBox.Success("流程刷新成功");
+            ProcessItems = GetLocalData();
             ProcessItems.Refresh();
-            // MessageBox.Success("流程刷新成功");
-            //Application.Current.Dispatcher.Invoke(() => { });
-            //Dispatcher.CurrentDispatcher.Invoke(() => { });
-
-            //Dispatcher.CurrentDispatcher.InvokeAsync(() => { });
-            //Dispatcher.CurrentDispatcher.BeginInvoke();
-            //Dispatcher dispatcher;
-            //dispatcher = dispatcher = Dispatcher.CurrentDispatcher;
+            MessageBox.Success("流程刷新成功");
         }
 
         public void SaveProcessData()
         {
             var foldPath = Path.Combine(IgniteInfoLocation.Recipe, "ProcessItem.xml");
             //将数据写成XML格式保存在本地
-            _writeService.Default.WriteObject(foldPath, ProcessItems);
+            var content = _contentAccess.Cache.Read(foldPath).Content;
+            _contentAccess.Default.Write(foldPath, content, DaoFileType.Xml).AsXml().ToXml(ProcessItems);
             MessageBox.Success("流程保存成功");
+        }
+
+        private BindableCollection<ProcessItem> GetLocalData()
+        {
+            var foldPath = Path.Combine(IgniteInfoLocation.Recipe, "ProcessItem.xml");
+            var result = _contentAccess.Default.Read(foldPath).AsXml().SelectNodes<ProcessItem>();
+            if (result.IsSuccess)
+            {
+                ProcessItems = new BindableCollection<ProcessItem>(result.Data);
+                return ProcessItems;
+            }
+            else
+            {
+                var faker = new TangdaoDataFaker<ProcessItem>();
+                ProcessItems = new BindableCollection<ProcessItem>(faker.Build(20));
+                return ProcessItems;
+            }
         }
 
         #endregion

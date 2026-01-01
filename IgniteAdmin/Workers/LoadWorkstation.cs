@@ -1,10 +1,11 @@
-﻿using IgniteShared.Globals.Common.Works;
+﻿using IgniteShared.Events;
+using IgniteShared.Globals.Common.Works;
+using IT.Tangdao.Framework.Abstractions.FileAccessor;
 using IT.Tangdao.Framework.Abstractions.Loggers;
 using IT.Tangdao.Framework.Extensions;
+using Stylet;
+using StyletIoC;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,6 +18,12 @@ namespace IgniteAdmin.Workers
         public new string WorkName => "上料工位";
         private static readonly ITangdaoLogger Logger = TangdaoLogger.Get(typeof(LoadWorkstation));
 
+        [Inject]
+        public IEventAggregator eventAggregator;
+
+        [Inject]
+        public IContentAccess contentAccess;
+
         protected override async Task ExecuteWorkAsync(CancellationToken token)
         {
             while (!token.IsCancellationRequested)
@@ -26,7 +33,15 @@ namespace IgniteAdmin.Workers
                 var wafer = new WaferMessage($"Wafer-{id:D4}");
 
                 Logger.WriteLocal($"生成产品: {wafer.CellId}");
-                await Task.Delay(500, token);
+                eventAggregator.Publish(new ProductUpdateEvent()
+                {
+                    ProductId = wafer.CellId,
+                    ProductName = WorkName,
+                    Remark = "进入上料",
+                    UpdateTime = DateTime.Now,
+                });
+
+                await Task.Delay(1500, token);
 
                 // 传递给预校工位
                 await ProductionLine.LoadToPre.Writer.WriteAsync(wafer, token);

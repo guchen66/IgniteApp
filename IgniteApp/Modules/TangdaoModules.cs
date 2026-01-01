@@ -1,32 +1,27 @@
-﻿using AutoMapper;
-using IgniteAdmin.Providers;
+﻿using IgniteAdmin.Providers;
+using IgniteApp.Dialogs.ViewModels;
 using IgniteApp.Interfaces;
-using IgniteShared.Models;
+using IgniteApp.Shell.Maintion.ViewModels;
+using IgniteApp.Shell.ProcessParame.ViewModels;
+using IgniteApp.ViewModels;
+using IgniteShared.Globals.Local;
+using IT.Tangdao.Framework;
 using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.FileAccessor;
+using IT.Tangdao.Framework.Abstractions.Navigation;
+using IT.Tangdao.Framework.Abstractions.Notices;
+using IT.Tangdao.Framework.Commands;
+using IT.Tangdao.Framework.Configurations;
+using IT.Tangdao.Framework.Enums;
+using IT.Tangdao.Framework.EventArg;
+using IT.Tangdao.Framework.Events;
+using IT.Tangdao.Framework.Extensions;
 using IT.Tangdao.Framework.Helpers;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
 using StyletIoC;
+using StyletIoC.Creation;
 using System;
 using System.Collections.Generic;
-using IT.Tangdao.Framework.Abstractions.FileAccessor;
-using IT.Tangdao.Framework.Enums;
-using System.IO.Ports;
-using IgniteApp.ViewModels;
-using IgniteApp.Shell.Maintion.ViewModels;
-using IT.Tangdao.Framework;
-using IT.Tangdao.Framework.Events;
-using StyletIoC.Creation;
-using IgniteShared.Dtos;
-using IgniteShared.Globals.Local;
-using IgniteApp.Tests;
-using IT.Tangdao.Framework.Ioc;
-using IgniteAdmin.Interfaces;
-using IT.Tangdao.Framework.Abstractions.Navigates;
-using IgniteApp.Dialogs.ViewModels;
-using IgniteApp.Shell.ProcessParame.ViewModels;
-using IT.Tangdao.Framework.Paths;
-using IT.Tangdao.Framework.Configurations;
+using System.ComponentModel;
 
 namespace IgniteApp.Modules
 {
@@ -38,9 +33,24 @@ namespace IgniteApp.Modules
             Bind<ISingleNavigateView>().ToAllImplementations();
             //简单导航的路由功能
             Bind<ISingleRouter>().To<SingleRouter>();
+
+            Bind<IHandlerTable>().To<HandlerTable>().InSingletonScope();
+
+            Bind<ITangdaoPublisher>().To<TangdaoPublisher>().InSingletonScope();
+            Bind<ITangdaoNotifier>().To<TangdaoNotifier>().InSingletonScope();
             Bind<ISingleRouterDemo>().To<SingleRouterDemo>();
-            //GlobalPhotoViewModel
+
             //注册导航，有拦截器功能
+
+            Bind<ITangdaoRouterResolver>().ToFactory(container =>
+            {
+                return new TangdaoRouterResolver(register => container.Get(register.RegisterType) as ITangdaoPage);
+            });
+
+            Bind<ITangdaoRouterFactory>().ToFactory(container =>
+            {
+                return new TangdaoRouterFactory(container.Get<ITangdaoRouterResolver>());
+            });
             Bind<ITangdaoRouter>().To<TangdaoRouter>().InSingletonScope();
 
             //注册转换器
@@ -59,22 +69,20 @@ namespace IgniteApp.Modules
                     FileReadRetryCount = 3
                 };
             }).InSingletonScope();
-            // 2. 注册服务注册器本身
-            //  Bind<ITangdaoServiceRegistrar>().To<StyletServiceRegistrar>().InSingletonScope();
+
             // 注册Tangdao监控服务
             Bind<IFileMonitor>().To<FileMonitor>().InSingletonScope();
 
             Bind<IFileLocator>().To<FileLocator>().InSingletonScope();
             //注册Tangdao读写服务
-            Bind<IContentReader>().To<ContentReader>();
-            Bind<IContentWriter>().To<ContentWriter>();
+            Bind<IContentAccess>().To<ContentAccess>();
             // 正确的方式：为每个实现单独注册并指定Key
-            Bind<ITangdaoPage>().To<DigitalSmartGaugeViewModel>().WithKey("DigitalSmartGauge");
-            Bind<ITangdaoPage>().To<DifferentialGaugeViewModel>().WithKey("DifferentialGauge");
-            Bind<ITangdaoPage>().To<VacuumGaugeViewModel>().WithKey("VacuumGauge");
-            Bind<ITangdaoPage>().To<CO2TeachViewModel>().WithKey("CO2Teach");
-            Bind<ITangdaoPage>().To<UVTeachViewModel>().WithKey("UVTeach");
-            Bind<ITangdaoPage>().To<IRTeachViewModel>().WithKey("IRTeach");
+            //Bind<ITangdaoPage>().To<DigitalSmartGaugeViewModel>().WithKey("DigitalSmartGauge");
+            //Bind<ITangdaoPage>().To<DifferentialGaugeViewModel>().WithKey("DifferentialGauge");
+            //Bind<ITangdaoPage>().To<VacuumGaugeViewModel>().WithKey("VacuumGauge");
+            //Bind<ITangdaoPage>().To<CO2TeachViewModel>().WithKey("CO2TeachViewModel");
+            //Bind<ITangdaoPage>().To<UVTeachViewModel>().WithKey("UVTeach");
+            //Bind<ITangdaoPage>().To<IRTeachViewModel>().WithKey("IRTeach");
 
             Bind<IPlcProvider>().To<PlcProvider>();
             //  Bind<IDeviceProvider>().To<DeviceProvider>().InSingletonScope();
@@ -92,10 +100,6 @@ namespace IgniteApp.Modules
                                                                        // 获取事件分发器和所有事件处理器
                                                                        // var dispatcher = ServerLocator.Current.Resolve<TangdaoEventDispatcher>();
                                                                        // var handlers = ServerLocator.Current.Resolve<ITangdaoHandler>();
-
-            Bind(typeof(IReadProvider<>)).To(typeof(XmlReadProvider<>));
-
-            //Fluent
         }
 
         private ITangdaoMessage Builder(IRegistrationContext context)

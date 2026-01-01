@@ -1,23 +1,15 @@
 ﻿//using EntityFramework.DynamicFilters;
-using EntityFramework.DynamicFilters;
 using IgniteShared.Entitys;
 using IT.Tangdao.Framework.Helpers;
 using Newtonsoft.Json.Linq;
 using SQLite.CodeFirst;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
-using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IgniteDb
 {
-    public class AccessDbContext:DbContext
+    public class AccessDbContext : DbContext
     {
         public DbSet<ProductInfo> Products { get; set; }
         public DbSet<MaterialInfo> MaterialInfos { get; set; }
@@ -31,7 +23,7 @@ namespace IgniteDb
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             // modelBuilder.Filter("IsDeleted", d=>d.IsDeleted,false);
-          //  modelBuilder.Filter("IsDeleted", (IDeletionWare d) => d.IsDeleted, false);      //使用全局过滤器进行软删除
+            //  modelBuilder.Filter("IsDeleted", (IDeletionWare d) => d.IsDeleted, false);      //使用全局过滤器进行软删除
             modelBuilder.Entity<ProductInfo>().ToTable("ProductInfo");
             modelBuilder.Entity<MaterialInfo>().ToTable("MaterialInfo");
             modelBuilder.Entity<RecipeInfo>().ToTable("RecipeInfo");
@@ -52,7 +44,7 @@ namespace IgniteDb
 
         public override int SaveChanges()
         {
-           // ChangeTracker.Entries<IDeletionWare>().ToList().ForEach(entry => SetFilterDelete(entry));
+            // ChangeTracker.Entries<IDeletionWare>().ToList().ForEach(entry => SetFilterDelete(entry));
             return base.SaveChanges();
         }
 

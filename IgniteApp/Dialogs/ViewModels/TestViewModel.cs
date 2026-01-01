@@ -1,22 +1,26 @@
 ﻿using IgniteApp.Common;
 using IgniteApp.Extensions;
-using IgniteApp.Shell.Maintion.Services;
+using IT.Tangdao.Framework.Commands;
+using IT.Tangdao.Framework.Enums;
 using Stylet;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Threading;
+using IT.Tangdao.Framework.Extensions;
+using IT.Tangdao.Framework.Events;
 
 namespace IgniteApp.Dialogs.ViewModels
 {
     public class TestViewModel : Screen, IDialogProvider
     {
-        public TestViewModel()
+        private readonly IHandlerTable _handlerTable;
+
+        public TestViewModel(IHandlerTable handlerTable)
         {
+            _handlerTable = handlerTable;
         }
 
         public DialogResult OnDialogClosing()
@@ -62,6 +66,13 @@ namespace IgniteApp.Dialogs.ViewModels
 
         public void Open()
         {
+            // HandlerResult result = new HandlerResult();
+            // result.Result = BackResult.Success;
+            //   _handlerTable.Execute("Open", result, TaskThreadType.UI);
+            //var action = _handlerTable.GetResultHandler("Open");
+            // action.Invoke(result);
+
+            TangdaoWeakEvent.Instance.Publish("Open", _handlerTable);
         }
 
         private void TimerCallback(object sender, EventArgs e)

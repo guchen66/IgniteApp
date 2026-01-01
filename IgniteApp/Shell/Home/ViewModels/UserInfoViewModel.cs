@@ -1,44 +1,27 @@
 ﻿using HandyControl.Controls;
-using IgniteAdmin.Managers.Login;
 using IgniteApp.Bases;
-using IgniteApp.Shell.ProcessParame.Models;
-using IgniteApp.ViewModels;
 using IgniteShared.Dtos;
-using IgniteShared.Entitys;
 using IgniteShared.Enums;
 using IgniteShared.Globals.Local;
-using IgniteShared.Globals.System;
 using IT.Tangdao.Framework.Abstractions.FileAccessor;
 using IT.Tangdao.Framework.Abstractions.Loggers;
+using IT.Tangdao.Framework.Abstractions.Results;
 using IT.Tangdao.Framework.Commands;
+using IT.Tangdao.Framework.DaoTasks;
+using IT.Tangdao.Framework.Enums;
 using IT.Tangdao.Framework.Extensions;
 using IT.Tangdao.Framework.Helpers;
-using IT.Tangdao.Framework.Markup;
-using IT.Tangdao.Xaml.Controls;
-using MiniExcelLibs;
-using MiniExcelLibs.Attributes;
-using MiniExcelLibs.OpenXml;
-using Newtonsoft.Json.Linq;
 using Stylet;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Xml;
 using System.Xml.Linq;
-using System.Xml.Serialization;
-using static System.Net.Mime.MediaTypeNames;
 using Brush = System.Windows.Media.Brush;
 using Brushes = System.Windows.Media.Brushes;
-using ColorConverter = System.Windows.Media.ColorConverter;
 
 namespace IgniteApp.Shell.Home.ViewModels
 {
@@ -85,16 +68,16 @@ namespace IgniteApp.Shell.Home.ViewModels
         }
 
         public IWindowManager windowManager;
-        public IContentReader readService;
+        public IContentAccess contentAccess;
         public ICommand UnlockCommand { get; set; }
         public ICommand GetCellInfoCommand { get; set; }
         public ICommand GetIlistCellInfoCommand { get; set; }
         private readonly ITangdaoLogger Logger = TangdaoLogger.Get(typeof(UserInfoViewModel));
 
-        public UserInfoViewModel(IWindowManager windowManager, IContentReader readService)
+        public UserInfoViewModel(IWindowManager windowManager, IContentAccess contentAccess)
         {
             this.windowManager = windowManager;
-            this.readService = readService;
+            this.contentAccess = contentAccess;
             UnlockCommand = new TangdaoCommand<string>(ExecuteUnlock);
             GetCellInfoCommand = new TangdaoCommand<DataGridCellInfo>(ExecuteGetCellInfo);
             GetIlistCellInfoCommand = new TangdaoCommand<IList<DataGridCellInfo>>(ExecuteIListGetCellInfo);
@@ -107,24 +90,34 @@ namespace IgniteApp.Shell.Home.ViewModels
 
         private void ExecuteIListGetCellInfo(IList<DataGridCellInfo> info)
         {
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+            // dict.Select()
         }
 
         public void ShowUserInfo()
         {
             ObservableCollection<int> sss = new ObservableCollection<int>();
-            var xmlData = readService.Default.Read(Path.Combine(IgniteInfoLocation.User, "UserInfo.xml")).Content;
-            XDocument doc = XDocument.Parse(xmlData);
-            List<LoginDto> loginList = doc.Descendants("Login")
-           .Select(login => new LoginDto
-           {
-               // Id = (int)login.Attribute("Id"),
-               UserName = (string)login.Element("UserName"),
-               Password = (string)login.Element("Password"),
-               Role = (RoleType)Enum.Parse(typeof(RoleType), (string)login.Element("Role")),
-               IsAdmin = (bool)login.Element("IsAdmin"),
-               IP = (string)login.Element("IP")
-           })
-           .ToList();
+            var loginList = contentAccess.Default.Read(Path.Combine(IgniteInfoLocation.User, "UserInfo.xml")).AsXml().SelectNodes<LoginDto>().ToList();
+
+            // TangdaoTaskScheduler.Execute(dao =>
+            // {
+            //     var lists2 = datas.ToList();
+            //     Logger.WriteLocal($"{dao.Elapsed}");
+            // }, TaskThreadType.UI);
+
+            // XDocument doc = XDocument.Parse(xmlData);
+            // List<LoginDto> loginList = doc.Descendants("Login")
+            //.Select(login => new LoginDto
+            //{
+            //    // Id = (int)login.Attribute("Id"),
+            //    UserName = (string)login.Element("UserName"),
+            //    Password = (string)login.Element("Password"),
+            //    Role = (RoleType)Enum.Parse(typeof(RoleType),
+            //    (string)login.Element("Role")),
+            //    IsAdmin = (bool)login.Element("IsAdmin"),
+            //    IP = (string)login.Element("IP")
+            //})
+            //.ToList();
             //Descendants选择文档所有名称是Login的元素
             //var ips = doc.Descendants("Login").Select(node => node.Element("IP").Value).ToList();
             LoginInfos = new BindableCollection<LoginDto>(loginList);
@@ -155,11 +148,24 @@ namespace IgniteApp.Shell.Home.ViewModels
             }
         }
 
+        protected override void OnViewLoaded()
+        {
+            base.OnViewLoaded();
+        }
+
         protected override void OnClose()
         {
             base.OnClose();
             IsEnabled = false;
             //Text = null;
         }
+    }
+
+    public class Animal
+    {
+    }
+
+    public class Dog : Animal
+    {
     }
 }

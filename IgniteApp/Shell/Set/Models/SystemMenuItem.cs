@@ -1,16 +1,10 @@
 ﻿using IT.Tangdao.Framework.Mvvm;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace IgniteApp.Shell.Set.Models
 {
-    public class SystemMenuItem:DaoViewModelBase
+    public class SystemMenuItem : DaoViewModelBase
     {
         private int _id;
 
@@ -52,7 +46,7 @@ namespace IgniteApp.Shell.Set.Models
             set => SetProperty(ref _items, value);
         }
 
-     
+
 
     }
 }

@@ -1,21 +1,14 @@
 ﻿using HandyControl.Controls;
 using IgniteApp.Shell.ProcessParame.Models;
-using IgniteApp.Shell.ProcessParame.Services;
-using IgniteApp.ViewModels;
-using IT.Tangdao.Framework;
 using IT.Tangdao.Framework.Abstractions;
 using IT.Tangdao.Framework.Abstractions.FileAccessor;
-using IT.Tangdao.Framework.Abstractions.Navigates;
+using IT.Tangdao.Framework.Abstractions.Navigation;
 using IT.Tangdao.Framework.Commands;
 using IT.Tangdao.Framework.Extensions;
 using IT.Tangdao.Framework.Helpers;
 using Stylet;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Runtime.Remoting.Channels;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -77,11 +70,11 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
         }
 
         public string PageTitle => "";
-        private readonly IContentReader _readService;
+        private readonly IContentAccess _contentAccess;
 
-        public CO2TeachViewModel(IContentReader readService)
+        public CO2TeachViewModel(IContentAccess contentAccess)
         {
-            _readService = readService;
+            _contentAccess = contentAccess;
             // _channel = channel;
             SetCommand = MinidaoCommand.Create(ExecuteSet);
             UnlockCommand = MinidaoCommand.Create<string>(ExecuteUnlock);

@@ -1,14 +1,5 @@
-﻿using IgniteShared.Entitys;
-using IgniteShared.Enums;
-using IgniteShared.Globals.System;
-using IT.Tangdao.Framework.Attributes;
+﻿using IgniteShared.Enums;
 using IT.Tangdao.Framework.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IgniteShared.Dtos
 {

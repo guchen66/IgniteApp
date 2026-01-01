@@ -1,47 +1,27 @@
 ﻿using IgniteAdmin.Providers;
+using IgniteAdmin.Workers;
 using IgniteApp.Interfaces;
-using IgniteApp.Shell.ProcessParame.Models;
+using IgniteApp.Shell.Aside.ViewModels;
 using IgniteApp.Shell.Footer.ViewModels;
 using IgniteApp.Shell.Home.ViewModels;
+using IgniteApp.Shell.Maintion.Models;
+using IgniteApp.Shell.Maintion.ViewModels;
+using IgniteApp.Shell.ProcessParame.Services;
+using IgniteApp.Shell.Set.ViewModels;
 using IgniteApp.ViewModels;
-using IgniteDb.IRepositorys;
-using IgniteDb.Repositorys;
+using IgniteDevices.Connections;
+using IgniteDevices.Connections.Interfaces;
+using IgniteDevices.PLC.Services;
 using IgniteDevices.TempAndHum;
+using IT.Tangdao.Framework.Abstractions.Loggers;
+using IT.Tangdao.Framework.Extensions;
 using Stylet;
 using StyletIoC;
 using System;
-using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using IgniteApp.Dialogs.ViewModels;
-using IgniteApp.Shell.ProcessParame.Services;
-using IgniteApp.Shell.Maintion.Models;
-using IgniteDevices.PLC.Services;
-using IgniteDevices.Connections.Interfaces;
-using IgniteDevices.Connections;
-using IgniteShared.Enums;
-using IT.Tangdao.Framework.Extensions;
-using AutoMapper;
-using System.Runtime.Remoting.Contexts;
-using System.Data;
-using StyletIoC.Creation;
-using System.Linq.Expressions;
-using IgniteApp.Extensions;
-using Unity.Injection;
-using System.ComponentModel;
 using IContainer = StyletIoC.IContainer;
-using IgniteApp.Dialogs.Manage;
-using IgniteApp.Tests;
-using IT.Tangdao.Framework.Abstractions.Navigates;
-using IgniteApp.Bases;
-using IgniteApp.Shell.Maintion.ViewModels;
-using IgniteApp.Shell.Set.ViewModels;
-using IgniteApp.Shell.Maintion.Services;
-using IgniteAdmin.Interfaces;
-using IgniteAdmin.Workers;
-using IT.Tangdao.Framework.Abstractions.Loggers;
 
 namespace IgniteApp.Modules
 {
@@ -58,6 +38,7 @@ namespace IgniteApp.Modules
             Bind<PressureViewModel>().ToSelf().InSingletonScope();
             Bind<HardawreSetViewModel>().ToSelf().InSingletonScope();
             Bind<DefaultViewModel>().ToSelf().InSingletonScope();
+            Bind<TempAndHumViewModel>().ToSelf().InSingletonScope();
             //HardawreSetViewModel
             #endregion
 
@@ -73,13 +54,14 @@ namespace IgniteApp.Modules
             Bind<IAutoRun>().To<AutoRun>().InSingletonScope();
             Bind<IElectService>().To<ElectService>().InSingletonScope();
             Bind<LoginViewModel>().ToSelf().InSingletonScope();
+            Bind<AsideViewModel>().ToSelf().InSingletonScope();
+            Bind<UserInfoViewModel>().ToSelf().InSingletonScope();
             Bind<RegisterViewModel>().ToSelf().InSingletonScope();
             Bind<IPlcConfigService>().To<PlcConfigService>().InSingletonScope();
             Bind<TempAndHumClient>().ToSelf().InSingletonScope();
             Bind<ITaskController>().To<TaskController>().InSingletonScope();
             Bind<ITaskService>().To<TaskService>().InSingletonScope();
             Bind<TTForgeViewModel>().ToSelf().InSingletonScope();
-            //  Bind<WorkstationBase>().ToAllImplementations();
 
             //WorkstationBase
             // ① 碰类型
@@ -91,10 +73,7 @@ namespace IgniteApp.Modules
             //  Assembly assembly= Assembly.GetExecutingAssembly();
             // Assembly.Load("IgniteAdmin");
             Bind<WorkstationBase>().ToAllImplementations(true, Assembly.Load("IgniteAdmin"));
-            //  Bind<ConnectionContext>().ToSelf().InSingletonScope();
-            //  Bind<IConnectionState>().ToFactory(GetConnectionObject).InSingletonScope();
-            // 注册通信器
-            //  Bind<IPlcCommunicator>().To<PlcModbusCommunicator>().InSingletonScope();
+            Bind<WorkstationManager>().ToSelf().InSingletonScope();
         }
 
         private IConnectionState GetConnectionObject(IContainer container)

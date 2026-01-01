@@ -1,11 +1,5 @@
 ﻿using IgniteApp.Interfaces;
-using IT.Tangdao.Framework.Abstractions;
 using Stylet;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IgniteApp.Bases
 {
@@ -14,7 +8,7 @@ namespace IgniteApp.Bases
         // public virtual string Name { get; set; }
         public IViewFactory ViewFactoryService;
 
-        // private readonly IContentReader Read;
+        // private readonly IContentAccess Read;
         public readonly INavigateRoute NavigatRouteService;
 
         //public string HandlerName { get; set; }

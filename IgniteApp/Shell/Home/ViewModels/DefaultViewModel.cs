@@ -1,39 +1,37 @@
 ﻿using HandyControl.Controls;
-using IgniteAdmin.Providers;
 using IgniteApp.Bases;
-using IgniteApp.Converters;
+using IgniteApp.Common;
+using IgniteApp.Events;
 using IgniteDb.IRepositorys;
 using IgniteShared.Dtos;
 using IgniteShared.Entitys;
+using IgniteShared.Events;
 using IgniteShared.Globals.Local;
-using IgniteShared.Models;
 using IT.Tangdao.Framework.Abstractions.FileAccessor;
 using IT.Tangdao.Framework.Commands;
+using IT.Tangdao.Framework.Extensions;
 using IT.Tangdao.Framework.Helpers;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
 using Stylet;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Xml.Linq;
-using System.IO;
-using IgniteApp.Common;
-using IgniteApp.Dialogs.ViewModels;
 using StyletIoC;
-using IT.Tangdao.Framework.Paths;
+using System;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Windows.Input;
 
 namespace IgniteApp.Shell.Home.ViewModels
 {
-    public class DefaultViewModel : ViewModelBase// IScreenState
+    public class DefaultViewModel : ViewModelBase, IHandle<ProductUpdateEvent>
     {
         #region--属性--
+
+        private ProductDto _productDto;
+
+        public ProductDto ProductDto
+        {
+            get => _productDto ?? (_productDto = new ProductDto());
+            set => SetAndNotify(ref _productDto, value);
+        }
+
         private BindableCollection<ProductDto> _productList;
 
         public BindableCollection<ProductDto> ProductList
@@ -42,11 +40,11 @@ namespace IgniteApp.Shell.Home.ViewModels
             set => SetAndNotify(ref _productList, value);
         }
 
-        private BindableCollection<MaterialInfo> _materialInfoList;
+        private ObservableCollection<MaterialInfo> _materialInfoList;
 
-        public BindableCollection<MaterialInfo> MaterialInfoList
+        public ObservableCollection<MaterialInfo> MaterialInfoList
         {
-            get => _materialInfoList ?? (_materialInfoList = new BindableCollection<MaterialInfo>());
+            get => _materialInfoList ?? (_materialInfoList = new ObservableCollection<MaterialInfo>());
             set => SetAndNotify(ref _materialInfoList, value);
         }
 
@@ -79,19 +77,23 @@ namespace IgniteApp.Shell.Home.ViewModels
 
         private readonly IMaterialRepository _materialRepository;
         private readonly IProductRepository _productRepository;
-        private readonly IContentReader _readService;
+        private readonly IContentAccess _contentAccess;
+        private readonly IEventAggregator _eventAggregator;
         #endregion
 
         #region--ctor--
 
-        public DefaultViewModel(IMaterialRepository materialRepository, IContentReader readService, IProductRepository productRepository)
+        public DefaultViewModel(IMaterialRepository materialRepository, IContentAccess contentAccess, IProductRepository productRepository, IEventAggregator eventAggregator)
         {
             _materialRepository = materialRepository;
-            _readService = readService;
+            _contentAccess = contentAccess;
             _productRepository = productRepository;
+            _eventAggregator = eventAggregator;
+            _eventAggregator.Subscribe(this);
             InitData();
 
             UpdateCommand = MinidaoCommand.Create<int?>(ExecuteUpdate);
+            DeleteCommand = new TangdaoCommand(ExecuteDelete);
             string path = "../../../Assets/Images/404.png";
             ImageURI = path;
             IgniteEventHandler.StatisticUpdated -= OnStatisticUpdated;
@@ -114,6 +116,12 @@ namespace IgniteApp.Shell.Home.ViewModels
             MaterialInfoList.AddRange(materialModel);
             var productModel = _productRepository.GetAllProductInfo();
             ProductList.AddRange(productModel);
+
+            if (MaterialInfoList.Count == 0)
+            {
+                var faker = new TangdaoDataFaker<MaterialInfo>();
+                MaterialInfoList = faker.Build(20).ToObservableCollection();
+            }
         }
 
         private void OnStatisticUpdated(object sender, StatisticUpdateEventArgs e)
@@ -128,6 +136,11 @@ namespace IgniteApp.Shell.Home.ViewModels
         {
         }
 
+        public void ExecuteDelete()
+        {
+            MessageBox.Show("i.ToString()");
+        }
+
         protected override void OnActivate()
         {
         }
@@ -135,6 +148,19 @@ namespace IgniteApp.Shell.Home.ViewModels
         public void ExecuteReset()
         {
             StaticticInfo.SetReset();
+        }
+
+        public void Handle(ProductUpdateEvent message)
+        {
+            if (message == null)
+            {
+                string path = Path.Combine(IgniteInfoLocation.Cache, "ProductDto.xml");
+                _contentAccess.Default.Read(path).AsXml().SelectNodes<ProductUpdateEvent>();
+            }
+            ProductDto.ProductId = message.ProductId;
+            ProductDto.ProductName = message.ProductName;
+            ProductDto.Remark = message.Remark;
+            ProductDto.UpdateTime = message.UpdateTime;
         }
 
         #endregion

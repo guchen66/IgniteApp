@@ -1,18 +1,12 @@
 ﻿using IgniteApp.Bases;
-using IgniteApp.Common;
 using IgniteApp.Interfaces;
-using IT.Tangdao.Framework.Abstractions.FileAccessor;
-using IT.Tangdao.Framework.Infrastructure;
-using IT.Tangdao.Framework.Extensions;
-using Stylet;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IT.Tangdao.Framework.EventArg;
 using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.FileAccessor;
+using IT.Tangdao.Framework.Extensions;
+using IT.Tangdao.Framework.Infrastructure;
+using Stylet;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace IgniteApp.Shell.ProcessParame.ViewModels
 {
@@ -37,15 +31,15 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
         }
 
         public IViewFactory _viewFactory;
-        public IContentReader _readService;
+        public IContentAccess _contentAccess;
 
-        public ParameBaseViewModel(IViewFactory viewFactory, IContentReader readService)
+        public ParameBaseViewModel(IViewFactory viewFactory, IContentAccess contentAccess)
         {
             _viewFactory = viewFactory;
-            _readService = readService;
-            //   ParameMenuList = ReadOnlyMenuItemManager.Create(readService, HandlerName);
+            _contentAccess = contentAccess;
+            //   ParameMenuList = ReadOnlyMenuItemManager.Create(contentAccess, HandlerName);
 
-            ParameMenuList = readService.Default.AsConfig().SelectAppConfig(HandlerName).ToList(v => new TangdaoMenuItem { MenuName = v }).ToObservableCollection();
+            ParameMenuList = contentAccess.Default.Empty().AsConfig().SelectAppSection(HandlerName).ToList(kv => new TangdaoMenuItem { MenuName = kv.Value }).ToObservableCollection();
             this.BindAndInvoke(viewModel => viewModel.SelectedIndex, (obj, args) => DoNavigateToView());
         }
 

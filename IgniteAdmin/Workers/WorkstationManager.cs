@@ -1,36 +1,33 @@
 ﻿using IgniteAdmin.Interfaces;
-using System;
+using IgniteShared.Globals.Common.Works;
+using StyletIoC;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.Remoting.Channels;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Threading.Channels;
-using IgniteShared.Globals.Common.Works;
 
 namespace IgniteAdmin.Workers
 {
     // 工位管理器
     public class WorkstationManager //: INotifyPropertyChanged
     {
-        private readonly List<IWorkstation> _workstations;
+        private readonly IEnumerable<IWorkstation> _workstations;
         private CancellationTokenSource _globalCts;
 
-        public IReadOnlyCollection<IWorkstation> Workstations => _workstations.AsReadOnly();
+        //public IReadOnlyCollection<IWorkstation> Workstations => _workstations.AsReadOnly();
 
-        public WorkstationManager()
+        public WorkstationManager(IContainer container)
         {
-            _workstations = new List<IWorkstation>
-            {
-                new LoadWorkstation(),
-                new PreWorkstation(),
-                new CutWorkstation(),
-                new UnLoadWorkstation(),
-                // 其他工位...
-            };
+            _workstations = container.GetAll<WorkstationBase>();
+            //_workstations = new List<IWorkstation>
+            //{
+            //    new LoadWorkstation(),
+            //    new PreWorkstation(),
+            //    new CutWorkstation(),
+            //    new UnLoadWorkstation(),
+            //    // 其他工位...
+            //};
         }
 
         public async Task StartAllAsync()

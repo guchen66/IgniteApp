@@ -1,29 +1,26 @@
-﻿using IgniteAdmin.Providers;
+﻿using IgniteApp.Dialogs.ViewModels;
 using IgniteApp.Shell.ProcessParame.Models;
+using IgniteApp.Shell.ProcessParame.Services;
+using IgniteShared.Enums;
+using IgniteShared.Globals.Common;
+using IgniteShared.Globals.Local;
+using IT.Tangdao.Framework.Abstractions;
 using IT.Tangdao.Framework.Abstractions.Loggers;
-using IT.Tangdao.Framework.Enums;
+using IT.Tangdao.Framework.Common;
+using IT.Tangdao.Framework.Events;
+using IT.Tangdao.Framework.Extensions;
+using MiniExcelLibs;
 using Stylet;
+using StyletIoC;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-
-using IgniteApp.Shell.ProcessParame.Services;
-using MiniExcelLibs;
-using System.IO;
-using IgniteShared.Globals.Local;
-using HandyControl.Controls;
-using IgniteApp.Extensions;
-using IgniteApp.Dialogs.ViewModels;
-using StyletIoC;
-using IT.Tangdao.Framework.Extensions;
-using IT.Tangdao.Framework.Common;
-using IT.Tangdao.Framework;
-using IT.Tangdao.Framework.Abstractions;
-using System.ComponentModel;
+using System.Windows;
+using MessageBox = System.Windows.MessageBox;
 
 namespace IgniteApp.Shell.ProcessParame.ViewModels
 {
@@ -38,18 +35,30 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
             set => SetAndNotify(ref _loadCalibrationDataList, value);
         }
 
+        private int _calibrationValue;
+
+        public int CalibrationValue
+        {
+            get => _calibrationValue;
+            set => SetAndNotify(ref _calibrationValue, value);
+        }
+
         [Inject]
         private SaveFormatViewModel _saveFormatViewModel { get; set; }
 
         public ITaskController _taskController;
         public ITaskService _taskService;
         private IWindowManager _windowManager;
+        private CaliStatus CurrentCaliStatus { get; set; }
 
         public LoadCalibrationViewModel(ITaskController taskController, ITaskService taskService, IWindowManager windowManager)
         {
             _taskController = taskController;
             _taskService = taskService;
             _windowManager = windowManager;
+
+            // 使用弱事件订阅消息
+            //  WeakEventManager<MessageBus, MessageEventArgs>.AddHandler(MessageBus.Instance, "MessageReceived", OnMessageReceived);
         }
 
         private CancellationTokenSource _cts = new CancellationTokenSource();
@@ -59,11 +68,35 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
             try
             {
                 //var back = _windowManager.ShowDialogEx(_saveFormatViewModel);
+                // 1. 先获取当前状态
+                var currentStatus = _taskService.TaskStatus;
+
+                // 2. 根据状态决定行为
+                switch (currentStatus)
+                {
+                    case CaliStatus.Run:
+                        // 已经在运行，点击应该暂停
+                        _taskService.Pause();
+                        return;
+
+                    case CaliStatus.Pause:
+                        // 已经暂停，点击应该继续
+                        _taskService.Resume();
+                        return;
+
+                    case CaliStatus.Init:
+                    case CaliStatus.Sucess:
+                    case CaliStatus.Failure:
+                        // 这3种状态才需要询问"是否继续"
+                        Continue(_taskService);
+                        break;
+                }
 
                 Logger.WriteLocal("开始上料标定");
                 var progress = new Progress<CalibrationProgress>(p =>
                 {
                     LoadCalibrationDataList.Add(p.NewItem);
+                    CalibrationValue = p.NewItem.Id;
                 });
                 //await _taskController.StartAsync(progress);
                 await _taskService.StartAsync(progress);
@@ -72,6 +105,29 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
             catch (OperationCanceledException)
             {
                 // 处理取消
+            }
+        }
+
+        private void Continue(ITaskService taskService)
+        {
+            if (taskService.CaliCount > 0)
+            {
+                MessageBoxResult result = MessageBox.Show(
+                "检测到已有存在的标定记录，是否从上次标定继续执行？",
+                "标定继续确认",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    _taskService.Resume();
+                }
+                else if (result == MessageBoxResult.No)
+                {
+                    LoadCalibrationDataList.Clear();
+                    _taskService.CaliCount = 0;
+                    _taskService.Stop();
+                }
             }
         }
 
@@ -101,11 +157,11 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
             var result = LocalCalibrationService.CreateExcel(LoadCalibrationDataList);
             if (result)
             {
-                MessageBox.Success("保存成功");
+                HandyControl.Controls.MessageBox.Success("保存成功");
             }
             else
             {
-                MessageBox.Error("保存失败");
+                HandyControl.Controls.MessageBox.Error("保存失败");
             }
         }
 

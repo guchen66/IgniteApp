@@ -1,13 +1,8 @@
-﻿using IgniteApp.Dialogs.ViewModels;
-using IgniteApp.Events;
+﻿using IgniteApp.Events;
 using IgniteDevices.PLC;
 using IT.Tangdao.Framework.Events;
 using Stylet;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IgniteApp.Common
 {

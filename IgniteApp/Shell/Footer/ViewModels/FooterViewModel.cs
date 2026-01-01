@@ -1,44 +1,32 @@
-﻿using IgniteAdmin.Providers;
-using IgniteApp.Bases;
+﻿using IgniteApp.Bases;
 using IgniteApp.Common;
 using IgniteApp.Dialogs.ViewModels;
-using IgniteApp.Extensions;
 using IgniteApp.Interfaces;
-using IgniteApp.Modules;
-using IgniteApp.Shell.Home.Models;
 using IgniteApp.Shell.Set.Models;
-using IgniteApp.ViewModels;
-using IgniteDb;
-using IgniteDb.IRepositorys;
 using IgniteShared.Dtos;
-using IgniteShared.Entitys;
-
+using IgniteShared.Globals.Common;
 using IgniteShared.Globals.Local;
-using IgniteShared.Models;
-using IT.Tangdao.Framework.Abstractions.Loggers;
+using IT.Tangdao.Bridge.Sockets;
 using IT.Tangdao.Framework.Abstractions.FileAccessor;
+using IT.Tangdao.Framework.Abstractions.Loggers;
+using IT.Tangdao.Framework.Abstractions.Notices;
 using IT.Tangdao.Framework.Commands;
+using IT.Tangdao.Framework.Enums;
+using IT.Tangdao.Framework.EventArg;
+using IT.Tangdao.Framework.Events;
 using IT.Tangdao.Framework.Extensions;
 using IT.Tangdao.Framework.Helpers;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Stylet;
 using StyletIoC;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Configuration;
-using System.Data.Entity;
 using System.IO;
 using System.Linq;
-using System.Runtime.Remoting.Channels;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Input;
-using System.Xml.Linq;
 using Unity;
-using IT.Tangdao.Bridge.Sockets;
 
 namespace IgniteApp.Shell.Footer.ViewModels
 {
@@ -79,19 +67,21 @@ namespace IgniteApp.Shell.Footer.ViewModels
         private IWindowManager _windowManager;
         private readonly System.Timers.Timer _statusTimer;
         private IDialogService _dialogService;
-        private IContentReader _readService;
-
-        // private readonly ITangdaoChannel _channel;
+        private IContentAccess _contentAccess;
         private readonly ITangdaoSocket _tangdaoSocket;
+        private readonly IHandlerTable _handlerTable;
+        private readonly ITangdaoPublisher _tangdaoPublisher;
 
-        public FooterViewModel(IWindowManager windowManager, IDialogService dialogService, Func<TTForgeViewModel> viewModelFactory, IContentReader readService, ITangdaoSocket tangdaoSocket)
+        public FooterViewModel(IWindowManager windowManager, IDialogService dialogService, Func<TTForgeViewModel> viewModelFactory, IContentAccess contentAccess, ITangdaoSocket tangdaoSocket, IHandlerTable handlerTable, ITangdaoPublisher tangdaoPublisher)
         {
             // _plcProvider = plcProvider;
             _windowManager = windowManager;
             _dialogService = dialogService;
             _viewModelFactory = viewModelFactory;
-            _readService = readService;
+            _contentAccess = contentAccess;
             _tangdaoSocket = tangdaoSocket;
+            _handlerTable = handlerTable;
+            _tangdaoPublisher = tangdaoPublisher;
             // TTForgeViewModel = tTForgeViewModel;
             // 初始化定时器（间隔1秒，自动重置）
             // _statusTimer = new System.Timers.Timer(1000) { AutoReset = true };
@@ -108,6 +98,23 @@ namespace IgniteApp.Shell.Footer.ViewModels
             //_tangdaoChannel.Errors.ObserveOnDispatcher()
             //         .Subscribe(ex => MessageBox.Show(ex.Message));
             QueryServerStatus();
+
+            TangdaoWeakEvent.Instance.OnHandlerTableReceived += Instance_OnHandlerTableReceived;
+        }
+
+        private void Instance_OnHandlerTableReceived(object sender, HandlerTableEventArgs e)
+        {
+            if (e.Key == "Open")                       // 只关心自己的 key
+            {
+                var handler = e.HandlerTable.GetResultHandler("Open");
+                var result = new HandlerResult { Result = BackResult.Success };
+                handler?.Invoke(result);               // 执行父之前注册的逻辑
+            }
+        }
+
+        private void ExecuteOpen()
+        {
+            MessageBox.Show("打开弹窗");
         }
 
         #endregion
@@ -141,47 +148,77 @@ namespace IgniteApp.Shell.Footer.ViewModels
             }
         }
 
-        //public void QueryPlcStatus()
-        //{
-        //    // 先订阅事件，再执行连接检查
-        //    _plcProvider.Context.ConnectionStateChanged += Context_ConnectionStateChanged;
+        private string _bgColor;
 
-        //    Task.Run(() =>
-        //    {
-        //        IsConn = _plcProvider.ConnectionSiglePLC().IsSuccess;
-        //    });
-        //}
-
-        //private void Context_ConnectionStateChanged(object sender, IgniteDevices.Connections.ConnectionStateEventArgs e)
-        //{
-        //    IsConn = _plcProvider.ConnectionSiglePLC().IsSuccess;
-        //    // Execute.OnUIThreadAsync(() => _plcProvider.Context.IsConnected = e.IsConnected);
-        //}
-
-        public void Test()
+        public string BgColor
         {
-            // var wins = System.Windows.Application.Current.Windows;
-            // var view = GetWindowFromViewModel(TestViewModel);
-            SplitScreenManager.OpenOnSecondaryScreen(_windowManager, TestViewModel);
-            var s = TestViewModel.View;
-            // _windowManager.ShowDialog(TestViewModel);
-            //_dialogService.Show(TestViewModel, result: (result) =>
-            //{
-            //    var str = result.ResultValue;
-            //});
+            get => _bgColor ?? _colorBuffer.Next;
+            set => SetAndNotify(ref _bgColor, value);
+        }
+
+        // 颜色池
+        private readonly CircularBuffer<string> _colorBuffer = new CircularBuffer<string>(
+            new[] { "Green", "Orange", "DodgerBlue" });
+
+        public void TestColor()
+        {
+            BgColor = _colorBuffer.GetNext();
+        }
+
+        public void TestMessage()
+        {
+            MessageEventArgs messageEventArgs = new MessageEventArgs(BgColor);
+            TangdaoWeakEvent.Instance.Publish(messageEventArgs);
+            //  TangdaoWeakEvent.Instance.Publish("222", messageEventArgs);
+        }
+
+        public void TestObserver()
+        {
+            MessageEventArgs messageEventArgs = new MessageEventArgs(BgColor);
+            _tangdaoPublisher.Publish(messageEventArgs);
+        }
+
+        public void TestNoticeAll()
+        {
+            NoticeContext Context = new NoticeContext();
+            Context.CurrentTime = DateTime.Now;
+            Context.Tag = "数据改变了";
+            NoticeMediator.Instance.NotifyAll(Context);
+        }
+
+        public void TestNotice()
+        {
+            NoticeContext Context = new NoticeContext();
+            Context.CurrentTime = DateTime.Now;
+            Context.Tag = "单独数据改变";
+            NoticeMediator.Instance.NotifySingle("LightViewModel", Context);
+        }
+
+        public void TestWindow()
+        {
+            _handlerTable.Register("Open", x =>
+            {
+                if (x.Result == BackResult.Success)
+                {
+                    MessageBox.Show("成功返回");
+                }
+            });
+            _windowManager.ShowDialog(TestViewModel);
+            //  SplitScreenManager.OpenOnSecondaryScreen(_windowManager, TestViewModel);
+            //  var s = TestViewModel.View;
         }
 
         public void Test2()
         {
             var foldPath = Path.Combine(IgniteInfoLocation.Recipe, "ProcessItem.xml");
-            var xmlData = _readService.Default.Read(foldPath).Content;
+            var xmlData = _contentAccess.Default.Read(foldPath).Content;
 
             if (xmlData == null)
             {
                 return;
             }
-            //_readService.Current.Load(xmlData);
-            var readResult = _readService.Default.AsXml().SelectNodes<ProcessItem>();
+
+            var readResult = _contentAccess.Default.Read(foldPath).AsXml().SelectNodes<ProcessItem>();
             if (readResult.IsSuccess)
             {
                 var ProcessItems = new ObservableCollection<ProcessItem>(readResult.Data);
@@ -271,5 +308,10 @@ namespace IgniteApp.Shell.Footer.ViewModels
             // 5. 尝试获取焦点（双重保险）
             win.Focus();
         }
+
+        #region --命令--
+
+        // public ICommand OpenCommand { get; set; }
+        #endregion
     }
 }

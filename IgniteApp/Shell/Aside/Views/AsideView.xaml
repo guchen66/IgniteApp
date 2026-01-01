@@ -4,6 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:conver="clr-namespace:IgniteApp.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:daoMakup="clr-namespace:IT.Tangdao.Framework.Markup;assembly=IT.Tangdao.Framework"
+    xmlns:enum="clr-namespace:IgniteShared.Enums;assembly=IgniteShared"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:IgniteApp.Shell.Aside.Views"
     xmlns:manager="clr-namespace:IgniteAdmin.Managers.Home;assembly=IgniteAdmin"
@@ -15,10 +17,8 @@
     d:DesignWidth="300"
     mc:Ignorable="d">
     <UserControl.Resources>
-        <!--<ObjectDataProvider
-            x:Key="GetTime"
-            MethodName="ShowCurrentTime"
-            ObjectType="{x:Type manager:TimeManager}" />-->
+        <daoMakup:EnumBindSource x:Key="ProcessStatus" EnumType="{x:Type enum:ProcessStatus}" />
+        <conver:ProcessStatusToColorConverter x:Key="ProcessColor" />
         <conver:RoleTypeConverter x:Key="RoleConverter" />
         <conver:ContentToColorConverter x:Key="IsConn" />
         <conver:DeviceStatusConverter x:Key="StatusConverter" />
@@ -59,14 +59,44 @@
                 Width="100"
                 Height="40"
                 Margin="10"
-                Command="{s:Action ExecuteAuto}"
-                Content="自动" />
+                Command="{s:Action ExecuteAuto}">
+                <StackPanel Orientation="Horizontal">
+                    <Ellipse
+                        Width="10"
+                        Height="10"
+                        Margin="0,0,5,0"
+                        Fill="{Binding ProcessStatus, Converter={StaticResource ProcessColor},ConverterParameter={x:Static enum:ProcessStatus.Auto}}" />
+                    <TextBlock Text="自动" />
+                </StackPanel>
+            </Button>
             <Button
                 Width="100"
                 Height="40"
                 Margin="10"
-                Command="{s:Action ExecuteManual}"
-                Content="手动" />
+                Command="{s:Action ExecuteSemiAuto}">
+                <StackPanel Orientation="Horizontal">
+                    <Ellipse
+                        Width="10"
+                        Height="10"
+                        Margin="0,0,5,0"
+                        Fill="{Binding ProcessStatus, Converter={StaticResource ProcessColor},ConverterParameter={x:Static enum:ProcessStatus.SemiAuto}}" />
+                    <TextBlock Text="半自动" />
+                </StackPanel>
+            </Button>
+            <Button
+                Width="100"
+                Height="40"
+                Margin="10"
+                Command="{s:Action ExecuteManual}">
+                <StackPanel Orientation="Horizontal">
+                    <Ellipse
+                        Width="10"
+                        Height="10"
+                        Margin="0,0,5,0"
+                        Fill="{Binding ProcessStatus, Converter={StaticResource ProcessColor},ConverterParameter={x:Static enum:ProcessStatus.Manual}}" />
+                    <TextBlock Text="手动" />
+                </StackPanel>
+            </Button>
             <Button
                 Width="100"
                 Height="40"

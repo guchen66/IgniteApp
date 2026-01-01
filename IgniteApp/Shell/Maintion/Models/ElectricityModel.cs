@@ -1,13 +1,13 @@
 ﻿using IgniteApp.Shell.Maintion.Args;
+using IT.Tangdao.Framework.Enums;
 using IT.Tangdao.Framework.Mvvm;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IgniteApp.Shell.Maintion.Models
 {
+    /// <summary>
+    /// 电流表数据
+    /// </summary>
     public class ElectricityModel : DaoViewModelBase
     {
         public IElectService IElectService { get; set; }
@@ -51,38 +51,22 @@ namespace IgniteApp.Shell.Maintion.Models
             set => SetProperty(ref _isSelected, value);
         }
 
-        private SingleState _status;
+        private TangdaoActive _status;
 
-        public SingleState Status
+        public TangdaoActive Status
         {
             get => _status;
             set => SetProperty(ref _status, value);
         }
     }
 
-    public enum SingleState
-    {
-        Disabled = 0,
-        Enabled = 1
-    }
-
     public class ElectricityMotion
     {
-        public event EventHandler<ElectricityArgs> OverLoad;   //电流超载
+        public event EventHandler<ElectricityArgs> StateChanged;   //电流超载或者电流过低，（电流状态改变）
 
-        public event EventHandler<ElectricityArgs> LowLoad;    //电流过低
-
-        public void CheckElectricity(ElectricityModel model)
+        public void CheckState(ElectricityArgs electricityArgs)
         {
-            ElectricityArgs args = new ElectricityArgs(model);
-            //if (model.Value > 39)
-            //{
-            //    OverLoad?.Invoke(this, args);
-            //}
-            //else if (model.Value < 0)
-            //{
-            //    LowLoad?.Invoke(this, args);
-            //}
+            StateChanged.Invoke(this, electricityArgs);
         }
     }
 }

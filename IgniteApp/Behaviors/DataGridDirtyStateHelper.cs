@@ -6,7 +6,7 @@ namespace IgniteApp.Behaviors
     public static class DataGridDirtyStateHelper
     {
         // 定义一个附加属性，用于将DataGrid实例传递给ViewModel
-        public static readonly DependencyProperty DataGridInstanceProperty = 
+        public static readonly DependencyProperty DataGridInstanceProperty =
             DependencyProperty.RegisterAttached(
                 "DataGridInstance",
                 typeof(DataGrid),

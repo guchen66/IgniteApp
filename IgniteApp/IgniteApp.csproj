@@ -6,7 +6,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{98E17501-8617-49A9-B8FC-273991551787}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>IgniteApp</RootNamespace>
     <AssemblyName>IgniteApp</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
@@ -60,6 +60,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutoMapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
@@ -210,15 +213,11 @@
     <Compile Include="Behaviors\ShapeBehavior.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Common\AlarmPopupManager.cs" />
-    <Compile Include="Common\AlarmPopupNotifier.cs" />
-    <Compile Include="Common\AlarmPublisher.cs" />
     <Compile Include="Common\AsyncTaskManager.cs" />
     <Compile Include="Common\DialogParameters.cs" />
     <Compile Include="Common\DialogResult.cs" />
     <Compile Include="Common\Enums\RunStatus.cs" />
     <Compile Include="Common\IgniteEventHandler.cs" />
-    <Compile Include="Common\MenuList.cs" />
-    <Compile Include="Common\ReadOnlyMenuItemManager.cs" />
     <Compile Include="Common\SplitScreenManager.cs" />
     <Compile Include="Controls\CustomStatusLight.cs" />
     <Compile Include="Converters\ContentToColorConverter.cs" />
@@ -227,13 +226,13 @@
     <Compile Include="Converters\IdConverter.cs" />
     <Compile Include="Converters\NullToBoolConverter.cs" />
     <Compile Include="Converters\PasswordConverter.cs" />
+    <Compile Include="Converters\ProcessStatusToColorConverter.cs" />
     <Compile Include="Converters\RecipeUnlockConverter.cs" />
     <Compile Include="Converters\RoleTypeConverter.cs" />
     <Compile Include="Converters\SingleStateToBoolConverter.cs" />
     <Compile Include="Converters\StringArrayTypeConverter.cs" />
     <Compile Include="Converters\StringToImageConverter.cs" />
     <Compile Include="Converters\Test\TypeOfExtension.cs" />
-    <Compile Include="Dialogs\Manage\INagateScope.cs" />
     <Compile Include="Dialogs\ViewModels\AddRecipeViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\AlarmPopupViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\CheckProcessPhotoViewModel.cs" />
@@ -294,7 +293,6 @@
     <Compile Include="Interfaces\INavigateRoute.cs" />
     <Compile Include="Interfaces\INavigationService.cs" />
     <Compile Include="Interfaces\Ioc.cs" />
-    <Compile Include="Interfaces\IReadProvider.cs" />
     <Compile Include="Interfaces\IViewFactory.cs" />
     <Compile Include="Interfaces\SystemSetViewFactory.cs" />
     <Compile Include="Modules\AutoModules.cs" />
@@ -322,8 +320,10 @@
     <Compile Include="Shell\Header\Views\HeaderView.xaml.cs">
       <DependentUpon>HeaderView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Shell\Home\Models\DataConfig.cs" />
     <Compile Include="Shell\Home\Models\HomeMenuItem.cs" />
     <Compile Include="Shell\Home\Models\HomeMenuProvider.cs" />
+    <Compile Include="Shell\Home\Models\ReportData.cs" />
     <Compile Include="Shell\Home\Models\SetMenuItem.cs" />
     <Compile Include="Shell\Home\ViewModels\DefaultViewModel.cs" />
     <Compile Include="Shell\Home\ViewModels\HomeViewModel.cs" />
@@ -351,9 +351,6 @@
     <Compile Include="Shell\Maintion\Models\ElectricityModel.cs" />
     <Compile Include="Shell\Maintion\Models\ElectStatus.cs" />
     <Compile Include="Shell\Maintion\Models\IElectService.cs" />
-    <Compile Include="Shell\Maintion\Services\DeviceMediator.cs" />
-    <Compile Include="Shell\Maintion\Services\IDeviceFactory.cs" />
-    <Compile Include="Shell\Maintion\Services\IDeviceObserver.cs" />
     <Compile Include="Shell\Maintion\ViewModels\DifferentialGaugeViewModel.cs" />
     <Compile Include="Shell\Maintion\ViewModels\DigitalSmartGaugeViewModel.cs" />
     <Compile Include="Shell\Maintion\ViewModels\ElectViewModel.cs" />

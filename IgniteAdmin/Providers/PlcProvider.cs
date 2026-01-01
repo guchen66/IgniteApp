@@ -1,25 +1,9 @@
-﻿using AutoMapper;
-using IgniteDevices;
-using IgniteDevices.Connections;
+﻿using IgniteDevices.Connections;
 using IgniteDevices.Core.Models.Results;
-using IgniteDevices.PLC;
-using IgniteDevices.PLC.Services;
-
-using IgniteShared.Globals.System;
-using IgniteShared.Models;
 using IT.Tangdao.Framework.Abstractions.Loggers;
 using IT.Tangdao.Framework.Abstractions.Results;
 using IT.Tangdao.Framework.Extensions;
-using IT.Tangdao.Framework.Helpers;
-using Modbus.Device;
-using Stylet;
-using StyletIoC;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IgniteAdmin.Providers
 {

@@ -2,11 +2,8 @@
 using IgniteDb.IRepositorys;
 using IgniteShared.Dtos;
 using IgniteShared.Entitys;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IgniteDb.Repositorys
 {
@@ -14,7 +11,7 @@ namespace IgniteDb.Repositorys
     {
         private readonly AccessDbContext _context;
         private IMapper _mapper;
-        public ProductRepository(AccessDbContext context,IMapper mapper)
+        public ProductRepository(AccessDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -27,7 +24,7 @@ namespace IgniteDb.Repositorys
 
         public List<ProductDto> GetAllProductInfo()
         {
-           var productInfos= _context.Products.ToList();
+            var productInfos = _context.Products.ToList();
             List<ProductDto> dtos = _mapper.Map<List<ProductDto>>(productInfos);
             return dtos;
         }

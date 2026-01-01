@@ -5,6 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:IgniteApp.Shell.Maintion.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:marup="clr-namespace:IT.Tangdao.Framework.Markup;assembly=IT.Tangdao.Framework"
+    xmlns:textStatus="clr-namespace:IgniteShared.Globals.Common;assembly=IgniteShared"
     xmlns:s="https://github.com/canton7/Stylet"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -13,7 +15,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
-            <RowDefinition />
+            <RowDefinition Height="40" />
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal">
@@ -33,9 +35,9 @@
             <RadioButton
                 Margin="5"
                 IsChecked="{Binding IsConnTemp,UpdateSourceTrigger=PropertyChanged}" />
-            <Button Width="100"  Margin="5" Content="连接" Command="{s:Action ExecuteConn}"/>
-
+            <Button Width="100"  Margin="5" Content="连接" Command="{s:Action ExecuteConn}" />
         </StackPanel>
+
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <TextBlock
                 Margin="5"
@@ -52,8 +54,14 @@
             <RadioButton
                 Margin="5"
                 IsChecked="{Binding IsConnHum}" />
-            <Button Width="100"  Margin="5" Content="连接" Command="{s:Action ExecuteConn}"/>
-            <Button Width="100"  Margin="5" Content="读取" Command="{s:Action Read}"/>
+            <Button Width="100"  Margin="5" Content="连接" Command="{s:Action ExecuteConn}" />
+            <Button Width="100"  Margin="5" Content="读取" Command="{s:Action Read}" />
         </StackPanel>
+
+        <StatusBar Grid.Row="2" VerticalAlignment="Bottom" Style="{StaticResource CustomStatusBarStyle}" Width="100" Height="40" HorizontalAlignment="Left">
+            <StatusBarItem>
+                <TextBlock Text="{marup:BoolToStringMode Binding={Binding BoolValue}, FalseValue='{x:Static textStatus:TextStatus.Falied}', TrueValue='{x:Static textStatus:TextStatus.Sucess}'}" />
+            </StatusBarItem>
+        </StatusBar>
     </Grid>
 </UserControl>

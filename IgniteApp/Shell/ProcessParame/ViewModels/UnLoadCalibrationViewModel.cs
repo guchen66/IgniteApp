@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -40,6 +39,14 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
             // var status = this.ScreenState;
             // this.ScreenState = ScreenState.Active;
             _windowManager = windowManager;
+        }
+
+        private int _calibrationValue;
+
+        public int CalibrationValue
+        {
+            get => _calibrationValue;
+            set => SetAndNotify(ref _calibrationValue, value);
         }
 
         [Inject]
@@ -74,6 +81,7 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
                         StartValue = i,
                         EndValue = i + 100,
                     });
+                    CalibrationValue = i + 1;
                     var updates = UnLoadCalibrationDataList.Zip(caliTypes, (left, right) =>
                     {
                         left.CaliType = right;

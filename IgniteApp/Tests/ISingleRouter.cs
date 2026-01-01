@@ -1,19 +1,9 @@
-﻿using IgniteApp.Dialogs.Manage;
-using IgniteApp.Dialogs.ViewModels;
-using IgniteApp.Interfaces;
-using IT.Tangdao.Framework;
-using IT.Tangdao.Framework.Abstractions.Navigates;
+﻿using IT.Tangdao.Framework;
+using IT.Tangdao.Framework.Abstractions.Navigation;
 using IT.Tangdao.Framework.Extensions;
-using Stylet;
-using StyletIoC;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Threading;
 
 namespace IgniteApp.Tests
 {

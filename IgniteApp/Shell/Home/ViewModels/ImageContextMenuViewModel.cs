@@ -1,24 +1,19 @@
-﻿using IgniteApp.Bases;
+﻿using HandyControl.Controls;
+using IgniteApp.Bases;
+using IgniteApp.Dialogs.ViewModels;
+using IgniteApp.Events;
+using IgniteShared.Globals.Local;
 using IT.Tangdao.Framework.Commands;
+using IT.Tangdao.Framework.Extensions;
+using Microsoft.Win32;
+using Stylet;
+using StyletIoC;
 using System;
-using System.Collections.Generic;
-using System.Drawing.Imaging;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Input;
 using System.Windows.Media;
-using Microsoft.Win32;
-using System.IO;
 using System.Windows.Media.Imaging;
-using HandyControl.Controls;
-using IgniteShared.Globals.Local;
-using Stylet;
-using IgniteApp.Events;
-using IgniteApp.Dialogs.ViewModels;
-using StyletIoC;
-using IT.Tangdao.Framework.Extensions;
 
 namespace IgniteApp.Shell.Home.ViewModels
 {

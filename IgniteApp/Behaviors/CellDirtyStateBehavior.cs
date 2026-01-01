@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Media;
 
 namespace IgniteApp.Behaviors
@@ -53,10 +52,10 @@ namespace IgniteApp.Behaviors
                 // 获取当前值和原始值
                 string currentValue = textBlock.Text;
                 object originalValue = OriginalValues.TryGetValue(textBlock, out var value) ? value : null;
-                
+
                 // 比较当前值和原始值
                 bool isDirty = !Equals(currentValue, originalValue?.ToString());
-                
+
                 // 更新前景色 - 只有当值变化时才变为红色，不会自动恢复
                 if (isDirty)
                 {

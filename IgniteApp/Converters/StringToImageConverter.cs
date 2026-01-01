@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -38,9 +34,9 @@ namespace IgniteApp.Converters
         [DllImport("gdi32.dll")]
         public static extern bool DeleteObject(IntPtr intPtr);
 
-        public static ImageSource BitmapToImageSourceConvert(Bitmap bitmap) 
+        public static ImageSource BitmapToImageSourceConvert(Bitmap bitmap)
         {
-            IntPtr intPtr=bitmap.GetHbitmap();
+            IntPtr intPtr = bitmap.GetHbitmap();
             ImageSource imageSource = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(intPtr, IntPtr.Zero, System.Windows.Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
 
             //释放内存

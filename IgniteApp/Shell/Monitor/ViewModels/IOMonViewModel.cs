@@ -2,11 +2,6 @@
 using IgniteApp.Bases;
 using IgniteApp.Shell.Monitor.Models;
 using Stylet;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IgniteApp.Shell.Monitor.ViewModels
 {

@@ -1,10 +1,6 @@
 ﻿using IT.Tangdao.Framework.Extensions;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IgniteApp.Shell.Header.Models
 {
@@ -14,7 +10,7 @@ namespace IgniteApp.Shell.Header.Models
 
         public void Reset()
         {
-            this=new HeaderItem();
+            this = new HeaderItem();
         }
     }
 
@@ -27,8 +23,8 @@ namespace IgniteApp.Shell.Header.Models
             Items = new Dictionary<string, HeaderItem>();
         }
 
-        private static readonly Lazy<HeaderItemProvider> _instance=new Lazy<HeaderItemProvider>(() => new HeaderItemProvider());
-        public static HeaderItemProvider Instance=_instance.Value;
+        private static readonly Lazy<HeaderItemProvider> _instance = new Lazy<HeaderItemProvider>(() => new HeaderItemProvider());
+        public static HeaderItemProvider Instance = _instance.Value;
 
         public void AddHeaderItem(HeaderItem headerItem)
         {

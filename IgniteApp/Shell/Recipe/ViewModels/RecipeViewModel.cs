@@ -2,25 +2,13 @@
 using IgniteApp.Bases;
 using IgniteApp.Dialogs.ViewModels;
 using IgniteApp.Interfaces;
-using IgniteApp.Shell.Home.Models;
-using IgniteApp.Shell.Home.ViewModels;
-using IgniteApp.Shell.Recipe.Models;
 using IgniteApp.Shell.Set.ViewModels;
-using IgniteApp.ViewModels;
 using IgniteDb.IRepositorys;
 using IgniteShared.Dtos;
-using IgniteShared.Entitys;
 using IT.Tangdao.Framework.Extensions;
 using Stylet;
 using StyletIoC;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IgniteApp.Shell.Recipe.ViewModels
 {

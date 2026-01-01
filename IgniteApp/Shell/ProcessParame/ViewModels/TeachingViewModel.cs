@@ -1,42 +1,17 @@
-﻿using IgniteApp.Bases;
-using IgniteApp.Shell.Maintion.ViewModels;
-using IgniteApp.Tests;
-using IT.Tangdao.Framework;
-using IT.Tangdao.Framework.Abstractions;
-using IT.Tangdao.Framework.Abstractions.Navigates;
-using IT.Tangdao.Framework.Ioc;
+﻿using IT.Tangdao.Framework.Abstractions;
+using IT.Tangdao.Framework.Abstractions.Navigation;
 using Stylet;
 using StyletIoC;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Threading;
 
 namespace IgniteApp.Shell.ProcessParame.ViewModels
 {
-    public class TeachingViewModel : Screen, IRouteComponent
+    public class TeachingViewModel : Screen
     {
         public ITangdaoRouter Router { get; set; }
 
-        public IContainer _container;
-        public string RouteName { get; set; }
-        private bool _switching;
-
-        public bool Switching
-        {
-            get => _switching;
-            set => SetAndNotify(ref _switching, value);
-        }
-
-        public TeachingViewModel(ITangdaoRouter router, IContainer container)
+        public TeachingViewModel(ITangdaoRouter router)
         {
             Router = router;
-            _container = container;
-            Router.RouteComponent = this;
             Router.RegisterPage<CO2TeachViewModel>();
             Router.RegisterPage<UVTeachViewModel>();
             Router.RegisterPage<IRTeachViewModel>();
@@ -44,28 +19,16 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
 
         public void OpenTeachView(string navigateName)
         {
-            Switching = true;
-            ITangdaoParameter tangdaoParameter = new TangdaoParameter();
+            TangdaoParameter tangdaoParameter = new TangdaoParameter();
             tangdaoParameter.Add("Name", "张三");
             Router.NavigateTo(navigateName, tangdaoParameter);
-            //  Router.NavigateTo<CO2TeachViewModel>();
-            Switching = false;
         }
 
-        public ITangdaoPage ResolvePage(string route)
+        protected override void OnViewLoaded()
         {
-            var result = _container.Get<ITangdaoPage>(route);
-            return result;
+            base.OnViewLoaded();
+
+            Router.LoadFirstPage();
         }
-
-        private string _name = "未设置";
-
-        public string Name
-        {
-            get => _name;
-            set => SetAndNotify(ref _name, value);
-        }
-
-        public string PageTitle => "";
     }
 }

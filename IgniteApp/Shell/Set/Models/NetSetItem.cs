@@ -1,45 +1,40 @@
 ﻿using IT.Tangdao.Framework.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IgniteApp.Shell.Set.Models
 {
-    public class NetSetItem:DaoViewModelBase
+    public class NetSetItem : DaoViewModelBase
     {
-		private string _account;
+        private string _account;
 
-		public string Account
+        public string Account
         {
-			get => _account;
-			set => SetProperty(ref _account, value);
-		}
+            get => _account;
+            set => SetProperty(ref _account, value);
+        }
 
-		private string _type;
+        private string _type;
 
-		public string Type
-		{
-			get => _type;
-			set => SetProperty(ref _type, value);
-		}
+        public string Type
+        {
+            get => _type;
+            set => SetProperty(ref _type, value);
+        }
 
-		private string _port;
+        private string _port;
 
-		public string Port
-		{
-			get => _port;
-			set => SetProperty(ref _port, value);
-		}
+        public string Port
+        {
+            get => _port;
+            set => SetProperty(ref _port, value);
+        }
 
-		private string _address;
+        private string _address;
 
-		public string Address
-		{
-			get => _address;
-			set => SetProperty(ref _address, value);
-		}
+        public string Address
+        {
+            get => _address;
+            set => SetProperty(ref _address, value);
+        }
 
-	}
+    }
 }

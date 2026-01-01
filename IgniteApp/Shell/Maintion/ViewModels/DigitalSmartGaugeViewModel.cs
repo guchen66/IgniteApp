@@ -1,26 +1,18 @@
-﻿using HandyControl.Controls;
-using IT.Tangdao.Framework;
-using IT.Tangdao.Framework.Abstractions;
+﻿using IT.Tangdao.Framework.Abstractions;
 using IT.Tangdao.Framework.Abstractions.FileAccessor;
-using IT.Tangdao.Framework.Abstractions.Navigates;
-using IT.Tangdao.Framework.Ioc;
+using IT.Tangdao.Framework.Abstractions.Navigation;
 using Stylet;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IgniteApp.Shell.Maintion.ViewModels
 {
     public class DigitalSmartGaugeViewModel : Screen, ITangdaoPage
     {
         public string PageTitle => "数字智能测量仪222";
-        private IContentReader _readService;
+        private IContentAccess _contentAccess;
 
-        public DigitalSmartGaugeViewModel(IContentReader readService)
+        public DigitalSmartGaugeViewModel(IContentAccess contentAccess)
         {
-            _readService = readService;
+            _contentAccess = contentAccess;
         }
 
         public bool CanNavigateAway()

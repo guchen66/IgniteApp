@@ -1,13 +1,10 @@
-﻿using IgniteApp.Bases;
-using IgniteApp.Shell.Maintion.Services;
-using IgniteApp.Shell.Set.Models;
+﻿using IgniteApp.Shell.Set.Models;
+using IT.Tangdao.Framework.Abstractions.Loggers;
+using IT.Tangdao.Framework.Abstractions.Notices;
 using IT.Tangdao.Framework.Commands;
+using IT.Tangdao.Framework.Extensions;
 using Stylet;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace IgniteApp.Shell.Set.ViewModels
@@ -30,6 +27,8 @@ namespace IgniteApp.Shell.Set.ViewModels
             set => SetAndNotify(ref _netSetItem, value);
         }
 
+        private ITangdaoLogger _logger = TangdaoLogger.Get(typeof(HardawreSetViewModel));
+
         public HardawreSetViewModel()
         {
             ConnectionCommand = new TangdaoCommand(ExecuteAllDeviceConn);
@@ -39,10 +38,18 @@ namespace IgniteApp.Shell.Set.ViewModels
         {
             // 通过中介者通知所有设备
             var newState = IsChecked = !IsChecked;
-
-            DeviceMediator.Instance.NotifyAllDevices(newState);
+            NoticeContext noticeContext = new NoticeContext();
+            noticeContext.CurrentState = newState;
+            noticeContext.CurrentTime = DateTime.Now;
+            NoticeMediator.Instance.NotifyAll(noticeContext);
+            _logger.WriteLocal($"全部状态已通知更改,通知时间{noticeContext.CurrentTime}");
         }
 
         public ICommand ConnectionCommand { get; set; }
+
+        protected override void OnClose()
+        {
+            base.OnClose();
+        }
     }
 }

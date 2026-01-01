@@ -1,11 +1,7 @@
 ﻿using Modbus.Device;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace IgniteDevices.PLC
 {
@@ -54,7 +50,7 @@ namespace IgniteDevices.PLC
     /// PLC的基础信息
     /// 如果View以实例去绑定，那么构造器进行静态的赋值
     /// </summary>
-    public class PlcInfo 
+    public class PlcInfo
     {
         public int Id { get; set; }
         public string IP { get; set; }
@@ -64,5 +60,5 @@ namespace IgniteDevices.PLC
         public string PlcName { get; set; }
     }
 
-   
+
 }

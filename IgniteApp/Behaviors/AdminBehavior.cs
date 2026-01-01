@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Xaml.Behaviors;
 using System.Windows.Controls;
-using System.Windows;
-using Microsoft.Xaml.Behaviors;
-using IgniteShared.Globals.System;
-using IgniteShared.Enums;
 
 namespace IgniteApp.Behaviors
 {

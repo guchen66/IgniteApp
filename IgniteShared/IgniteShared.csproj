@@ -126,10 +126,13 @@
     <Compile Include="Entitys\RecipeInfo.cs" />
     <Compile Include="Entitys\StaticticInfo.cs" />
     <Compile Include="Enums\AlarmLevel.cs" />
+    <Compile Include="Enums\CaliStatus.cs" />
     <Compile Include="Enums\ConnectionType.cs" />
     <Compile Include="Enums\PlcType.cs" />
+    <Compile Include="Enums\ProcessStatus.cs" />
     <Compile Include="Enums\RoleType.cs" />
     <Compile Include="Enums\SelectModes.cs" />
+    <Compile Include="Events\ProductUpdateEvent.cs" />
     <Compile Include="Globals\Common\TextStatus.cs" />
     <Compile Include="Globals\Common\Works\ProductionLine.cs" />
     <Compile Include="Globals\Common\Works\WaferMessage.cs" />

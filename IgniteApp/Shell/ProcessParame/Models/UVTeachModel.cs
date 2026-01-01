@@ -1,18 +1,16 @@
 ﻿using IT.Tangdao.Framework.Attributes;
 using IT.Tangdao.Framework.Faker;
 using IT.Tangdao.Framework.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace IgniteApp.Shell.ProcessParame.Models
 {
+    [XmlRoot("UVTeachModelList")]
     public class UvTeachModel : DaoViewModelBase
     {
         private int _id;
 
+        [TangdaoFake(PrimarykeyAutoIncrement = true)]
         public int Id
         {
             get => _id;
@@ -52,11 +50,18 @@ namespace IgniteApp.Shell.ProcessParame.Models
 
         private bool _isEdit;
 
-        [TangdaoFake(DefaultValue = "false")]
+        [TangdaoFake()]
         public bool IsEdit
         {
             get => _isEdit;
             set => SetProperty(ref _isEdit, value);
         }
+
+        public TestEnum TestEnum { get; set; }
+    }
+
+    public enum TestEnum
+    {
+        None, One, Two, Three, Four, Five,
     }
 }

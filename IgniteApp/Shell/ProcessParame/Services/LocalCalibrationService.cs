@@ -1,24 +1,18 @@
-﻿using System;
+﻿using IgniteApp.Extensions;
+using IgniteApp.Shell.ProcessParame.Models;
+using IgniteApp.Shell.ProcessParame.ViewModels;
+using IgniteShared.Globals.Local;
+using IT.Tangdao.Framework.Abstractions.Loggers;
+using IT.Tangdao.Framework.Extensions;
+using IT.Tangdao.Framework.Paths;
+using MiniExcelLibs;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using HandyControl.Tools.Extension;
-using IgniteApp.Extensions;
-using IgniteApp.Shell.ProcessParame.Models;
-using IgniteApp.Shell.ProcessParame.ViewModels;
-
-using IgniteShared.Globals.Local;
-using IT.Tangdao.Framework.Abstractions.Loggers;
-using IT.Tangdao.Framework.Enums;
-using IT.Tangdao.Framework.Extensions;
-using IT.Tangdao.Framework.Paths;
-using MiniExcelLibs;
-using Stylet.Xaml;
 
 namespace IgniteApp.Shell.ProcessParame.Services
 {

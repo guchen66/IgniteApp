@@ -6,12 +6,7 @@ using IgniteApp.Shell.Recipe.ViewModels;
 using IgniteApp.Shell.Set.ViewModels;
 using Stylet;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IgniteApp.Interfaces
 {

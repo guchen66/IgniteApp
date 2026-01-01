@@ -37,8 +37,13 @@
         </Style>
     </UserControl.Resources>
 
-    <TickBar
-     x:Name="TopTick"
-     Placement="Top"
-     Style="{StaticResource SliderTickBarStyle}" />
+    <StackPanel>
+        <TickBar
+            x:Name="TopTick"
+            Placement="Top"
+            Style="{StaticResource SliderTickBarStyle}" />
+
+        <TextBlock Text="{Binding Name/}" />
+        <ListView ItemsSource="{Binding Schools/Students}" />
+    </StackPanel>
 </UserControl>

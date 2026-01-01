@@ -3,10 +3,6 @@ using IgniteApp.Shell.Recipe.ViewModels;
 using IgniteDb.IRepositorys;
 using IgniteShared.Dtos;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IgniteApp.Dialogs.ViewModels
 {

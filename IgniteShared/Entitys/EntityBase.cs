@@ -1,11 +1,4 @@
-﻿using IT.Tangdao.Framework.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.SqlTypes;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace IgniteShared.Entitys
 {
@@ -34,7 +27,7 @@ namespace IgniteShared.Entitys
         /// <summary>
         /// 软删除
         /// </summary>
-        
+
         public bool? IsDeleted { get; set; }
 
     }

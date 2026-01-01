@@ -11,7 +11,7 @@
     xmlns:s="https://github.com/canton7/Stylet"
     xmlns:settings="clr-namespace:IgniteApp.Properties"
     Title="主页"
-    Width="1150"
+    Width="1250"
     Height="800"
     AllowsTransparency="True"
     WindowStartupLocation="CenterScreen"
@@ -34,7 +34,7 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition />
-                    <RowDefinition Height="30" />
+                    <RowDefinition Height="40" />
                 </Grid.RowDefinitions>
                 <ContentControl Grid.Row="0" s:View.Model="{Binding HomeViewModel}" />
                 <ContentControl Grid.Row="1" s:View.Model="{Binding FooterViewModel}" />

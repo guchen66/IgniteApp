@@ -1,9 +1,4 @@
 ﻿using IgniteDevices.TempAndHum;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IgniteDevices
 {
@@ -11,7 +6,7 @@ namespace IgniteDevices
     {
         private DeviceGroupService()
         {
-                
+
         }
         public static DeviceGroupService Current => GetCurrent();
 

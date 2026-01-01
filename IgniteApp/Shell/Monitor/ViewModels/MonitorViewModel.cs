@@ -1,20 +1,14 @@
 ﻿using IgniteApp.Bases;
-using IgniteApp.Common;
-using IgniteApp.Extensions;
 using IgniteApp.Interfaces;
-using IgniteApp.Shell.Home.Models;
-using IgniteApp.Shell.Set.ViewModels;
+using IT.Tangdao.Framework.Abstractions;
 using IT.Tangdao.Framework.Abstractions.FileAccessor;
-using IT.Tangdao.Framework.Infrastructure;
 using IT.Tangdao.Framework.Extensions;
+using IT.Tangdao.Framework.Infrastructure;
 using Stylet;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IT.Tangdao.Framework.EventArg;
-using IT.Tangdao.Framework.Abstractions;
 
 namespace IgniteApp.Shell.Monitor.ViewModels
 {
@@ -39,15 +33,26 @@ namespace IgniteApp.Shell.Monitor.ViewModels
 
         public readonly IViewFactory _viewFactory;
         private readonly INavigateRoute _navigatRoute;
-        private readonly IContentReader _readService;
+        private readonly IContentAccess _contentAccess;
 
-        public MonitorViewModel(IViewFactory viewFactory, INavigateRoute navigatRoute, IContentReader readService)
+        public MonitorViewModel(IViewFactory viewFactory, INavigateRoute navigatRoute, IContentAccess contentAccess)
         {
             _viewFactory = viewFactory;
             _navigatRoute = navigatRoute;
-            _readService = readService;
-            // MonitorMenuList = ReadOnlyMenuItemManager.Create(readService, HandlerName);
-            MonitorMenuList = readService.Default.AsConfig().SelectAppConfig(HandlerName).ToList(v => new TangdaoMenuItem { MenuName = v }).ToObservableCollection();
+            _contentAccess = contentAccess;
+
+            MonitorMenuList = contentAccess.Default.Empty().AsConfig().SelectAppSection(HandlerName)
+                .ToList(kv => new TangdaoMenuItem
+                {
+                    MenuName = kv.Value
+                }).ToObservableCollection();
+            //var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "unity.config");
+            //MonitorMenuList = contentAccess.Default.Read(path).AsConfig().SelectSection(HandlerName)
+            //    .ToList(kv => new TangdaoMenuItem
+            //    {
+            //        MenuName = kv.Value
+            //    }).ToObservableCollection();
+
             this.BindAndInvoke(viewModel => viewModel.SelectedIndex, (obj, args) => DoNavigateToView());
         }
 

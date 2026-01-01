@@ -1,8 +1,6 @@
 ﻿using IgniteApp.Shell.Maintion.ViewModels;
-using IT.Tangdao.Framework.Abstractions;
-using IT.Tangdao.Framework.Abstractions.Navigates;
+using IT.Tangdao.Framework.Abstractions.Navigation;
 using IT.Tangdao.Framework.Attributes;
-using IT.Tangdao.Framework.Ioc;
 using StyletIoC;
 using System;
 using System.Collections;
@@ -10,10 +8,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace IgniteApp.Tests
 {

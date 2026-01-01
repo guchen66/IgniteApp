@@ -1,11 +1,6 @@
 ﻿using Stylet;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Forms;
 using Screen = System.Windows.Forms.Screen;
 
 namespace IgniteApp.Common
@@ -37,8 +32,7 @@ namespace IgniteApp.Common
         /// <param name="viewModel">要显示的ViewModel</param>
         /// <param name="primaryScreenIndex">主屏幕索引（默认0）</param>
         /// <param name="secondaryScreenIndex">副屏幕索引（默认1）</param>
-        public static void OpenOnSecondaryScreen(IWindowManager windowManager, object viewModel,
-            int primaryScreenIndex = 0, int secondaryScreenIndex = 1)
+        public static void OpenOnSecondaryScreen(IWindowManager windowManager, object viewModel, int primaryScreenIndex = 0, int secondaryScreenIndex = 1)
         {
             var screens = Screen.AllScreens;
 

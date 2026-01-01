@@ -30,39 +30,6 @@
         </Grid.RowDefinitions>
         <Grid>
             <ContentControl Content="{Binding Router.CurrentView}" />
-            <!--  路由视图容器  -->
-            <!--<ContentControl Content="{Binding Router.CurrentView}">
-                <ContentControl.Style>
-                    <Style TargetType="ContentControl">
-                        -->
-            <!-- 默认 Clip -->
-            <!--
-                        <Setter Property="Clip">
-                            <Setter.Value>
-                                <RectangleGeometry Rect="0,0,1,1">
-                                    <RectangleGeometry.Transform>
-                                        -->
-            <!-- 初始不缩放 -->
-            <!--
-                                        <ScaleTransform ScaleY="1" />
-                                    </RectangleGeometry.Transform>
-                                </RectangleGeometry>
-                            </Setter.Value>
-                        </Setter>
-
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Switching}" Value="True">
-                                <DataTrigger.EnterActions>
-                                    <BeginStoryboard Storyboard="{StaticResource CurtainOut}" />
-                                </DataTrigger.EnterActions>
-                                <DataTrigger.ExitActions>
-                                    <BeginStoryboard Storyboard="{StaticResource CurtainIn}" />
-                                </DataTrigger.ExitActions>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </ContentControl.Style>
-            </ContentControl>-->
         </Grid>
         <Grid Grid.Row="1">
             <Border>
@@ -71,19 +38,19 @@
                         Width="120"
                         Margin="5"
                         Command="{s:Action OpenTeachView}"
-                        CommandParameter="CO2Teach"
+                        CommandParameter="CO2TeachViewModel"
                         Content="CO2示教" />
                     <RadioButton
                         Width="120"
                         Margin="5"
                         Command="{s:Action OpenTeachView}"
-                        CommandParameter="UVTeach"
+                        CommandParameter="UVTeachViewModel"
                         Content="UV示教" />
                     <RadioButton
                         Width="120"
                         Margin="5"
                         Command="{s:Action OpenTeachView}"
-                        CommandParameter="IRTeach"
+                        CommandParameter="IRTeachViewModel"
                         Content="IR示教" />
                 </hc:ButtonGroup>
             </Border>

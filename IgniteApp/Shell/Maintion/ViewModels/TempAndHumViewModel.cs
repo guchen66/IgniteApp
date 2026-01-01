@@ -1,21 +1,15 @@
 ﻿using HandyControl.Controls;
 using IgniteApp.Bases;
-using IgniteApp.Extensions;
-using IgniteDevices;
 using IgniteDevices.TempAndHum;
 using IgniteShared.Globals.System;
 using IT.Tangdao.Framework.Abstractions.FileAccessor;
 using Stylet;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace IgniteApp.Shell.Maintion.ViewModels
 {
-    public class TempAndHumViewModel : ViewModelBase
+    public class TempAndHumViewModel : BaseDeviceViewModel
     {
         private double _temp;
 
@@ -59,12 +53,12 @@ namespace IgniteApp.Shell.Maintion.ViewModels
 
         private TempAndHumClient _tempAndHumClient;
 
-        public IContentReader _readService;
+        public IContentAccess _contentAccess;
         // public IDeviceProvider _deviceProvider;
 
-        public TempAndHumViewModel()
+        public TempAndHumViewModel() : base("TempAndHum")
         {
-            //_readService = readService;
+            //_contentAccess = contentAccess;
 
             // var s1 = _deviceProvider.DefaultTemp;
             //  var s2 = ServiceLocator.GetService<Temperature>();
@@ -77,7 +71,7 @@ namespace IgniteApp.Shell.Maintion.ViewModels
         {
             Task.Run(() =>
             {
-                // _readService.Device.Read();
+                // _contentAccess.Device.Read();
                 while (!_manual.IsSet)
                 {
                     _tempAndHumClient.Initinalized(_manual);

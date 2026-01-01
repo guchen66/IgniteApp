@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using IgniteShared.Dtos;
 using IgniteShared.Entitys;
 namespace IgniteAdmin.Profiles
 {
-    public class DataBaseProfile: Profile
+    public class DataBaseProfile : Profile
     {
         public DataBaseProfile()
         {

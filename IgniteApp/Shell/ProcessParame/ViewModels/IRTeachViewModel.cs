@@ -1,20 +1,11 @@
 ﻿using HandyControl.Controls;
 using IgniteShared.Globals.Local;
-using IT.Tangdao.Framework;
 using IT.Tangdao.Framework.Abstractions;
-using IT.Tangdao.Framework.Abstractions.Navigates;
+using IT.Tangdao.Framework.Abstractions.Navigation;
 using IT.Tangdao.Framework.Commands;
 using IT.Tangdao.Framework.Extensions;
 using Stylet;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using System.Windows.Shapes;
 using Path = System.IO.Path;
 
 namespace IgniteApp.Shell.ProcessParame.ViewModels

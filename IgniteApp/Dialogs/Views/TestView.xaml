@@ -8,8 +8,8 @@
         xmlns:s="https://github.com/canton7/Stylet"
         xmlns:hc="https://handyorg.github.io/handycontrol"
          Height="450" Width="800">
-    <StackPanel>
+    <StackPanel Orientation="Horizontal">
         <ToggleButton  Width="300" IsChecked="{Binding IsChecked}"  Style="{StaticResource ToggleButtonSwitch}" />
-        <Button Command="{s:Action Open}" />
+        <Button Command="{s:Action Open}" Content="父窗体命令" Width="200" Height="30" Margin="5" />
     </StackPanel>
 </Window>

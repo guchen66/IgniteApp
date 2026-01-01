@@ -1,11 +1,4 @@
-﻿using IT.Tangdao.Framework.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IgniteShared.Entitys
 {
@@ -13,7 +6,7 @@ namespace IgniteShared.Entitys
     /// 统计信息
     /// </summary>
     [Table("StaticticInfo")]
-    public class StaticticInfo:EntityBase
+    public class StaticticInfo : EntityBase
     {
         public string Name { get; set; }
 

@@ -1,31 +1,26 @@
 ﻿using IgniteApp.Bases;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IgniteApp.Shell.Set.ViewModels
 {
-    public class CommonSetViewModel:ViewModelBase
+    public class CommonSetViewModel : ViewModelBase
     {
-		private string[] _languages;
+        private string[] _languages;
 
-		public string[] Languages
+        public string[] Languages
         {
-			get => _languages;
-			set => SetAndNotify(ref _languages, value);
-		}
+            get => _languages;
+            set => SetAndNotify(ref _languages, value);
+        }
 
-		private string _language;
+        private string _language;
 
-		public string Language
+        public string Language
         {
-			get => _language;
-			set => SetAndNotify(ref _language, value);
-		}
+            get => _language;
+            set => SetAndNotify(ref _language, value);
+        }
 
-		public CommonSetViewModel()
+        public CommonSetViewModel()
         {
             Languages = new string[] { "English", "汉语", "한국어", "русский" };
             // 设置默认选中值

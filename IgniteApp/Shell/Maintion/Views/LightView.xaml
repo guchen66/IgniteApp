@@ -7,6 +7,7 @@
     xmlns:hc="https://handyorg.github.io/handycontrol"
     xmlns:local="clr-namespace:IgniteApp.Shell.Maintion.Views"
     xmlns:conver="clr-namespace:IgniteApp.Converters"
+    xmlns:converter="clr-namespace:IT.Tangdao.Framework.Converters.Wpf;assembly=IT.Tangdao.Framework"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="https://github.com/canton7/Stylet"
     xmlns:marup="clr-namespace:IT.Tangdao.Framework.Markup;assembly=IT.Tangdao.Framework"
@@ -16,19 +17,15 @@
     mc:Ignorable="d">
     <UserControl.Resources>
         <conver:ContentToColorConverter x:Key="bg" />
+        <converter:IntToStringConverter x:Key="intToString" />
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="40" />
         </Grid.RowDefinitions>
-        <StatusBar VerticalAlignment="Top" Style="{StaticResource CustomStatusBarStyle}">
-            <StatusBarItem>
-                <TextBlock Text="{marup:BoolToStringMode Binding={Binding BoolValue}, FalseValue='{x:Static textStatus:TextStatus.Falied}', TrueValue='{x:Static textStatus:TextStatus.Sucess}'}" />
-            </StatusBarItem>
-            <Separator />
-        </StatusBar>
-        <StackPanel Orientation="Horizontal" Grid.Row="1">
+
+        <StackPanel Orientation="Horizontal">
             <hc:ProgressButton
                 x:Name="pro"
                 Width="180"
@@ -41,6 +38,14 @@
 
             <TextBlock Text="{Binding Mark}" Width="100" Height="30" />
             <Button Command="{s:Action Execute}" Content="{Binding Mark}" Width="200" Background="{Binding Content,Converter={StaticResource bg}}" />
+
+            <TextBox Text="{Binding Tag}" Width="100" Height="30" Margin="5" />
         </StackPanel>
+
+        <StatusBar Grid.Row="1" VerticalAlignment="Top" Style="{StaticResource CustomStatusBarStyle}" Width="100" Height="40" HorizontalAlignment="Left">
+            <StatusBarItem>
+                <TextBlock Text="{marup:BoolToStringMode Binding={Binding BoolValue}, FalseValue='{x:Static textStatus:TextStatus.Falied}', TrueValue='{x:Static textStatus:TextStatus.Sucess}'}" />
+            </StatusBarItem>
+        </StatusBar>
     </Grid>
 </UserControl>

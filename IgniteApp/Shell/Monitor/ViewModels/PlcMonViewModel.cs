@@ -1,6 +1,5 @@
 ﻿using IgniteApp.Bases;
 using IgniteApp.Common;
-using IgniteApp.Events;
 using IgniteApp.Shell.Monitor.Models;
 using IgniteDevices.PLC;
 using IgniteDevices.PLC.Services;
@@ -8,17 +7,9 @@ using IgniteShared.Enums;
 using IgniteShared.Globals.Local;
 using IT.Tangdao.Framework.Extensions;
 using IT.Tangdao.Framework.Paths;
-using Newtonsoft.Json.Linq;
 using Stylet;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Forms;
-using System.Windows.Ink;
 using System.Windows.Media.Imaging;
 
 namespace IgniteApp.Shell.Monitor.ViewModels

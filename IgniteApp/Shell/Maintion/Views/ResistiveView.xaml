@@ -13,17 +13,11 @@
     mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40" />
             <RowDefinition />
+            <RowDefinition Height="40" />
         </Grid.RowDefinitions>
-        <StatusBar VerticalAlignment="Top" Style="{StaticResource CustomStatusBarStyle}">
-            <StatusBarItem>
-                <TextBlock Text="{marup:BoolToStringMode Binding={Binding BoolValue}, FalseValue='{x:Static textStatus:TextStatus.Falied}', TrueValue='{x:Static textStatus:TextStatus.Sucess}'}" />
-            </StatusBarItem>
-            <Separator />
-        </StatusBar>
 
-        <Grid Grid.Row="1">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="100" />
                 <RowDefinition />
@@ -37,5 +31,10 @@
                 <Button Command="{s:Action GetData}" Content="获取数据" />
             </StackPanel>
         </Grid>
+        <StatusBar Grid.Row="1" VerticalAlignment="Top" Style="{StaticResource CustomStatusBarStyle}" Width="100" Height="40" HorizontalAlignment="Left">
+            <StatusBarItem>
+                <TextBlock Text="{marup:BoolToStringMode Binding={Binding BoolValue}, FalseValue='{x:Static textStatus:TextStatus.Falied}', TrueValue='{x:Static textStatus:TextStatus.Sucess}'}" />
+            </StatusBarItem>
+        </StatusBar>
     </Grid>
 </UserControl>

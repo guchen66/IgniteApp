@@ -1,38 +1,26 @@
 ﻿using IgniteApp.Bases;
-using IgniteApp.Interfaces;
-using IT.Tangdao.Framework.Abstractions;
-using IT.Tangdao.Framework.Abstractions.Navigates;
-using IT.Tangdao.Framework.Commands;
-using IT.Tangdao.Framework.Ioc;
+using IT.Tangdao.Framework.Abstractions.Navigation;
+using IT.Tangdao.Framework.Abstractions.Notices;
 using StyletIoC;
-using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace IgniteApp.Shell.Maintion.ViewModels
 {
-    public class PressureViewModel : BaseDeviceViewModel, IRouteComponent
+    public class PressureViewModel : BaseDeviceViewModel
     {
         public ITangdaoRouter Router { get; set; }
         public IContainer _container;
+        private string _tag;
+
+        public string Tag
+        {
+            get => _tag;
+            set => SetAndNotify(ref _tag, value);
+        }
 
         public PressureViewModel() : base("Pressure")
         {
         }
-
-        //public PressureViewModel(ITangdaoRouter router, IContainer container) : base("Pressure")
-        //{
-        //    Router = router;
-        //    _container = container;
-        //    Router.RouteComponent = this;
-        //    Router.RegisterPage<DigitalSmartGaugeViewModel>();
-        //    Router.RegisterPage<DifferentialGaugeViewModel>();
-        //    Router.RegisterPage<VacuumGaugeViewModel>();
-        //    GoBackCommand = MinidaoCommand.Create(ExecuteGoBack);
-        //    GoForwardCommand = MinidaoCommand.Create(ExecuteGoForward);
-        //}
 
         private void ExecuteGoForward()
         {

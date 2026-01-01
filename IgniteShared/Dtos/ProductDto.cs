@@ -1,14 +1,15 @@
-﻿using IgniteShared.Entitys;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IgniteShared.Dtos
+﻿namespace IgniteShared.Dtos
 {
     public class ProductDto : DataBase
     {
+        private string _productId;
+
+        public string ProductId
+        {
+            get => _productId;
+            set => SetProperty(ref _productId, value);
+        }
+
         private string _productName;
 
         public string ProductName
@@ -16,6 +17,5 @@ namespace IgniteShared.Dtos
             get => _productName;
             set => SetProperty(ref _productName, value);
         }
-
     }
 }

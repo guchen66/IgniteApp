@@ -233,10 +233,16 @@
                     </Grid.ColumnDefinitions>
 
                     <GroupBox Header="产品信息">
-                        <ListBox
-                            ItemContainerStyle="{DynamicResource myListBoxItemStyle}"
-                            ItemTemplate="{StaticResource ProductTemplate}"
-                            ItemsSource="{Binding ProductList}" />
+                        <UniformGrid Columns="2">
+                            <TextBlock Text="Id" />
+                            <TextBlock Text="{Binding ProductDto.ProductId}" />
+                            <TextBlock Text="产片名称" />
+                            <TextBlock Text="{Binding ProductDto.ProductName}" />
+                            <TextBlock Text="备注" />
+                            <TextBlock Text="{Binding ProductDto.Remark}" />
+                            <TextBlock Text="更新时间" />
+                            <TextBlock Text="{Binding ProductDto.UpdateTime,StringFormat='yyyy/mm/dd/MM/HH/ss'}" />
+                        </UniformGrid>
                     </GroupBox>
                     <GroupBox Grid.Column="1" Header="生产信息统计">
                         <Border>
@@ -298,6 +304,7 @@
 
             <hc:TabItem Header="物料信息" TextBlock.TextAlignment="Center">
                 <DataGrid
+                    x:Name="dataGrid"
                     AutoGenerateColumns="False"
                     Background="Transparent"
                     BorderThickness="0"
@@ -343,7 +350,7 @@
                                         <Button
                                             Width="70"
                                             Background="Red"
-                                            Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"
+                                            Command="{Binding DataContext.DeleteCommand, ElementName=dataGrid}"
                                             CommandParameter="{Binding Id}"
                                             Content="删除"
                                             FontSize="14"
