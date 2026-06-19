@@ -10,7 +10,7 @@ using IgniteShared.Globals.Local;
 using IT.Tangdao.Framework.Abstractions.FileAccessor;
 using IT.Tangdao.Framework.Commands;
 using IT.Tangdao.Framework.Extensions;
-using IT.Tangdao.Framework.Helpers;
+using IT.Tangdao.Framework.Infrastructure;
 using Stylet;
 using StyletIoC;
 using System;

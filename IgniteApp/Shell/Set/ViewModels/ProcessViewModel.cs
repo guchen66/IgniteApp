@@ -4,7 +4,7 @@ using IgniteApp.Shell.Set.Models;
 using IgniteShared.Globals.Local;
 using IT.Tangdao.Framework.Abstractions.FileAccessor;
 using IT.Tangdao.Framework.Enums;
-using IT.Tangdao.Framework.Helpers;
+using IT.Tangdao.Framework.Infrastructure;
 using Stylet;
 using System.Collections.Generic;
 using System.IO;

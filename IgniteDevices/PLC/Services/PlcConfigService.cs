@@ -1,5 +1,5 @@
 ﻿using IgniteShared.Models;
-using IT.Tangdao.Framework.Helpers;
+using IT.Tangdao.Framework.Infrastructure;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -51,7 +51,7 @@ namespace IgniteDevices.PLC.Services
         {
             lock (_configs)
             {
-                var path = DirectoryHelper.SelectDirectoryByName("appsetting.json");
+                var path = FileQueryable.SelectDirectoryByName("appsetting.json");
                 string json = File.ReadAllText(path);
                 var configCollection = JsonConvert.DeserializeObject<PlcConfigCollection>(json);
                 _configs = configCollection?.PlcConfigs ?? throw new InvalidDataException("配置格式错误");

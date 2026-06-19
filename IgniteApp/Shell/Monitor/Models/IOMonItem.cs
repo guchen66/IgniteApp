@@ -2,7 +2,7 @@
 
 namespace IgniteApp.Shell.Monitor.Models
 {
-    public class IOMonItem : DaoViewModelBase
+    public class IOMonItem : ViewModelBase
     {
         private int _id;
 

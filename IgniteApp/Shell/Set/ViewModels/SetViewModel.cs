@@ -1,6 +1,7 @@
 ﻿using IgniteApp.Bases;
 using IgniteApp.Interfaces;
 using IT.Tangdao.Framework.Abstractions.FileAccessor;
+using IT.Tangdao.Framework.Abstractions.Messaging;
 using IT.Tangdao.Framework.Extensions;
 using IT.Tangdao.Framework.Infrastructure;
 using Stylet;
@@ -31,11 +32,13 @@ namespace IgniteApp.Shell.Set.ViewModels
 
         public IViewFactory _viewFactory;
         public IContentAccess _contentAccess;
+        public ObserverBuilder _noticeBuilder;
 
-        public SetViewModel(IViewFactory viewFactory, IContentAccess contentAccess)
+        public SetViewModel(IViewFactory viewFactory, IContentAccess contentAccess, ObserverBuilder noticeBuilder)
         {
             _viewFactory = viewFactory;
             _contentAccess = contentAccess;
+            _noticeBuilder = noticeBuilder;
             SetMenuList = contentAccess.Default.Empty().AsConfig().SelectAppSection(HandlerName).ToList(kv => new TangdaoMenuItem { MenuName = kv.Value }).ToObservableCollection();
             this.BindAndInvoke(viewModel => viewModel.SelectedIndex, (obj, args) => DoNavigateToView());
         }

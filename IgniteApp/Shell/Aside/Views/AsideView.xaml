@@ -11,7 +11,7 @@
     xmlns:manager="clr-namespace:IgniteAdmin.Managers.Home;assembly=IgniteAdmin"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="https://github.com/canton7/Stylet"
-    xmlns:selector="clr-namespace:IT.Tangdao.Framework.Helpers;assembly=IT.Tangdao.Framework"
+
     xmlns:user="clr-namespace:IgniteShared.Globals.System;assembly=IgniteShared"
     d:DesignHeight="850"
     d:DesignWidth="300"
@@ -133,7 +133,8 @@
             Grid.Row="2"
             HorizontalAlignment="Center"
             VerticalAlignment="Center">
-            <TextBlock Text="{Binding Source={x:Static selector:DateTimeSelector.Instance}, Path=CurrentDate, StringFormat='yyyy-MM-dd HH:mm:ss'}" />
+
+            <!--<TextBlock Text="{Binding Source={x:Static selector:DateTimeSelector.Instance}, Path=CurrentDate, StringFormat='yyyy-MM-dd HH:mm:ss'}" />-->
         </StackPanel>
     </Grid>
 </UserControl>

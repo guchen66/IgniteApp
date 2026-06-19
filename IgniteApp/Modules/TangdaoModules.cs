@@ -1,4 +1,5 @@
-﻿using IgniteAdmin.Providers;
+﻿using AutoMapper;
+using IgniteAdmin.Providers;
 using IgniteApp.Dialogs.ViewModels;
 using IgniteApp.Interfaces;
 using IgniteApp.Shell.Maintion.ViewModels;
@@ -9,19 +10,18 @@ using IT.Tangdao.Framework;
 using IT.Tangdao.Framework.Abstractions;
 using IT.Tangdao.Framework.Abstractions.FileAccessor;
 using IT.Tangdao.Framework.Abstractions.Navigation;
-using IT.Tangdao.Framework.Abstractions.Notices;
+using IT.Tangdao.Framework.Abstractions.Messaging;
 using IT.Tangdao.Framework.Commands;
 using IT.Tangdao.Framework.Configurations;
 using IT.Tangdao.Framework.Enums;
-using IT.Tangdao.Framework.EventArg;
 using IT.Tangdao.Framework.Events;
 using IT.Tangdao.Framework.Extensions;
-using IT.Tangdao.Framework.Helpers;
 using StyletIoC;
 using StyletIoC.Creation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using IT.Tangdao.Framework.Collections;
 
 namespace IgniteApp.Modules
 {
@@ -34,12 +34,13 @@ namespace IgniteApp.Modules
             //简单导航的路由功能
             Bind<ISingleRouter>().To<SingleRouter>();
 
-            Bind<IHandlerTable>().To<HandlerTable>().InSingletonScope();
+            Bind<IActionTable>().To<ActionTable>().InSingletonScope();
 
             Bind<ITangdaoPublisher>().To<TangdaoPublisher>().InSingletonScope();
             Bind<ITangdaoNotifier>().To<TangdaoNotifier>().InSingletonScope();
             Bind<ISingleRouterDemo>().To<SingleRouterDemo>();
 
+            Bind<ObserverBuilder>().ToFactory(GetNoticeMediator);
             //注册导航，有拦截器功能
 
             Bind<ITangdaoRouterResolver>().ToFactory(container =>
@@ -88,7 +89,7 @@ namespace IgniteApp.Modules
             //  Bind<IDeviceProvider>().To<DeviceProvider>().InSingletonScope();
             Bind<IDialogService>().To<DialogService>().InSingletonScope();
             //注册Tangdao事件聚合器
-            Bind<IDaoEventAggregator>().To<DaoEventAggregator>().InSingletonScope();
+            Bind<IEventAggregator>().To<EventAggregator>().InSingletonScope();
             Bind<ITangdaoProvider>().To<TangdaoProvider>().InSingletonScope();
             // Bind<INavigateService>().To<NavigateService>().InSingletonScope();
             //   Bind<IServiceProvider>().To<ServiceProvider>().InSingletonScope();
@@ -100,6 +101,18 @@ namespace IgniteApp.Modules
                                                                        // 获取事件分发器和所有事件处理器
                                                                        // var dispatcher = ServerLocator.Current.Resolve<TangdaoEventDispatcher>();
                                                                        // var handlers = ServerLocator.Current.Resolve<ITangdaoHandler>();
+        }
+
+        private ObserverBuilder GetNoticeMediator(IRegistrationContext context)
+        {
+            TangdaoMessenger.Instance.SetResolver(reg => context.Get(reg.RegisterType) as IMessageObserver);
+
+            return TangdaoMessenger.Instance.ChainRegister()
+                .Add(typeof(LightViewModel))
+                .Add(typeof(ElectViewModel))
+                .Add(typeof(PressureViewModel))
+                .Add(typeof(TempAndHumViewModel))
+                .Add(typeof(ResistiveViewModel));
         }
 
         private ITangdaoMessage Builder(IRegistrationContext context)

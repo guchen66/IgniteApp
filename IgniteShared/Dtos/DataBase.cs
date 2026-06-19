@@ -6,7 +6,7 @@ namespace IgniteShared.Dtos
     /// <summary>
     /// Dto基类
     /// </summary>
-    public class DataBase : DaoViewModelBase
+    public class DataBase : ViewModelBase
     {
         private long _id;
 
@@ -30,11 +30,11 @@ namespace IgniteShared.Dtos
         /// <summary>
         /// 修改时间
         /// </summary>
-        private DateTime _updateTime;
+        private DateTime? _updateTime;
 
-        public DateTime UpdateTime
+        public DateTime? UpdateTime
         {
-            get => _updateTime;
+            get => _updateTime ?? (_updateTime = DateTime.Now);
             set => SetProperty(ref _updateTime, value);
         }
 

@@ -2,7 +2,7 @@
 
 namespace IgniteApp.Shell.Monitor.Models
 {
-    public class PlcMonItem : DaoViewModelBase
+    public class PlcMonItem : ViewModelBase
     {
         private int _id;
 

@@ -67,8 +67,8 @@ namespace IgniteApp.Shell.Monitor.ViewModels
             _eventAggregator = eventAggregator;
             _alarmPopupManager = alarmPopupManager;
             this.BindAndInvoke(viewModel => viewModel.SelectedIndex, (obj, sender) => SelectOpenPlcList());
-            var imagePath = TangdaoPath.Instance.Solution().Combine("Assets", "Images", "Light.png").Build();
-            var allImagePath = TangdaoPath.Instance.Solution().Combine("Assets", "Images").Build().EnumerateFiles("*.png");
+            var imagePath = TangdaoPath.Solution().Combine("Assets", "Images", "Light.png").Build();
+            var allImagePath = TangdaoPath.Solution().Combine("Assets", "Images").Build().EnumerateFiles("*.png");
             Image = new BitmapImage(new Uri(imagePath.Value));
         }
 

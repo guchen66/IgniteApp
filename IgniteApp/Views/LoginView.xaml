@@ -19,7 +19,6 @@
     Height="380"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
-    Tag="{daoMarkup:AppPackUri}"
     WindowStyle="None"
     mc:Ignorable="d">
     <Window.Resources>
@@ -67,7 +66,7 @@
                     <hc:PasswordBox
                         x:Name="txtPassword"
                         Width="250"
-                        Margin="10,0"
+                        Margin="10,0" InputMethod.IsInputMethodEnabled="False"
                         hc:InfoElement.Placeholder="请输入密码"
                         hc:UnsafePassword="{Binding LoginDto.Password, UpdateSourceTrigger=PropertyChanged}"
                         CaretBrush="{StaticResource PeonyBrush}"

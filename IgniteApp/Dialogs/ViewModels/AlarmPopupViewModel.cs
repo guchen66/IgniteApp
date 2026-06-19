@@ -2,7 +2,7 @@
 using IgniteDevices.PLC;
 
 using IT.Tangdao.Framework.Abstractions.Loggers;
-using IT.Tangdao.Framework.Events;
+using TangdaoEvents = IT.Tangdao.Framework.Events;
 using IT.Tangdao.Framework.Extensions;
 using Stylet;
 using System;
@@ -37,9 +37,9 @@ namespace IgniteApp.Dialogs.ViewModels
 
         private IEventAggregator _eventAggregator;
         private IWindowManager _windowManager;
-        private IDaoEventAggregator _daoEventAggregator;
+        private TangdaoEvents.IEventAggregator _daoEventAggregator;
 
-        public AlarmPopupViewModel(IEventAggregator eventAggregator, IWindowManager windowManager, IDaoEventAggregator daoEventAggregator)
+        public AlarmPopupViewModel(IEventAggregator eventAggregator, IWindowManager windowManager, TangdaoEvents.IEventAggregator daoEventAggregator)
         {
             _eventAggregator = eventAggregator;
             _windowManager = windowManager;

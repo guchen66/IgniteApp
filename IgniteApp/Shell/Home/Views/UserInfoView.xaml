@@ -136,7 +136,7 @@
                         <GridViewColumn DisplayMemberBinding="{Binding Path=UserName}" Header="用户名" />
                         <GridViewColumn DisplayMemberBinding="{Binding Path=Password}" Header="密码" />
                         <GridViewColumn DisplayMemberBinding="{Binding Path=IsAdmin}" Header="是否管理员" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=IP}" Header="登录IP" />
+                        <GridViewColumn DisplayMemberBinding="{daoMarkup:RowNumber}" Header="登录IP" />
                     </GridView>
                 </ListView.View>
             </ListView>

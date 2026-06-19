@@ -10,7 +10,7 @@ using IT.Tangdao.Framework.Commands;
 using IT.Tangdao.Framework.DaoTasks;
 using IT.Tangdao.Framework.Enums;
 using IT.Tangdao.Framework.Extensions;
-using IT.Tangdao.Framework.Helpers;
+using IT.Tangdao.Framework.Infrastructure;
 using Stylet;
 using System;
 using System.Collections.Generic;
@@ -137,15 +137,15 @@ namespace IgniteApp.Shell.Home.ViewModels
 
         private void ExecuteUnlock(string name)
         {
-            var uri = PackUriProvider.UriParses;
-            if (Password == "123")
-            {
-                IsEnabled = true;
-            }
-            else
-            {
-                MessageBox.Error($"密码:{Password}错误");
-            }
+            //var uri = PackUriProvider.UriParses;
+            //if (Password == "123")
+            //{
+            //    IsEnabled = true;
+            //}
+            //else
+            //{
+            //    MessageBox.Error($"密码:{Password}错误");
+            //}
         }
 
         protected override void OnViewLoaded()

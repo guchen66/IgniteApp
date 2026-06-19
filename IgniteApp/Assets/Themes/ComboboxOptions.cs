@@ -6,7 +6,7 @@ namespace IgniteApp.Assets.Themes
     {
         public static void SetTheme()
         {
-            OptionListExtension.OptionsPool["Accuracy"] = new[] { "X1", "Y1", "X2", "Y2", };
+            OptionItemsSourceExtension.OptionsPool["Accuracy"] = new[] { "X1", "Y1", "X2", "Y2", };
         }
     }
 }

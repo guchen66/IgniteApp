@@ -4,7 +4,7 @@ using System;
 
 namespace IgniteApp.Events
 {
-    public class CloseAlarmPopupEvent : DaoEventBase
+    public class CloseAlarmPopupEvent : EventBase
     {
         public DateTime CurrentTime { get; set; }
     }

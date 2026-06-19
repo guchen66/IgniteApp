@@ -1,6 +1,6 @@
 ﻿using IgniteApp.Shell.Set.Models;
 using IT.Tangdao.Framework.Abstractions.Loggers;
-using IT.Tangdao.Framework.Abstractions.Notices;
+using IT.Tangdao.Framework.Abstractions.Messaging;
 using IT.Tangdao.Framework.Commands;
 using IT.Tangdao.Framework.Extensions;
 using Stylet;
@@ -38,10 +38,10 @@ namespace IgniteApp.Shell.Set.ViewModels
         {
             // 通过中介者通知所有设备
             var newState = IsChecked = !IsChecked;
-            NoticeContext noticeContext = new NoticeContext();
+            MessageContext noticeContext = new MessageContext();
             noticeContext.CurrentState = newState;
             noticeContext.CurrentTime = DateTime.Now;
-            NoticeMediator.Instance.NotifyAll(noticeContext);
+            TangdaoMessenger.Instance.NotifyObservers(noticeContext);
             _logger.WriteLocal($"全部状态已通知更改,通知时间{noticeContext.CurrentTime}");
         }
 

@@ -5,7 +5,7 @@ using IT.Tangdao.Framework.Abstractions.FileAccessor;
 using IT.Tangdao.Framework.Abstractions.Navigation;
 using IT.Tangdao.Framework.Commands;
 using IT.Tangdao.Framework.Extensions;
-using IT.Tangdao.Framework.Helpers;
+using IT.Tangdao.Framework.Infrastructure;
 using Stylet;
 using System.Collections.Generic;
 using System.ComponentModel;

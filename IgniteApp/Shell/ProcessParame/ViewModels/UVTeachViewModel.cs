@@ -6,7 +6,7 @@ using IT.Tangdao.Framework.Abstractions.Navigation;
 using IT.Tangdao.Framework.Commands;
 using IT.Tangdao.Framework.DaoTasks;
 using IT.Tangdao.Framework.Extensions;
-using IT.Tangdao.Framework.Helpers;
+using IT.Tangdao.Framework.Infrastructure;
 using IT.Tangdao.Framework.Paths;
 using Stylet;
 using System;
@@ -137,11 +137,11 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
         private void SaveData()
         {
             UvTeachModelList = new ObservableCollection<UvTeachModel>(UvTeachModelList);
-            var sss1 = TangdaoPath.Instance.DateFrom(IgniteInfoLocation.Recipe).BuildDirectory();
+            var sss1 = TangdaoPath.DateFrom(IgniteInfoLocation.Recipe).BuildDirectory();
             //var directoryPath = TangdaoPath.Instance.DateFrom(IgniteInfoLocation.Recipe).BuildFile("111.xml");
 
-            var sss = TangdaoPath.Instance.AsPath(IgniteInfoLocation.Recipe);
-            var directoryPath = TangdaoPath.Instance.AsPath(IgniteInfoLocation.Recipe).BuildFile("111.xml");
+            var sss = TangdaoPath.AsPath(IgniteInfoLocation.Recipe);
+            var directoryPath = TangdaoPath.AsPath(IgniteInfoLocation.Recipe).BuildFile("111.xml");
             SerializeXMLToFile(UvTeachModelList, directoryPath.Value);
         }
 

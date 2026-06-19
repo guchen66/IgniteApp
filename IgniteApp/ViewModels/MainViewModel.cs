@@ -7,10 +7,8 @@ using IgniteApp.Shell.Header.ViewModels;
 using IgniteApp.Shell.Home.ViewModels;
 using IgniteDevices.PLC;
 using IgniteShared.Globals.Common;
-using IT.Tangdao.Framework.Abstractions.Notices;
-using IT.Tangdao.Framework.EventArg;
-using IT.Tangdao.Framework.Events;
-using IT.Tangdao.Framework.Helpers;
+using IT.Tangdao.Framework.Abstractions.Messaging;
+using TangdaoEvents = IT.Tangdao.Framework.Events;
 using Stylet;
 using StyletIoC;
 using System;
@@ -60,8 +58,8 @@ namespace IgniteApp.ViewModels
             OmronManager.AlarmChenged += OnAlarmChangedPublish;
             OmronManager.AlarmErrorChenged += OnAlarmErrorChanged;
 
-            TangdaoWeakEvent.Instance.OnMessageReceived += OnMessageReceived;
-            TangdaoWeakEvent.Instance.OnKeyMessageReceived += OnKeyMessageReceived;
+            TangdaoEvents.TangdaoWeakEvent.Instance.OnMessageReceived += OnMessageReceived;
+            TangdaoEvents.TangdaoWeakEvent.Instance.OnKeyMessageReceived += OnKeyMessageReceived;
             _tangdaoPublisher = tangdaoPublisher;
             _tangdaoNotifier = tangdaoNotifier;
             _tangdaoPublisher.Subscribe(_tangdaoNotifier);
@@ -72,9 +70,9 @@ namespace IgniteApp.ViewModels
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void OnKeyMessageReceived(object sender, KeyMessageEventArgs e)
+        private void OnKeyMessageReceived(object sender, TangdaoEvents.KeyMessageEventArgs e)
         {
-            Console.WriteLine(e.MessageEventArgs.Message);
+            Console.WriteLine(e.MessageEventArgs);
         }
 
         /// <summary>
@@ -82,9 +80,8 @@ namespace IgniteApp.ViewModels
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void OnMessageReceived(object sender, MessageEventArgs e)
+        private void OnMessageReceived(object sender, TangdaoEvents.MessageEventArgs e)
         {
-            Console.WriteLine(e.Message);
             Console.WriteLine(e.NowTime);
         }
 

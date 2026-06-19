@@ -4,7 +4,6 @@ using IgniteApp.Interfaces;
 using IgniteApp.Shell.Home.Models;
 using IT.Tangdao.Framework.Abstractions.FileAccessor;
 using IT.Tangdao.Framework.Extensions;
-using IT.Tangdao.Framework.Helpers;
 using Stylet;
 using System.Collections;
 using System;

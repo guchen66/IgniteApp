@@ -1,6 +1,6 @@
 ﻿using IgniteShared.Globals.Local;
+using IT.Tangdao.Framework.Collections;
 using IT.Tangdao.Framework.Extensions;
-using IT.Tangdao.Framework.Helpers;
 using System;
 using System.Collections;
 using System.Collections.Concurrent;

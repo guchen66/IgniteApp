@@ -23,7 +23,7 @@ namespace IgniteShared.Globals.Local
             Directory.CreateDirectory(Logger);
         }
 
-        public static readonly string AppData = Path.Combine("E:\\IgniteDatas");
+        public static readonly string AppData = Path.Combine("E:\\AppDatas\\IgniteDatas");
 
         /// <summary>
         /// 用户

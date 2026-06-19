@@ -2,7 +2,7 @@
 
 namespace IgniteApp.Shell.Recipe.Models
 {
-    public class RecipeMenuItem : DaoViewModelBase//, IMenuItem
+    public class RecipeMenuItem : ViewModelBase//, IMenuItem
     {
         private string _recipeName;
 

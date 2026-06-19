@@ -11,9 +11,8 @@ using IT.Tangdao.Bridge.Infrastructure;
 using IT.Tangdao.Bridge.Sockets;
 using IT.Tangdao.Framework.Abstractions.FileAccessor;
 using IT.Tangdao.Framework.Abstractions.Loggers;
-using IT.Tangdao.Framework.Abstractions.Notices;
+using IT.Tangdao.Framework.Abstractions.Messaging;
 using IT.Tangdao.Framework.Configurations;
-using IT.Tangdao.Framework.EventArg;
 using IT.Tangdao.Framework.Events;
 using IT.Tangdao.Framework.Extensions;
 using Stylet;
@@ -31,9 +30,26 @@ namespace IgniteApp
 
         private TcpTangdaoSocket TCP;
 
+        protected override void OnStart()
+        {
+            base.OnStart();
+            RegisterExceptionEvents();            //注册全局异常捕获
+            RegisterWCFEvent();                   //注册WCF事件
+            RegisterAutoMapper();
+            ComboboxOptions.SetTheme();
+            // throw new NotImplementedException();
+        }
+
         protected override void ConfigureIoC(IStyletIoCBuilder builder)
         {
-            LogPathConfig.SetRoot($@"{IgniteInfoLocation.Logger}");
+            // LogPathConfig.SetRoot($@"{IgniteInfoLocation.Logger}");
+
+            LogEntry logEntry = new LogEntry()
+            {
+                SaveDir = IgniteInfoLocation.Logger
+            };
+
+            LogEnsureConfig.Load(logEntry);
             //  builder.Assemblies = builder.Assemblies.Distinct().ToList();
             builder.AddModule(new TangdaoModules());
             builder.AddModule(new HomeModules());
@@ -48,11 +64,12 @@ namespace IgniteApp
 
             builder.Bind<ITangdaoSocket>().ToInstance(TCP);
 
-            Logger.WriteLocal($"注册成功");
+            Logger.Info($"注册成功");
         }
 
         protected override void Configure()
         {
+            Logger.WriteLocal($"{Container.GetHashCode()}");
             ServiceLocator.Init(Container);
             // 配置雪花Id算法机器码
             YitIdHelper.SetIdGenerator(new IdGeneratorOptions
@@ -65,7 +82,7 @@ namespace IgniteApp
         protected override async void OnLaunch()
         {
             base.OnLaunch();
-
+            Logger.WriteLocal($"{Container.GetHashCode()}");
             //NoticeMediator.SetResolver(reg => Container.Get(reg.RegisterType) as INoticeObserver);
 
             //NoticeMediator.Instance.ChainRegister()
@@ -84,16 +101,6 @@ namespace IgniteApp
         private void OnFileChanged(object sender, DaoFileChangedEventArgs e)
         {
             Logger.WriteLocal($"文件变化: {e.FilePath}, 变化类型: {e.ChangeType},{Environment.NewLine}变化详情：{e.ChangeDetails}，{Environment.NewLine}old:{e.OldContent},{Environment.NewLine}new:{e.NewContent}");
-        }
-
-        protected override void OnStart()
-        {
-            base.OnStart();
-            RegisterExceptionEvents();            //注册全局异常捕获
-            RegisterWCFEvent();                   //注册WCF事件
-            RegisterAutoMapper();
-            ComboboxOptions.SetTheme();
-            // throw new NotImplementedException();
         }
 
         private void RegisterExceptionEvents()

@@ -98,7 +98,7 @@
                         Width="100"
                         Height="30"
                         Margin="5"
-                        ItemsSource="{markup:OptionList Key=Accuracy}" />
+                        ItemsSource="{markup:OptionItemsSource Key=Accuracy}" />
                     <!--<TextBox Text="{bo:Custom Binding={Binding Offset}}" Width="100" Height="30" Margin="5" />-->
                     <TextBox
                         Width="100"

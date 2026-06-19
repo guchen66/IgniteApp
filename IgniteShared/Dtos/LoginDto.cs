@@ -3,7 +3,7 @@ using IT.Tangdao.Framework.Mvvm;
 
 namespace IgniteShared.Dtos
 {
-    public class LoginDto : DaoViewModelBase
+    public class LoginDto : ViewModelBase
     {
         private string _userName;
 

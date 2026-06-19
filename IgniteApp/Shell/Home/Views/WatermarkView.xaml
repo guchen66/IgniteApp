@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:IgniteApp.Shell.Home.Views"
              mc:Ignorable="d"
              xmlns:daoMarkup="clr-namespace:IT.Tangdao.Framework.Markup;assembly=IT.Tangdao.Framework"
-             Tag="{daoMarkup:AppPackUri}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
     </Grid>

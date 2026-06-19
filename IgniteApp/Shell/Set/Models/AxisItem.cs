@@ -3,8 +3,8 @@ using IT.Tangdao.Framework.Abstractions.FileAccessor;
 using IT.Tangdao.Framework.Abstractions.Loggers;
 using IT.Tangdao.Framework.Enums;
 using IT.Tangdao.Framework.Extensions;
-using IT.Tangdao.Framework.Helpers;
 using IT.Tangdao.Framework.Mvvm;
+using IT.Tangdao.Framework.Serializers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,7 +13,7 @@ using System.Xml.Linq;
 
 namespace IgniteApp.Shell.Set.Models
 {
-    public class AxisItem : DaoViewModelBase
+    public class AxisItem : ViewModelBase
     {
         private string _title;
 
@@ -99,7 +99,7 @@ namespace IgniteApp.Shell.Set.Models
                 var s = this as ObservableCollection<AxisItem>;
                 AxisItems = new List<AxisItem>(s);
 
-                var info = TangdaoXmlSerializer.SerializeXML<List<AxisItem>>(AxisItems);
+                var info = TangdaoXmlConvert.SerializeXML<List<AxisItem>>(AxisItems);
                 var foldPath = Path.Combine(IgniteInfoLocation.Recipe, "AxisInfo.xml");
                 _contentAccess.Default.Write(info, foldPath);
                 var xmlData = _contentAccess.Default.Read(foldPath).Content;

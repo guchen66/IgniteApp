@@ -9,9 +9,7 @@ using IT.Tangdao.Framework.Abstractions.FileAccessor;
 using IT.Tangdao.Framework.Abstractions.Loggers;
 using IT.Tangdao.Framework.Commands;
 using IT.Tangdao.Framework.Enums;
-using IT.Tangdao.Framework.Events;
 using IT.Tangdao.Framework.Extensions;
-using IT.Tangdao.Framework.Helpers;
 using IT.Tangdao.Framework.Paths;
 using IT.Tangdao.Framework.Threading;
 using Stylet;
@@ -22,6 +20,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Xml.Linq;
 using MessageBox = HandyControl.Controls.MessageBox;
 using Path = System.IO.Path;
 using Window = System.Windows.Window;
@@ -56,9 +55,10 @@ namespace IgniteApp.ViewModels
         #endregion
 
         #region--ctor--
-        public IDaoEventAggregator _daoEventAggregator;
 
-        public LoginViewModel(INavigationService navigationService, IEventAggregator eventAggregator, MainViewModel mainViewModel)
+        private IActionTable _actionTable;
+
+        public LoginViewModel(INavigationService navigationService, IEventAggregator eventAggregator, MainViewModel mainViewModel, IActionTable actionTable)
         {
             _mainViewModel = mainViewModel;
             _contentAccess = ServiceLocator.GetService<IContentAccess>();
@@ -68,6 +68,13 @@ namespace IgniteApp.ViewModels
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
             RegisterCommand = MinidaoCommand.Create(ExecuteRegister);
+            var defaultFilePath = TangdaoPath.GetDateFilePath("E://Datas");
+            _actionTable = actionTable;
+            _actionTable.Executing += _actionTable_Executing;
+        }
+
+        private void _actionTable_Executing(object sender, IT.Tangdao.Framework.Events.ActionTableEventArgs e)
+        {
         }
 
         #endregion
@@ -79,9 +86,9 @@ namespace IgniteApp.ViewModels
         /// </summary>
         public void ExecuteLogin()
         {
-            //1、Cache目录有缓存，使用缓存登录，2、Cache无缓存，使用新的账号登录3、缓存的账号一定是我登录过的，4、UserInfo一定包含我登录的信息
+            // 1、Cache目录有缓存，使用缓存登录，2、Cache无缓存，使用新的账号登录3、缓存的账号一定是我登录过的，4、UserInfo一定包含我登录的信息
             var cacheData = UserManager.SearchCache(LoginDto);
-            AmbientContext.SetObject(LoginDto);          //线程上下文传输数据
+            UIAmbientContext.SetObject(LoginDto);          //线程上下文传输数据
             if (cacheData)
             {
                 var foldPath = Path.Combine(IgniteInfoLocation.Cache, "LoginInfo.xml");
@@ -122,7 +129,7 @@ namespace IgniteApp.ViewModels
             base.OnActivate();
             try
             {
-                var s1 = TangdaoPath.Instance.GetThisFilePath();
+                var s1 = TangdaoPath.GetThisFilePath();
                 var foldPath = Path.Combine(IgniteInfoLocation.Cache, "LoginInfo.xml");
 
                 string isRememberValue = _contentAccess.Default.Read(foldPath).AsXml().SelectNode("IsRemember").Value;

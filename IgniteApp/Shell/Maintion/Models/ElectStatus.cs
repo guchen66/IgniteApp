@@ -3,7 +3,7 @@ using System;
 
 namespace IgniteApp.Shell.Maintion.Models
 {
-    public class ElectStatus : DaoViewModelBase
+    public class ElectStatus : ViewModelBase
     {
         private ElectPriceTrace electPriceTrace;
 

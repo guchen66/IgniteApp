@@ -241,7 +241,7 @@
                             <TextBlock Text="备注" />
                             <TextBlock Text="{Binding ProductDto.Remark}" />
                             <TextBlock Text="更新时间" />
-                            <TextBlock Text="{Binding ProductDto.UpdateTime,StringFormat='yyyy/mm/dd/MM/HH/ss'}" />
+                            <TextBlock Text="{Binding ProductDto.UpdateTime,StringFormat='yyyy/MM/dd/HH/mm/ss'}" />
                         </UniformGrid>
                     </GroupBox>
                     <GroupBox Grid.Column="1" Header="生产信息统计">

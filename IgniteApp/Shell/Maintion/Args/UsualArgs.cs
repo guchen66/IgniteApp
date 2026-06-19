@@ -2,7 +2,7 @@
 
 namespace IgniteApp.Shell.Maintion.Args
 {
-    public class UsualArgs : DaoViewModelBase
+    public class UsualArgs : ViewModelBase
     {
         private double[] _doubleValue;
 

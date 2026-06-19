@@ -1,6 +1,6 @@
 ﻿using IgniteApp.Events;
 using IgniteDevices.PLC;
-using IT.Tangdao.Framework.Events;
+using TangdaoEvents = IT.Tangdao.Framework.Events;
 using Stylet;
 using System;
 
@@ -12,9 +12,9 @@ namespace IgniteApp.Common
     public class AlarmPopupManager
     {
         public IEventAggregator _eventAggregator;
-        public IDaoEventAggregator _daoEventAggregator;
+        public TangdaoEvents.IEventAggregator _daoEventAggregator;
 
-        public AlarmPopupManager(IEventAggregator eventAggregator, IDaoEventAggregator daoEventAggregator)
+        public AlarmPopupManager(IEventAggregator eventAggregator, TangdaoEvents.IEventAggregator daoEventAggregator)
         {
             _eventAggregator = eventAggregator;
             _daoEventAggregator = daoEventAggregator;

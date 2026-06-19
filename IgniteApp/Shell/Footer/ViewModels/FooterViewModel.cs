@@ -7,15 +7,15 @@ using IgniteShared.Dtos;
 using IgniteShared.Globals.Common;
 using IgniteShared.Globals.Local;
 using IT.Tangdao.Bridge.Sockets;
+using IT.Tangdao.Framework.Abstractions;
 using IT.Tangdao.Framework.Abstractions.FileAccessor;
 using IT.Tangdao.Framework.Abstractions.Loggers;
-using IT.Tangdao.Framework.Abstractions.Notices;
+using IT.Tangdao.Framework.Abstractions.Messaging;
 using IT.Tangdao.Framework.Commands;
 using IT.Tangdao.Framework.Enums;
-using IT.Tangdao.Framework.EventArg;
 using IT.Tangdao.Framework.Events;
 using IT.Tangdao.Framework.Extensions;
-using IT.Tangdao.Framework.Helpers;
+using IT.Tangdao.Framework.Infrastructure;
 using Stylet;
 using StyletIoC;
 using System;
@@ -69,10 +69,10 @@ namespace IgniteApp.Shell.Footer.ViewModels
         private IDialogService _dialogService;
         private IContentAccess _contentAccess;
         private readonly ITangdaoSocket _tangdaoSocket;
-        private readonly IHandlerTable _handlerTable;
+        private readonly IActionTable _actionTable;
         private readonly ITangdaoPublisher _tangdaoPublisher;
 
-        public FooterViewModel(IWindowManager windowManager, IDialogService dialogService, Func<TTForgeViewModel> viewModelFactory, IContentAccess contentAccess, ITangdaoSocket tangdaoSocket, IHandlerTable handlerTable, ITangdaoPublisher tangdaoPublisher)
+        public FooterViewModel(IWindowManager windowManager, IDialogService dialogService, Func<TTForgeViewModel> viewModelFactory, IContentAccess contentAccess, ITangdaoSocket tangdaoSocket, IActionTable actionTable, ITangdaoPublisher tangdaoPublisher)
         {
             // _plcProvider = plcProvider;
             _windowManager = windowManager;
@@ -80,7 +80,7 @@ namespace IgniteApp.Shell.Footer.ViewModels
             _viewModelFactory = viewModelFactory;
             _contentAccess = contentAccess;
             _tangdaoSocket = tangdaoSocket;
-            _handlerTable = handlerTable;
+            _actionTable = actionTable;
             _tangdaoPublisher = tangdaoPublisher;
             // TTForgeViewModel = tTForgeViewModel;
             // 初始化定时器（间隔1秒，自动重置）
@@ -107,7 +107,7 @@ namespace IgniteApp.Shell.Footer.ViewModels
             if (e.Key == "Open")                       // 只关心自己的 key
             {
                 var handler = e.HandlerTable.GetResultHandler("Open");
-                var result = new HandlerResult { Result = BackResult.Success };
+                var result = new ActionResult { Result = ActionStatus.Success };
                 handler?.Invoke(result);               // 执行父之前注册的逻辑
             }
         }
@@ -167,45 +167,46 @@ namespace IgniteApp.Shell.Footer.ViewModels
 
         public void TestMessage()
         {
-            MessageEventArgs messageEventArgs = new MessageEventArgs(BgColor);
-            TangdaoWeakEvent.Instance.Publish(messageEventArgs);
+            //  MessageEventArgs messageEventArgs = new MessageEventArgs(BgColor);
+            //  TangdaoWeakEvent.Instance.Publish(messageEventArgs);
             //  TangdaoWeakEvent.Instance.Publish("222", messageEventArgs);
         }
 
         public void TestObserver()
         {
-            MessageEventArgs messageEventArgs = new MessageEventArgs(BgColor);
-            _tangdaoPublisher.Publish(messageEventArgs);
+            //  MessageEventArgs messageEventArgs = new MessageEventArgs(BgColor);
+            //_tangdaoPublisher.Publish(messageEventArgs);
         }
 
         public void TestNoticeAll()
         {
-            NoticeContext Context = new NoticeContext();
+            MessageContext Context = new MessageContext();
             Context.CurrentTime = DateTime.Now;
-            Context.Tag = "数据改变了";
-            NoticeMediator.Instance.NotifyAll(Context);
+
+            TangdaoMessenger.Instance.NotifyObservers(Context);
         }
 
         public void TestNotice()
         {
-            NoticeContext Context = new NoticeContext();
+            MessageContext Context = new MessageContext();
             Context.CurrentTime = DateTime.Now;
-            Context.Tag = "单独数据改变";
-            NoticeMediator.Instance.NotifySingle("LightViewModel", Context);
+            Context.Message = "单独数据改变";
+            TangdaoMessenger.Instance.NotifyObserverByKey("LightViewModel", Context);
         }
 
         public void TestWindow()
         {
-            _handlerTable.Register("Open", x =>
+            Logger.WriteLocal($"FooterViewModel测试：{_actionTable.GetActionInfo().Count}");
+            _actionTable.Register("Open", x =>
             {
-                if (x.Result == BackResult.Success)
+                if (x.Result == ActionStatus.Success)
                 {
                     MessageBox.Show("成功返回");
+                    Logger.WriteLocal($"FooterViewModel测试弹窗成功返回后：{_actionTable.GetActionInfo().Count}");
                 }
             });
             _windowManager.ShowDialog(TestViewModel);
-            //  SplitScreenManager.OpenOnSecondaryScreen(_windowManager, TestViewModel);
-            //  var s = TestViewModel.View;
+            Logger.WriteLocal($"FooterViewModel测试打开后：{_actionTable.GetActionInfo().Count}");
         }
 
         public void Test2()

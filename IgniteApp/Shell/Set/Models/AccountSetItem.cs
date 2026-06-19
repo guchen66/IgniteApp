@@ -2,7 +2,7 @@
 
 namespace IgniteApp.Shell.Set.Models
 {
-    public class AccountSetItem : DaoViewModelBase
+    public class AccountSetItem : ViewModelBase
     {
         private string _account;
 

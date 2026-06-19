@@ -1,6 +1,6 @@
 ﻿//using EntityFramework.DynamicFilters;
 using IgniteShared.Entitys;
-using IT.Tangdao.Framework.Helpers;
+using IT.Tangdao.Framework.Infrastructure;
 using Newtonsoft.Json.Linq;
 using SQLite.CodeFirst;
 using System.Data.Entity;
@@ -15,9 +15,9 @@ namespace IgniteDb
         public DbSet<MaterialInfo> MaterialInfos { get; set; }
         public DbSet<RecipeInfo> RecipeInfos { get; set; }
         public DbSet<StaticticInfo> StaticticInfos { get; set; }
+
         public AccessDbContext() : base("Sqlite")
         {
-
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -39,7 +39,6 @@ namespace IgniteDb
                 var sqliteConnectionInitializer = new SqliteCreateDatabaseIfNotExists<AccessDbContext>(modelBuilder);
                 Database.SetInitializer(sqliteConnectionInitializer);
             }
-
         }
 
         public override int SaveChanges()
@@ -57,10 +56,12 @@ namespace IgniteDb
                     entry.Property(model => model.IsDeleted).CurrentValue = false;
                     entry.Property(model => model.DeleteTime).CurrentValue = null;
                     break;
+
                 case EntityState.Modified:
                     entry.Property(model => model.IsDeleted).CurrentValue = false;
                     entry.Property(model => model.DeleteTime).CurrentValue = null;
                     break;
+
                 case EntityState.Deleted:
 
                     //阻止默认删除操作
@@ -68,6 +69,7 @@ namespace IgniteDb
                     entry.Property(model => model.IsDeleted).CurrentValue = false;
                     entry.Property(model => model.DeleteTime).CurrentValue = null;
                     break;
+
                 default:
                     break;
             }
@@ -79,11 +81,10 @@ namespace IgniteDb
         /// <returns></returns>
         private bool IsInitTable(out bool isShould)
         {
-            var path = DirectoryHelper.SelectDirectoryByName("appsetting.json");
+            var path = FileQueryable.SelectDirectoryByName("appsetting.json");
             string jsonContent = File.ReadAllText(path);
             isShould = JObject.Parse(jsonContent)["Sqlite"]["InitTable"].Value<bool>();//.ToString();
             return isShould;
-
         }
     }
 }

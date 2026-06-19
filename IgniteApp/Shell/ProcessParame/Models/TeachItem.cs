@@ -3,7 +3,7 @@ using IT.Tangdao.Framework.Mvvm;
 
 namespace IgniteApp.Shell.ProcessParame.Models
 {
-    public class TeachItem : DaoViewModelBase
+    public class TeachItem : ViewModelBase
     {
         private decimal _x1;
 

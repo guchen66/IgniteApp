@@ -30,7 +30,7 @@ namespace IgniteApp.Shell.ProcessParame.Services
                 // 1. 动态生成路径（使用Path.Combine确保跨平台兼容性）
                 string date = DateTime.Now.ToString("yyMMdd");
 
-                var directoryPath = TangdaoPath.Instance.DateFrom(IgniteInfoLocation.Framework).BuildDirectory();
+                var directoryPath = TangdaoPath.DateFrom(IgniteInfoLocation.Framework).BuildDirectory();
                 string filePath = Path.Combine(directoryPath.Value, $"{date}.xlsx");
 
                 // 3. 分Sheet处理逻辑

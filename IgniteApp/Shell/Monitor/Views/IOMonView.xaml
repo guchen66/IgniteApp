@@ -24,7 +24,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <TextBlock Text="筛选" Margin="10 10" />
-            <ComboBox x:Name="com" Grid.Column="1" ItemsSource="{markup:OptionList}" SelectedIndex="0" />
+            <ComboBox x:Name="com" Grid.Column="1" ItemsSource="{markup:OptionItemsSource}" SelectedIndex="0" />
             <TextBlock Text="" />
         </Grid>
         <DataGrid

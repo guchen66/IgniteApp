@@ -3,7 +3,7 @@ using IgniteApp.Bases;
 using IgniteApp.Shell.Maintion.Args;
 using IgniteApp.Shell.Maintion.Models;
 using IT.Tangdao.Framework.Abstractions.FileAccessor;
-using IT.Tangdao.Framework.Abstractions.Notices;
+using IT.Tangdao.Framework.Abstractions.Messaging;
 using IT.Tangdao.Framework.Commands;
 using IT.Tangdao.Framework.DaoTasks;
 using IT.Tangdao.Framework.Enums;

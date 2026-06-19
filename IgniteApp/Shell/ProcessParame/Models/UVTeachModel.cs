@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 namespace IgniteApp.Shell.ProcessParame.Models
 {
     [XmlRoot("UVTeachModelList")]
-    public class UvTeachModel : DaoViewModelBase
+    public class UvTeachModel : ViewModelBase
     {
         private int _id;
 

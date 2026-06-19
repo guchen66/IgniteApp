@@ -2,7 +2,7 @@
 
 namespace IgniteApp.Shell.Set.Models
 {
-    public class ProcessItem : DaoViewModelBase
+    public class ProcessItem : ViewModelBase
     {
         private string _name;
 

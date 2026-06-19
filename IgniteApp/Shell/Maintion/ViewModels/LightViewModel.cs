@@ -1,7 +1,7 @@
 ﻿using IgniteApp.Bases;
 using IgniteApp.Interfaces;
 using IT.Tangdao.Framework.Abstractions.Loggers;
-using IT.Tangdao.Framework.Abstractions.Notices;
+using IT.Tangdao.Framework.Abstractions.Messaging;
 using IT.Tangdao.Framework.Extensions;
 using System;
 using System.Threading;

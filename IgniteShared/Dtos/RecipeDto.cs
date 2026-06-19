@@ -3,7 +3,7 @@ using System;
 
 namespace IgniteShared.Dtos
 {
-    public class RecipeDto : DaoViewModelBase
+    public class RecipeDto : ViewModelBase
     {
         private int _id;
 

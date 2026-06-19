@@ -1,9 +1,11 @@
 ﻿using IgniteApp.Shell.ProcessParame.Models;
+using IT.Tangdao.Framework.Abstractions.Loggers;
 using IT.Tangdao.Framework.Extensions;
-using IT.Tangdao.Framework.Helpers;
+using IT.Tangdao.Framework.Infrastructure;
 using Stylet;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Controls;
 
@@ -107,14 +109,18 @@ namespace IgniteApp.Shell.ProcessParame.ViewModels
 
         private readonly RecipeManager _recipeManager = new RecipeManager();
         private readonly OffsetCaretaker _caretaker = new OffsetCaretaker();
+        private ITangdaoLogger _logger = TangdaoLogger.Get<AccuracyOffsetViewModel>();
 
         public AccuracyOffsetViewModel()
         {
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            stopwatch.Start();
             TangdaoDataFaker<OffsetModel> tangdaoDataFaker = new TangdaoDataFaker<OffsetModel>();
-            var lists = tangdaoDataFaker.Build(200);
+            var lists = tangdaoDataFaker.Build(2000000);
             AccuracyOffsetList = lists.ToObservableCollection();
             listCaretaker = new Caretaker<List<OffsetModel>>(listOriginator);
             _recipeManager.CompensationData = AccuracyOffsetList;
+            _logger.Info(stopwatch.Elapsed.ToString());
         }
 
         private double _offset;

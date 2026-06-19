@@ -15,7 +15,6 @@
     Height="800"
     AllowsTransparency="True"
     WindowStartupLocation="CenterScreen"
-     Tag="{daoMarkup:AppPackUri}"
     WindowStyle="None"
     mc:Ignorable="d">
     <Grid Panel.ZIndex="1">

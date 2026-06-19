@@ -1,6 +1,6 @@
 ﻿using IT.Tangdao.Framework.Abstractions.Navigation;
 using IT.Tangdao.Framework.Attributes;
-using IT.Tangdao.Framework.Helpers;
+using IT.Tangdao.Framework.Infrastructure;
 using Stylet;
 using System;
 using System.Collections.Generic;

@@ -3,7 +3,7 @@ using System;
 
 namespace IgniteApp.Shell.Monitor.Models
 {
-    public class AxisMonItem : DaoViewModelBase
+    public class AxisMonItem : ViewModelBase
     {
         private int _id;
 

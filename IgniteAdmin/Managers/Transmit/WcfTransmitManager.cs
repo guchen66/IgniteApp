@@ -1,4 +1,5 @@
-﻿using IT.Tangdao.Framework.Helpers;
+﻿using IT.Tangdao.Framework.Infrastructure;
+using IT.Tangdao.Framework.Serializers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -12,7 +13,7 @@ namespace IgniteAdmin.Managers.Transmit
     {
         public static async Task<bool> StartWcfAsync()
         {
-            var json = await TangdaoJsonFileHelper.GetDecisionJsonAsync("appsetting.json", "WCF");
+            var json = await TangdaoJsonQueryable.GetJsonContentAsync("appsetting.json", "WCF");
 
             var model = JsonConvert.DeserializeObject<WCFTransmitData>(json);
             return model.Startup;
@@ -34,7 +35,7 @@ namespace IgniteAdmin.Managers.Transmit
         /// <returns>JSON对象中对应键的值</returns>
         public static string GetDecisionJson(string resourceName, string key)
         {
-            var path = DirectoryHelper.SelectDirectoryByName(resourceName);
+            var path = FileQueryable.SelectDirectoryByName(resourceName);
 
             if (!File.Exists(path))
             {

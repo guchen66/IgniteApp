@@ -5,7 +5,7 @@ namespace IgniteApp.Shell.ProcessParame.Models
     /// <summary>
     /// 运动系标定
     /// </summary>
-    public class MotionCalibrationModel : DaoViewModelBase
+    public class MotionCalibrationModel : ViewModelBase
     {
         private int _id;
 

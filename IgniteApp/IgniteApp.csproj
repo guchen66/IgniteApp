@@ -286,7 +286,6 @@
     <Compile Include="Extensions\IDialogProvider.cs" />
     <Compile Include="Extensions\StyleIocExtensions.cs" />
     <Compile Include="Extensions\WindowManagerExtensions.cs" />
-    <Compile Include="Infrastructure\ModbusPlugin.cs" />
     <Compile Include="Interfaces\IAppConfigProvider.cs" />
     <Compile Include="Interfaces\IDialogService.cs" />
     <Compile Include="Interfaces\INavigateEntry.cs" />
@@ -895,6 +894,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="favicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Infrastructure\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

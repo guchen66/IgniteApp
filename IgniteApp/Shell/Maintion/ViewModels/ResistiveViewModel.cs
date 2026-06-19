@@ -1,6 +1,6 @@
 ﻿using IgniteApp.Bases;
 using IT.Tangdao.Framework.Abstractions.Loggers;
-using IT.Tangdao.Framework.Abstractions.Notices;
+using IT.Tangdao.Framework.Abstractions.Messaging;
 using IT.Tangdao.Framework.DaoTasks;
 using IT.Tangdao.Framework.Extensions;
 using System;
@@ -47,12 +47,6 @@ namespace IgniteApp.Shell.Maintion.ViewModels
                 Thread.Sleep(1000);
                 Data = daoTask.Duration();
             });
-
-            TangdaoTaskScheduler.ExecuteAsyncTask(daoTask =>
-            {
-            });
-
-            TangdaoTaskScheduler.ExecuteBackgroundThenUI(daoAsync => { }, dao => { });
         }
 
         public void GetData()

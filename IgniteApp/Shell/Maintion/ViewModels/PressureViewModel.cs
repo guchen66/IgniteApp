@@ -1,6 +1,6 @@
 ﻿using IgniteApp.Bases;
 using IT.Tangdao.Framework.Abstractions.Navigation;
-using IT.Tangdao.Framework.Abstractions.Notices;
+using IT.Tangdao.Framework.Abstractions.Messaging;
 using StyletIoC;
 using System.Windows.Input;
 

@@ -4,7 +4,7 @@ using IT.Tangdao.Framework.Mvvm;
 
 namespace IgniteApp.Shell.ProcessParame.Models
 {
-    public class OffsetModel : DaoViewModelBase
+    public class OffsetModel : ViewModelBase
     {
         private int _id;
 

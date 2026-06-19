@@ -25,7 +25,7 @@
             <TextBlock Margin="10,10" Text="筛选" />
             <ComboBox
                 Grid.Column="1"
-                ItemsSource="{markup:OptionList}"
+                ItemsSource="{markup:OptionItemsSource}"
                 SelectedItem="0" />
             <TextBlock Text="" />
         </Grid>

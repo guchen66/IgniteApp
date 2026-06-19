@@ -54,7 +54,6 @@ namespace IgniteApp.Shell.Aside.ViewModels
             set => SetAndNotify(ref _loginDto, value);
         }
 
-        private TangdaoPath _tangdaoPath;
         private static readonly ITangdaoLogger Logger = TangdaoLogger.Get(typeof(AsideViewModel));
         private DispatcherTimer timer;
         private IAutoRun _autoRun;
@@ -85,8 +84,9 @@ namespace IgniteApp.Shell.Aside.ViewModels
             PlcManager.GetPlcSignal<int>(1);
         }
 
-        public void ExecuteAuto()
+        public async void ExecuteAuto()
         {
+            await Task.Delay(200);
             ProcessStatus = ProcessStatus.Auto;
             SysProcessInfo.IsAuto = true;
             SysProcessInfo.IsCannel = false;
@@ -156,7 +156,7 @@ namespace IgniteApp.Shell.Aside.ViewModels
         protected override void OnViewLoaded()
         {
             base.OnViewLoaded();
-            LoginDto = AmbientContext.GetObject<LoginDto>();
+            LoginDto = UIAmbientContext.GetObject<LoginDto>();
         }
 
         #endregion

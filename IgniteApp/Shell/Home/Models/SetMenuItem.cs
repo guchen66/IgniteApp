@@ -2,7 +2,7 @@
 
 namespace IgniteApp.Shell.Home.Models
 {
-    public class SetMenuItem : DaoViewModelBase
+    public class SetMenuItem : ViewModelBase
     {
         public int Id { get; set; }
         private string _setMenuName;

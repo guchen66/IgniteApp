@@ -11,14 +11,17 @@ using System.Threading;
 using System.Windows.Threading;
 using IT.Tangdao.Framework.Extensions;
 using IT.Tangdao.Framework.Events;
+using IgniteApp.Shell.Footer.ViewModels;
+using IT.Tangdao.Framework.Abstractions.Loggers;
 
 namespace IgniteApp.Dialogs.ViewModels
 {
     public class TestViewModel : Screen, IDialogProvider
     {
-        private readonly IHandlerTable _handlerTable;
+        private readonly IActionTable _handlerTable;
+        private static readonly ITangdaoLogger Logger = TangdaoLogger.Get(typeof(TestViewModel));
 
-        public TestViewModel(IHandlerTable handlerTable)
+        public TestViewModel(IActionTable handlerTable)
         {
             _handlerTable = handlerTable;
         }
@@ -66,13 +69,11 @@ namespace IgniteApp.Dialogs.ViewModels
 
         public void Open()
         {
-            // HandlerResult result = new HandlerResult();
-            // result.Result = BackResult.Success;
-            //   _handlerTable.Execute("Open", result, TaskThreadType.UI);
-            //var action = _handlerTable.GetResultHandler("Open");
-            // action.Invoke(result);
-
-            TangdaoWeakEvent.Instance.Publish("Open", _handlerTable);
+            ActionResult result = new ActionResult();
+            result.Result = ActionStatus.Success;
+            // _handlerTable.GetResultHandler("Open").Invoke(result);
+            _handlerTable.Execute("Open", result);
+            Logger.WriteLocal($"TestViewModel测试：{_handlerTable.GetActionInfo().Count}");
         }
 
         private void TimerCallback(object sender, EventArgs e)
@@ -91,6 +92,13 @@ namespace IgniteApp.Dialogs.ViewModels
             {
                 _lock.ExitWriteLock();
             }
+        }
+
+        protected override void OnClose()
+        {
+            base.OnClose();
+
+            _handlerTable.UnregisterResultHandler("Open");
         }
     }
 }

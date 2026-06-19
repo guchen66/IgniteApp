@@ -9,7 +9,6 @@ using IgniteShared.Dtos;
 using IgniteShared.Enums;
 using IT.Tangdao.Framework.Abstractions;
 using IT.Tangdao.Framework.Commands;
-using IT.Tangdao.Framework.Helpers;
 using Stylet;
 using System;
 using System.Collections.Concurrent;
@@ -87,7 +86,7 @@ namespace IgniteApp.ViewModels
                 Password = Password,
                 IsAdmin = isAdmin,
                 Role = roleSelector,
-                IP = IPHelper.GetLocalIPByLinq()
+                IP = "  "
             };
 
             UserManager.SaveUserInfo(loginDto);

@@ -4,7 +4,7 @@ using System.Windows.Controls;
 
 namespace IgniteApp.Shell.Set.Models
 {
-    public class SystemMenuItem : DaoViewModelBase
+    public class SystemMenuItem : ViewModelBase
     {
         private int _id;
 

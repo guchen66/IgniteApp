@@ -8,7 +8,7 @@ namespace IgniteApp.Shell.Maintion.Models
     /// <summary>
     /// 电流表数据
     /// </summary>
-    public class ElectricityModel : DaoViewModelBase
+    public class ElectricityModel : ViewModelBase
     {
         public IElectService IElectService { get; set; }
         private int _id;
