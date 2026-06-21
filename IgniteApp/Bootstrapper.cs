@@ -5,6 +5,7 @@ using IgniteApp.Dialogs.ViewModels;
 using IgniteApp.Modules;
 using IgniteApp.Shell.Maintion.ViewModels;
 using IgniteApp.ViewModels;
+using IgniteApp.Views;
 using IgniteShared.Globals.Local;
 using IT.Tangdao.Bridge.Enums;
 using IT.Tangdao.Bridge.Infrastructure;
@@ -20,11 +21,12 @@ using StyletIoC;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using Yitter.IdGenerator;
 
 namespace IgniteApp
 {
-    public class Bootstrapper : Bootstrapper<LoginViewModel>
+    public class Bootstrapper : Bootstrapper<MainViewModel>
     {
         private static readonly ITangdaoLogger Logger = TangdaoLogger.Get(typeof(Bootstrapper));
 
@@ -57,12 +59,12 @@ namespace IgniteApp
             builder.AddModule(new AutoModules());
             // 只有真正需要全局唯一的对象才注册为单例
             builder.Bind<AlarmPopupViewModel>().ToSelf().InSingletonScope();
+            //  builder.Bind<LoginView>().ToSelf().InSingletonScope();
+            //string connUri = "tcp://127.0.0.1:8970";
+            //var uri = new TangdaoUri(connUri);
+            // TCP = new TcpTangdaoSocket(NetMode.Client, uri);//我是客户端，我要连接的服务端是connUri
 
-            string connUri = "tcp://127.0.0.1:8970";
-            var uri = new TangdaoUri(connUri);
-            TCP = new TcpTangdaoSocket(NetMode.Client, uri);//我是客户端，我要连接的服务端是connUri
-
-            builder.Bind<ITangdaoSocket>().ToInstance(TCP);
+            //  builder.Bind<ITangdaoSocket>().ToInstance(TCP);
 
             Logger.Info($"注册成功");
         }
@@ -79,19 +81,35 @@ namespace IgniteApp
             });
         }
 
+        public override Window GetActiveWindow()
+        {
+            return Container.Get<MainView>();
+        }
+
+        protected override void DisplayRootView(object rootViewModel)
+        {
+            var loginViewModel = Container.Get<LoginViewModel>();
+            var count = Application.Current.Windows.Count;
+            var result = Container.Get<IWindowManager>().ShowDialog(loginViewModel);
+
+            if (result == false)
+            {
+                System.Windows.Application.Current?.Shutdown();
+            }
+            else
+            {
+                var s1 = System.Windows.Application.Current.MainWindow;
+                count = Application.Current.Windows.Count;
+                base.DisplayRootView(rootViewModel);
+                var s2 = System.Windows.Application.Current.MainWindow;
+            }
+        }
+
         protected override async void OnLaunch()
         {
             base.OnLaunch();
+
             Logger.WriteLocal($"{Container.GetHashCode()}");
-            //NoticeMediator.SetResolver(reg => Container.Get(reg.RegisterType) as INoticeObserver);
-
-            //NoticeMediator.Instance.ChainRegister()
-            //    .Add(typeof(LightViewModel))
-            //    .Add(typeof(ElectViewModel))
-            //    .Add(typeof(PressureViewModel))
-            //    .Add(typeof(TempAndHumViewModel))
-            //    .Add(typeof(ResistiveViewModel));
-
             // 启动监控服务
             var monitorService = Container.Get<IFileMonitor>();
             monitorService.FileChanged += OnFileChanged;
@@ -112,6 +130,17 @@ namespace IgniteApp
             Application.DispatcherUnhandledException += handler.App_DispatcherUnhandledException;
             //非UI线程未捕获异常处理事件(例如自己创建的一个子线程)
             AppDomain.CurrentDomain.UnhandledException += handler.CurrentDomain_UnhandledException;
+
+            AppDomain.CurrentDomain.FirstChanceException += CurrentDomain_FirstChanceException;
+        }
+
+        private static int count = 1;
+
+        private static void CurrentDomain_FirstChanceException(object sender, System.Runtime.ExceptionServices.FirstChanceExceptionEventArgs e)
+        {
+            Console.WriteLine($"第{count}次异常信息名称：{e.Exception.GetType().Name}");
+            Console.WriteLine($"第{count}次异常信息：{e.Exception.Message}");
+            count++;
         }
 
         private void RegisterWCFEvent()
@@ -129,6 +158,11 @@ namespace IgniteApp
         private async void RegisterAutoMapper()
         {
             await Task.Delay(1000).ConfigureAwait(true);
+        }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            base.OnExit(e);
         }
     }
 

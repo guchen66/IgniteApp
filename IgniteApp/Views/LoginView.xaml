@@ -6,11 +6,11 @@
     xmlns:behavior="clr-namespace:IT.Tangdao.Xaml.Behaviors;assembly=IT.Tangdao.Xaml"
     xmlns:conver="clr-namespace:IT.Tangdao.Framework.Converters.Wpf;assembly=IT.Tangdao.Framework"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:daoMarkup="clr-namespace:IT.Tangdao.Framework.Markup;assembly=IT.Tangdao.Framework"
     xmlns:hc="https://handyorg.github.io/handycontrol"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:IgniteApp.Views"
     xmlns:markup="clr-namespace:IgniteApp.Converters.Test"
-    xmlns:daoMarkup="clr-namespace:IT.Tangdao.Framework.Markup;assembly=IT.Tangdao.Framework"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="https://github.com/canton7/Stylet"
     xmlns:shared="clr-namespace:IgniteShared.Entitys.Common;assembly=IgniteShared"
@@ -24,7 +24,10 @@
     <Window.Resources>
 
         <ResourceDictionary>
-            <ObjectDataProvider x:Key="drag"  MethodName="CreateDragMoveCommand" ObjectType="{x:Type local:DragMoveHelper}" />
+            <ObjectDataProvider
+                x:Key="drag"
+                MethodName="CreateDragMoveCommand"
+                ObjectType="{x:Type local:DragMoveHelper}" />
             <local:DragMoveHelper x:Key="DragHelper" />
             <markup:TypeOf x:Key="TypeOf" />
             <ResourceDictionary.MergedDictionaries>
@@ -60,17 +63,18 @@
                         CaretBrush="{StaticResource PeonyBrush}"
                         FontSize="16"
                         SelectionBrush="{StaticResource PeonyBrush}"
-                        Text="{Binding LoginDto.UserName, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        Text="{Binding LoginDto.UserName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                 </StackPanel>
                 <StackPanel Margin="20,10,0,0" Orientation="Horizontal">
                     <hc:PasswordBox
                         x:Name="txtPassword"
                         Width="250"
-                        Margin="10,0" InputMethod.IsInputMethodEnabled="False"
+                        Margin="10,0"
                         hc:InfoElement.Placeholder="请输入密码"
                         hc:UnsafePassword="{Binding LoginDto.Password, UpdateSourceTrigger=PropertyChanged}"
                         CaretBrush="{StaticResource PeonyBrush}"
                         FontSize="16"
+                        InputMethod.IsInputMethodEnabled="False"
                         IsSafeEnabled="False"
                         SelectionBrush="{StaticResource PeonyBrush}"
                         ShowEyeButton="True" />
@@ -79,7 +83,6 @@
                 <StackPanel Margin="20,15,0,0" Orientation="Horizontal">
                     <CheckBox
                         Margin="10,15,0,0"
-
                         Content="记住密码"
                         FontSize="16"
                         IsChecked="{Binding Path=LoginDto.IsRemember, Mode=TwoWay}" />
@@ -102,8 +105,19 @@
                         HorizontalAlignment="Center"
                         Background="{StaticResource OceanBlueBrush}"
                         Command="{s:Action ExecuteLogin}"
+                        CommandParameter="{daoMarkup:GetWindow}"
                         Content="登录"
                         IsDefault="True" />
+                    <!--<Button
+                        Width="100"
+                        Height="30"
+                        Margin="40,20,20,-100"
+                        HorizontalAlignment="Center"
+                        Background="{StaticResource OceanBlueBrush}"
+                        Command="{Binding LoginCommand}"
+                        CommandParameter="{daoMarkup:GetWindow}"
+                        Content="登录"
+                        IsDefault="True" />-->
                     <Button
                         Width="100"
                         Height="30"

@@ -9,6 +9,7 @@ using IgniteApp.Shell.Maintion.ViewModels;
 using IgniteApp.Shell.ProcessParame.Services;
 using IgniteApp.Shell.Set.ViewModels;
 using IgniteApp.ViewModels;
+using IgniteApp.Views;
 using IgniteDevices.Connections;
 using IgniteDevices.Connections.Interfaces;
 using IgniteDevices.PLC.Services;
@@ -53,6 +54,7 @@ namespace IgniteApp.Modules
             Bind<IEventAggregator>().To<EventAggregator>().InSingletonScope();
             Bind<IAutoRun>().To<AutoRun>().InSingletonScope();
             Bind<IElectService>().To<ElectService>().InSingletonScope();
+            //  Bind<LoginView>().ToSelf().InSingletonScope();
             Bind<LoginViewModel>().ToSelf().InSingletonScope();
             Bind<AsideViewModel>().ToSelf().InSingletonScope();
             Bind<UserInfoViewModel>().ToSelf().InSingletonScope();

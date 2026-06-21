@@ -71,7 +71,11 @@ namespace IgniteApp.ViewModels
             var defaultFilePath = TangdaoPath.GetDateFilePath("E://Datas");
             _actionTable = actionTable;
             _actionTable.Executing += _actionTable_Executing;
+
+            // LoginCommand = new TangdaoCommand<Window>(ExecuteLogin);
         }
+
+        public ICommand LoginCommand { get; set; }
 
         private void _actionTable_Executing(object sender, IT.Tangdao.Framework.Events.ActionTableEventArgs e)
         {
@@ -81,10 +85,39 @@ namespace IgniteApp.ViewModels
 
         #region--方法--
 
+        public void ExecuteLogin(Window win)
+        {
+            // win.DialogResult = true;
+            // 1、Cache目录有缓存，使用缓存登录，2、Cache无缓存，使用新的账号登录3、缓存的账号一定是我登录过的，4、UserInfo一定包含我登录的信息
+            var cacheData = UserManager.SearchCache(LoginDto);
+            UIAmbientContext.SetObject(LoginDto);          //线程上下文传输数据
+            if (cacheData)
+            {
+                var main = Application.Current.MainWindow;
+                win.DialogResult = true;
+                ///  RequestClose();
+
+                //  win.DialogResult = true;
+            }
+            else
+            {
+                MessageBox.Error("账号未注册");
+            }
+        }
+
+        protected override void OnClose()
+        {
+        }
+
+        public override void RequestClose(bool? dialogResult = null)
+        {
+            base.RequestClose(dialogResult);
+        }
+
         /// <summary>
         /// 登录
         /// </summary>
-        public void ExecuteLogin()
+        public void ExecuteLogin1(Window win)
         {
             // 1、Cache目录有缓存，使用缓存登录，2、Cache无缓存，使用新的账号登录3、缓存的账号一定是我登录过的，4、UserInfo一定包含我登录的信息
             var cacheData = UserManager.SearchCache(LoginDto);
@@ -95,6 +128,8 @@ namespace IgniteApp.ViewModels
                 _windowManager.ShowWindow(_mainViewModel);
                 //_contentAccess.Default.WriteObject(foldPath, LoginDto);
                 RequestClose();
+
+                //  win.DialogResult = true;
             }
             else
             {

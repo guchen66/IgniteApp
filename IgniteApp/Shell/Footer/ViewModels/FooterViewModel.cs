@@ -72,14 +72,14 @@ namespace IgniteApp.Shell.Footer.ViewModels
         private readonly IActionTable _actionTable;
         private readonly ITangdaoPublisher _tangdaoPublisher;
 
-        public FooterViewModel(IWindowManager windowManager, IDialogService dialogService, Func<TTForgeViewModel> viewModelFactory, IContentAccess contentAccess, ITangdaoSocket tangdaoSocket, IActionTable actionTable, ITangdaoPublisher tangdaoPublisher)
+        public FooterViewModel(IWindowManager windowManager, IDialogService dialogService, Func<TTForgeViewModel> viewModelFactory, IContentAccess contentAccess, IActionTable actionTable, ITangdaoPublisher tangdaoPublisher)
         {
             // _plcProvider = plcProvider;
             _windowManager = windowManager;
             _dialogService = dialogService;
             _viewModelFactory = viewModelFactory;
             _contentAccess = contentAccess;
-            _tangdaoSocket = tangdaoSocket;
+            // _tangdaoSocket = tangdaoSocket;
             _actionTable = actionTable;
             _tangdaoPublisher = tangdaoPublisher;
             // TTForgeViewModel = tTForgeViewModel;
@@ -97,7 +97,7 @@ namespace IgniteApp.Shell.Footer.ViewModels
             //// 错误
             //_tangdaoChannel.Errors.ObserveOnDispatcher()
             //         .Subscribe(ex => MessageBox.Show(ex.Message));
-            QueryServerStatus();
+            // QueryServerStatus();
 
             TangdaoWeakEvent.Instance.OnHandlerTableReceived += Instance_OnHandlerTableReceived;
         }
